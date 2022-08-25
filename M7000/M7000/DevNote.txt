@@ -1,0 +1,799 @@
+﻿
+*  윈도우 설정 아이콘 크기에 따라서 UI Size가 변경 되어서 문제가 있음.
+   기본값 사용으로 권장...
+
+'========================================================
+'작성자 : 박상규
+'작성일 : 2016-3-09
+'========================================================
+1. Motion Home 바라보는 기준이 다를 경우 참고한다.
+   - Option Real Axis 축을 추가
+    X축 구동 시 Y축을 움직이게 하는 방법  ex).  Axis - X 축   Real - Y 축을 등록하면 된다.
+   - Home을 바라보는 기준 시점으로 움직이는 거리 Cal을 해야 한다.
+   - Manual JOG & Axis Move 버튼은 Option의 Real Axis를 판단하여 움직인다.
+   - Display되는 Position은 Real Axis축이 갱신이 된다.
+
+ 
+'========================================================
+'작성자 : 박상규
+'작성일 : 2016-2-12
+'========================================================
+1. ChannelAllocation JIG 등록 하는 부분에서 MultiSelect 체크 박스로 추가
+  (1) 지그를 선택하면
+          MultiSelect  = True   해당하는 지그의 전 채널 선택
+                       = False  해당하는 지그의 1번 채널만 체크하고 나머지는 선택 해제
+  (2) 지그의 채널을 선택하면 
+          MultiSelect  = Ture   해당하는 지그의 채널 선택
+                       = False  해당하는 지그의 선택된 채널만 체크하고 나머지는 선택 해제
+
+
+'========================================================
+'작성자 : 양승록
+'작성일 : 2015-2-13   ~   14
+'========================================================
+1. PLC 상태 정보중에 Alarm 비트가 On 되었다 OFF 될때 Alarm Register의 정보를 Clear 해주어야 함.
+2. PLC 제어 Safety Mode 전환 Sequence
+  (1) IDEL 상태
+     - 샘플을 수동으로 로딩 하는 상태로 장비 전면의 수동 제어 버튼을 이용해야 Safety Mode 전환을 통한 Interlock 잠금/해제를 설정할 수 있습니다.
+	 - PLC 상태를 Process 에서 IDEL로  설정하면 자동 원점 복귀됨(샘플 반출 절차 실행) --> 삭제
+	 - 샘플 언로딩(Interlock 해제) 절차 : Safety Key Switch 를 Teach 방향으로 전환 --> Interlock 해제됨 --> 도어 오픈 --> 원점 복귀(진행중 : 깜빡임, 완료 : 점등) --> Air On 버튼 --> 샘플 반출
+	 - 샘플 로딩(Interlock 잠금) 절차 : (샘플이 언로딩 되어 있는 상태에서)  Air On 버튼 --> 샘플 로딩 --> Start 버튼(진해중 : 깜빡임, 완료 : 점등) 
+	    --> Door 를 닫음 --> Safety Key Switch를 Auto 방향으로 전환, 전환하면 Interlock이 잠김 --> 실험 가능 상태로 대기(실험을 진행 되면 PLC의 상태를 Process로 설정)
+  (2) Process 상태 or Process And Pause
+     - 실험 진행중에 Door를 열고 상태 확인 또는 점을 위해서 Safety Mode 전환을 통한 Interlock 잠금/해제 설정 방법
+	 - Interlock 해제 절차 : PLC의 상태를 Process And Pause로 설정 --> Safety Key Switch 를 Teach로 전환 --> Interlock 해제(Door 열기 가능)
+	 - Interlock 잠금 절차 : Door을 닫고 --> PLC의 Alarm Reg.의 Door Open 비트 체크 --> PLC의 상태를 Process로 설정 --> Interock 잠금 --> 실험 재시작 가능
+
+'========================================================
+'작성자 : 양승록
+'작성일 : 2015-2-4
+'========================================================
+1. 온도 컨트롤러 Sequence Routine 통합 방안 마련 및 적용 필요(*온도 컨트롤러 Class는 통합 되어 있음)
+
+
+'========================================================
+'작성자 : 양승록
+'작성일 : 2015-2-3
+'========================================================
+
+1. 온도 컨트롤러 설정 방법(TOHO사 TTM-004 모델)
+  - TTM-004 통신 설정 부분의 통신 프로토콜 설정("_Prt" 로 표시)을 TOHO Protocol 로 설정 해야함. 값은 0,  매뉴얼에 따라서 표시되어 있지 않는 경우가 있음 (주의)
+  - TTM-004 통신 설정 부분의 응답 시간 설정 = 10ms
+  - TTM-004 통신 설정 항목 기타 : RS485 Address(1~99까지, 0은 설정 안됨) ,  Data Length = 8, BBC 체크 = OFF, Parity Bit = None, Stop bit = 2, Baud Rate = 9600(9.6)
+  - 10도 미만 설정 불가
+
+
+'========================================================
+'작성자 : 양승록
+'작성일 : 2015-1-15
+'========================================================
+
+
+1. 기능 개선 사항
+  - Sequence 빌더 오류개선(메모리 점유 및 속도 처리)
+  - 시퀀스 빌더 측정 포인트 설정 창에 수동 입력 기능 추가
+  - teach 모드 전환시 스위치 전환 --> 일시정지모드 진입 --> 비밀번호 입력창 팝업 으로 수정( 일시정지모드 진입 안하면 문이 열리고 잠깐 움직여서 환경안전에 문제 발생)
+  - du'v' 산출 및 저장 ( 초기 데이터 대비 현재 측정 데이터로 계산) =  루트((V0-Vn)^2 + (u0'-un')^2))
+  - Viewer 아이콘 변경(아이콘 + 텍스트)
+  - CCD 안에 들어오는 영역 측정\
+
+'========================================================
+'작성자 : 양승록
+'작성일 : 2014-12-16
+'========================================================
+1. Sequence Builder Setting 기능 추가
+  - Test End 조건의 설정 파라메터 선택 기능 추가
+
+
+
+
+
+
+'========================================================
+'작성자 : 양승록
+'작성일 : 2014-11-07
+'========================================================
+1. 박상규 작업 코드(BOE Last)에서 기능 Merge
+   - ucDispPGImageManager Class
+
+
+'========================================================
+'작성자 : 양승록
+'작성일 : 2014-11-05
+'========================================================
+0. Sequence Builder
+ - 작성되어 있는 Sequence 파일에서, 공통 정보의 샘플 타입을 변경하면, 공통 정보만 변경되고, 구성되어 있는 Recipe에는 업데이트 안됨, 해야 하나??? 과연 이렇게 사용할 경우가 있을까...? 메시지 팝업 하여 사용자 의사 확인 필요.
+ - 위의 내용에서 샘플 타입 이외에 다른 파라메터는 없는지 확인 필요
+ - Display 갱신 코드를 함수 하나로 통합해야 할것 같음(Enable, Visible 속성 등 설정 코드)
+1. Lifetime Recipe 창에서
+  - Cell Lifetime 일때는 Rotation 텝이 필요 없음.
+  - Rotation 텝의 설정 창 비율 조정 필요
+  - 장비 구동 설정 파라메터를 View option에 적용하여 노출을 설정할수 있어야함.(View option 적용에 구분 방법 Lifetime에 Cell, panel, module 레이어 추가??, 아니면, 그냥 컴포넌트 모델 명으로 표기???, 텝 노출도 설정 할 수 있어야 할까??)
+  - 장비 구동 설정 부분 텝의 명칭 확인 Component(?), Rotation(?), 
+  - Pattern Image 설정 부분에 기본 이미지가 안보임, 측정 이미지를 한개 이상 등록 할 수 있도록 기능 변경(딜레이도 필요함)
+2. Set. Meas Point 설정창의 Title 변경, 배경 이미지 고객 설정 기능 추가
+3. Pattern Image 등록 및 순서 정렬 기능 필요.(GNT 시스템즈 장비와 똑같게 설정 할 수 있도록 할려면....)
+
+'========================================================
+'작성자 : 양승록
+'작성일 : 2014-11-03
+'========================================================
+1. Sequence Builder Merge (양승록 + 박상규(BOE Last))
+
+Dir 1 : E:\Development\M7000\M7000_20140731_BOE_Last_Dll\M7000\M7000\SequenceBuilder
+
+Dir 2 : E:\Development\M7000\M7000_20141028_SDC\M7000\M7000\SequenceBuilder
+
+
+ dispDataGridSeqEditor_evCellLineInfo
+
+'========================================================
+'작성자 : 양승록
+'작성일 : 2014-10-28
+'========================================================
+1. Sequence Builder 의 Common Recipe 정보를 변경해도 적용되지 않는 문제들 개선
+  - sequence title을 변경하여도 sequence manager list의 이름이 변경되지 않음.
+  - sequence 파일명도 변경되지 않음.
+  - Sample Type변경에 따른 사용 가능 Recipe가 변경되지 않던 문제 개선
+
+g_motionPosSpectrometer
+1. LoadMotionPosSpectrometer()::frmMotionUI Class에서
+   - g_motionPosSpectrometer 배열의 수(g_nMaxCh)보다 기존 파일에 저장되어 있는 채널의 수가 더 많을때 에러 발생
+2. SaveMotionPosition()::frmMotionUI Class 에서 모든 채널의 좌표를 모두 저장하면서 발생하는 문제
+  - LoadMotionPosSpectrometer()에서 정보가 배열수 만큰 로드되지 않을 경우 기존의 좌표가 손실될 수 있음.
+
+
+
+'========================================================
+'작성자 : 양승록
+'작성일 : 2014-10-20
+'========================================================
+1.Initialization Function ::ucDispMultiCtrlOfJIGLayout Class 에 예외 처리 필요
+    - Channel Allocation 정보가 잘 못 되었을대 오류가 발생, 아래의 경우 JIG 가 채널 수보다 크거나, 지그에 포함된 채널을 포함한 전체 채널의 수가 지그 수보다 작을때 에러나 나타나, 
+	- 주로 다른 시스템에서 사용하던 정보가 드른 종류의 시스템에 그대로 올라 올때 문제가 발생, 원칙적으로 시스템에 맞는 구성 설정으로 수정할 수 있으나 예외 처리가 필요 할 것 같음.
+
+    ....
+	For i = 0 To g_ConfigInfos.numOfJIG - 1
+            '같은 지그에 위치한 채널 확인
+            combindChNum = frmSettingWind.CheckCombinedChannelAsJIG(i)
+            Dim sampleUi(combindChNum.Length - 1) As ucDispSampleUI   <--- 오류 발생 줄
+            For idx As Integer = 0 To combindChNum.Length - 1
+                sampleUi(idx) = DispChSampleUI(combindChNum(idx))
+                'Cell 초기화 ' Sample UI 초기화
+                sampleUi(idx).sample.CellNo = idx
+            Next
+     .....
+
+
+2. init()::frmSettingWnd Class에 오류 예외 처리 
+    .....
+	   Case frmConfigSystem.eDeviceItem.ePG
+                    gbPGGroup.Enabled = True
+					 ReDim Preserve m_AlocItems(nItemCnt)
+                        m_AlocItems(nItemCnt) = eChAllocationItem.eDevNoOfMcPG
+                        nItemCnt += 1
+                        ReDim Preserve m_AlocItems(nItemCnt)
+                        m_AlocItems(nItemCnt) = eChAllocationItem.eChOfMcPG
+                        nItemCnt += 1
+                        ReDim Preserve m_AlocItems(nItemCnt)
+                        m_AlocItems(nItemCnt) = eChAllocationItem.eGroupOfMcPGPower
+                        nItemCnt += 1
+                        ReDim Preserve m_AlocItems(nItemCnt)
+                        m_AlocItems(nItemCnt) = eChAllocationItem.eDevNoOfMcPGPower
+                        nItemCnt += 1
+                        ReDim Preserve m_AlocItems(nItemCnt)
+                        m_AlocItems(nItemCnt) = eChAllocationItem.eChOfMcPGPower
+                        nItemCnt += 1
+                        ReDim Preserve m_AlocItems(nItemCnt)
+                        m_AlocItems(nItemCnt) = eChAllocationItem.eGroupOfMcPGCtrlBD
+                        nItemCnt += 1
+                        ReDim Preserve m_AlocItems(nItemCnt)
+                        m_AlocItems(nItemCnt) = eChAllocationItem.eDevNoOfMcPGCtrlBD
+                        nItemCnt += 1
+                        ReDim Preserve m_AlocItems(nItemCnt)
+                        m_AlocItems(nItemCnt) = eChAllocationItem.eChOfMcPGCtrlBD
+                        nItemCnt += 1
+
+                        With cbSelPGDevice
+                            .Items.Clear()
+                            If m_Config.PGConfig.McPGConfig Is Nothing Then
+                                .Text = "Nothing"
+                            Else
+                                For n As Integer = 0 To m_Config.PGConfig.McPGConfig.Length - 1
+                                    .Items.Add(i)   '"Device" & Format(i + 1, "00")    <------------- i를 n으로 수정 필요
+                                Next
+                                .SelectedIndex = 0
+                            End If
+                        End With
+
+                        With cbSelPGPwrGroup
+                            .Items.Clear()
+                            If m_Config.PGConfig.McPGPwrConfig Is Nothing Then
+                                .Text = "Nothing"
+                            Else
+                                For n As Integer = 0 To m_Config.PGConfig.McPGPwrConfig.Length - 1
+                                    .Items.Add(i) '"Device" & Format(i + 1, "00")    <------------- i를 n으로 수정 필요
+                                Next
+                                .SelectedIndex = 0
+                            End If
+                        End With
+
+                        With cbSelPGCtrlGroup
+                            .Items.Clear()
+                            If m_Config.PGConfig.McPGCtrlBDConfig Is Nothing Then
+                                .Text = "Nothing"
+                            Else
+                                For n As Integer = 0 To m_Config.PGConfig.McPGCtrlBDConfig.Length - 1
+                                    .Items.Add(i) '"Device" & Format(i + 1, "00")   <------------- i를 n으로 수정 필요
+                                Next
+                                .SelectedIndex = 0
+                            End If
+                        End With
+   ..................
+
+3.frmSettingWnd Class 의 Control에 대한 ancor 설정 때문에 Control이 표시되지 않는 문제 발생
+   - frmSettingWnd Class의 문제만은 아님,  화면 갱신 속도가 느릴경우 Form의 Size가 생성되는 중간에 잘못 전달되어 발생, 
+   - 코딩으로 변경하던지, 알고 있어서 건들지 않으면 문제 없음.
+
+
+
+'========================================================
+'작성자 : 양승록
+'작성일 : 2014-10-17
+'========================================================
+1. 모션 기능 재정의 및 기능 구현 작업
+  - 좌표 디스플레이 값을 Actual Pos로 변경 --> Homming 에서 값이 정상 초기화 되지 않는 문제(홈을 찾을때의 속도 때문에 실제 홈 위치에서 지나치는 것 같음, 상규가 구현한것 참고 할것)
+  - 조그키 방향 설정 완료
+  - (미완료)절대 이동 함수의 방향 조정 필요 --> 테스트 필요
+2. HW 셋업 관련
+  - 기준점 변경으로 Limit 센서의 동작이 방향에 반대로 작동함
+  - 모션 드라이버 전원 전장의 라벨이 잘못 표기되어 있음(Z 축 스위치가 X 축으로 표시 등)
+
+
+
+'========================================================
+'작성자 : 양승록
+'작성일 : 2014-09-23
+'========================================================
+1. 개발 환경 구축(SDC 문창윤 선임_모듈 수명 측정 시스템)
+  (1) VS2010
+  (2) MIL9
+  
+
+'========================================================
+'작성자 : 양승록
+'작성일 : 2014-09-22
+'========================================================
+
+*대상 Cpu 플랫폼 선택 주의 : x64, x86 라이브러리가 중복 되면 문제가됨, 아래와 같이...
+*64Bit OS에서 개발시 MIL은 64bit용만 설치가 되며, 소프트웨어 개발시 대상 CPU 플랫 폼은 x64 or Any로 설정이 가능하다. 이때 ca-sdk(32bit)를 중복으로 사용할 수 없다.
+*32Bit OS에서는 MIL을 32bit용만 설치가되며, 소프트웨어 개발시 대상 CPU 플랫 폼은 x86으로 설정해야 한다. CA-SDK는 32bit로 만 사용해야 하므로, 당연히 중복해서 사용할 수 있다.
+
+
+Error: System.Runtime.InteropServices.COMException (0×80040154): Class not registered (Exception from HRESULT: 0×80040154 (REGDB_E_CLASSNOTREG))
+
+in
+
+Share
+. 
+Posted by maureens on Jun 23, 2011
+
+Symptoms
+◾Error: System.Runtime.InteropServices.COMException (0x80040154): Class not registered (Exception from HRESULT: 0x80040154 (REGDB_E_CLASSNOTREG)) displays when you click the Attach (paperclip) icon on the SmartVault Toolbar or when you open the SmartVault Inbox and then click Add.
+◾The SmartVault Toolbar displays as active, but when you click the Attach (paperclip) icon on the SmartVault Toolbar, nothing happens. (The Attach Documents dialog box does not display.)
+◾After you double-click on the Documents (folder) icon on the SmartVault Toolbar to open the Documents List dialog box, when you click Add nothing happens.
+◾When you open the SmartVault Inbox and then click Add, nothing happens.
+
+Note: When these symptoms occur, you can still upload documents to SmartVault by dragging and dropping documents onto the SmartVault Toolbar or by dragging and dropping documents into the SmartVault Inbox.
+
+Cause
+
+One or more of these symptoms typically occur when the GdViewerpro4.ocx file is not registered on your computer. The GdViewerpro4.ocx file is the control that manages the Attach Documents dialog box. When the when the GdViewerpro4.ocx file is not registered, SmartVault cannot open the Attach Documents dialog box. 
+
+Resolution
+
+To resolve this issue, try registering the GdViewerpro4.ocx file manually. 
+
+To register a file manually, you must be either a local Administrator on your computer or you must run the Windows Command Prompt utility as an Administrator. 
+
+The steps for registering a file manually vary based on the version of the Windows operating system you are running. 
+
+Windows Vista or Windows 7
+
+To manually register the GdViewerpro4.ocx file on a Windows Vista or Windows 7 computer: 
+1.Click Start.
+2.In the Search programs and files field, copy and paste regsvr32 GdViewerpro4.ocx into the command prompt, and then press ENTER on your keyboard.
+
+Note: You may see a message telling you that the file has been registered after you press enter. 
+3.In QuickBooks, on the SmartVault Toolbar, try clicking the Attach (paperclip) icon on the SmartVault Toolbar again. The Attach Documents dialog box should now display.
+4.If the Attach Documents dialog box still does not display, complete the following steps:
+1.Close QuickBooks.
+2.Exit SmartVault by right-clicking on the SmartVault icon and then clicking Exit.
+
+Note: The SmartVault icon is the green keyhole icon in the notification area at the bottom-right corner of your computer. 
+3. Reopen QuickBooks and sign in to SmartVault again from the SmartVault Desktop software.
+4.Try clicking the Attach (paperclip) icon on the SmartVault Toolbar again. The Attach Documents dialog box should now display.
+
+Windows XP
+
+To manually register the GdViewerpro4.ocx file on a Windows XP computer: 
+1.Click Start > Programs > Accessories. 
+2.If you are a local Administrator on your computer, double-click the Command Prompt utility.
+3.If you are not a local administrator on your computer, right-click on the Command Prompt utility, click Run as administrator…, and then type in the Administrator user name and password.
+4.In the command prompt DOS window, copy and paste cd windowssystem32 into the command prompt, and then press ENTER on your keyboard.
+5.At the new prompt, copy and paste regsvr32 GdViewerpro4.ocx and then press ENTER on your keyboard.
+
+Note: You may see a message telling you that the file has been registered after you press enter. 
+6.In QuickBooks, on the SmartVault Toolbar, try clicking the Attach (paperclip) icon on the SmartVault Toolbar again. The Attach Documents dialog box should now display.
+7.If the Attach Documents dialog box still does not display, complete the following steps:
+1.Close QuickBooks.
+2.Exit SmartVault by right-clicking on the SmartVault icon and then clicking Exit.
+
+Note: The SmartVault icon is the green keyhole icon in the notification area at the bottom-right corner of your computer. 
+3. Reopen QuickBooks and sign in to SmartVault again from the SmartVault Desktop software.
+4.Try clicking the Attach (paperclip) icon on the SmartVault Toolbar again. The Attach Documents dialog box should now display.
+
+Knowledge Base ID
+
+KB312
+
+
+	"80040154 클래스가 등록되지 않았습니다.
+	 (예외가 발생한 HRESULT: 0x80040154 (REGDB_E_CLASSNOTREG)) 오류로 인해 CLSID가 {006B0650-AF9A-4EE1-B18F-B5740004D7CE}인 구성 요소의 COM 클래스 팩터리를 검색하지 못했습니다."
+
+--> CA310 SDK가 날라가서 생기는 문제일 가능성이 가장 큼. MINOLTA SDK 를 다시 설치해보자
+'========================================================
+'작성자 : 양승록
+'작성일 : 2014-08-28
+'========================================================
+* Pattern Generator 장치가 추가 됨에 따라 Abstract Class 와 API Class추가
+1. CDevPG --> CDevMcPG로 변경
+2. cDevPGControl --> cDevMcPGControl 로 변경
+3. cDevPGPower --> cDevMcPGPower 로 변경
+
+
+
+
+
+'========================================================
+'작성자 : 양승록
+'작성일 : 2014-08-20
+'========================================================
+1. LGC M7000 소스코드를 이용하여 SDC 문창윤 선임 SW 프로젝트 생성함.
+2. Component Merge(G4S 모듈 구동기(G&T Systems), CA310 Color analyzer(미놀타))
+3. Class frmConfigSystem 변경 사항
+  - Color Analyzer 항목 추가, Spectrometer와는 별도로 
+  - Spectrometer를 Spectroradiometer 로 명칭 변경
+  - Pattern Generator를 모듈구동기(Module
+
+
+
+
+
+
+'========================================================
+'작성자 : 양승록
+'작성일 : 2014-05-21
+'========================================================
+1.IVL Sweep 전에 Servo OFF --> IVL Sweep 후 Servo ON 동작에서 Z축 좌표 틀어지는 현상 발생, 시간이 지나면서 좌표가 조금씩 변경됨
+2.일시 정지 기능 추가
+3.
+
+
+
+
+
+
+
+'========================================================
+'작성자 : 양승록
+'작성일 : 2014-05-19
+'========================================================
+
+1. CScheduler Class
+     Private Sub ChekLifetimeMeasInterval(ByVal in_Ch As Integer, ByVal totalTestTime As Long, ByVal modeTime_sec As Long)
+        Try
+            If fMain.SequenceList(in_Ch) Is Nothing = False Then
+			          ...
+                '기준 Luminance PD 값 선정 부분
+                If fMain.g_MeasuredDatas(in_Ch).bIsSavedRefPDCurrent = False Then
+
+                    'Once 모드 : 안정화 시간 적용을 최초 Lifetime Recipe 에서 한번 만 적용
+                    'ChangeRecipe : 안정화 시간 적용을 Lifetime Recipe가 전환 될때 마다 적용
+                    If fMain.SequenceList(in_Ch).Current.sLifetimeInfo.sCommon.sSetInfosTheRefPD.eEnableRenewalMode = ucRefPDSetting.eRefPDMode.Once Or
+                        ....
+						
+                    Else  'If fMain.SequenceList(in_Ch).Current.LifeTimeModeParams.sLuminanceSettings.bEnableRenewalMode = ucRefPDSetting.eRefPDMode.OFF Then
+                        'OFF : 안정화 시간을 적용하지 않고 최초 Lifetime Recipe에서 한번만 적용
+
+                        Select Case fMain.SequenceList(in_Ch).Current.sLifetimeInfo.nMyMode
+
+                            Case ucSequenceBuilder.eRcpMode.eCell_Lifetime
+
+                                'LEX_20140423
+                                If fMain.g_MeasuredDatas(in_Ch).sCellLTParams.sSpectrometer.sPR705 Is Nothing = False Then
+                                    If fMain.g_MeasuredDatas(in_Ch).sCellLTParams.sSpectrometer.sPR705(0).D6.s2YY <> 0 Then
+
+                                        '     If fMain.g_MeasuredDatas(in_Ch).sCellLTParams.dPDCurrent <> 0 Then
+                                        '   fMain.g_MeasuredDatas(in_Ch).dRefLuminance = fMain.g_MeasuredDatas(in_Ch).dLuminance
+                                        fMain.g_MeasuredDatas(in_Ch).dRefLuminance = fMain.g_MeasuredDatas(in_Ch).sCellLTParams.sSpectrometer.sPR705(0).D6.s2YY
+                                        fMain.g_MeasuredDatas(in_Ch).bIsSavedRefPDCurrent = True
+                                    End If
+                                Else
+                                    fMain.g_MeasuredDatas(in_Ch).dRefLuminance = 100
+									에러 코드 -->           fMain.g_MeasuredDatas(in_Ch).bIsSavedRefPDCurrent = True
+                        수정 코드 -->           fMain.g_MeasuredDatas(in_Ch).bIsSavedRefPDCurrent = False
+   ......
+      end sub
+'========================================================
+'작성자 : 양승록
+'작성일 : 2014-05-15
+'========================================================
+1. Windows XP --> Windows 7으로 OS 변경
+2. 통신 포트 재설정
+  - MC9 : Com3
+  - SW : COM2
+  - PR705 : COM4
+
+3. 데이터 저장 기능 개선 및 테스트
+  - Option에 Save 텝 추가, 파일명 생성 규칙 추가
+4. Sequence Builder 기능 개선
+  - Setting 매뉴 추가
+  - Default Value 설정 창 추가 --> Sequence 생성시 초기 값을 Default Value에 설정된 값으로 사용
+
+'========================================================
+'작성자 : 양승록
+'작성일 : 2014-05-08
+'========================================================
+1. Builder 기능 개선
+  - Seq 파일의 정보를 저장하는 "seqList.ini" 파일에 seq 파일의 경로를 저장할때 상대 경로로 저장
+2. 데이터 저장 관련
+  - 프로그램 시작과 동시에 모든 파일을 생성하는 부분 개선 필요
+  - 저장 경로 설정 기능 구현 방안
+
+3. UI에 온도가 일부 짤려서 표시되는 부분
+4. 진행중인 채널이 명확하게 보이지 않는 문제
+
+5. frmMotionUI Class의 CCD Grab Start 버튼을 반복 클릭하면 메모리 증가하는 문제 발생
+
+
+
+
+
+
+
+'========================================================
+'작성자 : 양승록
+'작성일 : 2014-04-04
+'========================================================
+1. ACF 기능 관련 추가 되어야 할 기능
+  - IntensityAdjLoop 의 acf bias, limit Value를 Option에 추가
+  - 
+
+
+2. Pretest 관련
+ - 상태 디스플레이 기능 추가
+ - Sequence Tree 에서 값을 직접 수정 할 수 있도록 
+
+
+
+3. Scheduler
+  - A,C Group 실행중 --> B Group실행시 우선순위 조정 기능 추가 : Scheduler 상태 변경 차단, Process 명령 차단
+
+
+
+
+
+'========================================================
+'작성자 : 양승록
+'작성일 : 2014-04-02
+'========================================================
+1. 온도 설정 부분 위치 변경 
+  - CSeqProcessor Class 에서 CScheduler Class로 이동
+
+
+
+
+
+
+'========================================================
+'작성자 : Happy Park
+'작성일Ï : 2014-02-17
+'========================================================
+1. 시리얼 통신
+   - Terminator(Send, Rcv) 고정으로 되어 있는 부분 선택해서 설정 할 수 있게 수정 해야 함.
+   - RTS 사용 여부 또한 설정 할 수 있게 해야 함.
+2. 키슬리 
+   - 통합 Class 필요
+   - 모델별로 UI가 나눠져 있는 부분을 SMUKeithley 형태로 묶을 필요가 있음.
+'========================================================
+
+
+'========================================================
+'작성자 : Happy Park
+'작성일Ï : 2014-02-03
+'========================================================
+1. JIG Layout UI 수정.
+   - Main UI 설정에 맞게 Display 되도록 수정
+   - JIG Layout에서 SampleType 및 이 Cell로 고정 되어 있던 부분 수정
+   - JIG 배치는 설정된 좌표로 Display 시킬 수 있도록 수정
+   - JIG에 Sample를 List로 등록 시키는 부분에서 Change시 Colum갯수가 맞지 않던 오류 수정. 
+2. IVL Sweep UI 추가. 
+   - Common UI 추가
+   - SampleType별 UI 추가
+
+'========================================================
+'작성자 : Lex Yang
+'작성일Ï : 2014-01-17
+'========================================================
+1. [개선필요] 통신 포트 자동 찾기 기능은 통신포트가 있는 PC에서는 유용하지만, 없는 PC에서 디버깅 하기 위해서는 매우 불편하다. 포트가 모두 없어져서 설정에 문제가 발생한다.
+2. 김열일 수석 M7000 시스템 SW 를 위한 UI 변경 작업 진행중
+   - JIG Layout Ediitor 구현 방안 개선 필요.
+
+'========================================================
+'작성자 : Lex Yang
+'작성일Ï : 2013-12-19
+'========================================================
+1. IAT 용으로 AMX와 MDX 버젼으로 Branch 시켰던 소스코드를 통합(Merge)
+    - M7000 MDX_20131031   +  M7000 AMX_20131031 두소스코드를 통합
+
+
+
+'========================================================
+'작성자 : Lex Yang
+'작성일Ï : 2013-09-24
+'========================================================
+1. [Bug] Z Axis Position Value Reset Error
+
+
+'========================================================
+'작성자 : Lex Yang
+'작성일Ï : 2013-09-22
+'========================================================
+1. M7000 MDX 장비 Y Axis 홈센싱 불량(기준 좌표 설정 불가능)
+2. Z 축 높이가 PR730 포커싱 거리 만큼 이동 하지 않음.
+3. 모션 노이즈 발생
+4. 2,3번 채널 점등 안됨, 케이블 or 팔레트 불량 의심됨.
+5. PC Comport 불량 --> 매인보드 교체 필요.
+6. Auto Focusing 카메라 위치 변경 필요
+7. 모션 축이동 거리 확인 필요.
+
+'========================================================
+'작성자 : Lex Yang
+'작성일Ï : 2013-09-21
+'========================================================
+1. M6000, M7000 소스코드 분리(Branch 생성) 
+  --> 기능이 너무 많아서 소스코드 작성 및 개말의 난이도 상승(여러가지를 고려해야 하는 상황으로 개발 시간에 영향을 많이 줌)
+  --> M6000, M7000 이 기능적으로 충돌하는 부분이 있어서 분리하는 것이 좋을 것 같음.
+  --> 다만, 향후 디버깅을 각각 진행하고 소스코드 관리도 별도로 진행되어야 할 것으로 보임.
+
+2. Multi-Point 데이저 저장 포멧 및 저장 기능 구현
+
+'========================================================
+'작성자 : Lex Yang
+'작성일Ï : 2013-09-18
+'========================================================
+1. ucDispPointSetting Class 에 샘플의 사이즈에 따라, 셀 모양 ui의 가로 세로 비율이 변하도록
+2. UpdateRecipeInfos::ucSequenceBuilder 의 내용 수정 필요, 각각의 설정 코드를 컨트롤 안으로 이동하여 라인 축소 및 통합
+3. Motion 제어 관련하여 수정 되어야 할 부분들(BOE 납품 시스템 이외에 삼성 납품 장비에 SW 업데이트 시에 문제가 발생 할 수 있음)
+  a. 축의 제어 방향이 고정되어 있음.(다른 장비에서는 방향이 반대로 되어 있음)
+  b. 축의 수가 3축으로 고정 되어 있음
+
+4. Multi-Point 데이저 저장 포멧 및 저장 기능 구현
+5. 모니터링 UI의 파라메터 개선
+6. SG 통신 오류(모션 노이즈의 영향으로 보임)
+7. 이미지  Sweep 기능 구현 방안 (PG 적용 or 기존 형태)
+
+'========================================================
+'작성자 : Lex Yang
+'작성일Ï : 2013-09-17
+'========================================================
+1. Motion home 센서가 1번 채널 지그 상에 위치.(1번 채널 측정 할 수 없음.)
+2. Motion Noise로 인해 심각한 잡음 발생.(게인 값 조정으로 해야 함.)
+3. OptionWindows form 로드 시 OptionData값이 적용 되는 부분을 Save or Ok Event 발생 시 적용 할 수 있도록.
+4. ACF기능 적용 시킬 것.
+5. Centering기능을 이용하여 기준 좌표를 등록 할 수 있게 변경해야 함.
+6. AxtMIL ImageProcessing 참초 사라지는 문제.
+7. Motion 움직이는 거리에 대비하여 휘도계가 특정 채널을 측정 할 수 없는 위치기 있음.
+'========================================================
+'작성자 : Lex Yang
+'작성일 : 2013 09-15
+'========================================================
+
+******************************IMPORTANT SETTING***************************
+모션의 Z축 설정에서 Init Speed 가 50이상이면 , Z축이 움직 이지 않음.
+Motion Init Speed03=40
+************************************************************************************
+
+
+'========================================================
+'작성자 : Lex Yang
+'작성일 : 2013 09-13
+'========================================================
+SERVO ON , ORG =7
+SERVO ON,  = 6
+SERVO OFF, ORG = 3
+SERVO OFF, = 2
+
+
+
+
+'========================================================
+'작성자 : Lex Yang
+'작성일 : 2013 09-13
+'========================================================
+1. motion 제어 기능 구현
+2. 기준 좌표 등록 및 설정 기능
+3. 
+3-1. Giga-E CCD 연동
+
+'========================================================
+'작성자 : Lex Yang
+'작성일 : 2013 09-11
+'========================================================
+1. Channel Assign(Mapping) 기능 보완 최우선
+  a. combained 채널 검색에 검색 ITem 추가, 지금은 무조건 온도, 온도 컨트롤러, PG, SG 등 다양한 종속 항목에 대응하고 변경할 수 있어야 할 것 같음.
+  b. SeqRoutinePG, SG 선택 할 수 있는 정보 추가 필요.
+  c. SG에 PD 측정이 채널당 최대 3개 인데, 1~3개를 선택 할 수 있어야 한다.
+2. SG의 PD 측정이 채널당 3개 이므로, 어떤 형태로 Display할지 결정해야 함. Average, 각각 표시 등
+
+
+'========================================================
+'작성자 : Lex Yang
+'ÀÛ¼ºÀÏ : 2013 09-04
+'========================================================
+
+1. Group, Device, ChÀÇ Á¤ÀÇ¸¦ ¸íÈ®ÇÏ°Ô, Àåºñ¿¡ µû¶ó È¥¿ë µÇ°í ÀÖÀ½.
+
+
+
+
+'========================================================
+'작성자 : Lex Yang
+'ÀÛ¼ºÀÏ : 2013 09-04
+'========================================================
+
+****Áß ¿ä **** ÁÖ¼®Áß¿¡ "LEX"·Î ½ÃÀÛ µÇ´Â ºÎºÐÀº ÃßÈÄ ÀÛ¼ºÀ» À§ÇÏ¿© ÁÖ¼® Ã³¸®ÇÑ ºÎºÐÀ¸·Î Ã¶ÀúÈ÷ È®ÀÎÇÏ¿©¾ß ÇÔ.
+
+
+'========================================================
+'작성자 : Lex Yang
+'ÀÛ¼ºÀÏ : 2013 09-03
+'========================================================
+1. THC98585 Åë½Å ¼³Á¤
+
+  comInfo.sPortName = m_sPorts(cboComList.SelectedIndex)
+        comInfo.nBaudRate = 38400
+        comInfo.nDataBits = 8
+        comInfo.nParity = 0
+        comInfo.nStopBits = 1
+        comInfo.nHandShake = IO.Ports.Handshake.None
+        comInfo.enableTerminator = False
+        comInfo.sCMDTerminator = Nothing
+        comInfo.sTerminator = Nothing
+
+2. PD Measurement UNIT
+  COM port = 
+  BPS = 19200
+  Parity = None
+  Stop Bit =  One
+  Data Length = 8
+  Terminator = McScience
+
+  3. NX1
+    COM port = 
+  BPS = 9600
+  Parity = None
+  Stop Bit =  One
+  Data Length = 8
+  Terminator = vbCrLf
+
+  4. SG
+      COM port = 
+  BPS = 57600
+  Parity = None
+  Stop Bit =  One
+  Data Length = 8
+  Terminator = vbCrLf
+
+  4. PD ÃøÁ¤±â Åë½Å ¼³Á¤¿¡
+    a. Ã¤³Î¼ö
+	b. Device ¸®½ºÆ® µî·Ï ÇÒ ¼ö ÀÖµµ·Ï
+
+
+5. PG Power Åë½Å¼³Á¤
+  a. BPS : 57600
+  b. Parity : None
+  c. Stop Bit : One
+  d. Data Len : 8
+  e. Terminator : CRLF
+
+6. PG Control BD(ÆÈ·¹Æ®0 Åë½Å¼³Á¤
+  a. BPS : 57600
+  b. Parity : None
+  c. Stop Bit : One
+  d. Data Len : 8
+  e. Terminator : CRLF
+  
+  7. PR730(Spectrometer)
+     configinfo.sPortName = cboPort.Text
+        configinfo.nBaudRate =9600
+        configinfo.nDataBits = 8
+        configinfo.nHandShake = Ports.Handshake.None
+        configinfo.nParity = Ports.Parity.None
+        configinfo.nStopBits = Ports.StopBits.One
+        configinfo.sTerminator = vbCrLf
+        configinfo.sCMDTerminator = vbLf
+
+8.GIGA-E Camera 네트워크 아답터 설정
+ - 169.254.1.1 
+ - 점보 패킷 --> 9014바이트 
+
+  '========================================================
+'작성자 : Lex Yang
+'ÀÛ¼ºÀÏ : 2013 09-02
+'========================================================
+1.Device List
+  a. M6000
+  b. SG
+  c. MC9
+  d. NX1
+  e. PLC
+  f. Motion
+  g. Camera(Giga-E)
+  h. Spectrometer
+  i. PG, PG Power, PG Control BD
+  j. PD Measurement Unit
+  k. THC98585
+'========================================================
+'작성자 : Lex Yang
+'ÀÛ¼ºÀÏ : 2013 07 31
+'========================================================
+1. Configuration Widows, Channel Allocation WindowsÀÇ ±â´É ±¸Çö
+  a. Control°úÀÇ ±¸¼º°ú ±¸Á¶Ã¼¸¸ Á¤ÀÇÇÏ¿´À½.
+  b. ±¸Á¶Ã¼ µ¥ÀÌÅÍ Save/Load±â´É ±¸Çö ¹× ÇöÀç ±¸Çö ÇÔ¼öµé¿¡¼­ ¾÷µ¥ÀÌÆ® µÈ ±¸Á¶Ã¼¿Í °ü·ÃµÈ ±â´Éµé ±¸Çö
+  c. WindowsÀÇ ¹èÄ¡ ¹× ½ÎÀÌÁî Á¶Á¤¿¡ ´ëÀÀ µÇµµ·Ï
+2. 
+
+'========================================================
+'ÀÛ¼ºÀÚ : Lex Yang
+'ÀÛ¼ºÀÏ : 2013 07 25
+'========================================================
+1. SG Editor¿¡¼­ ¼³Á¤µÈ °ªÀ» ±×·¡ÇÁ·Î Ç¥ÇöÇÏ´Â ±â´É ÇÊ¿ä
+2. SG Edit¹æ¹ý °³¼± ¹æ¾È ÇÊ¿ä, ÀüÃ¼ »ç¿ë Signal ¼ö Á¤ÀÇÇÏ´Â ÆÄ¶ó¸ÞÅÍ ÇÊ¿ä.
+
+'========================================================
+'ÀÛ¼ºÀÚ : Lex Yang
+'ÀÛ¼ºÀÏ : 2013 07 23
+'========================================================
+1. ucDispPointSetting User Control Class ±â´É ¾ÆÀÌµð¾î
+  a. ÆÐ³ÎÀ§¿¡¼­ ¸¶¿ì½º ¹öÆ°À» Å¬¸¯ÇÒ¶§ÀÇ À§Ä¡¸¦ ¿À¸¥ÂÊ ¸®½ºÆ®¿¡ µî·Ï
+  b. µî·Ï µÈÀ§Ä¡¸¦ ÆÐ³Î¿¡ ¸¶Å· ±â´É
+  c. bÀÇ ±â´ÉÀ» ÀÀ¿ëÇÏ¿© ±Õµç ºÐÇÒ ´ÜÃà ¹öÆ°À» Å¬¸¯ÇÒ¶§, ¸®½ºÆ®¿¡ ÀÚµ¿ µî·Ï µÇ¸é¼­ ÆÐ³Î UI¿¡ À§Ä¡ ¸¶Å·
+
+
+
+
+      Case frmConfigSystem.eDeviceItem.eSMU_M6000
+                 
+                Case frmConfigSystem.eDeviceItem.eMcPG
+                   
+                Case frmConfigSystem.eDeviceItem.eMcSG
+                  
+
+                Case frmConfigSystem.eDeviceItem.eMotion
+                  
+                Case frmConfigSystem.eDeviceItem.ePDMeasurement
+                   
+                Case frmConfigSystem.eDeviceItem.ePLC
+                  
+                Case frmConfigSystem.eDeviceItem.ePR730
+                  
+                Case frmConfigSystem.eDeviceItem.eTC_MC9
+                  
+                Case frmConfigSystem.eDeviceItem.eTC_NX1
+                 
+                Case frmConfigSystem.eDeviceItem.eTHC_98585
+                
+                Case frmConfigSystem.eDeviceItem.eCamera
+

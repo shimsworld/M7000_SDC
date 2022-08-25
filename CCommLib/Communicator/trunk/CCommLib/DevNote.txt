@@ -1,0 +1,56 @@
+﻿'==================================================================================
+<<<<<<< .mine
+'Date : 2017-01-16
+'Written by : Jeongsoo	
+'===================================================================================
+1. CComSerial Class 
+   Public Overrides Function ReciveToBytes(ByRef outData() As Byte) As CComCommonNode.eReturnCode
+    수신 전용 함수 추가
+
+
+'==================================================================================
+<<<<<<< .mine
+'Date : 2015-01-15
+'Written by : Lex
+'===================================================================================
+1. CComSerial Class 
+  Public Overrides Function SendToString(ByVal textToSend As String, ByRef outData As String) As eReturnCode
+    If sDeltaTime > 100 Then 'm_dTimeOut =수정=> If sDeltaTime > m_dTimeOut Then 'm_dTimeOut
+	
+2. GBIP 관련 부분 임시 주석 처리(NI Library 개발 Platform 호환성 문제)
+	   -> 추후 CCommLib의 개발 Platform은 x86으로 고정 하고, 참조 라이브러리들도 x86전용으로 제한
+	   
+
+'==================================================================================
+<<<<<<< .mine
+'Date : 2015-01-05
+'Written by : Lex
+'===================================================================================
+1. CComSocket Class에 수신 전용 함수 추가(Receive 모드)
+  - 배경 : GNT Systems 사의 G4s 모듈 구동기 에서 수신 전용 모드 필요(아무 명령없이 구동기에서 PC로 데이터 전송하는 경우가 발생), 데이터가 수신되는 절차가 정해져 있는경우 사용, 양방향은 아니며, 함수호출로 대기상태로 진입
+  - 수정사항 : 
+    (1) CComSocket Class :: Private Function TCPRecive(ByRef rcvData() As Byte) As Boolean 추가
+	(2) TimeOut Property 인터페이스 추가 및 TCPReceive 함수의 Stream.ReadTimeOut = TimeOut으로 연동
+	(3) CComSocket Class ::  Public Overrides Function ReciveToBytes(ByRef outData() As Byte) As CComCommonNode.eReturnCode 추가
+	(4) CComCommonNode Class ::  Public Overridable Function ReciveToBytes(ByRef outData() As Byte) As CComCommonNode.eReturnCode 추가
+
+'==================================================================================
+=======
+'Date : 2014-10-15
+'Written by : Happy Park
+'===================================================================================
+1.ucConfigRS232_Socket_GPIB User Control Class 추가, M7000 프로젝트에 있던 것을 옮김
+
+'==================================================================================
+>>>>>>> .r10
+'Date : 2014-09-16
+'Written by : Lex
+'===================================================================================
+1. ucConfigRS232_RS485 User Control Class 추가, M7000 프로젝트에 있던 것을 옮김
+
+'==================================================================================
+'Date : 2014-08-28
+'Written by : Lex
+'===================================================================================
+1. 예외 처리 구문에 있던 MsgBox() 를 삭제하고, 예외 메시지를 m_sStateMsg 함수로 전달
+2. Abstract Class 인 CComCommonNode Class에 m_sStateMsg 추가, StateMessage Property 추가

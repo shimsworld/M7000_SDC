@@ -1,0 +1,97 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+CCommLib
+</name>
+</assembly>
+<members>
+<member name="M:CCommLib.CComCommonNode.SendToString(System.String)">
+	<summary>
+ String Type 명령 전송, 응답에 대하여 확인 하지 않음.
+ </summary>
+	<param name="textToSend"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:CCommLib.CComCommonNode.SendToString(System.String,System.String@)">
+	<summary>
+ String Type 명령 전송, Query 명령 또는 Ack(응답)에대한 값을 반환함.
+ </summary>
+	<param name="textToSend"></param>
+	<param name="outData"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:CCommLib.CComCommonNode.SendToBytes(System.Byte[],System.Byte[]@)">
+	<summary>
+ Byte() 명령 전송, Query 명령 또는 ACK(응답)에 대한 값을 반환함.
+ </summary>
+	<param name="Wbyte"></param>
+	<param name="outData"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:CCommLib.CComCommonNode.SendToBytes(System.Byte[])">
+	<summary>
+ Byte() 명령 전송, 응답에 대한 명령을 확인하지 않음.
+ </summary>
+	<param name="Wbyte"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:CCommLib.CComCommonNode.SendToBytes(System.Byte[],System.Byte[]@,System.Int32,System.Int32)">
+	<summary>
+  Byte() 명령 전송,  ACK(응답)에 대한 값을 지정한 길이 만큼 반환함.
+ </summary>
+	<param name="Wbyte">송신 데이터</param>
+	<param name="outData">수신 데이터</param>
+	<param name="RcvDataLen">Image 데이터가 정상 수신될때 수신할 데이터의 길이를 지정 </param>
+	<param name="RcvDataLen_Error">Image 데이터가 없을 경우 수신할 데이터의 길이를 지정 </param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:CCommLib.CComCommonNode.ReciveToBytes(System.Byte[]@)">
+	<summary>
+ 수신 전용 함수(Bytes)
+ </summary>
+	<param name="outData"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:CCommLib.CComCommonNode.ReciveToString(System.String@)">
+	<summary>
+ 수신 전용 함수(String)
+ </summary>
+	<param name="outData"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:CCommLib.CComSocket.TimeOut">
+	<summary>
+ ACK Time out by sec
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:CCommLib.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:CCommLib.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:CCommLib.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="M:CCommLib.CComSerial.ErrorReceived(System.Object,System.IO.Ports.SerialErrorReceivedEventArgs)">
+	<summary>
+ Respond to error events.
+ </summary>
+</member><member name="M:CCommLib.CComSerial.IsSameSerialInfos(CCommLib.CComSerial.sSerialPortInfo,CCommLib.CComSerial.sSerialPortInfo)">
+	<summary>
+ refInfo의 정보와 newInfo의 정보를 비교하여 같은 값이면 True 를, 다른 값이면 False 를 리턴한다.
+ </summary>
+	<param name="refInfo"></param>
+	<param name="newInfo"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member>
+</members>
+</doc>

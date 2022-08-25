@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>
+    </SchemaVersion>
+    <ProjectGuid>{2EA8048B-C8C3-401F-94F9-5B43955CC320}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>CColorAnalyzerLib</RootNamespace>
+    <AssemblyName>CColorAnalyzerLib</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>Windows</MyType>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>CColorAnalyzerLib.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>CColorAnalyzerLib.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CColorAnalyzerLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\CColorAnalyzerLib.dll</HintPath>
+    </Reference>
+    <Reference Include="CCommLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Communicator\trunk\CCommLib\bin\Debug\CCommLib.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="CA200SRVRLib" />
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Class\CDevBM-7A.vb" />
+    <Compile Include="Class\CDevCAxxxCMD.vb" />
+    <Compile Include="Class\CDevColorAnalyzerAPI.vb" />
+    <Compile Include="Class\CDevColorAnalyzerCommonNode.vb" />
+    <Compile Include="Class\CDevCS100A.vb" />
+    <Compile Include="Class\CDevHEXA50.vb" />
+    <Compile Include="Control\ucBM7A.Designer.vb">
+      <DependentUpon>ucBM7A.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ucBM7A.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\ucCA310.designer.vb">
+      <DependentUpon>ucCA310.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ucCA310.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\ucCAxxx.Designer.vb">
+      <DependentUpon>ucCAxxx.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ucCAxxx.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\ucCS100A.Designer.vb">
+      <DependentUpon>ucCS100A.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ucCS100A.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\ucHEXA50.Designer.vb">
+      <DependentUpon>ucHEXA50.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ucHEXA50.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Module\CUnitCommonNode.vb" />
+    <Compile Include="Module\Miow.vb" />
+    <Compile Include="Module\MMainModule.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Control\ucBM7A.resx">
+      <DependentUpon>ucBM7A.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\ucCA310.resx">
+      <DependentUpon>ucCA310.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\ucCAxxx.resx">
+      <DependentUpon>ucCAxxx.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\ucCS100A.resx">
+      <DependentUpon>ucCS100A.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\ucHEXA50.resx">
+      <DependentUpon>ucHEXA50.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DevNote.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="CA200SRVRLib">
+      <Guid>{81480671-9287-43D4-8A21-F0CB0157077F}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>1</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{94E38DFF-614B-4CBD-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

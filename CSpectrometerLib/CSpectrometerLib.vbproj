@@ -1,0 +1,313 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>
+    </SchemaVersion>
+    <ProjectGuid>{106B1734-122F-4A1F-BDC5-BD2E37507ED1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>CSpectrometerLib</RootNamespace>
+    <AssemblyName>CSpectrometerLib</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>Windows</MyType>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>CSpectrometerLib.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <PlatformTarget>x86</PlatformTarget>
+    <Optimize>true</Optimize>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>CSpectrometerLib.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CCommLib, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\CCommLib\bin\Debug\CCommLib.dll</HintPath>
+    </Reference>
+    <Reference Include="CS2000Cal">
+      <HintPath>DLL\CS2000Cal.dll</HintPath>
+    </Reference>
+    <Reference Include="CS2000SDK_AutoMeas">
+      <HintPath>DLL\CS2000SDK_AutoMeas.dll</HintPath>
+    </Reference>
+    <Reference Include="Image1, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\Image1.dll</HintPath>
+    </Reference>
+    <Reference Include="LabsphereLibrary">
+      <HintPath>DLL\LabsphereLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Class\CDevAvantes.vb" />
+    <Compile Include="Class\CDevCS1000A.vb" />
+    <Compile Include="Class\CDevCS2000.vb" />
+    <Compile Include="Class\cDevCS2000A.vb" />
+    <Compile Include="Class\CDevDarsaPro.vb" />
+    <Compile Include="Class\CDevLabsphere.vb" />
+    <Compile Include="Class\CDevPR650.vb" />
+    <Compile Include="Class\CDevPR655.vb" />
+    <Compile Include="Class\CDevPR670.vb" />
+    <Compile Include="Class\CDevPR705.vb" />
+    <Compile Include="Class\CDevPR730.vb" />
+    <Compile Include="Class\CDevPR740.vb" />
+    <Compile Include="Class\CDevSpectrometerAPI.vb" />
+    <Compile Include="Class\CDevSpectrometerCommonNode.vb" />
+    <Compile Include="Class\CDevSR-3AR.vb" />
+    <Compile Include="Class\CDevSR-UL2.vb" />
+    <Compile Include="Class\CDevUA-10.vb" />
+    <Compile Include="Class\MCommonMeasure.vb" />
+    <Compile Include="Class\CDevCS1000.vb" />
+    <Compile Include="Control\ucAvantes.Designer.vb">
+      <DependentUpon>ucAvantes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ucAvantes.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\ucCS1000.Designer.vb">
+      <DependentUpon>ucCS1000.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ucCS1000.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\ucCS1000A.Designer.vb">
+      <DependentUpon>ucCS1000A.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ucCS1000A.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\ucCS2000.Designer.vb">
+      <DependentUpon>ucCS2000.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ucCS2000.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\ucDarsaPro.Designer.vb">
+      <DependentUpon>ucDarsaPro.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ucDarsaPro.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\ucLabsphere.Designer.vb">
+      <DependentUpon>ucLabsphere.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ucLabsphere.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\ucOceanOptics.Designer.vb">
+      <DependentUpon>ucOceanOptics.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ucOceanOptics.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\ucPR650.Designer.vb">
+      <DependentUpon>ucPR650.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ucPR650.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\ucPR655.Designer.vb">
+      <DependentUpon>ucPR655.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ucPR655.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\ucPR670.Designer.vb">
+      <DependentUpon>ucPR670.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ucPR670.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\ucPR705.Designer.vb">
+      <DependentUpon>ucPR705.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ucPR705.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\ucPR730.Designer.vb">
+      <DependentUpon>ucPR730.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ucPR730.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\ucPR740.Designer.vb">
+      <DependentUpon>ucPR740.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ucPR740.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\ucSR3AR.Designer.vb">
+      <DependentUpon>ucSR3AR.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ucSR3AR.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\ucSRUL2.Designer.vb">
+      <DependentUpon>ucSRUL2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ucSRUL2.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\ucUA10.Designer.vb">
+      <DependentUpon>ucUA10.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ucUA10.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Control\ucAvantes.resx">
+      <DependentUpon>ucAvantes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\ucCS1000.resx">
+      <DependentUpon>ucCS1000.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\ucCS1000A.resx">
+      <DependentUpon>ucCS1000A.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\ucCS2000.resx">
+      <DependentUpon>ucCS2000.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\ucDarsaPro.resx">
+      <DependentUpon>ucDarsaPro.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\ucLabsphere.resx">
+      <DependentUpon>ucLabsphere.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\ucOceanOptics.resx">
+      <DependentUpon>ucOceanOptics.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\ucPR650.resx">
+      <DependentUpon>ucPR650.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\ucPR655.resx">
+      <DependentUpon>ucPR655.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\ucPR670.resx">
+      <DependentUpon>ucPR670.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\ucPR705.resx">
+      <DependentUpon>ucPR705.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\ucPR730.resx">
+      <DependentUpon>ucPR730.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\ucPR740.resx">
+      <DependentUpon>ucPR740.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\ucSR3AR.resx">
+      <DependentUpon>ucSR3AR.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\ucSRUL2.resx">
+      <DependentUpon>ucSRUL2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\ucUA10.resx">
+      <DependentUpon>ucUA10.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{94E38DFF-614B-4CBD-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="OmniDriverDLL">
+      <Guid>{2CFDD427-2A73-4D82-9518-59D84360C8D4}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>
+    </SchemaVersion>
+    <ProjectGuid>{B3D45A33-9C43-4699-86E5-14E18260B29F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>CCommLib</RootNamespace>
+    <AssemblyName>CCommLib</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>Windows</MyType>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>CCommLib.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>CCommLib.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NationalInstruments.Common, Version=12.0.40.253, Culture=neutral, PublicKeyToken=dc6ad606294fc298, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\National Instruments\MeasurementStudioVS2010\DotNET\Assemblies\Current\NationalInstruments.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="NationalInstruments.NI4882, Version=9.0.40.157, Culture=neutral, PublicKeyToken=dc6ad606294fc298, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\National Instruments\MeasurementStudioVS2010\DotNET\Assemblies\Current\NationalInstruments.NI4882.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CComAPI.vb" />
+    <Compile Include="CComGPIB.vb" />
+    <Compile Include="CComCommonNode.vb" />
+    <Compile Include="CComSerial.vb" />
+    <Compile Include="CComSocket.vb" />
+    <Compile Include="Control\ucConfigGPIB.designer.vb">
+      <DependentUpon>ucConfigGPIB.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ucConfigGPIB.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\ucConfigMultiGPIB.designer.vb">
+      <DependentUpon>ucConfigMultiGPIB.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ucConfigMultiGPIB.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\ucConfigMultiRS232.designer.vb">
+      <DependentUpon>ucConfigMultiRS232.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ucConfigMultiRS232.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\ucConfigRS232.Designer.vb">
+      <DependentUpon>ucConfigRS232.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ucConfigRS232.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\ucConfigRS232_RS485.Designer.vb">
+      <DependentUpon>ucConfigRS232_RS485.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ucConfigRS232_RS485.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\ucConfigRS232_Socket_GPIB.designer.vb">
+      <DependentUpon>ucConfigRS232_Socket_GPIB.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ucConfigRS232_Socket_GPIB.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\ucConfigRS485.Designer.vb">
+      <DependentUpon>ucConfigRS485.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ucConfigRS485.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\ucConfigSocket.Designer.vb">
+      <DependentUpon>ucConfigSocket.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ucConfigSocket.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\ucDispListView.Designer.vb">
+      <DependentUpon>ucDispListView.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ucDispListView.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Control\ucConfigGPIB.resx">
+      <DependentUpon>ucConfigGPIB.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\ucConfigMultiGPIB.resx">
+      <DependentUpon>ucConfigMultiGPIB.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\ucConfigMultiRS232.resx">
+      <DependentUpon>ucConfigMultiRS232.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\ucConfigRS232.resx">
+      <DependentUpon>ucConfigRS232.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\ucConfigRS232_RS485.resx">
+      <DependentUpon>ucConfigRS232_RS485.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\ucConfigRS232_Socket_GPIB.resx">
+      <DependentUpon>ucConfigRS232_Socket_GPIB.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\ucConfigRS485.resx">
+      <DependentUpon>ucConfigRS485.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\ucConfigSocket.resx">
+      <DependentUpon>ucConfigSocket.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\ucDispListView.resx">
+      <DependentUpon>ucDispListView.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DevNote.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,1541 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="M7000.My.MyApplication" Collapsed="true">
+    <Position X="41.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ApplicationEvents.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.My.MySettings" Collapsed="true">
+    <Position X="43.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAABAAIAAABAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CMcFile" Collapsed="true">
+    <Position X="43.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EBAAAAIAAAABIARAAAAAAAAAQACAAACAAAAAACAAgAA=</HashCode>
+      <FileName>Class\CMcFile.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CPauseControl" Collapsed="true">
+    <Position X="45.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QACAAAAAAAgQQAAAAAAAAACAAAAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>Class\CPauseControl.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CV7000Emergency" Collapsed="true">
+    <Position X="48.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAABAAAAAABAAAAAAAAAAAAAAAAICAAAAAAAAAAAA=</HashCode>
+      <FileName>Class\CPauseControl.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CV7000StateLamp" Collapsed="true">
+    <Position X="50.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAABAAAAAAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>Class\CPauseControl.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CScheduler" Collapsed="true">
+    <Position X="47" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAICIAgDBAABAAAQAIBAAAAAAwAgAAAgEAhQAABAA=</HashCode>
+      <FileName>Class\CScheduler.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CSeqProcessor" Collapsed="true">
+    <Position X="48.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIABAAAACAAAACCAMABAAAAAAAAAIAgAAAAAQAABAA=</HashCode>
+      <FileName>Class\CSeqProcessor.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CSequenceInfo" Collapsed="true">
+    <Position X="13" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAEAAAAAAAAAAAAAAACAAAAAABAAAAA=</HashCode>
+      <FileName>Class\CSequenceInfo.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CSequenceListManager" Collapsed="true">
+    <Position X="40" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAAAAAAAAAACAAAAAAUAAERAQAAIAAAAAACBBAAE=</HashCode>
+      <FileName>Class\CSequenceListManager.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CIOSeqListInfo" Collapsed="true">
+    <Position X="19.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAEAAAAAAAAAAAAAAACAAAAAABAAAAA=</HashCode>
+      <FileName>Class\CSequenceListManager.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CSequenceManager" Collapsed="true">
+    <Position X="41.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ANAAMQAQDYAkQQpgQJWqhBCBCQIAGGhwgRkOpAFSwgQ=</HashCode>
+      <FileName>Class\CSequenceManager.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CStateMsg" Collapsed="true">
+    <Position X="43.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAoAAAAgAAAAIAAAAAAAAAAACAAAAAAgAAAABA=</HashCode>
+      <FileName>Class\CStateMsg.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CDataQECal" Collapsed="true">
+    <Position X="36.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAACABAAAAAAAAAAAAAAAAAAAAAAAAAAEAg=</HashCode>
+      <FileName>Class\Data Process\CDataQECal.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CDataSort" Collapsed="true">
+    <Position X="38.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQACAAAAAAAAgAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Class\Data Process\CDataSort.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CChDisp" Collapsed="true">
+    <Position X="31.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAAEAAABAAAAEAAgAAAAAAEAQABAAAAA=</HashCode>
+      <FileName>Class\Disp\CChDisp.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CConfigINI" Collapsed="true">
+    <Position X="4" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAEAAAAAAAAAAAAAAACAAAAAABAAAAA=</HashCode>
+      <FileName>Class\IO\CConfigINI.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.cDataOutput" Collapsed="true">
+    <Position X="34.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAIACgABFhABAARCwAxIAAAQYEIAACIDIEAAGOBAAhA=</HashCode>
+      <FileName>Class\IO\cDataOutput.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CExcelConverter" Collapsed="true">
+    <Position X="36.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAQQQAEAAiACAEAgAAUBADEAEAIABIQAgABBiQAAAAA=</HashCode>
+      <FileName>Class\IO\CExcelConverter.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CIOInitialCode" Collapsed="true">
+    <Position X="40" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAIAAAAABAgAABAAAAAAQECQAAAIAAoAAAAAAAAA=</HashCode>
+      <FileName>Class\IO\CIOInitialCode.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.cls_INI" Collapsed="true">
+    <Position X="15.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAgAAAAAAACAAACAACAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Class\IO\cls_INI.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.COptionINI" Collapsed="true">
+    <Position X="8.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAEAAAAAAAAAAAAAAACAAAAAABAAAAA=</HashCode>
+      <FileName>Class\IO\COptionINI.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CViewerLinkInfoINI" Collapsed="true">
+    <Position X="10.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAEAAAAAAAAAAAAAAACAAAAAABAAAAA=</HashCode>
+      <FileName>Class\IO\COptionINI.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CPGImiageINI" Collapsed="true">
+    <Position X="15.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAEAAAAAAAAAAAAAAACAAAAAABAAAAA=</HashCode>
+      <FileName>Class\IO\CPGImiageINI.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CRcpINI" Collapsed="true">
+    <Position X="17.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAEAAAAAAAAAAAAAAACAAAAAABAAAAA=</HashCode>
+      <FileName>Class\IO\CRcpINI.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CSeqBuilderSettingsINI" Collapsed="true">
+    <Position X="22" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAEAAAAAAAAAAAAAAACAAAAAABAAAAA=</HashCode>
+      <FileName>Class\IO\CSeqBuilderSettingsINI.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CUserSettingsINI" Collapsed="true">
+    <Position X="26.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAEAAAAAAAAAAAAAAACAAAAAABAAAAA=</HashCode>
+      <FileName>Class\IO\CUserSettingsINI.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucDispStateMsg" Collapsed="true">
+    <Position X="47" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IgCAAAAACCQAAIAAAACAAAAGAAQAIAIAAAAhAACABAg=</HashCode>
+      <FileName>Class\ucDispStateMsg.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CAllocationINI" Collapsed="true">
+    <Position X="28.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAEAAAAAAAAAAAAAAACAAAAAABAAAAA=</HashCode>
+      <FileName>Class\Unit\CAllocationINI.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CChannelStatusINI" Collapsed="true">
+    <Position X="1.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAEAAAAAAAAAAAAAAACAAAAAABAAAAA=</HashCode>
+      <FileName>Class\Unit\CChannelStatusINI.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CTime" Collapsed="true">
+    <Position X="45.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AUQAAAEAAEHAAAEAAAAAEAAAAAAAAACAEIABAAAgQAI=</HashCode>
+      <FileName>Class\Unit\CTime.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CUnitCommonNode" Collapsed="true">
+    <Position X="9" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAFCAAAAEMAAAAAAIQCAAJAoCEAAAGAABgRAADIAEAA=</HashCode>
+      <FileName>Class\Unit\CUnitCommonNode.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CUnitConverter" Collapsed="true">
+    <Position X="47" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAgAAMAAAEBAAAAAAAAAAAIAAAAAQAMAgEABA=</HashCode>
+      <FileName>Class\Unit\CUnitConverter.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CUnitAmpere" Collapsed="true">
+    <Position X="1.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAEAAA=</HashCode>
+      <FileName>Class\Unit\Units\CUnitAmpere.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CUnitArea" Collapsed="true">
+    <Position X="3.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAECAAAAEEAAAAAAAQAAAJAIAAAAAGAABARAADIEAAA=</HashCode>
+      <FileName>Class\Unit\Units\CUnitArea.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CUnitCurrentDensity" Collapsed="true">
+    <Position X="5.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAIAAAAAAAAAkAACAAAAQAAAAAAAA=</HashCode>
+      <FileName>Class\Unit\Units\CUnitCurrentDensity.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CUnitPower" Collapsed="true">
+    <Position X="8" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAAAAAACAAAAAAAAAEAAA=</HashCode>
+      <FileName>Class\Unit\Units\CUnitPower.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CUnitResistance" Collapsed="true">
+    <Position X="10.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAAAAAACAAAAAAAAAEAAA=</HashCode>
+      <FileName>Class\Unit\Units\CUnitResistance.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CUnitTemperature" Collapsed="true">
+    <Position X="12.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAgAAAAAAAAAAABAAAAAAAAAAAAAgAAAAA=</HashCode>
+      <FileName>Class\Unit\Units\CUnitTemperature.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CUnitTime" Collapsed="true">
+    <Position X="14.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAACABgCAQCAAAAAAkAIAAAAAgBIABABAAAA=</HashCode>
+      <FileName>Class\Unit\Units\CUnitTime.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CunitVoltage" Collapsed="true">
+    <Position X="17" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAAAAAACAAAAAAAAAEAAA=</HashCode>
+      <FileName>Class\Unit\Units\CunitVoltage.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CDevM6000" Collapsed="true">
+    <Position X="40" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>GcJgh9B6YAAgBuHAIg2IAFgyKsBCiAIBoYNwCmoAAog=</HashCode>
+      <FileName>Device\CDevM6000.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CDevMotion_AJIN" Collapsed="true">
+    <Position X="47" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACkhFEIDAIAJSlAIARFCEA2kAAArgQYhAAVIaAEBVA=</HashCode>
+      <FileName>Device\CDevMotion_AJIN.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CDevPDUnit" Collapsed="true">
+    <Position X="48.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CADAgAAAACgIAWHAAoAIAEgoIgAAIQBhAAAwAADAAII=</HashCode>
+      <FileName>Device\CDevPDUnit.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CDevPLC" Collapsed="true">
+    <Position X="52.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>0BIABAAAAGyAQCFAAJAAABogAAAAjUAALAIUgBggDAA=</HashCode>
+      <FileName>Device\CDevPLC.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CDevSG" Collapsed="true">
+    <Position X="31.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>dtcs8FqxKPvvXO/tm7P16pZvsV/1vt67veTv675vLK8=</HashCode>
+      <FileName>Device\CDevSG.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CImageProcessCal" Collapsed="true">
+    <Position X="38.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACIAAAAAAAQAEAKAAAAAIAAAAIAEAAAAAAAAAAA=</HashCode>
+      <FileName>Device\CImageProcessCal.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CM7000Vision" Collapsed="true">
+    <Position X="41.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAA2AmACAioUAAugwJIKmkAUVIRBwJIAAAAAnAAwQhE=</HashCode>
+      <FileName>Device\CM7000Vision.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.UcADcChannel" Collapsed="true">
+    <Position X="47" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQCGAIEAsiBoEQAAiImBAAIGsDB4YkJoACAIIAKAAgE=</HashCode>
+      <FileName>Device\Control\ucADcChannel.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.UcADcFrame" Collapsed="true">
+    <Position X="48.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAMAEAACAIUAAACICBAAACgAgIAAIAABAAYQAAAQI=</HashCode>
+      <FileName>Device\Control\ucADcFrame.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucConfigMcPGGroup" Collapsed="true">
+    <Position X="31.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAGAAAiEKIAAAJAAwTAAoACASASMAIAAAABQ1hCAAA=</HashCode>
+      <FileName>Device\Control\ucConfigMcPGGroup.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucConfigMotion" Collapsed="true">
+    <Position X="33" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAGAAAAEKNACApIEQTAggACARAyNAIAgBABQkBAAAA=</HashCode>
+      <FileName>Device\Control\ucConfigMotion.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucConfigPG" Collapsed="true">
+    <Position X="34.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAIAECAEAEAAAECIEAACAQAACAIABAgAAABABAA=</HashCode>
+      <FileName>Device\Control\ucConfigPG.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucConfigRS232_Socket_GPIB" Collapsed="true">
+    <Position X="36.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEACABgAELKEAAQEAATAAgACAQAgIAIBAYBJA0BEABA=</HashCode>
+      <FileName>Device\Control\ucConfigRS232_Socket_GPIB.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.UcDacChannel" Collapsed="true">
+    <Position X="38.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACACgAQYsOBJPgwAAEiAwgMCBEAxYEscCAhIMIIBAkM=</HashCode>
+      <FileName>Device\Control\ucDacChannel.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CIODacInfo" Collapsed="true">
+    <Position X="24.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAEAAAAAAAAAAAAAAACAAAAAABAAAAA=</HashCode>
+      <FileName>Device\Control\ucDacChannel.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.UcDacFrame" Collapsed="true">
+    <Position X="40" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAgQBAABAKAIAAgBAACAAAACBEAQAAMAAAAgQAAAAAA=</HashCode>
+      <FileName>Device\Control\ucDacFrame.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucG4SConfig" Collapsed="true">
+    <Position X="52.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAECIAAEQAQASAAAACAADwIEIAAYDAJQBAABI=</HashCode>
+      <FileName>Device\Control\ucG4SConfig.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.Ucgpio" Collapsed="true">
+    <Position X="31.25" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>Af4DQCCCKuDxAwgAOGGAAAACABAYoEL8IwQMgCQAAIM=</HashCode>
+      <FileName>Device\Control\ucGPIO.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucK24XXConfig" Collapsed="true">
+    <Position X="33" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAEBAAELCEAAwAAATAAAACAAAgIAIBAYBJA0BAgBA=</HashCode>
+      <FileName>Device\Control\ucK24XXConfig.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucK26XXConfig" Collapsed="true">
+    <Position X="34.75" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAEBAAELCEAAwAAATAAAACAAAgIAIBAYBJA0BAgBA=</HashCode>
+      <FileName>Device\Control\ucK26XXConfig.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucM6000Config" Collapsed="true">
+    <Position X="38.25" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEACEAAAELCEAAwIAATAAgACAABgMAIBAYBJAkBAgBQ=</HashCode>
+      <FileName>Device\Control\ucM6000Config.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucMcPG" Collapsed="true">
+    <Position X="40" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>RCBRQgGgEDDOMRIwnEWASFQTtWQTMdSXgUYKIxAQFQA=</HashCode>
+      <FileName>Device\Control\ucMcPG.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucMcPGControl" Collapsed="true">
+    <Position X="41.75" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>wxBXjA0pGHtowyKAiUGgzX8j9CTw+c/DkJRCCxowQUI=</HashCode>
+      <FileName>Device\Control\ucMcPGControl.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucMcPGPower" Collapsed="true">
+    <Position X="43.5" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BE15CyEhuDOI8YMgOJHh/PtPkjT/e0+LBIQCKxAoAGE=</HashCode>
+      <FileName>Device\Control\ucMcPGPower.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucSelectValueTypeAndUnit" Collapsed="true">
+    <Position X="36.5" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAMYAAABQCAAAAAABACAAAACQAgAAAIAAEAAAQAAEAA=</HashCode>
+      <FileName>Device\Control\ucSelectValueTypeAndUnit.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucSGOutputDefine" Collapsed="true">
+    <Position X="40" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgBCQACBEChCGAQAAACAAQADIQABIAYAIgBABABAABA=</HashCode>
+      <FileName>Device\Control\ucSGOutputDefine.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucSingleList" Collapsed="true">
+    <Position X="41.75" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAABQYEEACAAAQAQAAKQAgACEBAAgAIIAUAFIAAAAgA=</HashCode>
+      <FileName>Device\Control\ucSingleList.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucSwitchConfig" Collapsed="true">
+    <Position X="43.5" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAELAAAAQAAATAAAACAAAgIAIBAYBBAQAAABA=</HashCode>
+      <FileName>Device\Control\ucSwitchConfig.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CSeqRoutineM6000" Collapsed="true">
+    <Position X="50.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAUABACACAEEEoAAAgAAQQAAggAQAAAAAIQABQMI=</HashCode>
+      <FileName>Device\CSeqRoutineM6000.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CSeqRoutineSG" Collapsed="true">
+    <Position X="33" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EEAAwMABACAAAAHAAAgAKAAQwAAwgDQAAEBQAAABCIY=</HashCode>
+      <FileName>Device\CSeqRoutineSG.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmColorAnalyzerControl" Collapsed="true">
+    <Position X="38.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAACAAEEiA8AgAAQZCAAAEigAAAAAIAgAAdQBQBAEA=</HashCode>
+      <FileName>Device\Frame\frmColorAnalyzerControl.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmK23XControl" Collapsed="true">
+    <Position X="34.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgECOBIEECGIECAAEAWgCAgCAAgmYgIDAYDBAQAAwAg=</HashCode>
+      <FileName>Device\Frame\frmK23XControl.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmK24XXControl" Collapsed="true">
+    <Position X="36.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgECOBIEECGIECAAEAWgCAACAAgmIgIDAYDBAQAAwAg=</HashCode>
+      <FileName>Device\Frame\frmK24XXControl.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmK26XXControl" Collapsed="true">
+    <Position X="38.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgECOBIEECWLACCAEAWECAACAAAmIgIDAYDBAQAAwAg=</HashCode>
+      <FileName>Device\Frame\frmK26XXControl.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmK7001Control" Collapsed="true">
+    <Position X="40" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEBBAEGEAACQAKhGBQAACACH4KAAAAAGEgQAAEAI=</HashCode>
+      <FileName>Device\Frame\frmK7001Control.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmMcPGControl" Collapsed="true">
+    <Position X="52.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAECAgAQAAAAGAEAACBAAAIAIBQEAAAABAQAA=</HashCode>
+      <FileName>Device\Frame\frmMcPGControl.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmMotionControl" Collapsed="true">
+    <Position X="36.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>MBHAIICocHAQAYCKS8KAcKsCzAWXdUDkQbQLqRQBJoA=</HashCode>
+      <FileName>Device\Frame\frmMotionControl.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmNx1Control" Collapsed="true">
+    <Position X="40" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gACMSIVAECAEEAIAAAGAAIAiAAA0KAIAIAAAAmBARIw=</HashCode>
+      <FileName>Device\Frame\frmNx1Control.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmPDUnitControl" Collapsed="true">
+    <Position X="45.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AoQAAgABEGQAgAAIgAmgAAADUDD/IBICAIQBCAAIQCA=</HashCode>
+      <FileName>Device\Frame\frmPDUnitControl.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmPGSendRecieveLog" Collapsed="true">
+    <Position X="47" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAACAYAAAAAACAAAQCAAAAIAAAAAMgACAAAAA=</HashCode>
+      <FileName>Device\Frame\frmPGSendRecieveLog.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmPLCControl" Collapsed="true">
+    <Position X="48.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAQBgEIgECEQqCkAGGG4FBySQIAQfAQBAJQoAAIGRwg=</HashCode>
+      <FileName>Device\Frame\frmPLCControl.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmPR705Control" Collapsed="true">
+    <Position X="50.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAGAAAgAcCCiBBACBoOBQAYjANA2JCgGAYYKCBAAgAg=</HashCode>
+      <FileName>Device\Frame\frmPR705Control.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.FrmPR730Control" Collapsed="true">
+    <Position X="52.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAIQIAGAEGAAAAIAAAGEAiAiACBQIQAAQAQAAACAAAA=</HashCode>
+      <FileName>Device\Frame\frmPR730Control.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmSGCalibration" Collapsed="true">
+    <Position X="36.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAWQEAAEKAgAAIAAACRQAFCgADCYACHAYAAAAAAAAA=</HashCode>
+      <FileName>Device\Frame\frmSGCalibration.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmSGControl" Collapsed="true">
+    <Position X="38.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>dSX59LP4Evft/J7a/8fR//+n9Xb/83+vcvxaNr0ZfXs=</HashCode>
+      <FileName>Device\Frame\frmSGControl.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmSGDacChannel" Collapsed="true">
+    <Position X="40" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABACAAAAAAAACAAQACAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Device\Frame\frmSGDacChannel.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmSGSendRecieveLog" Collapsed="true">
+    <Position X="41.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAACAIAAAAAACAAAQCAAAAIAAAAAMgBCAAAAA=</HashCode>
+      <FileName>Device\Frame\frmSGSendRecieveLog.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmSR_3AR" Collapsed="true">
+    <Position X="50.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAkCAgEBCAATOgSAYCABAiIAAAAACKAQAAQAg=</HashCode>
+      <FileName>Device\Frame\frmSR-3AR.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmSW7000Control" Collapsed="true">
+    <Position X="52.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAECAAAAAAAgGYIAACAABgIQCACACJAAAEQAg=</HashCode>
+      <FileName>Device\Frame\frmSW7000Control.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmTHCControl" Collapsed="true">
+    <Position X="38.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAEGAAMAAAAASAAAAigEAAIAAAAAQCAAAEQAg=</HashCode>
+      <FileName>Device\Frame\frmTHCControl.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CComTCPServer" Collapsed="true">
+    <Position X="33" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAAIEEAAEBEAAAoQAABQAAAAgAAAADEIAs=</HashCode>
+      <FileName>Device\PatternGenerator\CComTCPServer.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CDevG4S" Collapsed="true">
+    <Position X="7.75" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AJWIg1AgUCxB4FVDEFAAABAUUUwihYFBWgK4oUGZEKI=</HashCode>
+      <FileName>Device\PatternGenerator\CDevG4S.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.cDevMcPG" Collapsed="true">
+    <Position X="41.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACABACAAIhECKlBAhEoKBASAMyU0kECCITEljgADAA=</HashCode>
+      <FileName>Device\PatternGenerator\cDevMcPG.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.cDevMcPGControl" Collapsed="true">
+    <Position X="43.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>KQgAAojwMAjEhClBAhEACBMAAEAchEACCATKgB0FHAA=</HashCode>
+      <FileName>Device\PatternGenerator\cDevMcPGControl.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.cDevMcPGPower" Collapsed="true">
+    <Position X="45.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ET0CgADQkDlEGH1tEnMRnBBBIMAwkEAKOfTNghgejJE=</HashCode>
+      <FileName>Device\PatternGenerator\cDevMcPGPower.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CDevPGAPI" Collapsed="true">
+    <Position X="50.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAEAAAAAAAAAAIABAAAIAAAAAABAAIg=</HashCode>
+      <FileName>Device\PatternGenerator\CDevPGAPI.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CDevPGCommonNode" Collapsed="true">
+    <Position X="6.75" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACIgAIDQiAEACFgAoAEJAAAwIAAhQyAAgwEAIBCDIw=</HashCode>
+      <FileName>Device\PatternGenerator\CDevPGCommonNode.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CSeqRoutineMcPG" Collapsed="true">
+    <Position X="5.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>UEgEBECAACDEAQWAAgEASAAQAAAxoCAEAACAABCBAII=</HashCode>
+      <FileName>Device\PatternGenerator\CSeqRoutineMcPG.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CDevK7001" Collapsed="true">
+    <Position X="0.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAgCBQCAAhCEAAAQBAAAAAAAAAAABAABAAAEAAIA=</HashCode>
+      <FileName>Device\Switch\CDevK7001.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CDevSW7000" Collapsed="true">
+    <Position X="2.75" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgQgAAAIYAAAACEAAEgAQAAACAgAkAIDAAAEAEEAcIE=</HashCode>
+      <FileName>Device\Switch\CDevSW7000.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CDevSwitchAPI" Collapsed="true">
+    <Position X="33" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Device\Switch\CDevSwitchAPI.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CDevSwitchCommonNode" Collapsed="true">
+    <Position X="1.75" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAACQgAABCFAAIAEAAAAAAAAAAABAAgAAAEABIA=</HashCode>
+      <FileName>Device\Switch\CDevSwitchCommonNode.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CDevMC9" Collapsed="true">
+    <Position X="0.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gSTQCDztQWAolWNx+T8Jas1gExkEgUAoigy2VGD+y94=</HashCode>
+      <FileName>Device\Temp\CDevMC9.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CDevNX1" Collapsed="true">
+    <Position X="3" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQgAAoACiAAAiFAACAAAgAAAQAAACADABAAAkAiRIA=</HashCode>
+      <FileName>Device\Temp\CDevNX1.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CDevSP790" Collapsed="true">
+    <Position X="5.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>KQwgYEwkCABAACHAABAAAwEAUYgUhAAgAEHAAFhsaJI=</HashCode>
+      <FileName>Device\Temp\CDevSP790.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CDevTCCommonNode" Collapsed="true">
+    <Position X="5.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAADACAAAiFAAIAAAAAAAQAAAAggAACEAEAgTIA=</HashCode>
+      <FileName>Device\Temp\CDevTCCommonNode.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CDevTD500" Collapsed="true">
+    <Position X="7.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQFAQAAgQAAACFAECBAAgAAgwCUACggGISAgEApSgQ=</HashCode>
+      <FileName>Device\Temp\CDevTD500.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CDevTempController" Collapsed="true">
+    <Position X="34.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Device\Temp\CDevTempController.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CDevTHC98585" Collapsed="true">
+    <Position X="9.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAADEAAAICAAAkAAAAAggAAAAAkAAAAIA=</HashCode>
+      <FileName>Device\Temp\CDevTHC98585.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CSeqRoutineMC9" Collapsed="true">
+    <Position X="52.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAEBBgCCEAgEAAAgAAAAQAAAgABAAAEAAAAABAII=</HashCode>
+      <FileName>Device\Temp\CSeqRoutineMC9.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CSeqRoutineNX1" Collapsed="true">
+    <Position X="31.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQAAEABgCAEAAEAAEgAAAAQgIAgABBAAEAAACABAII=</HashCode>
+      <FileName>Device\Temp\CSeqRoutineNX1.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CSeqRoutineSP790" Collapsed="true">
+    <Position X="34.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAUBBgCAEAgEAAAgAAAAQAAAgABQAAEAAABADAII=</HashCode>
+      <FileName>Device\Temp\CSeqRoutineSP790.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CSeqRoutineTD500" Collapsed="true">
+    <Position X="36.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAUABACAAAwEAAAgAABAQAAAAAAAABAAAAAADAII=</HashCode>
+      <FileName>Device\Temp\CSeqRoutineTD500.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CSeqRoutineTemp" Collapsed="true">
+    <Position X="38.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEBBgCAEAgMAAAgAAAAQAAAgABAAAAAAAAAhAoI=</HashCode>
+      <FileName>Device\Temp\CSeqRoutineTemp.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmMain" Collapsed="true">
+    <Position X="50.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>RZX1Rr1Js73X/+ffy+OCdkXnFa9W4z7rY8/DmsfBln8=</HashCode>
+      <FileName>frmMain.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucAcf" Collapsed="true">
+    <Position X="45.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACACAAAAAABACAAAACAAAAIAAAAAAAQAAAAAA=</HashCode>
+      <FileName>PretestMotionControls\ucAcf.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucAlarmTest" Collapsed="true">
+    <Position X="50.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAEAAACAAAAAAEACAAIAKAgKAIAAAAAIAAAAAAAA=</HashCode>
+      <FileName>PretestMotionControls\ucAlarmTest.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucFreeRun" Collapsed="true">
+    <Position X="50.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAABECAIACAAGACAAAACEADwIABQAAAAQgAAACA=</HashCode>
+      <FileName>PretestMotionControls\ucFreeRun.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucMotionControl" Collapsed="true">
+    <Position X="50.5" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CCgIgAAAECBAAEB8AICAIAQCAqAAICgAgAAAAAAAAEA=</HashCode>
+      <FileName>PretestMotionControls\ucMotionControl.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucMotionIndicator" Collapsed="true">
+    <Position X="52.25" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAgACAACOCEEBKIAAAioAAHICIBAAAAAAAAAAI=</HashCode>
+      <FileName>PretestMotionControls\ucMotionIndicator.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucDefTestEndParam" Collapsed="true">
+    <Position X="43.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAABAECAEAIIAAACAAAEGAEQAAAIGgEAQWgAAAAA=</HashCode>
+      <FileName>SequenceBuilder\BuilderSetting\ucDefTestEndParam.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucDataGridView" Collapsed="true">
+    <Position X="41.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EEVQQMCCJb4YEA1kQhTREABmECMCARI40yRUAgAEAAo=</HashCode>
+      <FileName>SequenceBuilder\CommUserCtrl\ucDataGridView.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucDispGraph" Collapsed="true">
+    <Position X="47" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gru5ThqhWHgqi0jZAObqAuMiCMwGQovLDpomWu7QXI0=</HashCode>
+      <FileName>SequenceBuilder\CommUserCtrl\ucDispGraph.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucDispListView" Collapsed="true">
+    <Position X="31.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAgQQNAEAGEAAAAREgCQAgACkABAkAIIiSSEICFBCAQ=</HashCode>
+      <FileName>SequenceBuilder\CommUserCtrl\ucDispListView.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucDispTarget_PanelModuel" Collapsed="true">
+    <Position X="48.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>iBCAEiGRACAgYAAACCSAASACCAQEQAIEAAEgghRAADA=</HashCode>
+      <FileName>SequenceBuilder\CommUserCtrl\ucDispTarget_PanelModuel.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmBuilderSettings" Collapsed="true">
+    <Position X="33" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgIDAAAAAKAAAIQAgAKIAMACFQAAAE4CAAAFABEBAAA=</HashCode>
+      <FileName>SequenceBuilder\frmBuilderSettings.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmSweepImgSelector" Collapsed="true">
+    <Position X="31.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAgEAAACAAIACAAAAAEIAAAAAAAAAAAA=</HashCode>
+      <FileName>SequenceBuilder\Module\frmSweepImgSelector.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucDispImage" Collapsed="true">
+    <Position X="48.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAIACAAAACAAAAAAIAAAAAAAACAAQ=</HashCode>
+      <FileName>SequenceBuilder\Module\ucDispImage.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucDispModule" Collapsed="true">
+    <Position X="33" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQCADIAJCAAAAACAACgQEACAQAAACIAggAQIIAAAAA=</HashCode>
+      <FileName>SequenceBuilder\Module\ucDispModule.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucDispPGGrayScale" Collapsed="true">
+    <Position X="36.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACCAAAECAAAoAAAACAEQACAGAAJAIAAAIgQgAgAAE=</HashCode>
+      <FileName>SequenceBuilder\Module\ucDispPGGrayScale.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucDispPGImageManger" Collapsed="true">
+    <Position X="40" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAIAAAChAAhAAAwCJAAACAEBAAAIgAACBAAwCAAQ=</HashCode>
+      <FileName>SequenceBuilder\Module\ucDispPGImageManger.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucDispPGImageSweep" Collapsed="true">
+    <Position X="41.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAwSEagAGOgAYwAgABWAIAEDAZAAIAKjA0AgCQMgAkY=</HashCode>
+      <FileName>SequenceBuilder\Module\ucDispPGImageSweep.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.UcDispPGInitCode" Collapsed="true">
+    <Position X="43.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAQAAIAECVAEAcgAgCEggATEAAqoAMIUINCQAAiAQY=</HashCode>
+      <FileName>SequenceBuilder\Module\UcDispPGInitCode.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucDispPGPower" Collapsed="true">
+    <Position X="45.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACQCAAARGiKA8QEAAAWAAACCKwD3AQIAAJgAAAQgZEg=</HashCode>
+      <FileName>SequenceBuilder\Module\ucDispPGPower.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucDispPGReg" Collapsed="true">
+    <Position X="47" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CgADAAEBECdAQAAwEQTgiAEDAQAAoFoCgIAACAIgEAI=</HashCode>
+      <FileName>SequenceBuilder\Module\ucDispPGReg.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucDispSignalGenerator" Collapsed="true">
+    <Position X="45.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BggBCkCBEK1AFBtgNADAiAVDAQYooB4ukICAjkJAoxY=</HashCode>
+      <FileName>SequenceBuilder\Panel\ucDispSignalGenerator.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucPanelRGB" Collapsed="true">
+    <Position X="31.25" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAgAAAGCAIAAAAAACAIAAKAIAAAAIAAAAAAABAAAA=</HashCode>
+      <FileName>SequenceBuilder\Panel\ucPanelRGB.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucPanelRGBWRotation" Collapsed="true">
+    <Position X="33" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAGCAAQAAAJICAhAICARBAoAIAgAIBEgAAgQY=</HashCode>
+      <FileName>SequenceBuilder\Panel\ucPanelRGBWRotation.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucBrightSetting" Collapsed="true">
+    <Position X="52.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>RAAIAAQAACQQAAAgAECAAAQiAgGAAAIAAAAAABBEBAA=</HashCode>
+      <FileName>SequenceBuilder\Sequence\Common\ucBrightSetting.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucLimitSetting" Collapsed="true">
+    <Position X="36.5" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACQAAAESCAAEACAECCAAACAQAAAAIAgAAAAAAAAAA=</HashCode>
+      <FileName>SequenceBuilder\Sequence\Common\ucLimitSetting.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucMeasureIntervalSetting" Collapsed="true">
+    <Position X="45.25" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ARABIAAMWCACAAAQAACkCAASQABAoBIABAABQAPABQY=</HashCode>
+      <FileName>SequenceBuilder\Sequence\Common\ucMeasureIntervalSetting.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucMeasureSweepList" Collapsed="true">
+    <Position X="47" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAECgABAAAAAGACAAKIJABqBIABAABRANABQY=</HashCode>
+      <FileName>SequenceBuilder\Sequence\Common\ucMeasureSweepList.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucMeasureSweepRegion" Collapsed="true">
+    <Position X="48.75" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AJACgBAAA2AIEAAgKiiAAAgaA4ABoIIAAAIBAghCAQY=</HashCode>
+      <FileName>SequenceBuilder\Sequence\Common\ucMeasureSweepRegion.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucRefPDSetting" Collapsed="true">
+    <Position X="34.75" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACgECAMAAAAAgGAAAICAAYAKAIACAAAAQhAAAA=</HashCode>
+      <FileName>SequenceBuilder\Sequence\Common\ucRefPDSetting.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucTempSetting" Collapsed="true">
+    <Position X="45.25" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAQECAAAIAQACCAgAJCECgAgAIAAEAEAAAABAI=</HashCode>
+      <FileName>SequenceBuilder\Sequence\Common\ucTempSetting.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucTestEndParam" Collapsed="true">
+    <Position X="47" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAkAAACAAIEEgYACgAEQvANAAwAICgAAQAAgAgEM=</HashCode>
+      <FileName>SequenceBuilder\Sequence\Common\ucTestEndParam.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmCrateNewSeq" Collapsed="true">
+    <Position X="43.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAACAAAAEAAACAAAACAAAAAEIAAAAAAAAAAAA=</HashCode>
+      <FileName>SequenceBuilder\Sequence\frmCrateNewSeq.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmMeasPointSetting" Collapsed="true">
+    <Position X="33" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAACAAAAEAABCAAAADAAAAAEIAgAAAgAAAAAA=</HashCode>
+      <FileName>SequenceBuilder\Sequence\frmMeasPointSetting.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmPatternGeneratorSetting" Collapsed="true">
+    <Position X="43.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACADoAJCAEAAEAACDgBMQCAQEAAGIAAAEQAAAgAAA=</HashCode>
+      <FileName>SequenceBuilder\Sequence\frmPatternGeneratorSetting.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmSignalGenerator" Collapsed="true">
+    <Position X="45.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACEAAAEAAACAAAACAAACAEIQAAAAAAAAAAA=</HashCode>
+      <FileName>SequenceBuilder\Sequence\frmSignalGenerator.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucDispCellLifetime" Collapsed="true">
+    <Position X="45.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QMQSgAtCICkAKkAQCVCAMwQGWOAIkJoAgYBEAIKAxII=</HashCode>
+      <FileName>SequenceBuilder\Sequence\ucDispCellLifetime.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucDispPointSetting" Collapsed="true">
+    <Position X="48.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gRQGCAAKFCQCEJQEAQCAaBEDAQQKoQMIgIGTgCAgAS0=</HashCode>
+      <FileName>SequenceBuilder\Sequence\ucDispPointSetting.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucDispRcpCommon" Collapsed="true">
+    <Position X="50.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ARACRQEAlKCAQABSIaCKgAACCRBAhAoigJBEEAARAAQ=</HashCode>
+      <FileName>SequenceBuilder\Sequence\ucDispRcpCommon.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucDispRcpGrayScaleSweep" Collapsed="true">
+    <Position X="52.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAECgAAABCAASACRAIOgDAADARAAEIYhkQCCQgADCAI=</HashCode>
+      <FileName>SequenceBuilder\Sequence\ucDispRcpGrayScaleSweep.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucDispRcpImageSticking" Collapsed="true">
+    <Position X="31.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACgAAAFDAAQAERAAGBAAASASAAQAIhFUAiQgACgBA=</HashCode>
+      <FileName>SequenceBuilder\Sequence\ucDispRcpImageSticking.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucDispRcpImageSweep" Collapsed="true">
+    <Position X="33" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>wADAgAAADCAAAAAVgAGAAAAmAAAAAAMBgRABQgAAAAA=</HashCode>
+      <FileName>SequenceBuilder\Sequence\ucDispRcpImageSweep.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucDispRcpIVLSweep" Collapsed="true">
+    <Position X="34.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABHCoeADVCFEYABRwBGgACBrURj/AJMlGSGJ4hB6ABI=</HashCode>
+      <FileName>SequenceBuilder\Sequence\ucDispRcpIVLSweep.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucDispRcpLifetime" Collapsed="true">
+    <Position X="36.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACoIQAFDBIQgUQJAOBCAQSAYAAQEIhkVggQgAGgAE=</HashCode>
+      <FileName>SequenceBuilder\Sequence\ucDispRcpLifetime.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucDispRcpRGBWAging" Collapsed="true">
+    <Position X="38.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAACAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SequenceBuilder\Sequence\ucDispRcpRGBWAging.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucDispRcpTemp" Collapsed="true">
+    <Position X="40" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAQECAAAAIQACGAwAJCEBgAgAIBEEAEAAAABAI=</HashCode>
+      <FileName>SequenceBuilder\Sequence\ucDispRcpTemp.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucDispRcpUserPattern" Collapsed="true">
+    <Position X="41.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAACAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SequenceBuilder\Sequence\ucDispRcpUserPattern.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucSequenceBuilder" Collapsed="true">
+    <Position X="38.25" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>wFcGYYeyFGQFEZANAdClKBQLwEEIKRsriYQhqAYiAQU=</HashCode>
+      <FileName>SequenceBuilder\ucSequenceBuilder.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucDispSampleCommonNode" Collapsed="true">
+    <Position X="11.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gARMkkQ1IWAQmDIlkICAFgDSBAAgME4CAIsCwrAhGBg=</HashCode>
+      <FileName>SubFrameControls\ChannelUI\CellUI\ucDispSampleCommonNode.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucDispSamplePanelModule" Collapsed="true">
+    <Position X="10.5" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAEEAgYkASgAEJANEACQBAAaBAAAJA6EACRIIIABIJw=</HashCode>
+      <FileName>SubFrameControls\ChannelUI\CellUI\ucDispSamplePanelModule.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucDispSampleUI" Collapsed="true">
+    <Position X="43.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQMEgAgACAAkAAIEACAAABCAAIAUE6AABgAApAFGAg=</HashCode>
+      <FileName>SubFrameControls\ChannelUI\CellUI\ucDispSampleUI.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucDispSampleUnitCell" Collapsed="true">
+    <Position X="12.75" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAEEAgIkASgAEBANAACQBAAaBAAAJA6AACRIIIABIJw=</HashCode>
+      <FileName>SubFrameControls\ChannelUI\CellUI\ucDispSampleUnitCell.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucDispCtrlUICommonNode" Collapsed="true">
+    <Position X="10.5" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACQAAgACAAAAAAEACAAQCSAAACACIKAQAIAAABIAA=</HashCode>
+      <FileName>SubFrameControls\ChannelUI\ForQC\ucDispCtrlUICommonNode.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucDispCtrlUIOfCustomTypeForQC" Collapsed="true">
+    <Position X="10.5" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABBggC8ACCFkADJUAShDATCBCAFCJIACwIQEBLFAAQ=</HashCode>
+      <FileName>SubFrameControls\ChannelUI\ForQC\ucDispCtrlUIOfCustomTypeForQC.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucDispJIG" Collapsed="true">
+    <Position X="50.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAqA+IxIWgQlIAtAIDUhgCaEAAAFAsDBABCwjIRGJQ=</HashCode>
+      <FileName>SubFrameControls\ChannelUI\JIGUI\ucDispJIG.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucDispJIGCommonNode" Collapsed="true">
+    <Position X="52.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAACAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SubFrameControls\ChannelUI\JIGUI\ucDispJIGCommonNode.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucDispMultiCtrlCommonNode" Collapsed="true">
+    <Position X="4" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACBQgMQ0IGCxEDgREICAAABbAgJhMSKCAYACQiAFGAA=</HashCode>
+      <FileName>SubFrameControls\ucDispMultiCtrlCommonNode.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucDispMultiCtrlOfCustomTypeForQC" Collapsed="true">
+    <Position X="0.75" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAKAAAAAAAACACAAiAIAAAAAAgAAAAACABAA=</HashCode>
+      <FileName>SubFrameControls\ucDispMultiCtrlOfCustomTypeForQC.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucDispMultiCtrlOfJIGLayout" Collapsed="true">
+    <Position X="3" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AARAAAAAALAAAAAAAACSAgAGAAQAAAACgYABAASADBA=</HashCode>
+      <FileName>SubFrameControls\ucDispMultiCtrlOfJIGLayout.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucDispMultiCtrlOfListType" Collapsed="true">
+    <Position X="5.25" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAACAAAAACAACAAAACAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>SubFrameControls\ucDispMultiCtrlOfListType.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucDispMultiCtrlOfListTypeForQC" Collapsed="true">
+    <Position X="7.5" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAACAAAAAAAACAAAACAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>SubFrameControls\ucDispMultiCtrlOfListTypeForQC.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.ucDispMultiCtrlUI" Collapsed="true">
+    <Position X="34.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAICABBAAAAACAAAACBAAgAEIAAAAAAAAAAAA=</HashCode>
+      <FileName>SubFrameControls\ucDispMultiCtrlUI.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.UcDispPGImageManager" Collapsed="true">
+    <Position X="38.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAggyQCBEOQglAJAkADACABnAQI04QICgIiAKAAAoBg=</HashCode>
+      <FileName>SubFrameControls\UcDispPGImageManager.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmDataGridWind" Collapsed="true">
+    <Position X="47" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>wAAeQAAEACCKEEAUCCLAAgAyABA4AAIADJIQAQABAAA=</HashCode>
+      <FileName>SubFrames\DataGridWindows\frmDataGridWind.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmLifetimeSetting" Collapsed="true">
+    <Position X="43.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAABAACEIQIEAAACJAAASAAEAQEAQhEAgAAAACAA=</HashCode>
+      <FileName>SubFrames\DataGridWindows\frmLifetimeSetting.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmLimitSetting" Collapsed="true">
+    <Position X="45.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAACAIAAAAAACIAAACAgAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>SubFrames\DataGridWindows\frmLimitSetting.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmTempSetting" Collapsed="true">
+    <Position X="33" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAIAAAAAACYAAACAABAAEAAAAAAAQAAAAA=</HashCode>
+      <FileName>SubFrames\DataGridWindows\frmTempSetting.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmTestEndSetting" Collapsed="true">
+    <Position X="36.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAABAACAIAAAAAACIAAACAAAAIEgAAAAAAAAAAAA=</HashCode>
+      <FileName>SubFrames\DataGridWindows\frmTestEndSetting.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmBrightSetting" Collapsed="true">
+    <Position X="31.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAEAEEAACAIAAEABAiACMACAAAAKEIAAAAAEAIAAAA=</HashCode>
+      <FileName>SubFrames\frmBrightSetting.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmCtrlUI" Collapsed="true">
+    <Position X="45.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAwEAAAACAAAAAAAACAAAACgAABCAIABgABAAAAAAA=</HashCode>
+      <FileName>SubFrames\frmCtrlUI.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmImageManager" Collapsed="true">
+    <Position X="31.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAIQAAAAACIAIICAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>SubFrames\frmImageManager.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmMonitorUIOfGeneralType" Collapsed="true">
+    <Position X="34.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAjQAQgEBiSAIAAIEAiGAABOAkAzAAIChAEQJaAEAAA=</HashCode>
+      <FileName>SubFrames\frmMonitorUIOfGeneralType.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmMotionUI" Collapsed="true">
+    <Position X="38.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ixhaYKE+0WISgMHLXquSIqMy4IsnMafv5LIJqETSWEw=</HashCode>
+      <FileName>SubFrames\frmMotionUI.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmPretestUI" Collapsed="true">
+    <Position X="31.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>SAMRAIQClGEEgEgiAZKBaAEjgqAsAIsgBAIQAAEIjAA=</HashCode>
+      <FileName>SubFrames\frmPretestUI.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmCheckPassword" Collapsed="true">
+    <Position X="36.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAFCAAAAEAAACAAEACAIAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>SubWindows\frmCheckPassword.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmConfigDevice" Collapsed="true">
+    <Position X="40" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>RgEDFAJAESwCIUIQAgDJDKAGRQMAAFqICFATCAIAYKA=</HashCode>
+      <FileName>SubWindows\frmConfigDevice.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmConfigSystem" Collapsed="true">
+    <Position X="41.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAoCAAIAkGIAAAkAAACAAokCEQQAAEICgAEQC4kAAgE=</HashCode>
+      <FileName>SubWindows\frmConfigSystem.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CIOSystemConfig" Collapsed="true">
+    <Position X="6.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAEAAAAAAAAAAAAAAACAAAAAABAAAAA=</HashCode>
+      <FileName>SubWindows\frmConfigSystem.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmEditJIGLayout" Collapsed="true">
+    <Position X="48.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gQQIAAACTCEBF0CAA0CEAE4TAABAAQIEAcIIgAIYAGg=</HashCode>
+      <FileName>SubWindows\frmEditJIGLayout.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.CWindowInfo" Collapsed="true">
+    <Position X="52.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAIAEAAAAAAAAAIAAAAAEAAABBAAAAAA=</HashCode>
+      <FileName>SubWindows\frmEditJIGLayout.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmGrpPlotItemSelector" Collapsed="true">
+    <Position X="52.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIGEAACEAAACABGAGAAAAAEJAAAAACIAAAAA=</HashCode>
+      <FileName>SubWindows\frmGrpPlotItemSelector.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmIVLDisplay" Collapsed="true">
+    <Position X="33" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAQIAAAAGAAAAAAAQGIIFADAAAEAAAgBAACAAAAAQA=</HashCode>
+      <FileName>SubWindows\frmIVLDisplay.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmKeithleySMUSettings" Collapsed="true">
+    <Position X="41.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAACAAAAAAAACAABACAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>SubWindows\frmKeithleySMUSettings.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmLogInWnd" Collapsed="true">
+    <Position X="47" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AMAEAAAQECAAAAgAgICJAAAKAAAAMBAAACCAAECAABA=</HashCode>
+      <FileName>SubWindows\frmLogInWnd.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmLogWin" Collapsed="true">
+    <Position X="48.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAQAAAAESAAEAAAAACAAAICAAAgYAAAAAAAQAAAAwA=</HashCode>
+      <FileName>SubWindows\frmLogWin.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmOptionWindow" Collapsed="true">
+    <Position X="41.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>g5V7n6Kr0uCAIgfY/XeetEoKGf//fr7RsGZ0E5XKyTM=</HashCode>
+      <FileName>SubWindows\frmOptionWindow.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmSequenceBuilder" Collapsed="true">
+    <Position X="33" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAACIAIACAAAAAEIIAAAAAAAAgAA=</HashCode>
+      <FileName>SubWindows\frmSequenceBuilder.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmSettingWind" Collapsed="true">
+    <Position X="34.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EDAnWmTGWCbcArgpCVC66uBiDfP/vHajfJEBBSMv8Ic=</HashCode>
+      <FileName>SubWindows\frmSettingWind.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmSinglePointMeas" Collapsed="true">
+    <Position X="47" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgkCAIhAAAIIGAAEFigADzYAIgIIBQACkAAEk=</HashCode>
+      <FileName>SubWindows\frmSinglePointMeas.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmSourceControl" Collapsed="true">
+    <Position X="48.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAECAIhQAAIAGAAEECgAAAYAIAIIAAACAAAAE=</HashCode>
+      <FileName>SubWindows\frmSourceControl.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmTempWind" Collapsed="true">
+    <Position X="34.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAECBIAAEAAACAAIACAAAAAEAAAAAAgAAAAAA=</HashCode>
+      <FileName>SubWindows\frmTempWind.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmCA310ManualMeasUI" Collapsed="true">
+    <Position X="34.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAACABQAAAAACgAAASgQAAyAIAAIAAAAgAAAI=</HashCode>
+      <FileName>Test\frmCA310ManualMeasUI.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmG4sTestUI" Collapsed="true">
+    <Position X="50.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABiklLImMCAAEHCQJ2GgkAADggEKZAIAQIABEAltQKw=</HashCode>
+      <FileName>Test\frmG4sTestUI.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmMcPGTestUI" Collapsed="true">
+    <Position X="31.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QBAAJhAAECQIEAgAQAGgQAoCgAAIIyEQAAAAAAAAYEg=</HashCode>
+      <FileName>Test\frmMcPGTestUI.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmSGTestUI" Collapsed="true">
+    <Position X="43.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QBAAACJQEKQIEAAAQAGoAA4igAAIQQAQBAAiIAAAYAg=</HashCode>
+      <FileName>Test\frmSGTestUI.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="M7000.frmUITest" Collapsed="true">
+    <Position X="40" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gCUQAAAAACAAAAAQAACAAAACAAAAAAIAAAAAAAAQIAA=</HashCode>
+      <FileName>Test\frmUITest.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Module Name="M7000.My.MySettingsProperty" Collapsed="true">
+    <Position X="43.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Module>
+  <Module Name="M7000.AxtCAMCFS20" Collapsed="true">
+    <Position X="31.25" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Device\Motion\AxtCAMCFS20.vb</FileName>
+    </TypeIdentifier>
+  </Module>
+  <Module Name="M7000.AxtCAMCIP" Collapsed="true">
+    <Position X="33" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Device\Motion\AxtCAMCIP.vb</FileName>
+    </TypeIdentifier>
+  </Module>
+  <Module Name="M7000.AxtLIB" Collapsed="true">
+    <Position X="34.75" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Device\Motion\AxtLIB.vb</FileName>
+    </TypeIdentifier>
+  </Module>
+  <Module Name="M7000.AxtLIBDef" Collapsed="true">
+    <Position X="36.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CBABoEAc4AmAAgQCAAUJQBAhQigEsCgmv4CFUIUAEgA=</HashCode>
+      <FileName>Device\Motion\AxtLIBDef.vb</FileName>
+    </TypeIdentifier>
+  </Module>
+  <Module Name="M7000.CAMCFSDef" Collapsed="true">
+    <Position X="38.25" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>rvd/3vX/f////P/5//v//9Z88rf7f/st93v/399/N/8=</HashCode>
+      <FileName>Device\Motion\CAMCFSDef.vb</FileName>
+    </TypeIdentifier>
+  </Module>
+  <Module Name="M7000.CAMCIPDef" Collapsed="true">
+    <Position X="40" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>9f/n//f933//r//d//tf9v7u///v/699///f9/////c=</HashCode>
+      <FileName>Device\Motion\CAMCIPDef.vb</FileName>
+    </TypeIdentifier>
+  </Module>
+  <Module Name="M7000.mdlDefine" Collapsed="true">
+    <Position X="41.75" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAZAiEIASQAgAAwGGGlAUQkgAAACAADAgIAECYAlAA=</HashCode>
+      <FileName>mdlDefine.vb</FileName>
+    </TypeIdentifier>
+  </Module>
+  <Module Name="M7000.My.Resources.Resources" Collapsed="true">
+    <Position X="45.25" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IGAqAECDEAACRIJAAjgLFXgJdaSEFAiAIHQDqghMIII=</HashCode>
+    </TypeIdentifier>
+  </Module>
+  <Font Name="맑은 고딕" Size="9" />
+</ClassDiagram>

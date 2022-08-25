@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CCommLib.CComAPI" Collapsed="true">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAIAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAQAQ=</HashCode>
+      <FileName>CComAPI.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CCommLib.CComCommonNode" Collapsed="true">
+    <Position X="2.75" Y="0.5" Width="1.5" />
+    <NestedTypes>
+      <Struct Name="CCommLib.CComCommonNode.sCommInfo" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>CComCommonNode.vb</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+      <Struct Name="CCommLib.CComCommonNode.sCommState" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>CComCommonNode.vb</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+      <Enum Name="CCommLib.CComCommonNode.eCommType" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>CComCommonNode.vb</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="CCommLib.CComCommonNode.eTransferState" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>CComCommonNode.vb</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="CCommLib.CComCommonNode.eReturnCode" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>CComCommonNode.vb</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAQgEAAEAAIAgAICAABEAIAAAAAAACgAAgAgAAAAwAQ=</HashCode>
+      <FileName>CComCommonNode.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CCommLib.CComGPIB">
+    <Position X="2.75" Y="2" Width="1.5" />
+    <NestedTypes>
+      <Struct Name="CCommLib.CComGPIB.sGPIBInfos" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>CComGPIB.vb</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAACEQAACEAIAgAAAAAAIAAgAgAAEAAIA=</HashCode>
+      <FileName>CComGPIB.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CCommLib.CComSerial">
+    <Position X="5" Y="2" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="CCommLib.CComSerial.eDataType" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>CComSerial.vb</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Struct Name="CCommLib.CComSerial.sSerialPortInfo" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>CComSerial.vb</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+      <Struct Name="CCommLib.CComSerial.sTermi" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>CComSerial.vb</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>IAQgBCAAAACAQAAAAMBWAIAgCEAAgwAAIAQgAAEAgAA=</HashCode>
+      <FileName>CComSerial.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CCommLib.CComSocket">
+    <Position X="0.5" Y="2" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="CCommLib.CComSocket.eDataType" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>CComSocket.vb</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="CCommLib.CComSocket.eType" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>CComSocket.vb</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Struct Name="CCommLib.CComSocket.sSockInfos" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>CComSocket.vb</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAQgAAAAAAACAAEAAAAEAMAgAAAAAAAAAAAACAAAAIA=</HashCode>
+      <FileName>CComSocket.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CCommLib.ucConfigGPIB" Collapsed="true">
+    <Position X="11" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAECAAAEAAAACAAIACAAAAAAAAAAACAAAgAAA=</HashCode>
+      <FileName>Control\ucConfigGPIB.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CCommLib.ucConfigMultiGPIB" Collapsed="true">
+    <Position X="7.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAGAAAIEKIAAAYAAATAAgACAQASMEIAAAABQkBAABA=</HashCode>
+      <FileName>Control\ucConfigMultiGPIB.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CCommLib.ucConfigMultiRS232" Collapsed="true">
+    <Position X="9.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAGAAAAELIAAAYAAATAAgACAQASMEIAAAABQkBAABA=</HashCode>
+      <FileName>Control\ucConfigMultiRS232.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CCommLib.ucConfigRs232" Collapsed="true">
+    <Position X="11" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>JAAAAiBAECAAgEoAAAGgAIACAgAAJAAIAAAChgBoAAA=</HashCode>
+      <FileName>Control\ucConfigRS232.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CCommLib.ucConfigRS485" Collapsed="true">
+    <Position X="7.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEACEAAREKAEIEwAAATAAgACAAAgIEIgIAIJAsBAAJA=</HashCode>
+      <FileName>Control\ucConfigRS485.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CCommLib.ucConfigSocket" Collapsed="true">
+    <Position X="9.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACEAAAEOAAIEQAAATAAgACAAEAMEIAAYJBgkBAAJA=</HashCode>
+      <FileName>Control\ucConfigSocket.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CCommLib.ucDispListView" Collapsed="true">
+    <Position X="11" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAgQQNAEACEAAAAREgCQAgACkABAkAIIiSSEICFBCAQ=</HashCode>
+      <FileName>Control\ucDispListView.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CCommLib.My.MySettings" Collapsed="true">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Module Name="CCommLib.My.Resources.Resources" Collapsed="true">
+    <Position X="9.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Module>
+  <Module Name="CCommLib.My.MySettingsProperty" Collapsed="true">
+    <Position X="7.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Module>
+  <Font Name="맑은 고딕" Size="9" />
+</ClassDiagram>

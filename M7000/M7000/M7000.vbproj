@@ -1,0 +1,1886 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F2EEF503-CD44-4D5F-85A9-6E31FC5B1481}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>M7000.My.MyApplication</StartupObject>
+    <RootNamespace>M7000</RootNamespace>
+    <AssemblyName>M7000</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>M7000.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>M7000.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Text</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>m-48.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CColorAnalyzerLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\CColorAnalyzerLib\bin\Debug\CColorAnalyzerLib.dll</HintPath>
+    </Reference>
+    <Reference Include="CCommLib, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\CCommLib\bin\Debug\CCommLib.dll</HintPath>
+    </Reference>
+    <Reference Include="CommonTools, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\CommonTools.dll</HintPath>
+    </Reference>
+    <Reference Include="CSMULib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\CSMULib\bin\Debug\CSMULib.dll</HintPath>
+    </Reference>
+    <Reference Include="cSVSCamera">
+      <HintPath>DLL\cSVSCamera.dll</HintPath>
+    </Reference>
+    <Reference Include="Filmstrip">
+      <HintPath>DLL\Filmstrip.dll</HintPath>
+    </Reference>
+    <Reference Include="G4SDataLibrary">
+      <HintPath>..\..\G4SDataLibrary\bin\Debug\G4SDataLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="G4SLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\G4SLibrary\bin\Debug\G4SLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.ActProgTypeLib">
+      <HintPath>DLL\Interop.ActProgTypeLib.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Interop.ActUtlTypeLib">
+      <HintPath>DLL\Interop.ActUtlTypeLib.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="LBIndustrialCtrls, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="Matrox.MatroxImagingLibrary, Version=9.2.1109.1, Culture=neutral, PublicKeyToken=5a83d419d44a9d98, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\Matrox.MatroxImagingLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="MBTreeViewExplorer">
+      <HintPath>DLL\MBTreeViewExplorer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic.Compatibility" />
+    <Reference Include="MoveGraphLibrary">
+      <HintPath>..\..\RectangleGeneral\bin\Debug\MoveGraphLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="OfficePickers">
+      <HintPath>DLL\OfficePickers.dll</HintPath>
+    </Reference>
+    <Reference Include="PvNET, Version=1.0.7492.17154, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\PvNET\bin\Debug\PvNET.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="ZedGraph">
+      <HintPath>DLL\ZedGraph.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="Class\Capture\cScreenCapture.vb" />
+    <Compile Include="Class\CCalibration.vb" />
+    <Compile Include="Class\CSequenceManager.vb" />
+    <Compile Include="Class\CSheduler_PLC.vb" />
+    <Compile Include="Class\CstateInfo.vb" />
+    <Compile Include="Class\Data Process\cDataColorName.vb" />
+    <Compile Include="Class\Data Process\CDataSort.vb" />
+    <Compile Include="Class\Disp\CChDisp.vb" />
+    <Compile Include="Class\IO\CExcelConverter.vb" />
+    <Compile Include="Class\IO\CIOInitialCode.vb" />
+    <Compile Include="Class\IO\CM600CalDataINI.vb" />
+    <Compile Include="Class\IO\COptionINI.vb" />
+    <Compile Include="Class\CPauseControl.vb" />
+    <Compile Include="Class\CSequenceInfo.vb" />
+    <Compile Include="Class\CStateMsg.vb" />
+    <Compile Include="Class\Data Process\CDataQECal.vb" />
+    <Compile Include="Class\IO\CRangeInfoINI.vb" />
+    <Compile Include="Class\IO\CSavePosition.vb" />
+    <Compile Include="Class\Unit\CPGImiageINI.vb" />
+    <Compile Include="Class\IO\CSeqBuilderSettingsINI.vb" />
+    <Compile Include="Class\IO\CUserSettingsINI.vb" />
+    <Compile Include="Class\Unit\CAllocationINI.vb" />
+    <Compile Include="Class\IO\CConfigINI.vb" />
+    <Compile Include="Class\IO\CDataOutput.vb" />
+    <Compile Include="Class\IO\cls_INI.vb" />
+    <Compile Include="Class\CMcFile.vb" />
+    <Compile Include="Device\CImageProcessCal.vb" />
+    <Compile Include="Device\Control\ucConfigPG.Designer.vb">
+      <DependentUpon>ucConfigPG.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Device\Control\ucConfigPG.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Device\Control\ucG4SConfig.Designer.vb">
+      <DependentUpon>ucG4SConfig.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Device\Control\ucG4SConfig.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Class\IO\CRcpINI.vb" />
+    <Compile Include="Class\CScheduler.vb" />
+    <Compile Include="Class\CSeqProcessor.vb" />
+    <Compile Include="Class\CSequenceListManager.vb" />
+    <Compile Include="Class\Unit\CChannelStatusINI.vb" />
+    <Compile Include="Class\Unit\CTime.vb" />
+    <Compile Include="Class\Unit\CUnitCommonNode.vb" />
+    <Compile Include="Class\Unit\CUnitConverter.vb" />
+    <Compile Include="Class\Unit\Units\CUnitAmpere.vb" />
+    <Compile Include="Class\Unit\Units\CUnitArea.vb" />
+    <Compile Include="Class\Unit\Units\CUnitCurrentDensity.vb" />
+    <Compile Include="Class\Unit\Units\CUnitPower.vb" />
+    <Compile Include="Class\Unit\Units\CUnitResistance.vb" />
+    <Compile Include="Class\Unit\Units\CUnitTemperature.vb" />
+    <Compile Include="Class\Unit\Units\CUnitTime.vb" />
+    <Compile Include="Class\Unit\Units\CunitVoltage.vb" />
+    <Compile Include="Device\Control\ucMcIVLPowerSupplyConfig.Designer.vb">
+      <DependentUpon>ucMcIVLPowerSupplyConfig.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Device\Control\ucMcIVLPowerSupplyConfig.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Device\DMM\CDevDMM6500.vb" />
+    <Compile Include="Device\Frame\FrmPLCMotionControl.Designer.vb">
+      <DependentUpon>FrmPLCMotionControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Device\Frame\FrmPLCMotionControl.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Device\Frame\frmStrobeControl.Designer.vb">
+      <DependentUpon>frmStrobeControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Device\Frame\frmStrobeControl.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Device\Motion\Ajin\CDevMotion_AJIN.vb" />
+    <Compile Include="Device\Frame\frmMcM600.Designer.vb">
+      <DependentUpon>frmMcM600.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Device\Frame\frmMcM600.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Device\Frame\frmSpectrometer.Designer.vb">
+      <DependentUpon>frmSpectrometer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Device\Frame\frmSpectrometer.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Device\Frame\frmSVSCamera.Designer.vb">
+      <DependentUpon>frmSVSCamera.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Device\Frame\frmSVSCamera.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Device\Frame\frmTCTTM004.Designer.vb">
+      <DependentUpon>frmTCTTM004.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Device\Frame\frmTCTTM004.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Device\Motion\EZ\CDevEZISERVOPLUSR.vb" />
+    <Compile Include="Device\Motion\EZ\CDevMotionAPI.vb" />
+    <Compile Include="Device\Motion\EZ\EziSERVOPlusRCommand.vb" />
+    <Compile Include="Device\PatternGenerator\CComTCPServer.vb" />
+    <Compile Include="Device\PatternGenerator\CDevG4S.vb" />
+    <Compile Include="Device\PatternGenerator\CDevPGAPI.vb" />
+    <Compile Include="Device\PatternGenerator\CDevPGCommonNode.vb" />
+    <Compile Include="Device\SMU\CDevM6000CommonNode.vb" />
+    <Compile Include="Device\Strobe\CDevStrobe.vb" />
+    <Compile Include="Device\PLC\CDevPLCCommonNode.vb" />
+    <Compile Include="Device\PLC\CDevPLC_API.vb" />
+    <Compile Include="Device\PLC\CDevPLC_LS.vb" />
+    <Compile Include="Device\PLC\CDevPLC_MITSUBISHI.vb" />
+    <Compile Include="Device\PLC\CSeqRoutinePLC.vb" />
+    <Compile Include="Device\Reader\CDevVoyager1250.vb" />
+    <Compile Include="Device\Switch\CDevK7001.vb" />
+    <Compile Include="Device\Switch\CDevSW7000.vb" />
+    <Compile Include="Device\Switch\CDevSwitchAPI.vb" />
+    <Compile Include="Device\Switch\CDevSwitchCommonNode.vb" />
+    <Compile Include="Device\Temp\CDevMcTC.vb" />
+    <Compile Include="Device\Temp\CDevNX1.vb" />
+    <Compile Include="Device\CDevPDUnit.vb" />
+    <Compile Include="Device\CDevSG.vb" />
+    <Compile Include="Device\Temp\CDevTHC98585.vb" />
+    <Compile Include="Device\PatternGenerator\cDevMcPGControl.vb" />
+    <Compile Include="Device\PatternGenerator\cDevMcPG.vb" />
+    <Compile Include="Device\PatternGenerator\cDevMcPGPower.vb" />
+    <Compile Include="Device\Control\ucConfigMotion.Designer.vb">
+      <DependentUpon>ucConfigMotion.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Device\Control\ucConfigMotion.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Device\Control\ucConfigMcPGGroup.Designer.vb">
+      <DependentUpon>ucConfigMcPGGroup.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Device\Control\ucConfigMcPGGroup.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Device\Control\ucConfigRS232_Socket_GPIB.Designer.vb">
+      <DependentUpon>ucConfigRS232_Socket_GPIB.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Device\Control\ucConfigRS232_Socket_GPIB.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Device\Control\ucK24XXConfig.Designer.vb">
+      <DependentUpon>ucK24XXConfig.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Device\Control\ucK24XXConfig.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Device\Control\ucK26XXConfig.Designer.vb">
+      <DependentUpon>ucK26XXConfig.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Device\Control\ucK26XXConfig.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Device\Control\ucSwitchConfig.Designer.vb">
+      <DependentUpon>ucSwitchConfig.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Device\Control\ucSwitchConfig.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Device\Control\ucMcPGControl.Designer.vb">
+      <DependentUpon>ucMcPGControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Device\Control\ucMcPGControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Device\Control\ucMcPG.Designer.vb">
+      <DependentUpon>ucMcPG.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Device\Control\ucMcPG.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Device\Control\ucMcPGPower.Designer.vb">
+      <DependentUpon>ucMcPGPower.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Device\Control\ucMcPGPower.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Device\Control\ucSelectValueTypeAndUnit.designer.vb">
+      <DependentUpon>ucSelectValueTypeAndUnit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Device\Control\ucSelectValueTypeAndUnit.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Device\Control\ucSGOutputDefine.designer.vb">
+      <DependentUpon>ucSGOutputDefine.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Device\Control\ucSGOutputDefine.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Device\SMU\CSeqRoutineM6000.vb" />
+    <Compile Include="Device\Temp\CDevTTM004.vb" />
+    <Compile Include="Device\Temp\CSeqRoutineMC9.vb" />
+    <Compile Include="Device\Temp\CSeqRoutineNX1.vb" />
+    <Compile Include="Device\PatternGenerator\CSeqRoutineMcPG.vb" />
+    <Compile Include="Device\CSeqRoutineSG.vb" />
+    <Compile Include="Device\Frame\frmK23XControl.Designer.vb">
+      <DependentUpon>frmK23XControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Device\Frame\frmK23XControl.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Device\Frame\frmK24XXControl.Designer.vb">
+      <DependentUpon>frmK24XXControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Device\Frame\frmK24XXControl.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Device\Frame\frmK26XXControl.Designer.vb">
+      <DependentUpon>frmK26XXControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Device\Frame\frmK26XXControl.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Device\Frame\frmK7001Control.Designer.vb">
+      <DependentUpon>frmK7001Control.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Device\Frame\frmK7001Control.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Device\Frame\frmTCNx1.Designer.vb">
+      <DependentUpon>frmTCNx1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Device\Frame\frmTCNx1.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Device\Frame\frmMcPGControl.Designer.vb">
+      <DependentUpon>frmMcPGControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Device\Frame\frmMcPGControl.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Device\Frame\frmPGSendRecieveLog.Designer.vb">
+      <DependentUpon>frmPGSendRecieveLog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Device\Frame\frmPGSendRecieveLog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Device\Frame\frmPR705Control.Designer.vb">
+      <DependentUpon>frmPR705Control.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Device\Frame\frmPR705Control.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Device\Frame\frmSW7000Control.Designer.vb">
+      <DependentUpon>frmSW7000Control.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Device\Frame\frmSW7000Control.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Device\Frame\frmTHCControl.Designer.vb">
+      <DependentUpon>frmTHCControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Device\Frame\frmTHCControl.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Device\Control\ucADcChannel.Designer.vb">
+      <DependentUpon>ucADcChannel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Device\Control\ucADcChannel.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Device\Control\ucADcFrame.Designer.vb">
+      <DependentUpon>ucADcFrame.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Device\Control\ucADcFrame.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Device\Control\ucDacChannel.Designer.vb">
+      <DependentUpon>ucDacChannel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Device\Control\ucDacChannel.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Device\Control\ucDacFrame.Designer.vb">
+      <DependentUpon>ucDacFrame.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Device\Control\ucDacFrame.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Device\Control\ucGPIO.Designer.vb">
+      <DependentUpon>ucGPIO.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Device\Control\ucGPIO.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Device\Control\ucM6000Config.Designer.vb">
+      <DependentUpon>ucM6000Config.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Device\Control\ucM6000Config.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Device\Control\ucSingleList.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Device\Frame\frmSGCalibration.Designer.vb">
+      <DependentUpon>frmSGCalibration.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Device\Frame\frmSGCalibration.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Device\Frame\frmSGDacChannel.Designer.vb">
+      <DependentUpon>frmSGDacChannel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Device\Frame\frmSGDacChannel.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Device\Frame\frmPDUnitControl.Designer.vb">
+      <DependentUpon>frmPDUnitControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Device\Frame\frmPDUnitControl.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Device\Frame\frmPLCControl.Designer.vb">
+      <DependentUpon>frmPLCControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Device\Frame\frmPLCControl.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Device\Frame\frmMotionControl.Designer.vb">
+      <DependentUpon>frmMotionControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Device\Frame\frmMotionControl.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Device\Frame\frmSGControl.Designer.vb">
+      <DependentUpon>frmSGControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Device\Frame\frmSGControl.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Device\Frame\frmSGSendRecieveLog.Designer.vb">
+      <DependentUpon>frmSGSendRecieveLog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Device\Frame\frmSGSendRecieveLog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Device\Motion\Ajin\AxtCAMCFS20.vb" />
+    <Compile Include="Device\Motion\Ajin\AxtCAMCIP.vb" />
+    <Compile Include="Device\Motion\Ajin\AxtLIB.vb" />
+    <Compile Include="Device\Motion\Ajin\AxtLIBDef.vb" />
+    <Compile Include="Device\Motion\Ajin\CAMCFSDef.vb" />
+    <Compile Include="Device\Motion\Ajin\CAMCIPDef.vb" />
+    <Compile Include="Device\Temp\CDevTCCommonNode.vb" />
+    <Compile Include="Device\Temp\CDevSP790.vb" />
+    <Compile Include="Device\Temp\CDevTD500.vb" />
+    <Compile Include="Device\Temp\CDevTempController.vb" />
+    <Compile Include="Device\Temp\CSeqRoutineSP790.vb" />
+    <Compile Include="Device\Temp\CSeqRoutineTD500.vb" />
+    <Compile Include="Device\Temp\CSeqRoutineTemp.vb" />
+    <Compile Include="Device\VisionCamera\CDevGC1290.vb" />
+    <Compile Include="Device\VisionCamera\CDevSVSCamera.vb" />
+    <Compile Include="Device\VisionCamera\CDevVisionCameraAPI.vb" />
+    <Compile Include="Device\CDevVisionCameraCommonNode.vb" />
+    <Compile Include="frmMain.designer.vb">
+      <DependentUpon>frmMain.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmMain.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModuleMain.vb" />
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="PretestMotionControls\ucAcf.Designer.vb">
+      <DependentUpon>ucAcf.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PretestMotionControls\ucAcf.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PretestMotionControls\ucAlarmTest.Designer.vb">
+      <DependentUpon>ucAlarmTest.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PretestMotionControls\ucAlarmTest.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PretestMotionControls\ucFreeRun.Designer.vb">
+      <DependentUpon>ucFreeRun.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PretestMotionControls\ucFreeRun.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PretestMotionControls\ucKeithleyOrM6000AndSW7000Manual.designer.vb">
+      <DependentUpon>ucKeithleyOrM6000AndSW7000Manual.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PretestMotionControls\ucKeithleyOrM6000AndSW7000Manual.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PretestMotionControls\ucMotionControl.Designer.vb">
+      <DependentUpon>ucMotionControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PretestMotionControls\ucMotionControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PretestMotionControls\ucMotionIndicator.designer.vb">
+      <DependentUpon>ucMotionIndicator.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PretestMotionControls\ucMotionIndicator.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\BuilderSetting\ucDefTestEndParam.Designer.vb">
+      <DependentUpon>ucDefTestEndParam.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\BuilderSetting\ucDefTestEndParam.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\CommUserCtrl\ucDispGraph.Designer.vb">
+      <DependentUpon>ucDispGraph.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\CommUserCtrl\ucDispGraph.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\frmBuilderSettings.designer.vb">
+      <DependentUpon>frmBuilderSettings.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\frmBuilderSettings.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\CommUserCtrl\Module\frmSweepImgSelector.Designer.vb">
+      <DependentUpon>frmSweepImgSelector.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\CommUserCtrl\Module\frmSweepImgSelector.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\CommUserCtrl\Module\UcDispPGInitCode.Designer.vb">
+      <DependentUpon>UcDispPGInitCode.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\CommUserCtrl\Module\UcDispPGInitCode.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\Panel\ucDispSignalGenerator.designer.vb">
+      <DependentUpon>ucDispSignalGenerator.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\Panel\ucDispSignalGenerator.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\Panel\ucPanelRGB.Designer.vb">
+      <DependentUpon>ucPanelRGB.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\Panel\ucPanelRGB.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\Panel\ucPanelRGBWRotation.Designer.vb">
+      <DependentUpon>ucPanelRGBWRotation.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\Panel\ucPanelRGBWRotation.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\Common\ucBrightSetting.designer.vb">
+      <DependentUpon>ucBrightSetting.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\Common\ucBrightSetting.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\Common\ucCommonConditions.Designer.vb">
+      <DependentUpon>ucCommonConditions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\Common\ucCommonConditions.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\Common\ucMeasureColorList.Designer.vb">
+      <DependentUpon>ucMeasureColorList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\Common\ucMeasureColorList.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\Common\ucMeasureRGBSweepRegion.Designer.vb">
+      <DependentUpon>ucMeasureRGBSweepRegion.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\Common\ucMeasureRGBSweepRegion.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\Common\ucMeasureSweepRegion.Designer.vb">
+      <DependentUpon>ucMeasureSweepRegion.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\Common\ucMeasureSweepRegion.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\Common\ucMeasureSweepList.Designer.vb">
+      <DependentUpon>ucMeasureSweepList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\Common\ucMeasureSweepList.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\Common\ucSampleInfos.Designer.vb">
+      <DependentUpon>ucSampleInfos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\Common\ucSampleInfos.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\Common\ucSweepSetting.designer.vb">
+      <DependentUpon>ucSweepSetting.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\Common\ucSweepSetting.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\Common\ucTempSetting.designer.vb">
+      <DependentUpon>ucTempSetting.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\Common\ucTempSetting.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\frmSignalGenerator.designer.vb">
+      <DependentUpon>frmSignalGenerator.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\frmSignalGenerator.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\ucDispRcpAging.Designer.vb">
+      <DependentUpon>ucDispRcpAging.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\ucDispRcpAging.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\ucDispRcpGrayScaleSweep.Designer.vb">
+      <DependentUpon>ucDispRcpGrayScaleSweep.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\ucDispRcpGrayScaleSweep.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\ucDispRcpImageSticking.Designer.vb">
+      <DependentUpon>ucDispRcpImageSticking.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\ucDispRcpImageSticking.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\ucDispRcpImageSweep.Designer.vb">
+      <DependentUpon>ucDispRcpImageSweep.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\ucDispRcpImageSweep.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\ucDispRcpIVLSweep.designer.vb">
+      <DependentUpon>ucDispRcpIVLSweep.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\ucDispRcpIVLSweep.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\ucDispRcpLifetimeAndIVLSweep.Designer.vb">
+      <DependentUpon>ucDispRcpLifetimeAndIVLSweep.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\ucDispRcpLifetimeAndIVLSweep.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\ucDispRcpRGBWAging.Designer.vb">
+      <DependentUpon>ucDispRcpRGBWAging.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\ucDispRcpRGBWAging.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\ucDispRcpUserPattern.Designer.vb">
+      <DependentUpon>ucDispRcpUserPattern.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\ucDispRcpUserPattern.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\ucDispRcpViewingAngle.designer.vb">
+      <DependentUpon>ucDispRcpViewingAngle.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\ucDispRcpViewingAngle.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\ucSequenceBuilder.designer.vb">
+      <DependentUpon>ucSequenceBuilder.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\ucSequenceBuilder.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SubFrameControls\ChannelUI\CellUI\ucDispSampleCommonNode.Designer.vb">
+      <DependentUpon>ucDispSampleCommonNode.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubFrameControls\ChannelUI\CellUI\ucDispSampleCommonNode.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SubFrameControls\ChannelUI\CellUI\ucDispSamplePanelModule.Designer.vb">
+      <DependentUpon>ucDispSamplePanelModule.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubFrameControls\ChannelUI\CellUI\ucDispSamplePanelModule.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SubFrameControls\ChannelUI\CellUI\ucDispSampleUI.Designer.vb">
+      <DependentUpon>ucDispSampleUI.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubFrameControls\ChannelUI\CellUI\ucDispSampleUI.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SubFrameControls\ChannelUI\CellUI\ucDispSampleUnitCell.Designer.vb">
+      <DependentUpon>ucDispSampleUnitCell.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubFrameControls\ChannelUI\CellUI\ucDispSampleUnitCell.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SubFrameControls\ChannelUI\ForQC\ucDispCtrlUICommonNode.Designer.vb">
+      <DependentUpon>ucDispCtrlUICommonNode.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubFrameControls\ChannelUI\ForQC\ucDispCtrlUICommonNode.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SubFrameControls\ChannelUI\ForQC\ucDispCtrlUIOfCustomTypeForQC.Designer.vb">
+      <DependentUpon>ucDispCtrlUIOfCustomTypeForQC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubFrameControls\ChannelUI\ForQC\ucDispCtrlUIOfCustomTypeForQC.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SubFrameControls\ChannelUI\JIGUI\ucDispJIG.Designer.vb">
+      <DependentUpon>ucDispJIG.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubFrameControls\ChannelUI\JIGUI\ucDispJIG.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SubFrameControls\ChannelUI\JIGUI\ucDispJIGCommonNode.Designer.vb">
+      <DependentUpon>ucDispJIGCommonNode.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubFrameControls\ChannelUI\JIGUI\ucDispJIGCommonNode.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Class\ucDispStateMsg.Designer.vb">
+      <DependentUpon>ucDispStateMsg.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Class\ucDispStateMsg.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SubFrameControls\ChannelUI\MainUI\ucDispMain.Designer.vb">
+      <DependentUpon>ucDispMain.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubFrameControls\ChannelUI\MainUI\ucDispMain.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SubFrameControls\ChannelUI\MainUI\ucDispMainJIG.Designer.vb">
+      <DependentUpon>ucDispMainJIG.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubFrameControls\ChannelUI\MainUI\ucDispMainJIG.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SubFrameControls\ChannelUI\MainUI\ucMainIVLJig.Designer.vb">
+      <DependentUpon>ucMainIVLJig.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubFrameControls\ChannelUI\MainUI\ucMainIVLJig.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SubFrameControls\ucDispMultiCtrlCommonNode.Designer.vb">
+      <DependentUpon>ucDispMultiCtrlCommonNode.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubFrameControls\ucDispMultiCtrlCommonNode.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SubFrameControls\ucDispMultiCtrlOfCustomTypeForQC.Designer.vb">
+      <DependentUpon>ucDispMultiCtrlOfCustomTypeForQC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubFrameControls\ucDispMultiCtrlOfCustomTypeForQC.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SubFrameControls\ucDispMultiCtrlOfJIGLayout.Designer.vb">
+      <DependentUpon>ucDispMultiCtrlOfJIGLayout.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubFrameControls\ucDispMultiCtrlOfJIGLayout.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SubFrameControls\ucDispMultiCtrlOfListType.Designer.vb">
+      <DependentUpon>ucDispMultiCtrlOfListType.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubFrameControls\ucDispMultiCtrlOfListType.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SubFrameControls\ucDispMultiCtrlOfListTypeForQC.Designer.vb">
+      <DependentUpon>ucDispMultiCtrlOfListTypeForQC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubFrameControls\ucDispMultiCtrlOfListTypeForQC.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SubFrameControls\ucDispMultiCtrlUI.Designer.vb">
+      <DependentUpon>ucDispMultiCtrlUI.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubFrameControls\ucDispMultiCtrlUI.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SubFrameControls\UcDispPGImageManager.Designer.vb">
+      <DependentUpon>UcDispPGImageManager.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubFrameControls\UcDispPGImageManager.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SubFrameControls\ucTopLabelControl.Designer.vb">
+      <DependentUpon>ucTopLabelControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubFrameControls\ucTopLabelControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SubFrames\DataGridWindows\frmTempSetting.designer.vb">
+      <DependentUpon>frmTempSetting.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubFrames\DataGridWindows\frmTempSetting.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubFrames\frmBrightSetting.designer.vb">
+      <DependentUpon>frmBrightSetting.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubFrames\frmBrightSetting.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubFrames\frmCtrlUI.Designer.vb">
+      <DependentUpon>frmCtrlUI.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubFrames\frmCtrlUI.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Device\SMU\CDevM6000PLUS.vb" />
+    <Compile Include="Device\Temp\CDevMC9.vb" />
+    <Compile Include="SubFrames\frmImageManager.Designer.vb">
+      <DependentUpon>frmImageManager.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubFrames\frmImageManager.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubFrames\frmMotionUI.designer.vb">
+      <DependentUpon>frmMotionUI.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubFrames\frmMotionUI.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubFrames\FrmPLCAlarm.Designer.vb">
+      <DependentUpon>FrmPLCAlarm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubFrames\FrmPLCAlarm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubFrames\frmSelectUI.Designer.vb">
+      <DependentUpon>frmSelectUI.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubFrames\frmSelectUI.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubFrames\UcMonitorControl.Designer.vb">
+      <DependentUpon>UcMonitorControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubFrames\UcMonitorControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SubFrames\UcMonitorParam.Designer.vb">
+      <DependentUpon>UcMonitorParam.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubFrames\UcMonitorParam.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SubWindows\frmChannelRangeSetttings.Designer.vb">
+      <DependentUpon>frmChannelRangeSetttings.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubWindows\frmChannelRangeSetttings.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubWindows\FrmSaveFileDialog.Designer.vb">
+      <DependentUpon>FrmSaveFileDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubWindows\FrmSaveFileDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubWindows\Test\frmCheckContact.Designer.vb">
+      <DependentUpon>frmCheckContact.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubWindows\Test\frmCheckContact.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubWindows\frmCheckPassword.Designer.vb">
+      <DependentUpon>frmCheckPassword.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubWindows\frmCheckPassword.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubWindows\frmLogInWnd.Designer.vb">
+      <DependentUpon>frmLogInWnd.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubWindows\frmLogInWnd.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubFrames\frmMonitorUIOfGeneralType.Designer.vb">
+      <DependentUpon>frmMonitorUIOfGeneralType.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubFrames\frmMonitorUIOfGeneralType.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubWindows\frmMessage.Designer.vb">
+      <DependentUpon>frmMessage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubWindows\frmMessage.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubWindows\frmOptionWindow.designer.vb">
+      <DependentUpon>frmOptionWindow.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubWindows\frmOptionWindow.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubFrames\frmPretestUI.Designer.vb">
+      <DependentUpon>frmPretestUI.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubFrames\frmPretestUI.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="mdlDefine.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="SequenceBuilder\CommUserCtrl\ucDataGridView.Designer.vb">
+      <DependentUpon>ucDataGridView.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\CommUserCtrl\ucDataGridView.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\CommUserCtrl\ucDispListView.Designer.vb">
+      <DependentUpon>ucDispListView.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\CommUserCtrl\ucDispListView.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\CommUserCtrl\ucDispTarget_PanelModuel.Designer.vb">
+      <DependentUpon>ucDispTarget_PanelModuel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\CommUserCtrl\ucDispTarget_PanelModuel.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\CommUserCtrl\Module\List.vb" />
+    <Compile Include="SequenceBuilder\CommUserCtrl\Module\ucDispImage.Designer.vb">
+      <DependentUpon>ucDispImage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\CommUserCtrl\Module\ucDispImage.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\CommUserCtrl\Module\ucDispPGReg.Designer.vb">
+      <DependentUpon>ucDispPGReg.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\CommUserCtrl\Module\ucDispPGReg.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\CommUserCtrl\Module\ucDispPGGrayScale.Designer.vb">
+      <DependentUpon>ucDispPGGrayScale.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\CommUserCtrl\Module\ucDispPGGrayScale.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\CommUserCtrl\Module\ucDispPGImageManger.Designer.vb">
+      <DependentUpon>ucDispPGImageManger.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\CommUserCtrl\Module\ucDispPGImageManger.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\CommUserCtrl\Module\ucDispPGImageSweep.Designer.vb">
+      <DependentUpon>ucDispPGImageSweep.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\CommUserCtrl\Module\ucDispPGImageSweep.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\CommUserCtrl\Module\ucDispPGPower.Designer.vb">
+      <DependentUpon>ucDispPGPower.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\CommUserCtrl\Module\ucDispPGPower.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\Common\ucLimitSetting.Designer.vb">
+      <DependentUpon>ucLimitSetting.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\Common\ucLimitSetting.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\Common\ucMeasureIntervalSetting.Designer.vb">
+      <DependentUpon>ucMeasureIntervalSetting.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\Common\ucMeasureIntervalSetting.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\Common\ucRefPDSetting.Designer.vb">
+      <DependentUpon>ucRefPDSetting.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\Common\ucRefPDSetting.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\Common\ucTestEndParam.Designer.vb">
+      <DependentUpon>ucTestEndParam.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\Common\ucTestEndParam.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\frmCrateNewSeq.Designer.vb">
+      <DependentUpon>frmCrateNewSeq.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\frmCrateNewSeq.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\frmMeasPointSetting.Designer.vb">
+      <DependentUpon>frmMeasPointSetting.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\frmMeasPointSetting.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\frmPatternGeneratorSetting.Designer.vb">
+      <DependentUpon>frmPatternGeneratorSetting.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\frmPatternGeneratorSetting.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\ucDispCellLifetime.Designer.vb">
+      <DependentUpon>ucDispCellLifetime.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\ucDispCellLifetime.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\ucDispRcpCommon.Designer.vb">
+      <DependentUpon>ucDispRcpCommon.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\ucDispRcpCommon.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\ucDispRcpLifetime.Designer.vb">
+      <DependentUpon>ucDispRcpLifetime.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\ucDispRcpLifetime.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\CommUserCtrl\Module\ucDispModule.Designer.vb">
+      <DependentUpon>ucDispModule.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\CommUserCtrl\Module\ucDispModule.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\ucDispPointSetting.Designer.vb">
+      <DependentUpon>ucDispPointSetting.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\ucDispPointSetting.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\ucDispRcpTemp.Designer.vb">
+      <DependentUpon>ucDispRcpTemp.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\ucDispRcpTemp.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SubWindows\frmEditJIGLayout.Designer.vb">
+      <DependentUpon>frmEditJIGLayout.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubWindows\frmEditJIGLayout.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubWindows\frmIVLDisplay.designer.vb">
+      <DependentUpon>frmIVLDisplay.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubWindows\frmIVLDisplay.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubWindows\frmKeithleySMUSettings.Designer.vb">
+      <DependentUpon>frmKeithleySMUSettings.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubWindows\frmKeithleySMUSettings.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubWindows\frmConfigSystem.Designer.vb">
+      <DependentUpon>frmConfigSystem.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubWindows\frmConfigSystem.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubWindows\frmGrpPlotItemSelector.Designer.vb">
+      <DependentUpon>frmGrpPlotItemSelector.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubWindows\frmGrpPlotItemSelector.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubWindows\frmLogWin.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubWindows\frmSequenceBuilder.Designer.vb">
+      <DependentUpon>frmSequenceBuilder.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubWindows\frmSequenceBuilder.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubWindows\frmSettingWind.designer.vb">
+      <DependentUpon>frmSettingWind.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubWindows\frmSettingWind.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubWindows\frmConfigDevice.Designer.vb">
+      <DependentUpon>frmConfigDevice.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubWindows\frmConfigDevice.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubWindows\frmSinglePointMeas.Designer.vb">
+      <DependentUpon>frmSinglePointMeas.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubWindows\frmSinglePointMeas.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubWindows\frmSourceControl.Designer.vb">
+      <DependentUpon>frmSourceControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubWindows\frmSourceControl.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubWindows\frmTempWind.Designer.vb">
+      <DependentUpon>frmTempWind.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubWindows\frmTempWind.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Device\Frame\frmColorAnalyzerControl.Designer.vb">
+      <DependentUpon>frmColorAnalyzerControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Device\Frame\frmColorAnalyzerControl.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubWindows\frmWADSet.Designer.vb">
+      <DependentUpon>frmWADSet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubWindows\frmWADSet.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubWindows\Test\frmCA310ManualMeasUI.Designer.vb">
+      <DependentUpon>frmCA310ManualMeasUI.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubWindows\Test\frmCA310ManualMeasUI.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubWindows\Test\frmG4sTestUI.Designer.vb">
+      <DependentUpon>frmG4sTestUI.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubWindows\Test\frmG4sTestUI.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubWindows\Test\frmMcPGTestUI.Designer.vb">
+      <DependentUpon>frmMcPGTestUI.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubWindows\Test\frmMcPGTestUI.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubWindows\Test\frmSGTestUI.Designer.vb">
+      <DependentUpon>frmSGTestUI.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubWindows\Test\frmSGTestUI.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubWindows\Test\frmUITest.Designer.vb">
+      <DependentUpon>frmUITest.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubWindows\Test\frmUITest.vb">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Device\Control\ucConfigMotion.resx">
+      <DependentUpon>ucConfigMotion.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Device\Control\ucConfigMcPGGroup.resx">
+      <DependentUpon>ucConfigMcPGGroup.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Device\Control\ucConfigPG.resx">
+      <DependentUpon>ucConfigPG.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Device\Control\ucConfigRS232_Socket_GPIB.resx">
+      <DependentUpon>ucConfigRS232_Socket_GPIB.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Device\Control\ucG4SConfig.resx">
+      <DependentUpon>ucG4SConfig.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Device\Control\ucK24XXConfig.resx">
+      <DependentUpon>ucK24XXConfig.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Device\Control\ucK26XXConfig.resx">
+      <DependentUpon>ucK26XXConfig.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Device\Control\ucMcIVLPowerSupplyConfig.resx">
+      <DependentUpon>ucMcIVLPowerSupplyConfig.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Device\Control\ucSwitchConfig.resx">
+      <DependentUpon>ucSwitchConfig.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Device\Control\ucMcPGControl.resx">
+      <DependentUpon>ucMcPGControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Device\Control\ucMcPG.resx">
+      <DependentUpon>ucMcPG.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Device\Control\ucMcPGPower.resx">
+      <DependentUpon>ucMcPGPower.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Device\Control\ucSelectValueTypeAndUnit.resx">
+      <DependentUpon>ucSelectValueTypeAndUnit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Device\Control\ucSGOutputDefine.resx">
+      <DependentUpon>ucSGOutputDefine.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Device\Frame\frmMcM600.resx">
+      <DependentUpon>frmMcM600.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Device\Frame\FrmPLCMotionControl.resx">
+      <DependentUpon>FrmPLCMotionControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Device\Frame\frmSpectrometer.resx">
+      <DependentUpon>frmSpectrometer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Device\Frame\frmK23XControl.resx">
+      <DependentUpon>frmK23XControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Device\Frame\frmK24XXControl.resx">
+      <DependentUpon>frmK24XXControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Device\Frame\frmK26XXControl.resx">
+      <DependentUpon>frmK26XXControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Device\Frame\frmK7001Control.resx">
+      <DependentUpon>frmK7001Control.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Device\Frame\frmStrobeControl.resx">
+      <DependentUpon>frmStrobeControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Device\Frame\frmSVSCamera.resx">
+      <DependentUpon>frmSVSCamera.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Device\Frame\frmTCNx1.resx">
+      <DependentUpon>frmTCNx1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Device\Frame\frmMcPGControl.resx">
+      <DependentUpon>frmMcPGControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Device\Frame\frmPGSendRecieveLog.resx">
+      <DependentUpon>frmPGSendRecieveLog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Device\Frame\frmPR705Control.resx">
+      <DependentUpon>frmPR705Control.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Device\Frame\frmSW7000Control.resx">
+      <DependentUpon>frmSW7000Control.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Device\Frame\frmTCTTM004.resx">
+      <DependentUpon>frmTCTTM004.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Device\Frame\frmTHCControl.resx">
+      <DependentUpon>frmTHCControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Device\Control\ucADcChannel.resx">
+      <DependentUpon>ucADcChannel.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Device\Control\ucADcFrame.resx">
+      <DependentUpon>ucADcFrame.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Device\Control\ucDacChannel.resx">
+      <DependentUpon>ucDacChannel.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Device\Control\ucDacFrame.resx">
+      <DependentUpon>ucDacFrame.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Device\Control\ucGPIO.resx">
+      <DependentUpon>ucGPIO.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Device\Control\ucM6000Config.resx">
+      <DependentUpon>ucM6000Config.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Device\Control\ucSingleList.resx">
+      <DependentUpon>ucSingleList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Device\Frame\frmSGCalibration.resx">
+      <DependentUpon>frmSGCalibration.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Device\Frame\frmSGDacChannel.resx">
+      <DependentUpon>frmSGDacChannel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Device\Frame\frmPDUnitControl.resx">
+      <DependentUpon>frmPDUnitControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Device\Frame\frmPLCControl.resx">
+      <DependentUpon>frmPLCControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Device\Frame\frmMotionControl.resx">
+      <DependentUpon>frmMotionControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Device\Frame\frmSGControl.resx">
+      <DependentUpon>frmSGControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Device\Frame\frmSGSendRecieveLog.resx">
+      <DependentUpon>frmSGSendRecieveLog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMain.resx">
+      <DependentUpon>frmMain.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PretestMotionControls\ucAcf.resx">
+      <DependentUpon>ucAcf.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PretestMotionControls\ucAlarmTest.resx">
+      <DependentUpon>ucAlarmTest.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PretestMotionControls\ucFreeRun.resx">
+      <DependentUpon>ucFreeRun.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PretestMotionControls\ucKeithleyOrM6000AndSW7000Manual.resx">
+      <DependentUpon>ucKeithleyOrM6000AndSW7000Manual.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PretestMotionControls\ucMotionControl.resx">
+      <DependentUpon>ucMotionControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PretestMotionControls\ucMotionIndicator.resx">
+      <DependentUpon>ucMotionIndicator.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\BuilderSetting\ucDefTestEndParam.resx">
+      <DependentUpon>ucDefTestEndParam.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\CommUserCtrl\ucDispGraph.resx">
+      <DependentUpon>ucDispGraph.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\frmBuilderSettings.resx">
+      <DependentUpon>frmBuilderSettings.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\CommUserCtrl\Module\frmSweepImgSelector.resx">
+      <DependentUpon>frmSweepImgSelector.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\CommUserCtrl\Module\ucDispModule.resx">
+      <DependentUpon>ucDispModule.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\CommUserCtrl\Module\UcDispPGInitCode.resx">
+      <DependentUpon>UcDispPGInitCode.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\Panel\ucDispSignalGenerator.resx">
+      <DependentUpon>ucDispSignalGenerator.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\Panel\ucPanelRGB.resx">
+      <DependentUpon>ucPanelRGB.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\Panel\ucPanelRGBWRotation.resx">
+      <DependentUpon>ucPanelRGBWRotation.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\Sequence\Common\ucBrightSetting.resx">
+      <DependentUpon>ucBrightSetting.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\Sequence\Common\ucCommonConditions.resx">
+      <DependentUpon>ucCommonConditions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\Sequence\Common\ucMeasureColorList.resx">
+      <DependentUpon>ucMeasureColorList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\Sequence\Common\ucMeasureRGBSweepRegion.resx">
+      <DependentUpon>ucMeasureRGBSweepRegion.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\Sequence\Common\ucMeasureSweepRegion.resx">
+      <DependentUpon>ucMeasureSweepRegion.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\Sequence\Common\ucMeasureSweepList.resx">
+      <DependentUpon>ucMeasureSweepList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\Sequence\Common\ucSampleInfos.resx">
+      <DependentUpon>ucSampleInfos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\Sequence\Common\ucSweepSetting.resx">
+      <DependentUpon>ucSweepSetting.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\Sequence\Common\ucTempSetting.resx">
+      <DependentUpon>ucTempSetting.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\Sequence\frmSignalGenerator.resx">
+      <DependentUpon>frmSignalGenerator.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\Sequence\ucDispRcpAging.resx">
+      <DependentUpon>ucDispRcpAging.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\Sequence\ucDispCellLifetime.resx">
+      <DependentUpon>ucDispCellLifetime.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\Sequence\ucDispRcpGrayScaleSweep.resx">
+      <DependentUpon>ucDispRcpGrayScaleSweep.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\Sequence\ucDispRcpImageSticking.resx">
+      <DependentUpon>ucDispRcpImageSticking.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\Sequence\ucDispRcpImageSweep.resx">
+      <DependentUpon>ucDispRcpImageSweep.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\Sequence\ucDispRcpIVLSweep.resx">
+      <DependentUpon>ucDispRcpIVLSweep.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\Sequence\ucDispRcpLifetimeAndIVLSweep.resx">
+      <DependentUpon>ucDispRcpLifetimeAndIVLSweep.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\Sequence\ucDispRcpRGBWAging.resx">
+      <DependentUpon>ucDispRcpRGBWAging.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\Sequence\ucDispRcpTemp.resx">
+      <DependentUpon>ucDispRcpTemp.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\Sequence\ucDispRcpViewingAngle.resx">
+      <DependentUpon>ucDispRcpViewingAngle.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\ucSequenceBuilder.resx">
+      <DependentUpon>ucSequenceBuilder.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFrameControls\ChannelUI\CellUI\ucDispSampleCommonNode.resx">
+      <DependentUpon>ucDispSampleCommonNode.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFrameControls\ChannelUI\CellUI\ucDispSamplePanelModule.resx">
+      <DependentUpon>ucDispSamplePanelModule.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFrameControls\ChannelUI\CellUI\ucDispSampleUI.resx">
+      <DependentUpon>ucDispSampleUI.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFrameControls\ChannelUI\CellUI\ucDispSampleUnitCell.resx">
+      <DependentUpon>ucDispSampleUnitCell.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFrameControls\ChannelUI\ForQC\ucDispCtrlUICommonNode.resx">
+      <DependentUpon>ucDispCtrlUICommonNode.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFrameControls\ChannelUI\ForQC\ucDispCtrlUIOfCustomTypeForQC.resx">
+      <DependentUpon>ucDispCtrlUIOfCustomTypeForQC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFrameControls\ChannelUI\JIGUI\ucDispJIG.resx">
+      <DependentUpon>ucDispJIG.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Class\ucDispStateMsg.resx">
+      <DependentUpon>ucDispStateMsg.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFrameControls\ChannelUI\MainUI\ucDispMain.resx">
+      <DependentUpon>ucDispMain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFrameControls\ChannelUI\MainUI\ucDispMainJIG.resx">
+      <DependentUpon>ucDispMainJIG.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFrameControls\ChannelUI\MainUI\ucMainIVLJig.resx">
+      <DependentUpon>ucMainIVLJig.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFrameControls\ucDispMultiCtrlCommonNode.resx">
+      <DependentUpon>ucDispMultiCtrlCommonNode.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFrameControls\ucDispMultiCtrlOfCustomTypeForQC.resx">
+      <DependentUpon>ucDispMultiCtrlOfCustomTypeForQC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFrameControls\ucDispMultiCtrlOfJIGLayout.resx">
+      <DependentUpon>ucDispMultiCtrlOfJIGLayout.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFrameControls\ucDispMultiCtrlOfListType.resx">
+      <DependentUpon>ucDispMultiCtrlOfListType.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFrameControls\ucDispMultiCtrlOfListTypeForQC.resx">
+      <DependentUpon>ucDispMultiCtrlOfListTypeForQC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFrameControls\UcDispPGImageManager.resx">
+      <DependentUpon>UcDispPGImageManager.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFrameControls\ucTopLabelControl.resx">
+      <DependentUpon>ucTopLabelControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFrames\DataGridWindows\frmTempSetting.resx">
+      <DependentUpon>frmTempSetting.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFrames\frmBrightSetting.resx">
+      <DependentUpon>frmBrightSetting.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFrames\frmCtrlUI.resx">
+      <DependentUpon>frmCtrlUI.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFrames\frmImageManager.resx">
+      <DependentUpon>frmImageManager.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFrames\frmMotionUI.resx">
+      <DependentUpon>frmMotionUI.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFrames\FrmPLCAlarm.resx">
+      <DependentUpon>FrmPLCAlarm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFrames\frmSelectUI.resx">
+      <DependentUpon>frmSelectUI.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFrames\UcMonitorControl.resx">
+      <DependentUpon>UcMonitorControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFrames\UcMonitorParam.resx">
+      <DependentUpon>UcMonitorParam.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubWindows\frmChannelRangeSetttings.resx">
+      <DependentUpon>frmChannelRangeSetttings.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubWindows\FrmSaveFileDialog.resx">
+      <DependentUpon>FrmSaveFileDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubWindows\Test\frmCheckContact.resx">
+      <DependentUpon>frmCheckContact.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubWindows\frmCheckPassword.resx">
+      <DependentUpon>frmCheckPassword.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubWindows\frmLogInWnd.resx">
+      <DependentUpon>frmLogInWnd.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFrames\frmMonitorUIOfGeneralType.resx">
+      <DependentUpon>frmMonitorUIOfGeneralType.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubWindows\frmMessage.resx">
+      <DependentUpon>frmMessage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubWindows\frmOptionWindow.resx">
+      <DependentUpon>frmOptionWindow.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFrames\frmPretestUI.resx">
+      <DependentUpon>frmPretestUI.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\CommUserCtrl\ucDataGridView.resx">
+      <DependentUpon>ucDataGridView.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\CommUserCtrl\ucDispListView.resx">
+      <DependentUpon>ucDispListView.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\CommUserCtrl\ucDispTarget_PanelModuel.resx">
+      <DependentUpon>ucDispTarget_PanelModuel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\CommUserCtrl\Module\ucDispImage.resx">
+      <DependentUpon>ucDispImage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\CommUserCtrl\Module\ucDispPGReg.resx">
+      <DependentUpon>ucDispPGReg.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\CommUserCtrl\Module\ucDispPGGrayScale.resx">
+      <DependentUpon>ucDispPGGrayScale.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\CommUserCtrl\Module\ucDispPGImageManger.resx">
+      <DependentUpon>ucDispPGImageManger.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\CommUserCtrl\Module\ucDispPGImageSweep.resx">
+      <DependentUpon>ucDispPGImageSweep.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\CommUserCtrl\Module\ucDispPGPower.resx">
+      <DependentUpon>ucDispPGPower.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\Sequence\Common\ucLimitSetting.resx">
+      <DependentUpon>ucLimitSetting.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\Sequence\Common\ucMeasureIntervalSetting.resx">
+      <DependentUpon>ucMeasureIntervalSetting.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\Sequence\Common\ucRefPDSetting.resx">
+      <DependentUpon>ucRefPDSetting.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\Sequence\Common\ucTestEndParam.resx">
+      <DependentUpon>ucTestEndParam.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\Sequence\frmCrateNewSeq.resx">
+      <DependentUpon>frmCrateNewSeq.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\Sequence\frmMeasPointSetting.resx">
+      <DependentUpon>frmMeasPointSetting.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\Sequence\frmPatternGeneratorSetting.resx">
+      <DependentUpon>frmPatternGeneratorSetting.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\Sequence\ucDispRcpCommon.resx">
+      <DependentUpon>ucDispRcpCommon.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\Sequence\ucDispRcpLifetime.resx">
+      <DependentUpon>ucDispRcpLifetime.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\Sequence\ucDispPointSetting.resx">
+      <DependentUpon>ucDispPointSetting.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubWindows\frmEditJIGLayout.resx">
+      <DependentUpon>frmEditJIGLayout.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubWindows\frmIVLDisplay.resx">
+      <DependentUpon>frmIVLDisplay.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubWindows\frmKeithleySMUSettings.resx">
+      <DependentUpon>frmKeithleySMUSettings.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubWindows\frmConfigSystem.resx">
+      <DependentUpon>frmConfigSystem.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubWindows\frmGrpPlotItemSelector.resx">
+      <DependentUpon>frmGrpPlotItemSelector.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubWindows\frmLogWin.resx">
+      <DependentUpon>frmLogWin.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubWindows\frmSequenceBuilder.resx">
+      <DependentUpon>frmSequenceBuilder.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubWindows\frmSettingWind.resx">
+      <DependentUpon>frmSettingWind.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubWindows\frmConfigDevice.resx">
+      <DependentUpon>frmConfigDevice.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubWindows\frmSinglePointMeas.resx">
+      <DependentUpon>frmSinglePointMeas.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubWindows\frmSourceControl.resx">
+      <DependentUpon>frmSourceControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubWindows\frmTempWind.resx">
+      <DependentUpon>frmTempWind.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Device\Frame\frmColorAnalyzerControl.resx">
+      <DependentUpon>frmColorAnalyzerControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubWindows\frmWADSet.resx">
+      <DependentUpon>frmWADSet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubWindows\Test\frmCA310ManualMeasUI.resx">
+      <DependentUpon>frmCA310ManualMeasUI.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubWindows\Test\frmG4sTestUI.resx">
+      <DependentUpon>frmG4sTestUI.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubWindows\Test\frmMcPGTestUI.resx">
+      <DependentUpon>frmMcPGTestUI.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubWindows\Test\frmSGTestUI.resx">
+      <DependentUpon>frmSGTestUI.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubWindows\Test\frmUITest.resx">
+      <DependentUpon>frmUITest.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="ClassDiagram1.cd" />
+    <None Include="My Project\app.manifest" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\config.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\menu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\CSpectrometerLib\CSpectrometerLib.vbproj">
+      <Project>{106b1734-122f-4a1f-bdc5-bd2e37507ed1}</Project>
+      <Name>CSpectrometerLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\RectangleGeneral\RectangleGeneral.csproj">
+      <Project>{59CAEACD-D5C6-4785-A5D2-E9A372EE3EC5}</Project>
+      <Name>RectangleGeneral</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DevNote.txt" />
+    <Content Include="m-48.ico" />
+    <None Include="Resources\clear_2.png" />
+    <None Include="Resources\clear - 복사본 %282%29.png" />
+    <None Include="Resources\clear - 복사본.png" />
+    <None Include="Resources\Red.png" />
+    <None Include="Resources\Green.png" />
+    <None Include="Resources\Blue.png" />
+    <None Include="Resources\Black.png" />
+    <None Include="Resources\Reset Pause_1.png" />
+    <None Include="Resources\Sequence Builder.png" />
+    <None Include="Resources\JogStop.png" />
+    <None Include="Resources\JogLUP.png" />
+    <None Include="Resources\JogL.png" />
+    <None Include="Resources\JogLDown.png" />
+    <None Include="Resources\JogDown.png" />
+    <None Include="Resources\JogRDown.png" />
+    <None Include="Resources\JogR.png" />
+    <None Include="Resources\JogUp.png" />
+    <None Include="Resources\JogRUP.png" />
+    <None Include="Resources\10Exit.png" />
+    <None Include="Resources\09Motion.png" />
+    <None Include="Resources\08Monitoring.png" />
+    <None Include="Resources\07Main.png" />
+    <None Include="Resources\06Pause.png" />
+    <None Include="Resources\05Stop.png" />
+    <None Include="Resources\04Start.png" />
+    <None Include="Resources\03Connection.png" />
+    <None Include="Resources\02Select All.png" />
+    <None Include="Resources\01Menu.png" />
+    <None Include="Resources\angle.png" />
+    <None Include="Resources\P5by5.png" />
+    <None Include="Resources\P3by4.png" />
+    <None Include="Resources\P3by3.png" />
+    <None Include="Resources\P2by2.png" />
+    <None Include="Resources\P1.png" />
+    <None Include="Resources\ImageSelect.png" />
+    <None Include="Resources\Image.png" />
+    <None Include="Resources\Color.png" />
+    <None Include="Resources\Reset Pause.png" />
+    <None Include="Resources\GrabImage.bmp" />
+    <None Include="Resources\7.graph view_IVL.PNG" />
+    <None Include="Resources\7.graph view_LT.PNG" />
+    <None Include="Resources\update.png" />
+    <None Include="Resources\up.png" />
+    <None Include="Resources\temp.png" />
+    <None Include="Resources\set measure.png" />
+    <None Include="Resources\save %282%29.png" />
+    <None Include="Resources\rgbw.png" />
+    <None Include="Resources\pretest.png" />
+    <None Include="Resources\pause.png" />
+    <None Include="Resources\pattern.png" />
+    <None Include="Resources\new-.png" />
+    <None Include="Resources\new&amp;add.png" />
+    <None Include="Resources\motion.png" />
+    <None Include="Resources\lifetime.png" />
+    <None Include="Resources\ivl.png" />
+    <None Include="Resources\import.png" />
+    <None Include="Resources\image sweep.png" />
+    <None Include="Resources\gray.png" />
+    <None Include="Resources\export.png" />
+    <None Include="Resources\edit.png" />
+    <None Include="Resources\down.png" />
+    <None Include="Resources\delete.png" />
+    <None Include="Resources\clear.png" />
+    <None Include="Resources\ControlUI01.png" />
+    <None Include="Resources\3.pc.png" />
+    <None Include="Resources\3.hw.png" />
+    <None Include="Resources\2.jig.png" />
+    <None Include="Resources\2.ch.png" />
+    <None Include="Resources\10.overvolt.png" />
+    <None Include="Resources\9.cafe.png" />
+    <None Include="Resources\8.exit.png" />
+    <None Include="Resources\7.graph view.png" />
+    <None Include="Resources\6.list view.png" />
+    <None Include="Resources\5.stop.png" />
+    <None Include="Resources\5.start.png" />
+    <None Include="Resources\5.append start.png" />
+    <None Include="Resources\4.disconnection.png" />
+    <None Include="Resources\2.select.png" />
+    <None Include="Resources\2.board select.png" />
+    <None Include="Resources\1.menu.png" />
+    <None Include="Resources\1.menu-2.png" />
+    <None Include="Resources\11.popup.png" />
+    <None Include="Resources\hw4_Fail.png" />
+    <None Include="Resources\hw3_Fail.png" />
+    <None Include="Resources\hw2_Fail.png" />
+    <None Include="Resources\hw5_Fail.png" />
+    <None Include="Resources\hw5_connected.png" />
+    <None Include="Resources\hw5_connecting.png" />
+    <None Include="Resources\hw4_connecting.png" />
+    <None Include="Resources\hw4_connected.png" />
+    <None Include="Resources\hw3_connecting.png" />
+    <None Include="Resources\hw3_connected.png" />
+    <None Include="Resources\hw2_connecting.png" />
+    <None Include="Resources\hw2_connected.png" />
+    <None Include="Resources\hw1_Fail.png" />
+    <None Include="Resources\hw1_connecting.png" />
+    <None Include="Resources\hw1_connected.png" />
+    <None Include="Resources\motionUP.jpg" />
+    <None Include="Resources\motionRUP.jpg" />
+    <None Include="Resources\motionRDOWN.jpg" />
+    <None Include="Resources\motionR.jpg" />
+    <None Include="Resources\motionLUP.jpg" />
+    <None Include="Resources\motionLDOWN.jpg" />
+    <None Include="Resources\motionL.jpg" />
+    <None Include="Resources\motionDOWN.jpg" />
+    <None Include="Resources\CIEImage.bmp" />
+    <None Include="Resources\stop.jpg" />
+    <None Include="Resources\8.jpg" />
+    <None Include="Resources\7.jpg" />
+    <None Include="Resources\6.jpg" />
+    <None Include="Resources\5.jpg" />
+    <None Include="Resources\4.jpg" />
+    <None Include="Resources\3.jpg" />
+    <None Include="Resources\2.jpg" />
+    <None Include="Resources\1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4%28x86 및 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
