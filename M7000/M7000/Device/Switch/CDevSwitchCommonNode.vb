@@ -7,10 +7,11 @@
     Protected m_ConfigInfo As CCommLib.CComCommonNode.sCommInfo
     Protected m_CommStatus As CCommLib.CComCommonNode.eTransferState
     Protected m_bIsConnected As Boolean = False
- 
-    Shared sSupportDeviceList() As String = New String() {"SW7000", "K7001"}
+
+    Shared sSupportDeviceList() As String = New String() {"SW7700", "SW7000", "K7001"}
 
     Public Enum eModel
+        MC_SW7700
         MC_SW7000
         KEITHLEY_K7001
     End Enum
@@ -113,6 +114,15 @@
     Public Overridable Function SwitchON(ByVal nCh As Integer) As Boolean
         Return False
     End Function
+    ''' <summary>
+    ''' Selected Switch ON
+    ''' </summary>
+    ''' <param name="nCh"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Overridable Function SwitchON(ByVal nDevNum As Integer, ByVal nCh As Integer) As Boolean
+        Return False
+    End Function
 
     ''' <summary>
     ''' Selected Switch OFF
@@ -121,6 +131,15 @@
     ''' <returns></returns>
     ''' <remarks></remarks>
     Public Overridable Function SwitchOFF(ByVal nCh As Integer) As Boolean
+        Return False
+    End Function
+    ''' <summary>
+    ''' Selected Switch OFF
+    ''' </summary>
+    ''' <param name="nCh"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Overridable Function SwitchOFF(ByVal nDevNum As Integer, ByVal nCh As Integer) As Boolean
         Return False
     End Function
 
@@ -132,8 +151,20 @@
     Public Overridable Function AllOFF() As Boolean
         Return False
     End Function
+    ''' <summary>
+    ''' All Switch OFF
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Overridable Function AllOFF(ByVal nDevNum As Integer) As Boolean
+        Return False
+    End Function
 
     Public Overridable Function AllON() As Boolean
+        Return False
+    End Function
+
+    Public Overridable Function AllON(ByVal nDevNum As Integer) As Boolean
         Return False
     End Function
 #End Region

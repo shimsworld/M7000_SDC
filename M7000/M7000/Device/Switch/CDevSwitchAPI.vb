@@ -5,6 +5,8 @@
 
         Select Case device
 
+            Case CDevSwitchCommonNode.eModel.MC_SW7700
+                mySwitch = New CDevSW7700
             Case CDevSwitchCommonNode.eModel.MC_SW7000
                 mySwitch = New CDevSW7000
             Case CDevSwitchCommonNode.eModel.KEITHLEY_K7001

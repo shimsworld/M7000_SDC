@@ -783,15 +783,13 @@ Public Class frmConfigDevice
                                 '김세훈8.25 _EIP 저장Case 추가
                             Case CDevPGCommonNode.eDevModel._EIP
 
-                                configSaver.SaveIniValue(CConfigINI.eSecID.ePatternGenerator, 0, CConfigINI.eKeyID.Serial_PortName, .PGConfig.EIPConfig.sSerialInfo.sPortName)
-                                configSaver.SaveIniValue(CConfigINI.eSecID.ePatternGenerator, 0, CConfigINI.eKeyID.Serial_BaudRate, .PGConfig.EIPConfig.sSerialInfo.nBaudRate)
-                                configSaver.SaveIniValue(CConfigINI.eSecID.ePatternGenerator, 0, CConfigINI.eKeyID.Serial_CMDTerminatorToString, .PGConfig.EIPConfig.sSerialInfo.sRcvTerminator)
-                                configSaver.SaveIniValue(CConfigINI.eSecID.ePatternGenerator, 0, CConfigINI.eKeyID.Serial_DataBit, .PGConfig.EIPConfig.sSerialInfo.nDataBits)
-                                configSaver.SaveIniValue(CConfigINI.eSecID.ePatternGenerator, 0, CConfigINI.eKeyID.Serial_Parity, .PGConfig.EIPConfig.sSerialInfo.nParity)
-                                configSaver.SaveIniValue(CConfigINI.eSecID.ePatternGenerator, 0, CConfigINI.eKeyID.Serial_StopBit, .PGConfig.EIPConfig.sSerialInfo.nStopBits)
-                                configSaver.SaveIniValue(CConfigINI.eSecID.ePatternGenerator, 0, CConfigINI.eKeyID.Serial_TerminatorToString, .PGConfig.EIPConfig.sSerialInfo.enableTerminator)
-
-
+                                configSaver.SaveIniValue(CConfigINI.eSecID.ePatternGenerator, 0, CConfigINI.eKeyID.Serial_PortName, .PGConfig.EIPPGConfig.sSerialInfo.sPortName)
+                                configSaver.SaveIniValue(CConfigINI.eSecID.ePatternGenerator, 0, CConfigINI.eKeyID.Serial_BaudRate, .PGConfig.EIPPGConfig.sSerialInfo.nBaudRate)
+                                configSaver.SaveIniValue(CConfigINI.eSecID.ePatternGenerator, 0, CConfigINI.eKeyID.Serial_CMDTerminatorToString, .PGConfig.EIPPGConfig.sSerialInfo.sRcvTerminator)
+                                configSaver.SaveIniValue(CConfigINI.eSecID.ePatternGenerator, 0, CConfigINI.eKeyID.Serial_DataBit, .PGConfig.EIPPGConfig.sSerialInfo.nDataBits)
+                                configSaver.SaveIniValue(CConfigINI.eSecID.ePatternGenerator, 0, CConfigINI.eKeyID.Serial_Parity, .PGConfig.EIPPGConfig.sSerialInfo.nParity.ToString())
+                                configSaver.SaveIniValue(CConfigINI.eSecID.ePatternGenerator, 0, CConfigINI.eKeyID.Serial_StopBit, .PGConfig.EIPPGConfig.sSerialInfo.nStopBits.ToString())
+                                configSaver.SaveIniValue(CConfigINI.eSecID.ePatternGenerator, 0, CConfigINI.eKeyID.Serial_TerminatorToString, .PGConfig.EIPPGConfig.sSerialInfo.sSendTerminator)
                             Case CDevPGCommonNode.eDevModel._Nothing
                                 Return False
                         End Select
@@ -1645,15 +1643,18 @@ Public Class frmConfigDevice
 
                                 '김세훈 8.25 _EIP 로드 추가
                             Case CDevPGCommonNode.eDevModel._EIP
-                                .PGConfig.EIPConfig.commType = ConvertStringToCommType(configLoader.LoadIniValue(CConfigINI.eSecID.ePatternGenerator, 0, CConfigINI.eKeyID.CommunicationType))
-                                Select Case .PGConfig.EIPConfig.commType
+                                .PGConfig.EIPPGConfig.commType = ConvertStringToCommType(configLoader.LoadIniValue(CConfigINI.eSecID.ePatternGenerator, 0, CConfigINI.eKeyID.CommunicationType))
+                                Select Case .PGConfig.EIPPGConfig.commType
                                     Case CComCommonNode.eCommType.eSerial
-                                        .PGConfig.EIPConfig.sSerialInfo.sPortName = configLoader.LoadIniValue(CConfigINI.eSecID.ePatternGenerator, 0, CConfigINI.eKeyID.Serial_PortName)
-                                        .PGConfig.EIPConfig.sSerialInfo.nBaudRate = configLoader.LoadIniValue(CConfigINI.eSecID.ePatternGenerator, 0, CConfigINI.eKeyID.Serial_BaudRate)
-                                        .PGConfig.EIPConfig.sSerialInfo.sRcvTerminator = configLoader.LoadIniValue(CConfigINI.eSecID.ePatternGenerator, 0, CConfigINI.eKeyID.Serial_CMDTerminatorToString)
-                                        .PGConfig.EIPConfig.sSerialInfo.nDataBits = configLoader.LoadIniValue(CConfigINI.eSecID.ePatternGenerator, 0, CConfigINI.eKeyID.Serial_DataBit)
-                                        .PGConfig.EIPConfig.sSerialInfo.nStopBits = configLoader.LoadIniValue(CConfigINI.eSecID.ePatternGenerator, 0, CConfigINI.eKeyID.Serial_StopBit)
-                                        .PGConfig.EIPConfig.sSerialInfo.sSendTerminator = configLoader.LoadIniValue(CConfigINI.eSecID.ePatternGenerator, 0, CConfigINI.eKeyID.Serial_TerminatorToString)
+                                        .PGConfig.EIPPGConfig.sSerialInfo.sPortName = configLoader.LoadIniValue(CConfigINI.eSecID.ePatternGenerator, 0, CConfigINI.eKeyID.Serial_PortName)
+                                        .PGConfig.EIPPGConfig.sSerialInfo.nBaudRate = configLoader.LoadIniValue(CConfigINI.eSecID.ePatternGenerator, 0, CConfigINI.eKeyID.Serial_BaudRate)
+                                        .PGConfig.EIPPGConfig.sSerialInfo.sRcvTerminator = configLoader.LoadIniValue(CConfigINI.eSecID.ePatternGenerator, 0, CConfigINI.eKeyID.Serial_CMDTerminatorToString)
+                                        .PGConfig.EIPPGConfig.sSerialInfo.nDataBits = configLoader.LoadIniValue(CConfigINI.eSecID.ePatternGenerator, 0, CConfigINI.eKeyID.Serial_DataBit)
+                                        .PGConfig.EIPPGConfig.sSerialInfo.nParity = ConvertStringToParity(configLoader.LoadIniValue(CConfigINI.eSecID.ePatternGenerator, 0, CConfigINI.eKeyID.Serial_Parity))
+                                        .PGConfig.EIPPGConfig.sSerialInfo.nStopBits = ConvertStringToStopBits(configLoader.LoadIniValue(CConfigINI.eSecID.ePatternGenerator, 0, CConfigINI.eKeyID.Serial_StopBit))
+                                        .PGConfig.EIPPGConfig.sSerialInfo.sSendTerminator = configLoader.LoadIniValue(CConfigINI.eSecID.ePatternGenerator, 0, CConfigINI.eKeyID.Serial_TerminatorToString)
+
+
                                 End Select
 
                             Case Else
@@ -2336,6 +2337,8 @@ Public Class frmConfigDevice
             type = CDevSwitchCommonNode.eModel.KEITHLEY_K7001
         ElseIf CDevSwitchCommonNode.eModel.MC_SW7000.ToString = str Then
             type = CDevSwitchCommonNode.eModel.MC_SW7000
+        ElseIf CDevSwitchCommonNode.eModel.MC_SW7700.ToString = str Then
+            type = CDevSwitchCommonNode.eModel.MC_SW7700
         End If
         Return type
     End Function

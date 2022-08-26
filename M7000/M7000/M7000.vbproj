@@ -76,10 +76,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\CColorAnalyzerLib\bin\Debug\CColorAnalyzerLib.dll</HintPath>
     </Reference>
-    <Reference Include="CCommLib, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\CCommLib\bin\Debug\CCommLib.dll</HintPath>
-    </Reference>
     <Reference Include="CommonTools, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>DLL\CommonTools.dll</HintPath>
@@ -117,8 +113,10 @@
     <Reference Include="MBTreeViewExplorer">
       <HintPath>DLL\MBTreeViewExplorer.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Office.Interop.Excel, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\..\..\..\..\..\..\Windows\assembly\GAC_MSIL\Microsoft.Office.Interop.Excel\15.0.0.0__71e9bce111e9429c\Microsoft.Office.Interop.Excel.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic.Compatibility" />
     <Reference Include="MoveGraphLibrary">
@@ -232,6 +230,8 @@
     <Compile Include="Device\Frame\frmStrobeControl.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Device\IVL\CDevIVLPowerSupplyAPI.vb" />
+    <Compile Include="Device\IVL\CDevIVLPowerSupplyCommonNode.vb" />
     <Compile Include="Device\Motion\Ajin\CDevMotion_AJIN.vb" />
     <Compile Include="Device\Frame\frmMcM600.Designer.vb">
       <DependentUpon>frmMcM600.vb</DependentUpon>
@@ -265,6 +265,7 @@
     <Compile Include="Device\PatternGenerator\CDevPGAPI.vb" />
     <Compile Include="Device\PatternGenerator\CDevPGCommonNode.vb" />
     <Compile Include="Device\SMU\CDevM6000CommonNode.vb" />
+    <Compile Include="Device\IVL\CDevIVLPowersupply.vb" />
     <Compile Include="Device\Strobe\CDevStrobe.vb" />
     <Compile Include="Device\PLC\CDevPLCCommonNode.vb" />
     <Compile Include="Device\PLC\CDevPLC_API.vb" />
@@ -274,6 +275,7 @@
     <Compile Include="Device\Reader\CDevVoyager1250.vb" />
     <Compile Include="Device\Switch\CDevK7001.vb" />
     <Compile Include="Device\Switch\CDevSW7000.vb" />
+    <Compile Include="Device\Switch\CDevSW7700.vb" />
     <Compile Include="Device\Switch\CDevSwitchAPI.vb" />
     <Compile Include="Device\Switch\CDevSwitchCommonNode.vb" />
     <Compile Include="Device\Temp\CDevMcTC.vb" />
@@ -1725,6 +1727,10 @@
     <None Include="Resources\menu.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\CCommLib\CCommLib.vbproj">
+      <Project>{b3d45a33-9c43-4699-86e5-14e18260b29f}</Project>
+      <Name>CCommLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\CSpectrometerLib\CSpectrometerLib.vbproj">
       <Project>{106b1734-122f-4a1f-bdc5-bd2e37507ed1}</Project>
       <Name>CSpectrometerLib</Name>

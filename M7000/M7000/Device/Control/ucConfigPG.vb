@@ -22,13 +22,11 @@ Public Class ucConfigPG
         Dim nDeviceType As CDevPGCommonNode.eDevModel
         Dim G4sConfig As CDevG4S.sInitParam
         '김세훈8.25 PG EIP추가
-        Dim EIPConfig As CComCommonNode.sCommInfo
+        Dim EIPPGConfig As CComCommonNode.sCommInfo
         Dim McPGGroup() As ucConfigMcPGGroup.sMcPGGroupInfos
         Dim McPGConfig() As ucConfigSocket.sConfig
         Dim McPGPwrConfig() As ucConfigRS485.sRS485Config
         Dim McPGCtrlBDConfig() As ucConfigRS485.sRS485Config
-        '정현기
-        Dim EIPPGConfig As CComCommonNode.sCommInfo
     End Structure
 
 #End Region
@@ -130,6 +128,15 @@ Public Class ucConfigPG
             End Select
 
         End With
+
+
+        ucDispRs232.COMPORT = m_sPGConfig.EIPPGConfig.sSerialInfo.sPortName
+        ucDispRs232.BAUDRATE = m_sPGConfig.EIPPGConfig.sSerialInfo.nBaudRate
+        ucDispRs232.RcvTerminator = ConvertStringToTerminator(m_sPGConfig.EIPPGConfig.sSerialInfo.sRcvTerminator)
+        ucDispRs232.DATABIT = m_sPGConfig.EIPPGConfig.sSerialInfo.nDataBits
+        ucDispRs232.PARITYBIT = m_sPGConfig.EIPPGConfig.sSerialInfo.nParity
+        ucDispRs232.STOPBIT = m_sPGConfig.EIPPGConfig.sSerialInfo.nStopBits
+        ucDispRs232.SendTerminator = ConvertStringToTerminator(m_sPGConfig.EIPPGConfig.sSerialInfo.sSendTerminator)
     End Sub
 
 
@@ -182,6 +189,14 @@ Public Class ucConfigPG
 
 
         End With
+
+        m_sPGConfig.EIPPGConfig.sSerialInfo.sPortName = ucDispRs232.COMPORT
+        m_sPGConfig.EIPPGConfig.sSerialInfo.nBaudRate = ucDispRs232.BAUDRATE
+        m_sPGConfig.EIPPGConfig.sSerialInfo.sRcvTerminator = ucDispRs232.RcvTerminator
+        m_sPGConfig.EIPPGConfig.sSerialInfo.nDataBits = ucDispRs232.DATABIT
+        m_sPGConfig.EIPPGConfig.sSerialInfo.nParity = ucDispRs232.PARITYBIT
+        m_sPGConfig.EIPPGConfig.sSerialInfo.nStopBits = ucDispRs232.STOPBIT
+        m_sPGConfig.EIPPGConfig.sSerialInfo.sSendTerminator = ucDispRs232.SendTerminator
     End Sub
 
 
@@ -222,5 +237,9 @@ Public Class ucConfigPG
                 ucDispRs232.Visible = True
         End Select
     End Sub
-
+    Public Shared Function ConvertStringToTerminator(ByVal str As String) As ucMcIVLPowerSupplyConfig.eTerminator
+        Dim type As ucMcIVLPowerSupplyConfig.eTerminator
+        type = Integer.Parse(str)
+        Return type
+    End Function
 End Class

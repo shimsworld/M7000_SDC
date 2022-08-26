@@ -219,7 +219,7 @@
         Dim myJIGNo As Integer
         Dim myPalletNo As Integer
         Dim combindChNum() As Integer
-        myJIGNo = frmSettingWind.GetAllocationValue(nCh, frmSettingWind.eChAllocationItem.eJIG_No)
+        myJIGNo = frmSettingWind.GetAllocationValue(nCh, frmSettingWind.eChAllocationItem.eChOfSwitch)
         myPalletNo = frmSettingWind.GetAllocationValue(nCh, frmSettingWind.eChAllocationItem.ePallet_No)
 
         '20220825 Update By SSH : Set Cell at Main UI Jig
@@ -269,7 +269,7 @@
         Dim myPalletNo As Integer
 
         Dim combindChNum() As Integer
-        myJIGNo = frmSettingWind.GetAllocationValue(nCh, frmSettingWind.eChAllocationItem.eJIG_No)
+        myJIGNo = frmSettingWind.GetAllocationValue(nCh, frmSettingWind.eChAllocationItem.eChOfSwitch)
         myPalletNo = frmSettingWind.GetAllocationValue(nCh, frmSettingWind.eChAllocationItem.ePallet_No)
 
         m_ucDispMain.SetCell(myPalletNo, myJIGNo, False)
