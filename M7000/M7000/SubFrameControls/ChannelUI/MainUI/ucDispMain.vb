@@ -8,13 +8,14 @@
         InitializeComponent()
         m_maxjig = maxltjig
         m_ivljig = maxIVLjig
+        panelmain.Dock = Dock.Fill
         Dim W = panelmain.Size.Width / 4
         Dim H = panelmain.Size.Height / 2
 
         LtJigs = New List(Of ucDispMainJIG)
         If m_ivljig >= 1 Then
             IvlJig = New ucMainIVLJig()
-            IvlJig.Label5.Dock = Dock.Fill
+            'IvlJig.Label5.Dock = Dock.Fill
             panelmain.Controls.Add(IvlJig)
 
         End If
@@ -40,11 +41,11 @@
     End Sub
     Public Sub SetPanelPosition()
         Dim W, H As Integer
-        Dim size = Me.Size
-        W = size.Width / 4
-        H = size.Height / 2
+        Dim size = LtJigs(0).Size
+        W = size.Width + 8
+        H = size.Height + 8
         For index = 0 To m_maxjig - 1
-            LtJigs(index).Size = New Size(W, H)
+            ' LtJigs(index).Size = New Size(W, H)
             LtJigs(index).SetPanelPosition()
             Select Case index
                 Case 0
@@ -71,8 +72,8 @@
             End Select
         Next
         For index = 0 To m_ivljig - 1
-            IvlJig.Size = New Size(W, H * 2)
-            IvlJig.Location = New Point(W * 2, 0)
+            IvlJig.Size = New Size(W * 0.8, H * 1.7)
+            IvlJig.Location = New Point(W * 2 + 40, 30)
         Next
         'Panel1.Location = New Point(0, 0)
         'Panel2.Location = New Point(0, H)

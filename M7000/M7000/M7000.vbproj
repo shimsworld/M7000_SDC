@@ -230,6 +230,8 @@
     <Compile Include="Device\Frame\frmStrobeControl.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Device\IVL\CDevIVLPowerSupplyAPI.vb" />
+    <Compile Include="Device\IVL\CDevIVLPowerSupplyCommonNode.vb" />
     <Compile Include="Device\Motion\Ajin\CDevMotion_AJIN.vb" />
     <Compile Include="Device\Frame\frmMcM600.Designer.vb">
       <DependentUpon>frmMcM600.vb</DependentUpon>
@@ -263,6 +265,7 @@
     <Compile Include="Device\PatternGenerator\CDevPGAPI.vb" />
     <Compile Include="Device\PatternGenerator\CDevPGCommonNode.vb" />
     <Compile Include="Device\SMU\CDevM6000CommonNode.vb" />
+    <Compile Include="Device\IVL\CDevIVLPowersupply.vb" />
     <Compile Include="Device\Strobe\CDevStrobe.vb" />
     <Compile Include="Device\PLC\CDevPLCCommonNode.vb" />
     <Compile Include="Device\PLC\CDevPLC_API.vb" />

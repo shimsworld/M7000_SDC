@@ -295,10 +295,12 @@
         pnJIGOutline.Dock = DockStyle.Fill
         lblTitle.Dock = DockStyle.Fill
 
+        '220826 Update by JKY : Panel -> TEG, CH명으로 라벨링
+        Dim teg = frmSettingWind.GetAllocationValue(m_nJIGNo, frmSettingWind.eChAllocationItem.eChOfSwitch)
         If m_AddText = "" Then
-            lblTitle.Text = "PANEL " & Format(m_nJIGNo + 1, "00") 'convertIncNumberToMatrixValue(m_nJIGNo)  'Format(m_nJIGNo + 1, "00")   'JIG
+            lblTitle.Text = "TEG " & Format(teg + 1, "00") 'convertIncNumberToMatrixValue(m_nJIGNo)  'Format(m_nJIGNo + 1, "00")   'JIG
         Else
-            lblTitle.Text = "PANEL " & Format(m_nJIGNo + 1, "00") & " (" & m_AddText & ")"
+            lblTitle.Text = "TEG " & Format(teg + 1, "00") & " (" & m_AddText & ")"
         End If
         lblIndicator_Temp.Font = New System.Drawing.Font("Arial", 8.5!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         lblIndicator_Temp.ForeColor = Color.OrangeRed
