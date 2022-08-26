@@ -2107,6 +2107,8 @@ Public Class CSequenceManager
                                 .sRecipes(i).sIVLSweepInfo.sCommon.sweepType = ucDispRcpIVLSweep.eSweepType.eStandard
                             Case ucDispRcpIVLSweep.eSweepType.eUserPattern.ToString
                                 .sRecipes(i).sIVLSweepInfo.sCommon.sweepType = ucDispRcpIVLSweep.eSweepType.eUserPattern
+                            Case ucDispRcpIVLSweep.eSweepType.eRGBPattern.ToString '220826 Update by JKY
+                                .sRecipes(i).sIVLSweepInfo.sCommon.sweepType = ucDispRcpIVLSweep.eSweepType.eRGBPattern
                         End Select
 
                         Try
@@ -2387,6 +2389,8 @@ Public Class CSequenceManager
                                 .sRecipes(i).sIVLSweepInfo.sCommon.sweepType = ucDispRcpIVLSweep.eSweepType.eStandard
                             Case ucDispRcpIVLSweep.eSweepType.eUserPattern.ToString
                                 .sRecipes(i).sIVLSweepInfo.sCommon.sweepType = ucDispRcpIVLSweep.eSweepType.eUserPattern
+                            Case ucDispRcpIVLSweep.eSweepType.eRGBPattern.ToString '220826 Update by JKY
+                                .sRecipes(i).sIVLSweepInfo.sCommon.sweepType = ucDispRcpIVLSweep.eSweepType.eRGBPattern
                         End Select
 
                         Try

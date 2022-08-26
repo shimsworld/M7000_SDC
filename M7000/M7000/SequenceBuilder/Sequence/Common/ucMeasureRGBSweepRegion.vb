@@ -2,9 +2,15 @@
 
 #Region "Define"
     Dim m_SetBias() As sSetSweepRegion
-    Dim m_bIsVisibleUnit As Boolean = True
-    Dim m_UnitType As ucSweepSetting.eUnitType
     Dim m_SweepList() As Double
+    Dim m_sPowerType() As String = New String() {"Vdd", "Vss", "Dr", "Dg", "Db"}
+    Dim m_bIsVisibleUnit As Boolean = True
+    Dim m_SweepType As eSweepType
+    Dim m_UnitType As ucSweepSetting.eUnitType
+
+    Public rbSweepList(4) As RadioButton
+    Public cbUseList(4) As CheckBox
+    Public txtVCList(4, 12) As TextBox
 
     Public Event evErrMsgSend(ByVal ErrMsg As String)
 
@@ -17,14 +23,20 @@
 
     Structure sSetSweepRegion
         Dim nSweepNumber As Integer
+        Dim SweepType As ePowerType
         Dim dStart As Double
-        Dim dStop As Double
+        Dim dStopV As Double
+        Dim dStopC As Double
         Dim dStep As Double
         Dim nPoint As Integer
-        Dim nRed As Integer
-        Dim nGreen As Integer
-        Dim nBlue As Integer
-        Dim nLevel As Double
+        Dim setPowerValue() As sSetPowerRegion
+    End Structure
+
+    Structure sSetPowerRegion
+        Dim PowerType As ePowerType
+        Dim dStopV As Double
+        Dim dStopC As Double
+        Dim bIsUse As Boolean
     End Structure
 
 #End Region
@@ -35,6 +47,23 @@
     Public Enum eSweepDirection
         eForward
         eReverse
+    End Enum
+
+    Public Enum ePowerType
+        eVdd
+        eVss
+        eDr
+        eDg
+        eDb
+    End Enum
+
+
+    Public Enum eSweepType
+        _IVLSweep
+        _GraySweep
+        _UserPattern
+        _ViewingAngle
+        _RGBSweep
     End Enum
 
 #End Region
@@ -56,7 +85,6 @@
         End Set
     End Property
 
-
     Public Property SweepList As Double()
         Get
             GetValueFromUI(m_SetBias)
@@ -68,23 +96,26 @@
         End Set
     End Property
 
-
     Public Property IsVisibleUnit As Boolean
         Get
             Return m_bIsVisibleUnit
         End Get
         Set(ByVal value As Boolean)
             m_bIsVisibleUnit = value
-            If m_bIsVisibleUnit = True Then
-                lblStartValueUnit.Visible = True
-                lblStepValueUnit.Visible = True
-                lblStopValueUnit.Visible = True
-            Else
-                lblStartValueUnit.Visible = False
-                lblStepValueUnit.Visible = False
-                lblStopValueUnit.Visible = False
-            End If
 
+        End Set
+    End Property
+
+
+    Public Property SweepType As eSweepType
+        Get
+            Return m_SweepType
+        End Get
+        Set(ByVal value As eSweepType)
+            If m_SweepType <> value Then
+                m_SweepType = value
+                UpdateSweepType()
+            End If
         End Set
     End Property
 
@@ -96,7 +127,7 @@
 
             If m_UnitType <> value Then
                 m_UnitType = value
-                UpdateUnitType()
+                'UpdateUnitType()
             End If
 
         End Set
@@ -106,11 +137,19 @@
 
 #Region "Init"
 
-
     Public Sub New()
 
         ' 이 호출은 디자이너에 필요합니다.
         InitializeComponent()
+
+        rbSweepList = New RadioButton() {rbSweep1, rbSweep2, rbSweep3, rbSweep4, rbSweep5}
+        cbUseList = New CheckBox() {cbUse1, cbUse2, cbUse3, cbUse4, cbUse5}
+        txtVCList = New TextBox(,) {
+            {tbV1, tbC1},
+            {tbV2, tbC2},
+            {tbV3, tbC3},
+            {tbV4, tbC4},
+            {tbV5, tbC5}}
 
         ' InitializeComponent() 호출 뒤에 초기화 코드를 추가하십시오.
         init()
@@ -120,6 +159,28 @@
         gbSweepCommon.Location = New System.Drawing.Point(0, 0)
         gbSweepCommon.Dock = DockStyle.Fill
 
+        rbSweep1.Checked = True
+        cbUse1.Checked = True
+        cbUse2.Checked = True
+        lblSweepPS.TextAlign = ContentAlignment.MiddleRight
+
+        '220826 Update by JKY : 사용하는 PS 개수에 따라 Visible Change
+        For i = 0 To txtVCList.GetLength(0) - 1
+            If i < g_ConfigInfos.IVLPowerSupplyConfig.settings.Length Then
+                rbSweepList(i).Visible = True
+                cbUseList(i).Visible = True
+                For j = 0 To txtVCList.GetLength(1) - 1
+                    txtVCList(i, j).Visible = True
+                Next
+            Else
+                rbSweepList(i).Visible = False
+                cbUseList(i).Visible = False
+                For j = 0 To txtVCList.GetLength(1) - 1
+                    txtVCList(i, j).Visible = False
+                Next
+            End If
+        Next
+
         SetListVier()
     End Sub
 
@@ -127,11 +188,12 @@
 
 
     Private Sub SetListVier()
-        ucListMeasSweep.ColHeader = {"No.", "Red", " Green", "Blue"}
-        ucListMeasSweep.ColHeaderWidthRatio = "10, 20, 20, 20"
+        ucListMeasSweep.ColHeader = {"No.", "SweepType", "Start", "V", "C", "Step", "Point", "else"}
+        ucListMeasSweep.ColHeaderWidthRatio = "10, 20, 15, 15, 15, 15, 15, 20"
     End Sub
 
 #Region "Event"
+
 
     Private Sub btnClear_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClear.Click
         ucListMeasSweep.ClearAllData()
@@ -149,16 +211,52 @@
 
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
         Dim SweepDirection As eSweepDirection
-        Dim sData(3) As String
+        Dim sData(7) As String
+        Dim pData() As String
 
-        sData(0) = ucListMeasSweep.GetListItemCount + 1
-        sData(1) = tbStart.Text
-        sData(2) = tbStop.Text
-        sData(3) = tbStep.Text
+        sData(6) = tbPoint.Text
+        If sData(6) = "NaN" Then
+            MsgBox("Sweep Point set Error")
+            Exit Sub
+        End If
+
+        For i = 0 To txtVCList.GetLength(0) - 1
+            If cbUseList(i).Checked Then
+                If rbSweepList(i).Checked Then
+                    sData(0) = ucListMeasSweep.GetListItemCount + 1
+                    sData(1) = m_sPowerType(i)
+                    sData(2) = tbStart.Text
+                    sData(3) = tbV1.Text
+                    sData(4) = tbC1.Text
+                    sData(5) = tbStep.Text
+                    sData(6) = tbPoint.Text
+                    sData(7) += $"{m_sPowerType(i)},"
+                Else
+                    sData(7) += $"{m_sPowerType(i)},"
+                End If
+            End If
+        Next
+
+        'ucListMeasSweep.AddRowData(sData)
 
         '   sData(4) = tbPoint.Text
         'Sweep Mode 별 Pattern Get Set 변경 해줘야 함.
-        ucListMeasSweep.AddRowData(sData)
+        If ucListMeasSweep.GetListItemCount <> 0 Then
+            If CDbl(sData(2)) <= CDbl(sData(3)) Then
+                SweepDirection = eSweepDirection.eForward
+            Else
+                SweepDirection = eSweepDirection.eReverse
+            End If
+
+            If CheckChangeSweepList(ucListMeasSweep.GetListItemCount, CDbl(sData(2)), SweepDirection) = False Then
+                RaiseEvent evErrMsgSend("Sweep List set Error")
+                MsgBox("Sweep List set Error")
+            Else
+                ucListMeasSweep.AddRowData(sData)
+            End If
+        Else
+            ucListMeasSweep.AddRowData(sData)
+        End If
     End Sub
 
 #End Region
@@ -172,10 +270,6 @@
         Dim dStep() As Double = Nothing
         Dim nPoint() As Double = Nothing
         Dim nCnt As Integer
-        Dim dRed() As Double = Nothing
-        Dim dGreen() As Double = Nothing
-        Dim dBlue() As Double = Nothing
-        Dim dLevel() As Double = Nothing
         nCnt = ucListMeasSweep.GetListItemCount
 
         If ucListMeasSweep.GetListItemCount <= 0 Then Return False
@@ -186,22 +280,15 @@
         ReDim dStep(nCnt - 1)
         ReDim nPoint(nCnt - 1)
         ReDim biasInfo(nCnt - 1)
-        ReDim dRed(nCnt - 1)
-        ReDim dGreen(nCnt - 1)
-        ReDim dBlue(nCnt - 1)
-        ReDim dLevel(nCnt - 1)
 
         ucListMeasSweep.GetColumnData(0, nSweepListNumber)
 
-        ucListMeasSweep.GetColumnData(1, dRed)
-        ucListMeasSweep.GetColumnData(2, dGreen)
-        ucListMeasSweep.GetColumnData(3, dBlue)
+        ucListMeasSweep.GetColumnData(1, dStart)
+        ucListMeasSweep.GetColumnData(2, dStop)
+        ucListMeasSweep.GetColumnData(3, dStep)
 
         For i As Integer = 0 To ucListMeasSweep.GetListItemCount - 1
             biasInfo(i).nSweepNumber = nSweepListNumber(i)
-            biasInfo(i).nRed = dRed(i)
-            biasInfo(i).nGreen = dGreen(i)
-            biasInfo(i).nBlue = dBlue(i)
         Next
 
         Return True
@@ -220,9 +307,6 @@
 
         For nCnt = 0 To sweepRegions.Length - 1
 
-            dStartValue = sweepRegions(nCnt).dStart 'SweepParameter(nCnt).dStart
-            dStopValue = sweepRegions(nCnt).dStop
-            dStepValue = sweepRegions(nCnt).dStep
             nPoint = sweepRegions(nCnt).nPoint
 
             If dStartValue < dStopValue Then   '정방향 Sweep -Bias --> +Bias
@@ -309,26 +393,6 @@ MakeSweep:
 
     End Function
 
-
-    Private Sub GraySetFormUI(ByVal grayInfo() As ucDispPGGrayScale.sPGGrayScale)
-
-        Dim sdata(3) As String
-
-        ucListMeasSweep.ClearAllData()
-
-        For i As Integer = 0 To grayInfo.Length - 1
-            sdata(0) = i + 1
-            sdata(1) = grayInfo(i).nRed
-            sdata(2) = grayInfo(i).nGreen
-            sdata(3) = grayInfo(i).nBlue
-
-            ucListMeasSweep.AddRowData(sdata)
-        Next
-
-    End Sub
-
-
-
     Private Sub SetValueToUI(ByVal biasInfo() As sSetSweepRegion)
 
         Dim sdata(4) As String
@@ -339,9 +403,6 @@ MakeSweep:
 
             ReDim sdata(3)
             sdata(0) = biasInfo(i).nSweepNumber
-            sdata(1) = biasInfo(i).nRed
-            sdata(2) = biasInfo(i).nGreen
-            sdata(3) = biasInfo(i).nBlue
             ucListMeasSweep.AddRowData(sdata)
         Next
 
@@ -369,7 +430,7 @@ MakeSweep:
 
         ucListMeasSweep.GetRowData(CheckLineNumber - 1, sData)
 
-        beforeChangeStop = CDbl(sData(1))
+        beforeChangeStop = CDbl(sData(2))
 
         If SweepDirection = eSweepDirection.eForward Then
             If beforeChangeStop >= ChangeStop Then
@@ -385,11 +446,23 @@ MakeSweep:
     End Function
 #End Region
 
-    Private Sub tbStart_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tbStart.TextChanged
+    Private Sub rbSweep_CheckedChanged(sender As Object, e As EventArgs) Handles rbSweep1.CheckedChanged, rbSweep2.CheckedChanged, rbSweep3.CheckedChanged, rbSweep4.CheckedChanged, rbSweep5.CheckedChanged
+        CheckedChangeUIState()
+    End Sub
+
+    Private Sub cbUse_CheckedChanged(sender As Object, e As EventArgs) Handles cbUse1.CheckedChanged, cbUse2.CheckedChanged, cbUse3.CheckedChanged, cbUse4.CheckedChanged, cbUse5.CheckedChanged
+        CheckedChangeUIState()
+    End Sub
+
+    Private Sub tbStart_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tbStart.TextChanged, tbStop.TextChanged
         CalSweepPoint()
     End Sub
 
-    Private Sub tbStop_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tbStop.TextChanged
+    Private Sub tbV_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tbV1.TextChanged, tbV2.TextChanged, tbV3.TextChanged, tbV4.TextChanged, tbV5.TextChanged
+        CalSweepPoint()
+    End Sub
+
+    Private Sub tbC_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tbC1.TextChanged, tbC2.TextChanged, tbC3.TextChanged, tbC4.TextChanged, tbC5.TextChanged
         CalSweepPoint()
     End Sub
 
@@ -397,12 +470,38 @@ MakeSweep:
         CalSweepPoint()
     End Sub
 
+    Private Sub CheckedChangeUIState()
+        For i = 0 To txtVCList.GetLength(0) - 1
+            If cbUseList(i).Checked Then
+                For j = 0 To txtVCList.GetLength(1) - 1
+                    rbSweepList(i).Enabled = True
+                    txtVCList(i, j).Enabled = True
+                Next
+            Else
+                For j = 0 To txtVCList.GetLength(1) - 1
+                    rbSweepList(i).Enabled = False
+                    txtVCList(i, j).Enabled = False
+                Next
+            End If
+        Next
+        For i = 0 To txtVCList.GetLength(0) - 1
+            If rbSweepList(i).Checked Then
+                lblSweepPS.Text = m_sPowerType(i) & Chr(13) & "Sweep"
+                tbStop.Text = txtVCList(i, 0).Text
+            End If
+        Next
+    End Sub
+
     Private Sub CalSweepPoint()
         Dim dStart As Double
-        Dim dStop As Double
-        Dim sPoint As String = Nothing
+        Dim dStopV() As Double
+        Dim dStopC() As Double
         Dim dStep As Double
         Dim dDelta As Double
+        Dim sPoint As String = Nothing
+
+        ReDim dStopV(txtVCList.GetLength(0))
+        ReDim dStopC(txtVCList.GetLength(0))
 
         Try
             dStart = CDbl(tbStart.Text)
@@ -411,12 +510,18 @@ MakeSweep:
             Exit Sub
         End Try
 
-        Try
-            dStop = CDbl(tbStop.Text)
-        Catch ex As Exception
-            dStop = 0
-            Exit Sub
-        End Try
+        For i = 0 To txtVCList.GetLength(0) - 1
+            Try
+                dStopV(i) = CDbl(txtVCList(i, 0).Text)
+            Catch ex As Exception
+                dStopV(i) = 0
+            End Try
+            Try
+                dStopC(i) = CDbl(txtVCList(i, 1).Text)
+            Catch ex As Exception
+                dStopC(i) = 0
+            End Try
+        Next
 
         Try
             dStep = CDbl(tbStep.Text)
@@ -425,11 +530,20 @@ MakeSweep:
             Exit Sub
         End Try
 
-        If dStart < dStop Then
-            dDelta = dStop - dStart
-        Else
-            dDelta = dStart - dStop
-        End If
+        For i = 0 To txtVCList.GetLength(0) - 1
+            Try
+                If rbSweepList(i).Checked Then
+                    tbStop.Text = txtVCList(i, 0).Text
+                    If dStart < dStopV(i) Then
+                        dDelta = dStopV(i) - dStart
+                    Else
+                        dDelta = dStart - dStopV(i)
+                    End If
+                End If
+            Catch ex As Exception
+
+            End Try
+        Next
 
         sPoint = CStr((dDelta / dStep) + 1)
         tbPoint.Text = sPoint
@@ -476,23 +590,11 @@ MakeSweep:
 
     End Function
 
-
-    Private Sub UpdateUnitType()
-        lblStartValueUnit.Text = ucSweepSetting.m_sCaptions_Unit(m_UnitType)
-        lblStepValueUnit.Text = ucSweepSetting.m_sCaptions_Unit(m_UnitType)
-        lblStopValueUnit.Text = ucSweepSetting.m_sCaptions_Unit(m_UnitType)
-    End Sub
-
     Private Sub UpdateSweepType()
 
         lblPoint.Visible = True
         tbPoint.Visible = True
-        lblStart.Text = "Start :"
-        lblStop.Text = "Stop :"
-        lblStep.Text = "Step :"
-
         SetListVier()
     End Sub
-
 
 End Class

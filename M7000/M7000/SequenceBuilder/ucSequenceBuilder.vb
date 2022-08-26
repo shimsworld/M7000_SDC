@@ -531,7 +531,6 @@ Public Class ucSequenceBuilder
             ucDispCommon.ucDispCommonConditions.ucSeqEndParam.UsedParams = .settings_UsedSequenceEndParam
             ucDispAging.ucTestEndParam.UsedParams = .settings_UsedAgingEndParam
 
-
         End With
     End Sub
 

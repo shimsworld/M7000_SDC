@@ -44,6 +44,7 @@
         _GraySweep
         _UserPattern
         _ViewingAngle
+        _RGBSweep
     End Enum
 
 #End Region

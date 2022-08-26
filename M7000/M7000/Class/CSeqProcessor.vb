@@ -4255,6 +4255,61 @@ Public Class CSeqProcessor
         End Try
     End Function
 
+    '220826 Update by JKY : RGB Sweep List
+    Public Shared Function MakeRGBSweepList(ByVal SweepRegionSettings() As ucMeasureRGBSweepRegion.sSetSweepRegion) As Double()
+        Try
+            Dim dStartValue, dStopValue, dStepValue As Double
+            Dim nPoint, nTotPoint As Integer
+
+            Dim dArrSweepList() As Double = Nothing
+            Dim arrSweepList() As Double
+
+            Dim i, nCnt As Integer
+
+            For nCnt = 0 To SweepRegionSettings.Length - 1
+
+                dStartValue = SweepRegionSettings(nCnt).dStart 'SweepParameter(nCnt).dStart
+                'dStopValue = SweepRegionSettings(nCnt).dStop
+                dStepValue = SweepRegionSettings(nCnt).dStep
+                nPoint = SweepRegionSettings(nCnt).nPoint
+
+                If dStartValue < dStopValue Then   '정방향 Sweep -Bias --> +Bias
+
+                Else   '역방향 Sweep +Bias --> -Bias
+                    dStepValue = -Math.Abs(dStepValue)
+                End If
+
+
+                ReDim Preserve dArrSweepList(nPoint + nTotPoint - 1)
+
+                dArrSweepList(0 + nTotPoint) = dStartValue
+
+
+                If nPoint = 1 Then
+                    For i = 1 To nPoint - 1
+                        dArrSweepList(i + nTotPoint) = CDbl(CStr(dArrSweepList(i + nTotPoint - 1) + dStepValue))
+                    Next
+                Else
+                    For i = 1 To nPoint - 1
+                        dArrSweepList(i + nTotPoint) = CDbl(CStr(dArrSweepList(i + nTotPoint - 1) + dStepValue))
+                    Next
+
+                End If
+
+                nTotPoint = nTotPoint + nPoint
+
+            Next
+
+
+            arrSweepList = dArrSweepList.Clone
+
+            Return arrSweepList
+        Catch ex As Exception
+            Dim Rslt() As Double = Nothing
+            Return Rslt
+        End Try
+    End Function
+
 #End Region
 
 

@@ -30,6 +30,7 @@ Public Class ucDispRcpIVLSweep
 #Region "Enum"
 
     Public Enum eSweepType
+        eRGBPattern '220826 Update by JKY
         eStandard
         eUserPattern
     End Enum
@@ -83,6 +84,7 @@ Public Class ucDispRcpIVLSweep
         Dim sweepType As eSweepType
         Dim sweepLine As eSweepLine
         Dim sMeasureSweepParameter() As ucMeasureSweepRegion.sSetSweepRegion
+        Dim sMeasureRGBSweepParameter() As ucMeasureRGBSweepRegion.sSetSweepRegion '220826 Update by JKY
         ' Dim sMeasureUserSweepList() As Double
         Dim dSweepList() As Double
         Dim nColorList() As ucMeasureColorList.eColor
@@ -378,6 +380,7 @@ Public Class ucDispRcpIVLSweep
         Set(ByVal value As Boolean)
             ucSweepSetting.ucUserPatternList.Visible = value
             ucSweepSetting.ucSweepRegion.Visible = value
+            ucSweepSetting.ucRGBSweepRegion.Visible = value
         End Set
     End Property
 
@@ -487,6 +490,9 @@ Public Class ucDispRcpIVLSweep
                     m_IVLSweepInfos.sCommon.dSweepList = CSeqProcessor.MakeSweepList(m_IVLSweepInfos.sCommon.sMeasureSweepParameter)
                 Case ucDispRcpIVLSweep.eSweepType.eUserPattern
                     m_IVLSweepInfos.sCommon.dSweepList = ucSweepSetting.ucUserPatternList.Setting
+                Case ucDispRcpIVLSweep.eSweepType.eRGBPattern '220826 Update by JKY
+                    m_IVLSweepInfos.sCommon.sMeasureRGBSweepParameter = ucSweepSetting.ucRGBSweepRegion.Setting
+                    m_IVLSweepInfos.sCommon.dSweepList = CSeqProcessor.MakeRGBSweepList(m_IVLSweepInfos.sCommon.sMeasureRGBSweepParameter)
             End Select
 
 
@@ -576,6 +582,8 @@ Public Class ucDispRcpIVLSweep
                     ucSweepSetting.ucSweepRegion.Setting = m_IVLSweepInfos.sCommon.sMeasureSweepParameter
                 Case ucDispRcpIVLSweep.eSweepType.eUserPattern
                     ucSweepSetting.ucUserPatternList.Setting = m_IVLSweepInfos.sCommon.dSweepList
+                Case ucDispRcpIVLSweep.eSweepType.eRGBPattern '220826 Update by JKY
+                    ucSweepSetting.ucRGBSweepRegion.Setting = m_IVLSweepInfos.sCommon.sMeasureRGBSweepParameter
             End Select
 
 
@@ -720,6 +728,9 @@ Public Class ucDispRcpIVLSweep
             Case M7000.ucSweepSetting.eSweepType._UserPattern
                 cbSweepMode.Enabled = False
                 tbCycleDelay.Enabled = False
+            Case M7000.ucSweepSetting.eSweepType._RGBPattern '220826 Update by JKY
+                cbSweepMode.Enabled = True
+                tbCycleDelay.Enabled = True
         End Select
 
     End Sub

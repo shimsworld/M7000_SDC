@@ -37,6 +37,7 @@ Public Class ucDispRcpLifetimeAndIVLSweep
 
     'IVL
     Public Enum eSweepType
+        eRGBPattern
         eStandard
         eUserPattern
     End Enum
@@ -656,6 +657,9 @@ Public Class ucDispRcpLifetimeAndIVLSweep
             Case M7000.ucSweepSetting.eSweepType._UserPattern
                 cbSweepMode.Enabled = False
                 tbCycleDelay.Enabled = False
+            Case M7000.ucSweepSetting.eSweepType._RGBPattern '220826 Update by JKY
+                cbSweepMode.Enabled = True
+                tbCycleDelay.Enabled = True
         End Select
 
     End Sub

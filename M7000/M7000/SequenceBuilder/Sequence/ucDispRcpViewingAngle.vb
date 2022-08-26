@@ -26,6 +26,7 @@ Public Class ucDispRcpViewingAngle
         Dim measItem As ucDispRcpIVLSweep.eMeasureItems
         Dim dBiasValue As Double
         Dim sMeasureSweepParameter() As ucMeasureSweepRegion.sSetSweepRegion
+        Dim sMeasureRGBSweepParameter() As ucMeasureRGBSweepRegion.sSetSweepRegion '220826 Update by JKY
         Dim dSweepList() As Double
         Dim dLumiCorrection As Double
     End Structure
