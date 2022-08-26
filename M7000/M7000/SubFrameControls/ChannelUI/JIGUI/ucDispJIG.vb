@@ -296,7 +296,7 @@
         lblTitle.Dock = DockStyle.Fill
 
         '220826 Update by JKY : Panel -> TEG, CH명으로 라벨링
-        Dim teg = frmSettingWind.GetAllocationValue(m_nJIGNo, frmSettingWind.eChAllocationItem.eChannel)
+        Dim teg = frmSettingWind.GetAllocationValue(m_nJIGNo, frmSettingWind.eChAllocationItem.eChOfSwitch)
         If m_AddText = "" Then
             lblTitle.Text = "TEG " & Format(teg + 1, "00") 'convertIncNumberToMatrixValue(m_nJIGNo)  'Format(m_nJIGNo + 1, "00")   'JIG
         Else
