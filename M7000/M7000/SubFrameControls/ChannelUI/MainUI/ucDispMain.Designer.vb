@@ -28,11 +28,11 @@ Partial Class ucDispMain
         'panelmain
         '
         Me.panelmain.BackColor = System.Drawing.SystemColors.Control
-        Me.panelmain.Dock = System.Windows.Forms.DockStyle.Top
+        Me.panelmain.Dock = System.Windows.Forms.DockStyle.Fill
         Me.panelmain.Location = New System.Drawing.Point(0, 0)
         Me.panelmain.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.panelmain.Name = "panelmain"
-        Me.panelmain.Size = New System.Drawing.Size(1168, 736)
+        Me.panelmain.Size = New System.Drawing.Size(1367, 764)
         Me.panelmain.TabIndex = 0
         '
         'ucDispMain
@@ -43,7 +43,7 @@ Partial Class ucDispMain
         Me.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Bold)
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Name = "ucDispMain"
-        Me.Size = New System.Drawing.Size(1168, 764)
+        Me.Size = New System.Drawing.Size(1367, 764)
         Me.ResumeLayout(False)
 
     End Sub
