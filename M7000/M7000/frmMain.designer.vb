@@ -37,16 +37,6 @@ Partial Class frmMain
         Me.tslRemainTime = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.MainToolStrip = New System.Windows.Forms.ToolStrip()
-        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
-        Me.ToolStripSeparator9 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripDropDownButton1 = New System.Windows.Forms.ToolStripDropDownButton()
         Me.LogInToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -115,7 +105,9 @@ Partial Class frmMain
         Me.tsbSelUI_Monitoring = New System.Windows.Forms.ToolStripButton()
         Me.tsbSelUI_Motion = New System.Windows.Forms.ToolStripButton()
         Me.tsSequenceBulider = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.tsBtnTestRed = New System.Windows.Forms.ToolStripButton()
         Me.tsBtnTestGreen = New System.Windows.Forms.ToolStripButton()
         Me.tsBtnTestBlue = New System.Windows.Forms.ToolStripButton()
@@ -123,10 +115,21 @@ Partial Class frmMain
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
         Me.tsBtnExit = New System.Windows.Forms.ToolStripButton()
         Me.tsbPretestViewMode = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
         Me.tsIVLDisplayShow = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.tsBtnCare = New System.Windows.Forms.ToolStripButton()
         Me.tsBtnAlarm = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
         Me.tsbIVLGraph = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripSeparator9 = New System.Windows.Forms.ToolStripSeparator()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
+        Me.EIPPGToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.IVLPowerSupplyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SW7700ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mainStatus.SuspendLayout()
         Me.MainToolStrip.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -246,82 +249,6 @@ Partial Class frmMain
         Me.MainToolStrip.TabIndex = 1
         Me.MainToolStrip.Text = "ToolStrip1"
         '
-        'ToolStripSeparator3
-        '
-        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(6, 66)
-        '
-        'ToolStripSeparator6
-        '
-        Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
-        Me.ToolStripSeparator6.Size = New System.Drawing.Size(6, 66)
-        '
-        'ToolStripSeparator7
-        '
-        Me.ToolStripSeparator7.AutoSize = False
-        Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
-        Me.ToolStripSeparator7.Size = New System.Drawing.Size(20, 57)
-        Me.ToolStripSeparator7.Visible = False
-        '
-        'ToolStripSeparator4
-        '
-        Me.ToolStripSeparator4.AutoSize = False
-        Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
-        Me.ToolStripSeparator4.Size = New System.Drawing.Size(20, 57)
-        Me.ToolStripSeparator4.Visible = False
-        '
-        'ToolStripSeparator5
-        '
-        Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
-        Me.ToolStripSeparator5.Size = New System.Drawing.Size(6, 66)
-        Me.ToolStripSeparator5.Visible = False
-        '
-        'ToolStripSeparator2
-        '
-        Me.ToolStripSeparator2.AutoSize = False
-        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(20, 57)
-        Me.ToolStripSeparator2.Visible = False
-        '
-        'ToolStripSeparator8
-        '
-        Me.ToolStripSeparator8.Name = "ToolStripSeparator8"
-        Me.ToolStripSeparator8.Size = New System.Drawing.Size(6, 66)
-        '
-        'Panel2
-        '
-        Me.Panel2.Controls.Add(Me.SplitContainer1)
-        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel2.Location = New System.Drawing.Point(0, 0)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(1302, 66)
-        Me.Panel2.TabIndex = 4
-        '
-        'SplitContainer1
-        '
-        Me.SplitContainer1.BackColor = System.Drawing.Color.White
-        Me.SplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SplitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1
-        Me.SplitContainer1.Location = New System.Drawing.Point(0, 0)
-        Me.SplitContainer1.Name = "SplitContainer1"
-        '
-        'SplitContainer1.Panel1
-        '
-        Me.SplitContainer1.Panel1.Controls.Add(Me.MainToolStrip)
-        '
-        'SplitContainer1.Panel2
-        '
-        Me.SplitContainer1.Panel2.BackColor = System.Drawing.Color.White
-        Me.SplitContainer1.Size = New System.Drawing.Size(1302, 66)
-        Me.SplitContainer1.SplitterDistance = 1251
-        Me.SplitContainer1.SplitterWidth = 1
-        Me.SplitContainer1.TabIndex = 0
-        '
-        'ToolStripSeparator9
-        '
-        Me.ToolStripSeparator9.Name = "ToolStripSeparator9"
-        Me.ToolStripSeparator9.Size = New System.Drawing.Size(6, 66)
-        '
         'ToolStripDropDownButton1
         '
         Me.ToolStripDropDownButton1.AutoSize = False
@@ -340,13 +267,13 @@ Partial Class frmMain
         'LogInToolStripMenuItem
         '
         Me.LogInToolStripMenuItem.Name = "LogInToolStripMenuItem"
-        Me.LogInToolStripMenuItem.Size = New System.Drawing.Size(147, 22)
+        Me.LogInToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.LogInToolStripMenuItem.Text = "Log-In"
         '
         'FileToolStripMenuItem
         '
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
-        Me.FileToolStripMenuItem.Size = New System.Drawing.Size(147, 22)
+        Me.FileToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.FileToolStripMenuItem.Text = "File"
         Me.FileToolStripMenuItem.Visible = False
         '
@@ -354,7 +281,7 @@ Partial Class frmMain
         '
         Me.SystemToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.HWConnectionToolStripMenu, Me.SWConnectionToolStripMenu, Me.DisconnectionToolStripMenuItem, Me.ToolStripMenuItem2, Me.SystemConfigurationToolStripMenuItem, Me.ConfigurationToolStripMenuItem, Me.ChannelAllocationToolStripMenuItem, Me.RangeSettingsToolStripMenuItem})
         Me.SystemToolStripMenuItem.Name = "SystemToolStripMenuItem"
-        Me.SystemToolStripMenuItem.Size = New System.Drawing.Size(147, 22)
+        Me.SystemToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.SystemToolStripMenuItem.Text = "System"
         '
         'HWConnectionToolStripMenu
@@ -413,7 +340,7 @@ Partial Class frmMain
         '
         Me.SettingsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OptionsToolStripMenuItem, Me.PGImageManagerToolStripMenuItem, Me.ToolStripMenuItem5, Me.ZeroCalToolStripMenuItem, Me.SAFETYModeToolStripMenuItem})
         Me.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem"
-        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(147, 22)
+        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.SettingsToolStripMenuItem.Text = "Settings"
         '
         'OptionsToolStripMenuItem
@@ -453,7 +380,7 @@ Partial Class frmMain
         '
         Me.TestToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RunToolStripMenuItem, Me.StopToolStripMenuItem, Me.ToolStripMenuItem3, Me.SequenceBuilderToolStripMenuItem})
         Me.TestToolStripMenuItem.Name = "TestToolStripMenuItem"
-        Me.TestToolStripMenuItem.Size = New System.Drawing.Size(147, 22)
+        Me.TestToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.TestToolStripMenuItem.Text = "Experiment"
         '
         'RunToolStripMenuItem
@@ -481,9 +408,9 @@ Partial Class frmMain
         '
         'ControlToolStripMenuItem
         '
-        Me.ControlToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MotionToolStripMenuItem, Me.PDMeasurementUnitToolStripMenuItem, Me.PLCToolStripMenuItem, Me.MC9ToolStripMenuItem, Me.NX1ToolStripMenuItem, Me.THC98585ToolStripMenuItem, Me.M6000ToolStripMenuItem, Me.SignalGeneratorToolStripMenuItem, Me.PatternGeneratorToolStripMenuItem, Me.K26XXToolStripMenuItem, Me.K24XXToolStripMenuItem, Me.K23XToolStripMenuItem, Me.PR705ToolStripMenuItem, Me.K7001ToolStripMenuItem, Me.SW7000ToolStripMenuItem, Me.ColorAnalyzerToolStripMenuItem, Me.TTM004ToolStripMenuItem, Me.SpectrometerToolStripMenuItem, Me.SVSCameraToolStripMenuItem, Me.StrobeToolStripMenuItem})
+        Me.ControlToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MotionToolStripMenuItem, Me.PDMeasurementUnitToolStripMenuItem, Me.PLCToolStripMenuItem, Me.MC9ToolStripMenuItem, Me.NX1ToolStripMenuItem, Me.THC98585ToolStripMenuItem, Me.M6000ToolStripMenuItem, Me.SignalGeneratorToolStripMenuItem, Me.PatternGeneratorToolStripMenuItem, Me.K26XXToolStripMenuItem, Me.K24XXToolStripMenuItem, Me.K23XToolStripMenuItem, Me.PR705ToolStripMenuItem, Me.K7001ToolStripMenuItem, Me.SW7000ToolStripMenuItem, Me.ColorAnalyzerToolStripMenuItem, Me.TTM004ToolStripMenuItem, Me.SpectrometerToolStripMenuItem, Me.SVSCameraToolStripMenuItem, Me.StrobeToolStripMenuItem, Me.EIPPGToolStripMenuItem, Me.IVLPowerSupplyToolStripMenuItem, Me.SW7700ToolStripMenuItem})
         Me.ControlToolStripMenuItem.Name = "ControlToolStripMenuItem"
-        Me.ControlToolStripMenuItem.Size = New System.Drawing.Size(147, 22)
+        Me.ControlToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.ControlToolStripMenuItem.Text = "Control"
         '
         'MotionToolStripMenuItem
@@ -531,7 +458,6 @@ Partial Class frmMain
         Me.M6000ToolStripMenuItem.Name = "M6000ToolStripMenuItem"
         Me.M6000ToolStripMenuItem.Size = New System.Drawing.Size(195, 22)
         Me.M6000ToolStripMenuItem.Text = "M6000"
-        Me.M6000ToolStripMenuItem.Visible = False
         '
         'SignalGeneratorToolStripMenuItem
         '
@@ -552,6 +478,7 @@ Partial Class frmMain
         Me.K26XXToolStripMenuItem.Name = "K26XXToolStripMenuItem"
         Me.K26XXToolStripMenuItem.Size = New System.Drawing.Size(195, 22)
         Me.K26XXToolStripMenuItem.Text = "K26XX"
+        Me.K26XXToolStripMenuItem.Visible = False
         '
         'K24XXToolStripMenuItem
         '
@@ -565,6 +492,7 @@ Partial Class frmMain
         Me.K23XToolStripMenuItem.Name = "K23XToolStripMenuItem"
         Me.K23XToolStripMenuItem.Size = New System.Drawing.Size(195, 22)
         Me.K23XToolStripMenuItem.Text = "K23X"
+        Me.K23XToolStripMenuItem.Visible = False
         '
         'PR705ToolStripMenuItem
         '
@@ -585,6 +513,7 @@ Partial Class frmMain
         Me.SW7000ToolStripMenuItem.Name = "SW7000ToolStripMenuItem"
         Me.SW7000ToolStripMenuItem.Size = New System.Drawing.Size(195, 22)
         Me.SW7000ToolStripMenuItem.Text = "SW7000"
+        Me.SW7000ToolStripMenuItem.Visible = False
         '
         'ColorAnalyzerToolStripMenuItem
         '
@@ -616,12 +545,13 @@ Partial Class frmMain
         Me.StrobeToolStripMenuItem.Name = "StrobeToolStripMenuItem"
         Me.StrobeToolStripMenuItem.Size = New System.Drawing.Size(195, 22)
         Me.StrobeToolStripMenuItem.Text = "Strobe"
+        Me.StrobeToolStripMenuItem.Visible = False
         '
         'ViewToolStripMenuItem
         '
         Me.ViewToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LogToolStripMenuItem})
         Me.ViewToolStripMenuItem.Name = "ViewToolStripMenuItem"
-        Me.ViewToolStripMenuItem.Size = New System.Drawing.Size(147, 22)
+        Me.ViewToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.ViewToolStripMenuItem.Text = "View"
         Me.ViewToolStripMenuItem.Visible = False
         '
@@ -647,19 +577,19 @@ Partial Class frmMain
         'ToolStripMenuItem1
         '
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(144, 6)
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(177, 6)
         '
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(147, 22)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.ExitToolStripMenuItem.Text = "Exit"
         '
         'FunctionTestToolStripMenuItem
         '
         Me.FunctionTestToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TestUIToolStripMenuItem2, Me.PGTestUIToolStripMenuItem, Me.UITestToolStripMenuItem, Me.ToolStripMenuItem4, Me.ProcessThreadRUNToolStripMenuItem, Me.ProcessThreadStopToolStripMenuItem})
         Me.FunctionTestToolStripMenuItem.Name = "FunctionTestToolStripMenuItem"
-        Me.FunctionTestToolStripMenuItem.Size = New System.Drawing.Size(147, 22)
+        Me.FunctionTestToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.FunctionTestToolStripMenuItem.Text = "Function Test"
         Me.FunctionTestToolStripMenuItem.Visible = False
         '
@@ -826,6 +756,11 @@ Partial Class frmMain
         Me.tsSequenceBulider.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.tsSequenceBulider.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         '
+        'ToolStripSeparator6
+        '
+        Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
+        Me.ToolStripSeparator6.Size = New System.Drawing.Size(6, 66)
+        '
         'ToolStripButton2
         '
         Me.ToolStripButton2.Image = Global.M7000.My.Resources.Resources.clear_2
@@ -835,6 +770,11 @@ Partial Class frmMain
         Me.ToolStripButton2.Size = New System.Drawing.Size(73, 63)
         Me.ToolStripButton2.Text = "QueueClear"
         Me.ToolStripButton2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        '
+        'ToolStripSeparator3
+        '
+        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(6, 66)
         '
         'tsBtnTestRed
         '
@@ -883,7 +823,7 @@ Partial Class frmMain
         Me.ToolStripButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton1.Name = "ToolStripButton1"
-        Me.ToolStripButton1.Size = New System.Drawing.Size(79, 69)
+        Me.ToolStripButton1.Size = New System.Drawing.Size(79, 63)
         Me.ToolStripButton1.Text = "Manual Stop"
         Me.ToolStripButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         '
@@ -894,7 +834,7 @@ Partial Class frmMain
         Me.tsBtnExit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.tsBtnExit.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsBtnExit.Name = "tsBtnExit"
-        Me.tsBtnExit.Size = New System.Drawing.Size(54, 69)
+        Me.tsBtnExit.Size = New System.Drawing.Size(54, 63)
         Me.tsBtnExit.Text = "Exit"
         Me.tsBtnExit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         '
@@ -905,10 +845,17 @@ Partial Class frmMain
         Me.tsbPretestViewMode.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.tsbPretestViewMode.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbPretestViewMode.Name = "tsbPretestViewMode"
-        Me.tsbPretestViewMode.Size = New System.Drawing.Size(50, 51)
+        Me.tsbPretestViewMode.Size = New System.Drawing.Size(50, 63)
         Me.tsbPretestViewMode.Text = "Pretest"
         Me.tsbPretestViewMode.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         Me.tsbPretestViewMode.Visible = False
+        '
+        'ToolStripSeparator7
+        '
+        Me.ToolStripSeparator7.AutoSize = False
+        Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
+        Me.ToolStripSeparator7.Size = New System.Drawing.Size(20, 57)
+        Me.ToolStripSeparator7.Visible = False
         '
         'tsIVLDisplayShow
         '
@@ -917,10 +864,17 @@ Partial Class frmMain
         Me.tsIVLDisplayShow.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.tsIVLDisplayShow.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsIVLDisplayShow.Name = "tsIVLDisplayShow"
-        Me.tsIVLDisplayShow.Size = New System.Drawing.Size(72, 51)
+        Me.tsIVLDisplayShow.Size = New System.Drawing.Size(72, 63)
         Me.tsIVLDisplayShow.Text = "IVL Display"
         Me.tsIVLDisplayShow.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         Me.tsIVLDisplayShow.Visible = False
+        '
+        'ToolStripSeparator4
+        '
+        Me.ToolStripSeparator4.AutoSize = False
+        Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
+        Me.ToolStripSeparator4.Size = New System.Drawing.Size(20, 57)
+        Me.ToolStripSeparator4.Visible = False
         '
         'tsBtnCare
         '
@@ -929,7 +883,7 @@ Partial Class frmMain
         Me.tsBtnCare.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.tsBtnCare.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsBtnCare.Name = "tsBtnCare"
-        Me.tsBtnCare.Size = New System.Drawing.Size(38, 51)
+        Me.tsBtnCare.Size = New System.Drawing.Size(38, 63)
         Me.tsBtnCare.Text = "Care"
         Me.tsBtnCare.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         Me.tsBtnCare.Visible = False
@@ -941,10 +895,16 @@ Partial Class frmMain
         Me.tsBtnAlarm.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.tsBtnAlarm.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsBtnAlarm.Name = "tsBtnAlarm"
-        Me.tsBtnAlarm.Size = New System.Drawing.Size(43, 51)
+        Me.tsBtnAlarm.Size = New System.Drawing.Size(43, 63)
         Me.tsBtnAlarm.Text = "Alarm"
         Me.tsBtnAlarm.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         Me.tsBtnAlarm.Visible = False
+        '
+        'ToolStripSeparator5
+        '
+        Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
+        Me.ToolStripSeparator5.Size = New System.Drawing.Size(6, 66)
+        Me.ToolStripSeparator5.Visible = False
         '
         'tsbIVLGraph
         '
@@ -953,10 +913,74 @@ Partial Class frmMain
         Me.tsbIVLGraph.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.tsbIVLGraph.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbIVLGraph.Name = "tsbIVLGraph"
-        Me.tsbIVLGraph.Size = New System.Drawing.Size(65, 51)
+        Me.tsbIVLGraph.Size = New System.Drawing.Size(65, 63)
         Me.tsbIVLGraph.Text = "IVL Graph"
         Me.tsbIVLGraph.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         Me.tsbIVLGraph.Visible = False
+        '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.AutoSize = False
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(20, 57)
+        Me.ToolStripSeparator2.Visible = False
+        '
+        'ToolStripSeparator8
+        '
+        Me.ToolStripSeparator8.Name = "ToolStripSeparator8"
+        Me.ToolStripSeparator8.Size = New System.Drawing.Size(6, 66)
+        '
+        'ToolStripSeparator9
+        '
+        Me.ToolStripSeparator9.Name = "ToolStripSeparator9"
+        Me.ToolStripSeparator9.Size = New System.Drawing.Size(6, 66)
+        '
+        'Panel2
+        '
+        Me.Panel2.Controls.Add(Me.SplitContainer1)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel2.Location = New System.Drawing.Point(0, 0)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(1302, 66)
+        Me.Panel2.TabIndex = 4
+        '
+        'SplitContainer1
+        '
+        Me.SplitContainer1.BackColor = System.Drawing.Color.White
+        Me.SplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.SplitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1
+        Me.SplitContainer1.Location = New System.Drawing.Point(0, 0)
+        Me.SplitContainer1.Name = "SplitContainer1"
+        '
+        'SplitContainer1.Panel1
+        '
+        Me.SplitContainer1.Panel1.Controls.Add(Me.MainToolStrip)
+        '
+        'SplitContainer1.Panel2
+        '
+        Me.SplitContainer1.Panel2.BackColor = System.Drawing.Color.White
+        Me.SplitContainer1.Size = New System.Drawing.Size(1302, 66)
+        Me.SplitContainer1.SplitterDistance = 1251
+        Me.SplitContainer1.SplitterWidth = 1
+        Me.SplitContainer1.TabIndex = 0
+        '
+        'EIPPGToolStripMenuItem
+        '
+        Me.EIPPGToolStripMenuItem.Name = "EIPPGToolStripMenuItem"
+        Me.EIPPGToolStripMenuItem.Size = New System.Drawing.Size(195, 22)
+        Me.EIPPGToolStripMenuItem.Text = "EIP Pattern Generator"
+        '
+        'IVLPowerSupplyToolStripMenuItem
+        '
+        Me.IVLPowerSupplyToolStripMenuItem.Name = "IVLPowerSupplyToolStripMenuItem"
+        Me.IVLPowerSupplyToolStripMenuItem.Size = New System.Drawing.Size(195, 22)
+        Me.IVLPowerSupplyToolStripMenuItem.Text = "IVL Power Supply"
+        '
+        'SW7700ToolStripMenuItem
+        '
+        Me.SW7700ToolStripMenuItem.Name = "SW7700ToolStripMenuItem"
+        Me.SW7700ToolStripMenuItem.Size = New System.Drawing.Size(195, 22)
+        Me.SW7700ToolStripMenuItem.Text = "SW7700"
         '
         'frmMain
         '
@@ -1088,5 +1112,7 @@ Partial Class frmMain
     Friend WithEvents ToolStripButton1 As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripButton2 As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripSeparator9 As System.Windows.Forms.ToolStripSeparator
-
+    Friend WithEvents EIPPGToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents IVLPowerSupplyToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SW7700ToolStripMenuItem As ToolStripMenuItem
 End Class
