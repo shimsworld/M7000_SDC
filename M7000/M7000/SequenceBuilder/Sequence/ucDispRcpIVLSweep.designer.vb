@@ -259,7 +259,7 @@ Partial Class ucDispRcpIVLSweep
         Me.GroupBox2.TabIndex = 3
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Measurement Point"
-        Me.GroupBox2.Visible = False
+        Me.GroupBox2.Visible = True
         '
         'UcDispListView1
         '
@@ -812,7 +812,7 @@ Partial Class ucDispRcpIVLSweep
         Me.btnMeasPoint.TabIndex = 12
         Me.btnMeasPoint.Text = "Set Meas. Point"
         Me.btnMeasPoint.UseVisualStyleBackColor = False
-        Me.btnMeasPoint.Visible = False '220829 Update by JKY : Original
+        Me.btnMeasPoint.Visible = True
         '
         'btnEdit
         '

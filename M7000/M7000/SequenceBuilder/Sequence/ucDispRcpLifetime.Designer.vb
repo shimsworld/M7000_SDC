@@ -133,6 +133,7 @@ Partial Class ucDispRcpLifetime
         Me.GroupBox1.TabIndex = 3
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Measurement Point"
+        Me.GroupBox1.Visible = False
         '
         'UcDispListView1
         '
@@ -580,6 +581,7 @@ Partial Class ucDispRcpLifetime
         Me.btnMeasPoint.TabIndex = 13
         Me.btnMeasPoint.Text = "Set Meas. Point"
         Me.btnMeasPoint.UseVisualStyleBackColor = True
+        Me.btnMeasPoint.Visible = False
         '
         'btnEdit
         '

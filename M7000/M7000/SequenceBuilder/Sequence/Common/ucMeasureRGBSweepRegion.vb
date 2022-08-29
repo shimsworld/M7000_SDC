@@ -414,14 +414,24 @@ MakeSweep:
 
     Private Sub SetValueToUI(ByVal biasInfo() As sSetSweepRegion)
 
-        Dim sdata(4) As String
+        Dim sdata(6) As String
 
         ucListMeasSweep.ClearAllData()
 
-        For i As Integer = 0 To biasInfo.Length - 1
-
-            ReDim sdata(3)
+        For i = 0 To biasInfo.Length - 1
             sdata(0) = biasInfo(i).nSweepNumber
+            For j = 0 To 4
+                If j = biasInfo(i).SweepType Then
+                    sdata(1) = biasInfo(i).SweepType
+                    sdata(2) = biasInfo(i).dStart
+                    sdata(3) = biasInfo(i).dStop
+                    sdata(4) = biasInfo(i).dStep
+                    sdata(5) = biasInfo(i).nPoint
+                    sdata(6) += $"{j},{biasInfo(i).setPowerValue(j).dStopV},{biasInfo(i).setPowerValue(j).dStopC},"
+                Else
+                    sdata(6) += $"{j},{biasInfo(i).setPowerValue(j).dStopV},{biasInfo(i).setPowerValue(j).dStopC},"
+                End If
+            Next
             ucListMeasSweep.AddRowData(sdata)
         Next
 
@@ -449,17 +459,21 @@ MakeSweep:
 
         ucListMeasSweep.GetRowData(CheckLineNumber - 1, sData)
 
-        beforeChangeStop = CDbl(sData(2))
+        Try
+            beforeChangeStop = CDbl(sData(2))
 
-        If SweepDirection = eSweepDirection.eForward Then
-            If beforeChangeStop >= ChangeStop Then
-                Return False
+            If SweepDirection = eSweepDirection.eForward Then
+                If beforeChangeStop >= ChangeStop Then
+                    Return False
+                End If
+            ElseIf SweepDirection = eSweepDirection.eReverse Then
+                If beforeChangeStop <= ChangeStop Then
+                    Return False
+                End If
             End If
-        ElseIf SweepDirection = eSweepDirection.eReverse Then
-            If beforeChangeStop <= ChangeStop Then
-                Return False
-            End If
-        End If
+        Catch ex As Exception
+            Return False
+        End Try
 
         Return True
     End Function
