@@ -146,7 +146,7 @@ Partial Class ucDispPointSetting
         '
         Me.tbMarginY.Location = New System.Drawing.Point(172, 22)
         Me.tbMarginY.Name = "tbMarginY"
-        Me.tbMarginY.Size = New System.Drawing.Size(61, 21)
+        Me.tbMarginY.Size = New System.Drawing.Size(61, 26)
         Me.tbMarginY.TabIndex = 17
         Me.tbMarginY.Text = "0"
         Me.tbMarginY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -156,7 +156,7 @@ Partial Class ucDispPointSetting
         Me.Label2.AutoSize = True
         Me.Label2.Location = New System.Drawing.Point(146, 28)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(25, 12)
+        Me.Label2.Size = New System.Drawing.Size(32, 20)
         Me.Label2.TabIndex = 16
         Me.Label2.Text = " Y :"
         '
@@ -164,7 +164,7 @@ Partial Class ucDispPointSetting
         '
         Me.tbMarginX.Location = New System.Drawing.Point(45, 22)
         Me.tbMarginX.Name = "tbMarginX"
-        Me.tbMarginX.Size = New System.Drawing.Size(61, 21)
+        Me.tbMarginX.Size = New System.Drawing.Size(61, 26)
         Me.tbMarginX.TabIndex = 15
         Me.tbMarginX.Text = "0"
         Me.tbMarginX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -174,7 +174,7 @@ Partial Class ucDispPointSetting
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(18, 28)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(25, 12)
+        Me.Label1.Size = New System.Drawing.Size(32, 20)
         Me.Label1.TabIndex = 14
         Me.Label1.Text = " X :"
         '
@@ -186,7 +186,7 @@ Partial Class ucDispPointSetting
         Me.ToolStrip.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip.Name = "ToolStrip"
         Me.ToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-        Me.ToolStrip.Size = New System.Drawing.Size(659, 25)
+        Me.ToolStrip.Size = New System.Drawing.Size(659, 53)
         Me.ToolStrip.TabIndex = 16
         Me.ToolStrip.Text = "ToolStrip1"
         '
@@ -206,7 +206,7 @@ Partial Class ucDispPointSetting
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 25)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 53)
         '
         'tsBtnShortCut_P1
         '
@@ -219,7 +219,6 @@ Partial Class ucDispPointSetting
         Me.tsBtnShortCut_P1.Text = "1"
         Me.tsBtnShortCut_P1.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.tsBtnShortCut_P1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        Me.tsBtnShortCut_P1.Visible = False
         '
         'tsBtnShortCut_P2by2
         '
@@ -232,7 +231,6 @@ Partial Class ucDispPointSetting
         Me.tsBtnShortCut_P2by2.Text = "2 * 2"
         Me.tsBtnShortCut_P2by2.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.tsBtnShortCut_P2by2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        Me.tsBtnShortCut_P2by2.Visible = False
         '
         'tsBtnShortCut_P3by3
         '
@@ -245,7 +243,6 @@ Partial Class ucDispPointSetting
         Me.tsBtnShortCut_P3by3.Text = "3 * 3"
         Me.tsBtnShortCut_P3by3.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.tsBtnShortCut_P3by3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        Me.tsBtnShortCut_P3by3.Visible = False
         '
         'tsBtnShortCut_P3by4
         '
@@ -258,7 +255,6 @@ Partial Class ucDispPointSetting
         Me.tsBtnShortCut_P3by4.Text = "3 * 4"
         Me.tsBtnShortCut_P3by4.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.tsBtnShortCut_P3by4.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        Me.tsBtnShortCut_P3by4.Visible = False
         '
         'tsBtnShortCut_P5by5
         '
@@ -271,12 +267,11 @@ Partial Class ucDispPointSetting
         Me.tsBtnShortCut_P5by5.Text = "5 * 5"
         Me.tsBtnShortCut_P5by5.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.tsBtnShortCut_P5by5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        Me.tsBtnShortCut_P5by5.Visible = False
         '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 25)
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 53)
         '
         'tsBtnPointColor1
         '
@@ -349,7 +344,7 @@ Partial Class ucDispPointSetting
         Me.UcDispTarget_PanelModuel1.Size = New System.Drawing.Size(217, 378)
         Me.UcDispTarget_PanelModuel1.TabIndex = 12
         Me.UcDispTarget_PanelModuel1.TargetType = M7000.ucSampleInfos.eSampleType.eCell
-        Me.UcDispTarget_PanelModuel1.Temp = 0.0R
+        Me.UcDispTarget_PanelModuel1.Temp = 0R
         '
         'gbPosition
         '
@@ -379,7 +374,7 @@ Partial Class ucDispPointSetting
         Me.Label4.AutoSize = True
         Me.Label4.Location = New System.Drawing.Point(15, 22)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(25, 12)
+        Me.Label4.Size = New System.Drawing.Size(32, 20)
         Me.Label4.TabIndex = 19
         Me.Label4.Text = " X :"
         '
@@ -387,7 +382,7 @@ Partial Class ucDispPointSetting
         '
         Me.tbInput_YPos.Location = New System.Drawing.Point(120, 15)
         Me.tbInput_YPos.Name = "tbInput_YPos"
-        Me.tbInput_YPos.Size = New System.Drawing.Size(54, 21)
+        Me.tbInput_YPos.Size = New System.Drawing.Size(54, 26)
         Me.tbInput_YPos.TabIndex = 22
         Me.tbInput_YPos.Text = "0"
         Me.tbInput_YPos.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -396,7 +391,7 @@ Partial Class ucDispPointSetting
         '
         Me.tbInput_XPos.Location = New System.Drawing.Point(41, 15)
         Me.tbInput_XPos.Name = "tbInput_XPos"
-        Me.tbInput_XPos.Size = New System.Drawing.Size(54, 21)
+        Me.tbInput_XPos.Size = New System.Drawing.Size(54, 26)
         Me.tbInput_XPos.TabIndex = 20
         Me.tbInput_XPos.Text = "0"
         Me.tbInput_XPos.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -406,7 +401,7 @@ Partial Class ucDispPointSetting
         Me.Label3.AutoSize = True
         Me.Label3.Location = New System.Drawing.Point(96, 22)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(25, 12)
+        Me.Label3.Size = New System.Drawing.Size(32, 20)
         Me.Label3.TabIndex = 21
         Me.Label3.Text = " Y :"
         '

@@ -24,6 +24,8 @@ Partial Class ucDispRcpIVLSweep
     Private Sub InitializeComponent()
         Me.spContainer = New System.Windows.Forms.SplitContainer()
         Me.gbIVLSweepCommon = New System.Windows.Forms.GroupBox()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.UcDispListView1 = New M7000.ucDispListView()
         Me.tcCommon = New System.Windows.Forms.TabControl()
         Me.tbStandard = New System.Windows.Forms.TabPage()
         Me.SplitContainer2 = New System.Windows.Forms.SplitContainer()
@@ -113,6 +115,7 @@ Partial Class ucDispRcpIVLSweep
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
         'spContainer
@@ -198,6 +201,7 @@ Partial Class ucDispRcpIVLSweep
         Me.SplitContainer2.Panel1.Controls.Add(Me.lblLMeasLevel)
         Me.SplitContainer2.Panel1.Controls.Add(Me.cbMeasureMode)
         Me.SplitContainer2.Panel1.Controls.Add(Me.lblMeasMode)
+        Me.SplitContainer2.Panel1.Controls.Add(Me.GroupBox2)
         '
         'SplitContainer2.Panel2
         '
@@ -244,6 +248,33 @@ Partial Class ucDispRcpIVLSweep
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Fast Mode"
         Me.GroupBox1.Visible = False
+        '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.UcDispListView1)
+        Me.GroupBox2.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox2.Location = New System.Drawing.Point(10, 255)
+        Me.GroupBox2.Name = "GroupBox1"
+        Me.GroupBox2.Size = New System.Drawing.Size(314, 196)
+        Me.GroupBox2.TabIndex = 3
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "Measurement Point"
+        Me.GroupBox2.Visible = False
+        '
+        'UcDispListView1
+        '
+        Me.UcDispListView1.ColHeader = New String() {"Point", "Position X(mm)", "Position Y(mm)"}
+        Me.UcDispListView1.ColHeaderWidthRatio = "20,40,40"
+        Me.UcDispListView1.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.UcDispListView1.FullRawSelection = True
+        Me.UcDispListView1.HideSelection = False
+        Me.UcDispListView1.LabelEdit = True
+        Me.UcDispListView1.LabelWrap = True
+        Me.UcDispListView1.Location = New System.Drawing.Point(8, 28)
+        Me.UcDispListView1.Name = "UcDispListView1"
+        Me.UcDispListView1.Size = New System.Drawing.Size(295, 152)
+        Me.UcDispListView1.TabIndex = 1
+        Me.UcDispListView1.UseCheckBoxex = False
         '
         'Label6
         '
@@ -781,7 +812,7 @@ Partial Class ucDispRcpIVLSweep
         Me.btnMeasPoint.TabIndex = 12
         Me.btnMeasPoint.Text = "Set Meas. Point"
         Me.btnMeasPoint.UseVisualStyleBackColor = False
-        Me.btnMeasPoint.Visible = False
+        Me.btnMeasPoint.Visible = False '220829 Update by JKY : Original
         '
         'btnEdit
         '
@@ -918,6 +949,7 @@ Partial Class ucDispRcpIVLSweep
         Me.SplitContainer2.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
+        Me.GroupBox2.ResumeLayout(False)
         Me.tbDetail.ResumeLayout(False)
         Me.gbDetailSettings.ResumeLayout(False)
         Me.gbDetailSettings.PerformLayout()
@@ -1002,5 +1034,7 @@ Partial Class ucDispRcpIVLSweep
     Friend WithEvents cbFastBiasMode As System.Windows.Forms.ComboBox
     Friend WithEvents chkBiasInvert As System.Windows.Forms.CheckBox
     Friend WithEvents ChkAnd As System.Windows.Forms.CheckBox
+    Protected WithEvents GroupBox2 As System.Windows.Forms.GroupBox
+    Friend WithEvents UcDispListView1 As M7000.ucDispListView
 
 End Class

@@ -413,7 +413,7 @@ Public Class ucDispRcpIVLSweep
 
                 IsVisibleOnlyCell = True
                 btnEdit.Enabled = False
-                btnMeasPoint.Enabled = False
+                btnMeasPoint.Enabled = True
             Case ucSequenceBuilder.eRcpMode.ePanel_IVL
                 btnMeasPoint.Enabled = True
                 For i As Integer = 0 To g_ConfigInfos.nDevice.Length - 1
@@ -586,6 +586,14 @@ Public Class ucDispRcpIVLSweep
                     ucSweepSetting.ucRGBSweepRegion.Setting = m_IVLSweepInfos.sCommon.sMeasureRGBSweepParameter
             End Select
 
+            '220829 Update by JKY
+            'UcDispListView1.ClearAllData()
+            'For i As Integer = 0 To m_IVLSweepInfos.sCommon.sMeasPoints.MeasPoint.Length - 1
+            '    Dim sData(1) As String
+            '    sData(0) = Format(m_IVLSweepInfos.sCommon.sMeasPoints.MeasPoint(i).X, "0.0")
+            '    sData(1) = Format(m_IVLSweepInfos.sCommon.sMeasPoints.MeasPoint(i).Y, "0.0")
+            '    UcDispListView1.AddRowData_AutoCountListNo(sData)
+            'Next
 
             'Add 20150319
             ucColorSetting.Setting = .nColorList
@@ -654,6 +662,16 @@ Public Class ucDispRcpIVLSweep
 
         If dlg.ShowDialog = DialogResult.OK Then
             m_IVLSweepInfos.sCommon.sMeasPoints = dlg.Settings
+
+            '220829 Update by JKY
+            'UcDispListView1.ClearAllData()
+            'For i As Integer = 0 To m_IVLSweepInfos.sCommon.sMeasPoints.MeasPoint.Length - 1
+            '    Dim sData(1) As String
+            '    sData(0) = Format(m_IVLSweepInfos.sCommon.sMeasPoints.MeasPoint(i).X, "0.0")
+            '    sData(1) = Format(m_IVLSweepInfos.sCommon.sMeasPoints.MeasPoint(i).Y, "0.0")
+            '    UcDispListView1.AddRowData_AutoCountListNo(sData)
+            'Next
+
         End If
     End Sub
 #End Region

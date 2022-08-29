@@ -195,7 +195,7 @@ Partial Class ucDispRcpLifetime
         Me.Label2.AutoSize = True
         Me.Label2.Location = New System.Drawing.Point(177, 24)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(205, 12)
+        Me.Label2.Size = New System.Drawing.Size(256, 20)
         Me.Label2.TabIndex = 36
         Me.Label2.Text = "[Range : 380 ~ 780 , Interval : 2nm)"
         '
@@ -206,7 +206,7 @@ Partial Class ucDispRcpLifetime
         Me.cboIntegralUserCount.Items.AddRange(New Object() {"1", "2", "3", "4"})
         Me.cboIntegralUserCount.Location = New System.Drawing.Point(102, 21)
         Me.cboIntegralUserCount.Name = "cboIntegralUserCount"
-        Me.cboIntegralUserCount.Size = New System.Drawing.Size(59, 20)
+        Me.cboIntegralUserCount.Size = New System.Drawing.Size(59, 28)
         Me.cboIntegralUserCount.TabIndex = 35
         '
         'Label1
@@ -214,7 +214,7 @@ Partial Class ucDispRcpLifetime
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(26, 26)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(72, 12)
+        Me.Label1.Size = New System.Drawing.Size(93, 20)
         Me.Label1.TabIndex = 34
         Me.Label1.Text = "Use Count :"
         '
@@ -223,7 +223,7 @@ Partial Class ucDispRcpLifetime
         Me.Label97.AutoSize = True
         Me.Label97.Location = New System.Drawing.Point(464, 103)
         Me.Label97.Name = "Label97"
-        Me.Label97.Size = New System.Drawing.Size(23, 12)
+        Me.Label97.Size = New System.Drawing.Size(31, 20)
         Me.Label97.TabIndex = 33
         Me.Label97.Text = "nm"
         '
@@ -232,7 +232,7 @@ Partial Class ucDispRcpLifetime
         Me.Label91.AutoSize = True
         Me.Label91.Location = New System.Drawing.Point(155, 54)
         Me.Label91.Name = "Label91"
-        Me.Label91.Size = New System.Drawing.Size(63, 12)
+        Me.Label91.Size = New System.Drawing.Size(78, 20)
         Me.Label91.TabIndex = 13
         Me.Label91.Text = "[Interval2]"
         '
@@ -241,7 +241,7 @@ Partial Class ucDispRcpLifetime
         Me.Label83.AutoSize = True
         Me.Label83.Location = New System.Drawing.Point(211, 104)
         Me.Label83.Name = "Label83"
-        Me.Label83.Size = New System.Drawing.Size(23, 12)
+        Me.Label83.Size = New System.Drawing.Size(31, 20)
         Me.Label83.TabIndex = 19
         Me.Label83.Text = "nm"
         '
@@ -249,7 +249,7 @@ Partial Class ucDispRcpLifetime
         '
         Me.txtWLInterval4Stop.Location = New System.Drawing.Point(417, 97)
         Me.txtWLInterval4Stop.Name = "txtWLInterval4Stop"
-        Me.txtWLInterval4Stop.Size = New System.Drawing.Size(44, 21)
+        Me.txtWLInterval4Stop.Size = New System.Drawing.Size(44, 26)
         Me.txtWLInterval4Stop.TabIndex = 32
         '
         'Label82
@@ -257,7 +257,7 @@ Partial Class ucDispRcpLifetime
         Me.Label82.AutoSize = True
         Me.Label82.Location = New System.Drawing.Point(29, 54)
         Me.Label82.Name = "Label82"
-        Me.Label82.Size = New System.Drawing.Size(63, 12)
+        Me.Label82.Size = New System.Drawing.Size(78, 20)
         Me.Label82.TabIndex = 0
         Me.Label82.Text = "[Interval1]"
         '
@@ -265,7 +265,7 @@ Partial Class ucDispRcpLifetime
         '
         Me.txtWLInterval2Start.Location = New System.Drawing.Point(164, 73)
         Me.txtWLInterval2Start.Name = "txtWLInterval2Start"
-        Me.txtWLInterval2Start.Size = New System.Drawing.Size(44, 21)
+        Me.txtWLInterval2Start.Size = New System.Drawing.Size(44, 26)
         Me.txtWLInterval2Start.TabIndex = 14
         '
         'Label98
@@ -273,7 +273,7 @@ Partial Class ucDispRcpLifetime
         Me.Label98.AutoSize = True
         Me.Label98.Location = New System.Drawing.Point(384, 102)
         Me.Label98.Name = "Label98"
-        Me.Label98.Size = New System.Drawing.Size(30, 12)
+        Me.Label98.Size = New System.Drawing.Size(43, 20)
         Me.Label98.TabIndex = 31
         Me.Label98.Text = "Stop"
         '
@@ -281,14 +281,14 @@ Partial Class ucDispRcpLifetime
         '
         Me.txtWLInterval1Start.Location = New System.Drawing.Point(38, 73)
         Me.txtWLInterval1Start.Name = "txtWLInterval1Start"
-        Me.txtWLInterval1Start.Size = New System.Drawing.Size(44, 21)
+        Me.txtWLInterval1Start.Size = New System.Drawing.Size(44, 26)
         Me.txtWLInterval1Start.TabIndex = 1
         '
         'txtWLInterval2Stop
         '
         Me.txtWLInterval2Stop.Location = New System.Drawing.Point(164, 97)
         Me.txtWLInterval2Stop.Name = "txtWLInterval2Stop"
-        Me.txtWLInterval2Stop.Size = New System.Drawing.Size(44, 21)
+        Me.txtWLInterval2Stop.Size = New System.Drawing.Size(44, 26)
         Me.txtWLInterval2Stop.TabIndex = 18
         '
         'Label117
@@ -296,7 +296,7 @@ Partial Class ucDispRcpLifetime
         Me.Label117.AutoSize = True
         Me.Label117.Location = New System.Drawing.Point(384, 78)
         Me.Label117.Name = "Label117"
-        Me.Label117.Size = New System.Drawing.Size(30, 12)
+        Me.Label117.Size = New System.Drawing.Size(44, 20)
         Me.Label117.TabIndex = 30
         Me.Label117.Text = "Start"
         '
@@ -305,7 +305,7 @@ Partial Class ucDispRcpLifetime
         Me.Label85.AutoSize = True
         Me.Label85.Location = New System.Drawing.Point(85, 79)
         Me.Label85.Name = "Label85"
-        Me.Label85.Size = New System.Drawing.Size(23, 12)
+        Me.Label85.Size = New System.Drawing.Size(31, 20)
         Me.Label85.TabIndex = 6
         Me.Label85.Text = "nm"
         '
@@ -314,7 +314,7 @@ Partial Class ucDispRcpLifetime
         Me.Label87.AutoSize = True
         Me.Label87.Location = New System.Drawing.Point(211, 80)
         Me.Label87.Name = "Label87"
-        Me.Label87.Size = New System.Drawing.Size(23, 12)
+        Me.Label87.Size = New System.Drawing.Size(31, 20)
         Me.Label87.TabIndex = 15
         Me.Label87.Text = "nm"
         '
@@ -323,7 +323,7 @@ Partial Class ucDispRcpLifetime
         Me.Label118.AutoSize = True
         Me.Label118.Location = New System.Drawing.Point(464, 80)
         Me.Label118.Name = "Label118"
-        Me.Label118.Size = New System.Drawing.Size(23, 12)
+        Me.Label118.Size = New System.Drawing.Size(31, 20)
         Me.Label118.TabIndex = 29
         Me.Label118.Text = "nm"
         '
@@ -332,7 +332,7 @@ Partial Class ucDispRcpLifetime
         Me.Label88.AutoSize = True
         Me.Label88.Location = New System.Drawing.Point(6, 78)
         Me.Label88.Name = "Label88"
-        Me.Label88.Size = New System.Drawing.Size(30, 12)
+        Me.Label88.Size = New System.Drawing.Size(44, 20)
         Me.Label88.TabIndex = 9
         Me.Label88.Text = "Start"
         '
@@ -341,7 +341,7 @@ Partial Class ucDispRcpLifetime
         Me.Label84.AutoSize = True
         Me.Label84.Location = New System.Drawing.Point(132, 102)
         Me.Label84.Name = "Label84"
-        Me.Label84.Size = New System.Drawing.Size(30, 12)
+        Me.Label84.Size = New System.Drawing.Size(43, 20)
         Me.Label84.TabIndex = 17
         Me.Label84.Text = "Stop"
         '
@@ -349,7 +349,7 @@ Partial Class ucDispRcpLifetime
         '
         Me.txtWLInterval4Start.Location = New System.Drawing.Point(417, 73)
         Me.txtWLInterval4Start.Name = "txtWLInterval4Start"
-        Me.txtWLInterval4Start.Size = New System.Drawing.Size(44, 21)
+        Me.txtWLInterval4Start.Size = New System.Drawing.Size(44, 26)
         Me.txtWLInterval4Start.TabIndex = 28
         '
         'Label89
@@ -357,7 +357,7 @@ Partial Class ucDispRcpLifetime
         Me.Label89.AutoSize = True
         Me.Label89.Location = New System.Drawing.Point(6, 102)
         Me.Label89.Name = "Label89"
-        Me.Label89.Size = New System.Drawing.Size(30, 12)
+        Me.Label89.Size = New System.Drawing.Size(43, 20)
         Me.Label89.TabIndex = 10
         Me.Label89.Text = "Stop"
         '
@@ -365,7 +365,7 @@ Partial Class ucDispRcpLifetime
         '
         Me.txtWLInterval1Stop.Location = New System.Drawing.Point(38, 97)
         Me.txtWLInterval1Stop.Name = "txtWLInterval1Stop"
-        Me.txtWLInterval1Stop.Size = New System.Drawing.Size(44, 21)
+        Me.txtWLInterval1Stop.Size = New System.Drawing.Size(44, 26)
         Me.txtWLInterval1Stop.TabIndex = 11
         '
         'Label119
@@ -373,7 +373,7 @@ Partial Class ucDispRcpLifetime
         Me.Label119.AutoSize = True
         Me.Label119.Location = New System.Drawing.Point(409, 54)
         Me.Label119.Name = "Label119"
-        Me.Label119.Size = New System.Drawing.Size(63, 12)
+        Me.Label119.Size = New System.Drawing.Size(78, 20)
         Me.Label119.TabIndex = 27
         Me.Label119.Text = "[Interval4]"
         '
@@ -382,7 +382,7 @@ Partial Class ucDispRcpLifetime
         Me.Label92.AutoSize = True
         Me.Label92.Location = New System.Drawing.Point(340, 103)
         Me.Label92.Name = "Label92"
-        Me.Label92.Size = New System.Drawing.Size(23, 12)
+        Me.Label92.Size = New System.Drawing.Size(31, 20)
         Me.Label92.TabIndex = 26
         Me.Label92.Text = "nm"
         '
@@ -391,7 +391,7 @@ Partial Class ucDispRcpLifetime
         Me.Label86.AutoSize = True
         Me.Label86.Location = New System.Drawing.Point(132, 78)
         Me.Label86.Name = "Label86"
-        Me.Label86.Size = New System.Drawing.Size(30, 12)
+        Me.Label86.Size = New System.Drawing.Size(44, 20)
         Me.Label86.TabIndex = 16
         Me.Label86.Text = "Start"
         '
@@ -399,7 +399,7 @@ Partial Class ucDispRcpLifetime
         '
         Me.txtWLInterval3Stop.Location = New System.Drawing.Point(293, 97)
         Me.txtWLInterval3Stop.Name = "txtWLInterval3Stop"
-        Me.txtWLInterval3Stop.Size = New System.Drawing.Size(44, 21)
+        Me.txtWLInterval3Stop.Size = New System.Drawing.Size(44, 26)
         Me.txtWLInterval3Stop.TabIndex = 25
         '
         'Label90
@@ -407,7 +407,7 @@ Partial Class ucDispRcpLifetime
         Me.Label90.AutoSize = True
         Me.Label90.Location = New System.Drawing.Point(85, 103)
         Me.Label90.Name = "Label90"
-        Me.Label90.Size = New System.Drawing.Size(23, 12)
+        Me.Label90.Size = New System.Drawing.Size(31, 20)
         Me.Label90.TabIndex = 12
         Me.Label90.Text = "nm"
         '
@@ -416,7 +416,7 @@ Partial Class ucDispRcpLifetime
         Me.Label96.AutoSize = True
         Me.Label96.Location = New System.Drawing.Point(284, 54)
         Me.Label96.Name = "Label96"
-        Me.Label96.Size = New System.Drawing.Size(63, 12)
+        Me.Label96.Size = New System.Drawing.Size(78, 20)
         Me.Label96.TabIndex = 20
         Me.Label96.Text = "[Interval3]"
         '
@@ -425,7 +425,7 @@ Partial Class ucDispRcpLifetime
         Me.Label93.AutoSize = True
         Me.Label93.Location = New System.Drawing.Point(261, 102)
         Me.Label93.Name = "Label93"
-        Me.Label93.Size = New System.Drawing.Size(30, 12)
+        Me.Label93.Size = New System.Drawing.Size(43, 20)
         Me.Label93.TabIndex = 24
         Me.Label93.Text = "Stop"
         '
@@ -434,7 +434,7 @@ Partial Class ucDispRcpLifetime
         Me.Label94.AutoSize = True
         Me.Label94.Location = New System.Drawing.Point(261, 78)
         Me.Label94.Name = "Label94"
-        Me.Label94.Size = New System.Drawing.Size(30, 12)
+        Me.Label94.Size = New System.Drawing.Size(44, 20)
         Me.Label94.TabIndex = 23
         Me.Label94.Text = "Start"
         '
@@ -442,7 +442,7 @@ Partial Class ucDispRcpLifetime
         '
         Me.txtWLInterval3Start.Location = New System.Drawing.Point(293, 73)
         Me.txtWLInterval3Start.Name = "txtWLInterval3Start"
-        Me.txtWLInterval3Start.Size = New System.Drawing.Size(44, 21)
+        Me.txtWLInterval3Start.Size = New System.Drawing.Size(44, 26)
         Me.txtWLInterval3Start.TabIndex = 21
         '
         'Label95
@@ -450,7 +450,7 @@ Partial Class ucDispRcpLifetime
         Me.Label95.AutoSize = True
         Me.Label95.Location = New System.Drawing.Point(340, 79)
         Me.Label95.Name = "Label95"
-        Me.Label95.Size = New System.Drawing.Size(23, 12)
+        Me.Label95.Size = New System.Drawing.Size(31, 20)
         Me.Label95.TabIndex = 22
         Me.Label95.Text = "nm"
         '
