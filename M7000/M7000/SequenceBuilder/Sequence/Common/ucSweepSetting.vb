@@ -5,16 +5,16 @@
 
     Public Event ChangedSweepType(ByVal type As eSweepType)
 
-    Public Shared m_sCaptions_SweepType() As String = New String() {"RGB Pattern", "Standard", "User Pattern"} '220826 Update by JKY : RGB Pattern 추가
+    Public Shared m_sCaptions_SweepType() As String = New String() {"Standard", "User Pattern", "RGB Pattern"} '220826 Update by JKY : RGB Pattern 추가
     Public Shared m_sCaptions_Unit() As String = New String() {"V", "mA", "Deg"}
 
     Dim m_SweepType As eSweepType
 
     Public Enum eSweepType
-        '220825 Update by JKY : RGB Pattern 추가
-        _RGBPattern
         _Standard
         _UserPattern
+        '220825 Update by JKY : RGB Pattern 추가
+        _RGBPattern
     End Enum
 
     Public Enum eUnitType
@@ -97,13 +97,6 @@
             '    lblSingleValue.Visible = True
             '    tbSingleValue.Visible = True
             '    lblSingleValueUnit.Visible = True
-            Case eSweepType._RGBPattern
-                ucSweepRegion.Visible = False
-                ucUserPatternList.Visible = False
-                ucRGBSweepRegion.Visible = True
-                lblSingleValue.Visible = False
-                tbSingleValue.Visible = False
-                lblSingleValueUnit.Visible = False
             Case eSweepType._Standard
                 ucSweepRegion.Visible = True
                 ucUserPatternList.Visible = False
@@ -111,6 +104,7 @@
                 lblSingleValue.Visible = False
                 tbSingleValue.Visible = False
                 lblSingleValueUnit.Visible = False
+                ucSweepRegion.BringToFront()
             Case eSweepType._UserPattern
                 ucSweepRegion.Visible = False
                 ucUserPatternList.Visible = True
@@ -118,6 +112,15 @@
                 lblSingleValue.Visible = False
                 tbSingleValue.Visible = False
                 lblSingleValueUnit.Visible = False
+                ucUserPatternList.BringToFront()
+            Case eSweepType._RGBPattern
+                ucSweepRegion.Visible = False
+                ucUserPatternList.Visible = False
+                ucRGBSweepRegion.Visible = True
+                lblSingleValue.Visible = False
+                tbSingleValue.Visible = False
+                lblSingleValueUnit.Visible = False
+                ucRGBSweepRegion.BringToFront()
             Case Else
 
         End Select

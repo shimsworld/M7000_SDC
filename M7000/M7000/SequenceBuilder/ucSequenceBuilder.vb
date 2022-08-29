@@ -1299,8 +1299,11 @@ Public Class ucSequenceBuilder
             '========================================================
             Select Case seqInfo.sRecipes(idx).nMode
                 Case eRcpMode.eCell_IVL
-                    ModeStr = .sIVLSweepInfo.sCommon.biasMode.ToString & "/" & .sIVLSweepInfo.sCommon.measItem.ToString & "/" & .sIVLSweepInfo.sCommon.dSweepList(0) & "~" & .sIVLSweepInfo.sCommon.dSweepList(.sIVLSweepInfo.sCommon.dSweepList.Length - 1) & _
-                              "/" & "Limit : " & "Current = " & .sIVLSweepInfo.sCommon.dCurrentLimit
+                    Try
+                        ModeStr = .sIVLSweepInfo.sCommon.biasMode.ToString & "/" & .sIVLSweepInfo.sCommon.measItem.ToString & "/" & .sIVLSweepInfo.sCommon.dSweepList(0) & "~" & .sIVLSweepInfo.sCommon.dSweepList(.sIVLSweepInfo.sCommon.dSweepList.Length - 1) &
+                                  "/" & "Limit : " & "Current = " & .sIVLSweepInfo.sCommon.dCurrentLimit
+                    Catch ex As Exception
+                    End Try
 
                     If .sIVLSweepInfo.sCommon.measItem = ucDispRcpIVLSweep.eMeasureItems.eIVL Then
                         ModeStr = ModeStr & "/" & "Limit : " & "Luminance = " & .sIVLSweepInfo.sCommon.dLMeasLimit & "/Luminance Correction = " & .sIVLSweepInfo.sCommon.dLumiCorrection & "%" & "/BiasInvert = " & .sIVLSweepInfo.sCommon.dBiasInvert

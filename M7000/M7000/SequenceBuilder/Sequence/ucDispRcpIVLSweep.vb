@@ -30,9 +30,9 @@ Public Class ucDispRcpIVLSweep
 #Region "Enum"
 
     Public Enum eSweepType
-        eRGBPattern '220826 Update by JKY
         eStandard
         eUserPattern
+        eRGBPattern '220826 Update by JKY
     End Enum
     Public Enum eSweepMethod
         eStair

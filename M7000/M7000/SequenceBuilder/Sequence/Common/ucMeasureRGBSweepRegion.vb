@@ -25,8 +25,7 @@
         Dim nSweepNumber As Integer
         Dim SweepType As ePowerType
         Dim dStart As Double
-        Dim dStopV As Double
-        Dim dStopC As Double
+        Dim dStop As Double
         Dim dStep As Double
         Dim nPoint As Integer
         Dim setPowerValue() As sSetPowerRegion
@@ -88,7 +87,7 @@
     Public Property SweepList As Double()
         Get
             GetValueFromUI(m_SetBias)
-            m_SweepList = MakeSweepList(m_SetBias)
+            m_SweepList = MakeRGBSweepList(m_SetBias)
             Return m_SweepList
         End Get
         Set(ByVal value As Double())
@@ -188,8 +187,8 @@
 
 
     Private Sub SetListVier()
-        ucListMeasSweep.ColHeader = {"No.", "SweepType", "Start", "V", "C", "Step", "Point", "else"}
-        ucListMeasSweep.ColHeaderWidthRatio = "10, 20, 15, 15, 15, 15, 15, 20"
+        ucListMeasSweep.ColHeader = {"No.", "SweepType", "Start", "Stop", "Step", "Point", "else"}
+        ucListMeasSweep.ColHeaderWidthRatio = "10, 20, 15, 15, 15, 15, 20"
     End Sub
 
 #Region "Event"
@@ -211,11 +210,10 @@
 
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
         Dim SweepDirection As eSweepDirection
-        Dim sData(7) As String
-        Dim pData() As String
+        Dim sData(6) As String
 
-        sData(6) = tbPoint.Text
-        If sData(6) = "NaN" Then
+        sData(5) = tbPoint.Text
+        If sData(5) = "NaN" Then
             MsgBox("Sweep Point set Error")
             Exit Sub
         End If
@@ -224,16 +222,17 @@
             If cbUseList(i).Checked Then
                 If rbSweepList(i).Checked Then
                     sData(0) = ucListMeasSweep.GetListItemCount + 1
-                    sData(1) = m_sPowerType(i)
+                    sData(1) = i
                     sData(2) = tbStart.Text
-                    sData(3) = tbV1.Text
-                    sData(4) = tbC1.Text
-                    sData(5) = tbStep.Text
-                    sData(6) = tbPoint.Text
-                    sData(7) += $"{m_sPowerType(i)},"
+                    sData(3) = txtVCList(i, 0).Text
+                    sData(4) = tbStep.Text
+                    sData(5) = tbPoint.Text
+                    sData(6) += $"{i},{txtVCList(i, 0).Text},{txtVCList(i, 1).Text},"
                 Else
-                    sData(7) += $"{m_sPowerType(i)},"
+                    sData(6) += $"{i},{txtVCList(i, 0).Text},{txtVCList(i, 1).Text},"
                 End If
+            Else
+                sData(6) += $"{i},{0},{0},"
             End If
         Next
 
@@ -265,36 +264,56 @@
 
     Private Function GetValueFromUI(ByRef biasInfo() As sSetSweepRegion) As Boolean
         Dim nSweepListNumber() As Integer
+        Dim nSweepType() As Integer
         Dim dStart() As Double = Nothing
         Dim dStop() As Double = Nothing
         Dim dStep() As Double = Nothing
         Dim nPoint() As Double = Nothing
+        Dim sVCData() As String = Nothing
         Dim nCnt As Integer
         nCnt = ucListMeasSweep.GetListItemCount
 
         If ucListMeasSweep.GetListItemCount <= 0 Then Return False
 
         ReDim nSweepListNumber(nCnt - 1)
+        ReDim nSweepType(nCnt - 1)
         ReDim dStart(nCnt - 1)
         ReDim dStop(nCnt - 1)
         ReDim dStep(nCnt - 1)
         ReDim nPoint(nCnt - 1)
+        ReDim sVCData(nCnt - 1)
         ReDim biasInfo(nCnt - 1)
 
         ucListMeasSweep.GetColumnData(0, nSweepListNumber)
-
-        ucListMeasSweep.GetColumnData(1, dStart)
-        ucListMeasSweep.GetColumnData(2, dStop)
-        ucListMeasSweep.GetColumnData(3, dStep)
+        ucListMeasSweep.GetColumnData(1, nSweepType)
+        ucListMeasSweep.GetColumnData(2, dStart)
+        ucListMeasSweep.GetColumnData(3, dStop)
+        ucListMeasSweep.GetColumnData(4, dStep)
+        ucListMeasSweep.GetColumnData(5, nPoint)
+        ucListMeasSweep.GetColumnData(6, sVCData)
 
         For i As Integer = 0 To ucListMeasSweep.GetListItemCount - 1
             biasInfo(i).nSweepNumber = nSweepListNumber(i)
+            biasInfo(i).SweepType = nSweepType(i)
+            biasInfo(i).dStart = dStart(i)
+            biasInfo(i).dStop = dStop(i)
+            biasInfo(i).dStep = dStep(i)
+            biasInfo(i).nPoint = nPoint(i)
+
+            Dim datas() As String = sVCData(i).Split(",")
+            ReDim biasInfo(i).setPowerValue(4)
+            For j = 0 To 4
+                biasInfo(i).setPowerValue(j).PowerType = CInt(datas(j * 3 + 0))
+                biasInfo(i).setPowerValue(j).dStopV = CDbl(datas(j * 3 + 1))
+                biasInfo(i).setPowerValue(j).dStopC = CDbl(datas(j * 3 + 2))
+                biasInfo(i).setPowerValue(j).bIsUse = If(CDbl(datas(j * 3 + 1)) = 0, False, True)
+            Next
         Next
 
         Return True
     End Function
 
-    Public Shared Function MakeSweepList(ByVal sweepRegions() As sSetSweepRegion) As Double()
+    Public Shared Function MakeRGBSweepList(ByVal sweepRegions() As sSetSweepRegion) As Double()
         Dim dStartValue, dStopValue, dStepValue As Double
         Dim nPoint, nTotPoint As Integer
 

@@ -2227,7 +2227,11 @@ Public Class CSeqProcessor
         nChOfTc = frmSettingWind.GetAllocationValue(nCh, frmSettingWind.eChAllocationItem.eChOfTC)
 
         '*****1. GetSweepList *****
-        procParam.recipe.sIVLSweepInfo.sCommon.dSweepList = MakeSweepList(procParam.recipe.sIVLSweepInfo.sCommon)
+        If procParam.recipe.sIVLSweepInfo.sCommon.sweepType = ucDispRcpIVLSweep.eSweepType.eRGBPattern Then
+            procParam.recipe.sIVLSweepInfo.sCommon.dSweepList = MakeRGBSweepList(procParam.recipe.sIVLSweepInfo.sCommon)
+        Else
+            procParam.recipe.sIVLSweepInfo.sCommon.dSweepList = MakeSweepList(procParam.recipe.sIVLSweepInfo.sCommon)
+        End If
 
         IVLIndicatorDlg.StartPosition = FormStartPosition.CenterParent
         IVLIndicatorDlg.ShowFrame()
@@ -3399,7 +3403,7 @@ Public Class CSeqProcessor
             If .opticalData.sSpectrometerData.D5.i3nm Is Nothing = False Then
                 nWavelengthInterval = .opticalData.sSpectrometerData.D5.i3nm(1) - .opticalData.sSpectrometerData.D5.i3nm(0)
 
-                .opticalData.dQE = FormatNumber(cDataQE.QuantumEfficiency(dLumi, .dCurrentDensity, procParam.sSampleInfos.SampleSize.Height * procParam.sSampleInfos.SampleSize.Width, _
+                .opticalData.dQE = FormatNumber(cDataQE.QuantumEfficiency(dLumi, .dCurrentDensity, procParam.sSampleInfos.SampleSize.Height * procParam.sSampleInfos.SampleSize.Width,
                                                                          .opticalData.sSpectrometerData.D5.s4Intensity, nWavelengthInterval), 3)
                 For idx As Integer = 0 To .opticalData.sSpectrometerData.D5.s4Intensity.Length - 1
                     dSum += .opticalData.sSpectrometerData.D5.s4Intensity(idx)
@@ -3981,6 +3985,90 @@ Public Class CSeqProcessor
         End Try
     End Function
 
+    '220826 Update by JKY : RGB Sweep List
+    Public Shared Function MakeRGBSweepList(ByVal sIVLCominfos As ucDispRcpIVLSweep.sIVLSweepCommonInfos) As Double()
+        Try
+            Dim dStartValue, dStopValue, dStepValue As Double
+            Dim nPoint, nTotPoint As Integer
+
+            Dim dArrSweepList() As Double = Nothing
+            Dim arrSweepList() As Double
+
+            Dim i, nCnt As Integer
+            Dim ChkCC As Boolean = False
+
+            If sIVLCominfos.biasMode = ucDispRcpIVLSweep.eBiasMode.eCC Then
+                ChkCC = True
+            End If
+            For nCnt = 0 To sIVLCominfos.sMeasureRGBSweepParameter.Length - 1
+
+                dStartValue = sIVLCominfos.sMeasureRGBSweepParameter(nCnt).dStart 'SweepParameter(nCnt).dStart
+                dStopValue = sIVLCominfos.sMeasureRGBSweepParameter(nCnt).dStop
+                dStepValue = sIVLCominfos.sMeasureRGBSweepParameter(nCnt).dStep
+                nPoint = sIVLCominfos.sMeasureRGBSweepParameter(nCnt).nPoint
+
+                If dStartValue < dStopValue Then   '정방향 Sweep -Bias --> +Bias
+
+                Else   '역방향 Sweep +Bias --> -Bias
+                    dStepValue = -Math.Abs(dStepValue)
+                End If
+
+                ReDim Preserve dArrSweepList(nPoint + nTotPoint - 1)
+                If ChkCC = True Then
+                    dArrSweepList(0 + nTotPoint) = dStartValue / 1000
+                Else
+                    dArrSweepList(0 + nTotPoint) = dStartValue
+                End If
+
+                If nPoint = 1 Then
+
+                    For i = 1 To nPoint - 1
+                        If ChkCC = True Then
+                            dArrSweepList(i + nTotPoint) = CDbl(CStr(dArrSweepList(i + nTotPoint - 1) + dStepValue / 1000))
+                        ElseIf ChkCC = False Then
+                            dArrSweepList(i + nTotPoint) = CDbl(CStr(dArrSweepList(i + nTotPoint - 1) + dStepValue))
+                        End If
+                    Next
+
+                Else
+
+                    For i = 1 To nPoint - 1
+                        If ChkCC = True Then
+                            dArrSweepList(i + nTotPoint) = CDbl(CStr(dArrSweepList(i + nTotPoint - 1) + dStepValue / 1000))
+                        ElseIf ChkCC = False Then
+                            dArrSweepList(i + nTotPoint) = CDbl(CStr(dArrSweepList(i + nTotPoint - 1) + dStepValue))
+                        End If
+
+                    Next
+
+                End If
+
+                nTotPoint = nTotPoint + nPoint
+
+            Next
+
+            With sIVLCominfos
+
+                If .sweepMode = ucDispRcpIVLSweep.eSweepMode.eCycle Then
+                    Dim dArrBuf(dArrSweepList.Length - 1) As Double
+
+                    ReDim Preserve dArrSweepList(dArrSweepList.Length + dArrBuf.Length - 1)
+
+                    For j As Integer = dArrBuf.Length To dArrSweepList.Length - 1
+                        dArrSweepList(i) = dArrSweepList(dArrSweepList.Length - i - 1)
+                    Next
+                End If
+            End With
+
+            arrSweepList = dArrSweepList.Clone
+
+            Return arrSweepList
+        Catch ex As Exception
+            Dim Rslt() As Double = Nothing
+            Return Rslt
+        End Try
+    End Function
+
     Private Function DataProcessToResultData(ByVal procParam As sProcessParams, ByVal measData As CDevSpectrometerCommonNode.tData, Optional ByVal measCnt As Integer = Nothing, Optional ByVal spectrumCnt As Integer = Nothing, Optional ByVal uprime0 As Double = Nothing, Optional ByVal vprime0 As Double = Nothing, Optional ByVal angle As Double = Nothing) As Boolean
         Dim dLumi As Double
         Dim dcdA As Double
@@ -4258,7 +4346,7 @@ Public Class CSeqProcessor
     '220826 Update by JKY : RGB Sweep List
     Public Shared Function MakeRGBSweepList(ByVal SweepRegionSettings() As ucMeasureRGBSweepRegion.sSetSweepRegion) As Double()
         Try
-            Dim dStartValue, dStopValue, dStepValue As Double
+            Dim dStartValue, dStopVValue, dStepValue As Double
             Dim nPoint, nTotPoint As Integer
 
             Dim dArrSweepList() As Double = Nothing
@@ -4269,11 +4357,11 @@ Public Class CSeqProcessor
             For nCnt = 0 To SweepRegionSettings.Length - 1
 
                 dStartValue = SweepRegionSettings(nCnt).dStart 'SweepParameter(nCnt).dStart
-                'dStopValue = SweepRegionSettings(nCnt).dStop
+                dStopVValue = SweepRegionSettings(nCnt).dStop
                 dStepValue = SweepRegionSettings(nCnt).dStep
                 nPoint = SweepRegionSettings(nCnt).nPoint
 
-                If dStartValue < dStopValue Then   '정방향 Sweep -Bias --> +Bias
+                If dStartValue < dStopVValue Then   '정방향 Sweep -Bias --> +Bias
 
                 Else   '역방향 Sweep +Bias --> -Bias
                     dStepValue = -Math.Abs(dStepValue)
@@ -4283,7 +4371,6 @@ Public Class CSeqProcessor
                 ReDim Preserve dArrSweepList(nPoint + nTotPoint - 1)
 
                 dArrSweepList(0 + nTotPoint) = dStartValue
-
 
                 If nPoint = 1 Then
                     For i = 1 To nPoint - 1

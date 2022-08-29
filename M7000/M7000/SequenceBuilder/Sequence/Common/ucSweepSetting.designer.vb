@@ -23,7 +23,7 @@ Partial Class ucSweepSetting
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.gbMain = New System.Windows.Forms.GroupBox()
-        Me.ucRGBSweepRegion = New ucMeasureRGBSweepRegion()
+        Me.ucRGBSweepRegion = New M7000.ucMeasureRGBSweepRegion()
         Me.cbSelSweepType = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ucSweepRegion = New M7000.ucMeasureSweepRegion()
@@ -56,7 +56,7 @@ Partial Class ucSweepSetting
         Me.ucRGBSweepRegion.AutoScroll = True
         Me.ucRGBSweepRegion.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ucRGBSweepRegion.Location = New System.Drawing.Point(6, 47)
-        Me.ucRGBSweepRegion.MaximumSize = New System.Drawing.Size(300, 300)
+        Me.ucRGBSweepRegion.MaximumSize = New System.Drawing.Size(289, 300)
         Me.ucRGBSweepRegion.MinimumSize = New System.Drawing.Size(261, 237)
         Me.ucRGBSweepRegion.Name = "ucRGBSweepRegion"
         Me.ucRGBSweepRegion.Setting = Nothing

@@ -455,8 +455,9 @@
                 m_LifetimeInfos.sViewingAngleInfos.dSweepList = CSeqProcessor.MakeSweepList(m_LifetimeInfos.sViewingAngleInfos.sMeasureSweepParameter)
             Case ucDispRcpIVLSweep.eSweepType.eUserPattern
                 m_LifetimeInfos.sViewingAngleInfos.dSweepList = ucDispViewingAngle.ucUserPatternList.Setting
-            Case ucDispRcpIVLSweep.eSweepType.eRGBPattern '220826 Update by JKY
-                'NEED CHECK
+            Case ucDispRcpIVLSweep.eSweepType.eRGBPattern '220826 Update by JKY => NEED CHECK
+                m_LifetimeInfos.sViewingAngleInfos.sMeasureRGBSweepParameter = ucDispViewingAngle.ucRGBSweepRegion.Setting
+                m_LifetimeInfos.sViewingAngleInfos.dSweepList = CSeqProcessor.MakeRGBSweepList(m_LifetimeInfos.sViewingAngleInfos.sMeasureRGBSweepParameter)
         End Select
 
     End Sub
