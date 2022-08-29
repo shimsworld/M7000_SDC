@@ -1016,21 +1016,11 @@ Public Class CSequenceManager
                                 rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Step, n, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).dStep))
                                 rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Point, n, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).nPoint))
                                 rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Type, n, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).SweepType))
-                                rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_Type1, n, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).setPowerValue(0).PowerType))
-                                rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_Type2, n, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).setPowerValue(1).PowerType))
-                                rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_Type3, n, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).setPowerValue(2).PowerType))
-                                rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_Type4, n, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).setPowerValue(3).PowerType))
-                                rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_Type5, n, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).setPowerValue(4).PowerType))
-                                rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopV1, n, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).setPowerValue(0).dStopV))
-                                rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopV2, n, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).setPowerValue(1).dStopV))
-                                rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopV3, n, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).setPowerValue(2).dStopV))
-                                rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopV4, n, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).setPowerValue(3).dStopV))
-                                rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopV5, n, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).setPowerValue(4).dStopV))
-                                rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopC1, n, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).setPowerValue(0).dStopC))
-                                rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopC2, n, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).setPowerValue(1).dStopC))
-                                rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopC3, n, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).setPowerValue(2).dStopC))
-                                rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopC4, n, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).setPowerValue(3).dStopC))
-                                rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopC5, n, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).setPowerValue(4).dStopC))
+                                For m As Integer = 0 To 4
+                                    rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_Type, n, m, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).setPowerValue(m).PowerType))
+                                    rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopV, n, m, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).setPowerValue(m).dStopV))
+                                    rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopC, n, m, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).setPowerValue(m).dStopC))
+                                Next
                             Next
                         End If
 
@@ -1186,21 +1176,11 @@ Public Class CSequenceManager
                                 rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Step, n, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).dStep))
                                 rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Point, n, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).nPoint))
                                 rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Type, n, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).SweepType))
-                                rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_Type1, n, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).setPowerValue(0).PowerType))
-                                rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_Type2, n, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).setPowerValue(1).PowerType))
-                                rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_Type3, n, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).setPowerValue(2).PowerType))
-                                rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_Type4, n, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).setPowerValue(3).PowerType))
-                                rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_Type5, n, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).setPowerValue(4).PowerType))
-                                rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopV1, n, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).setPowerValue(0).dStopV))
-                                rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopV2, n, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).setPowerValue(1).dStopV))
-                                rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopV3, n, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).setPowerValue(2).dStopV))
-                                rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopV4, n, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).setPowerValue(3).dStopV))
-                                rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopV5, n, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).setPowerValue(4).dStopV))
-                                rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopC1, n, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).setPowerValue(0).dStopC))
-                                rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopC2, n, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).setPowerValue(1).dStopC))
-                                rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopC3, n, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).setPowerValue(2).dStopC))
-                                rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopC4, n, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).setPowerValue(3).dStopC))
-                                rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopC5, n, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).setPowerValue(4).dStopC))
+                                For m As Integer = 0 To 4
+                                    rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_Type, n, m, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).setPowerValue(m).PowerType))
+                                    rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopV, n, m, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).setPowerValue(m).dStopV))
+                                    rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopC, n, m, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).setPowerValue(m).dStopC))
+                                Next
                             Next
                         End If
 
@@ -2192,21 +2172,11 @@ Public Class CSequenceManager
                                 standardSweepSettings(n).dStep = CDbl(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Step, n))
                                 standardSweepSettings(n).nPoint = CInt(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Point, n))
                                 standardSweepSettings(n).SweepType = CInt(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Type, n))
-                                standardSweepSettings(n).setPowerValue(0).PowerType = CInt(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_Type1, n))
-                                standardSweepSettings(n).setPowerValue(0).dStopV = CDbl(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopV1, n))
-                                standardSweepSettings(n).setPowerValue(0).dStopC = CDbl(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopC1, n))
-                                standardSweepSettings(n).setPowerValue(1).PowerType = CInt(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_Type2, n))
-                                standardSweepSettings(n).setPowerValue(1).dStopV = CDbl(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopV2, n))
-                                standardSweepSettings(n).setPowerValue(1).dStopC = CDbl(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopC2, n))
-                                standardSweepSettings(n).setPowerValue(2).PowerType = CInt(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_Type3, n))
-                                standardSweepSettings(n).setPowerValue(2).dStopV = CDbl(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopV3, n))
-                                standardSweepSettings(n).setPowerValue(2).dStopC = CDbl(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopC3, n))
-                                standardSweepSettings(n).setPowerValue(3).PowerType = CInt(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_Type4, n))
-                                standardSweepSettings(n).setPowerValue(3).dStopV = CDbl(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopV4, n))
-                                standardSweepSettings(n).setPowerValue(3).dStopC = CDbl(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopC4, n))
-                                standardSweepSettings(n).setPowerValue(4).PowerType = CInt(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_Type5, n))
-                                standardSweepSettings(n).setPowerValue(4).dStopV = CDbl(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopV5, n))
-                                standardSweepSettings(n).setPowerValue(4).dStopC = CDbl(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopC5, n))
+                                For m As Integer = 0 To 4
+                                    standardSweepSettings(n).setPowerValue(m).PowerType = CInt(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_Type, n, m))
+                                    standardSweepSettings(n).setPowerValue(m).dStopV = CDbl(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopV, n, m))
+                                    standardSweepSettings(n).setPowerValue(m).dStopC = CDbl(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopC, n, m))
+                                Next
                             Next
                             .sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter = standardSweepSettings.Clone
                         Else
@@ -2516,21 +2486,11 @@ Public Class CSequenceManager
                                 standardSweepSettings(n).dStep = CDbl(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Step, n))
                                 standardSweepSettings(n).nPoint = CInt(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Point, n))
                                 standardSweepSettings(n).SweepType = CInt(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Type, n))
-                                standardSweepSettings(n).setPowerValue(0).PowerType = CInt(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_Type1, n))
-                                standardSweepSettings(n).setPowerValue(0).dStopV = CDbl(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopV1, n))
-                                standardSweepSettings(n).setPowerValue(0).dStopC = CDbl(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopC1, n))
-                                standardSweepSettings(n).setPowerValue(1).PowerType = CInt(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_Type2, n))
-                                standardSweepSettings(n).setPowerValue(1).dStopV = CDbl(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopV2, n))
-                                standardSweepSettings(n).setPowerValue(1).dStopC = CDbl(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopC2, n))
-                                standardSweepSettings(n).setPowerValue(2).PowerType = CInt(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_Type3, n))
-                                standardSweepSettings(n).setPowerValue(2).dStopV = CDbl(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopV3, n))
-                                standardSweepSettings(n).setPowerValue(2).dStopC = CDbl(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopC3, n))
-                                standardSweepSettings(n).setPowerValue(3).PowerType = CInt(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_Type4, n))
-                                standardSweepSettings(n).setPowerValue(3).dStopV = CDbl(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopV4, n))
-                                standardSweepSettings(n).setPowerValue(3).dStopC = CDbl(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopC4, n))
-                                standardSweepSettings(n).setPowerValue(4).PowerType = CInt(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_Type5, n))
-                                standardSweepSettings(n).setPowerValue(4).dStopV = CDbl(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopV5, n))
-                                standardSweepSettings(n).setPowerValue(4).dStopC = CDbl(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopC5, n))
+                                For m As Integer = 0 To 4
+                                    standardSweepSettings(n).setPowerValue(m).PowerType = CInt(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_Type, n, m))
+                                    standardSweepSettings(n).setPowerValue(m).dStopV = CDbl(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopV, n, m))
+                                    standardSweepSettings(n).setPowerValue(m).dStopC = CDbl(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopC, n, m))
+                                Next
                             Next
                             .sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter = standardSweepSettings.Clone
                         Else

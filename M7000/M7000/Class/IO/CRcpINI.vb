@@ -42,10 +42,7 @@
 "IVLCommon_Average", "IVLCommon_BiasMode", "IVLCommon_CycleDelay", "IVLCommon_DelayState", "IVLCommon_LMeasLevel", "IVLCommon_MeasItem", "IVLCommon_MeasureDelay", "IVLCommon_OffsetBias",
 "IVLCommon_SweepMode", "IVLCommon_SweepMethod", "IVLCommon_SweepType", "IVLCommon_SweepDelay", "IVLCommon_SweepLine",
 "IVLCommon_Count_SweepSetting", "IVLCommon_SweepSetting_Number", "IVLCommon_SweepSetting_Start", "IVLCommon_SweepSetting_Stop", "IVLCommon_SweepSetting_Step", "IVLCommon_SweepSetting_Point", "IVLCommon_SweepSetting_Level",
-"IVLCommon_SweepSetting_Type", "IVLCommon_PowerSetting_Type1", "IVLCommon_PowerSetting_StopV1", "IVLCommon_PowerSetting_StopC1",
-"IVLCommon_PowerSetting_Type2", "IVLCommon_PowerSetting_StopV2", "IVLCommon_PowerSetting_StopC2", "IVLCommon_PowerSetting_Type3", "IVLCommon_PowerSetting_StopV3",
-"IVLCommon_PowerSetting_StopC3", "IVLCommon_PowerSetting_Type4", "IVLCommon_PowerSetting_StopV4", "IVLCommon_PowerSetting_StopC4",
-"IVLCommon_PowerSetting_Type5", "IVLCommon_PowerSetting_StopV5", "IVLCommon_PowerSetting_StopC5",
+"IVLCommon_SweepSetting_Type", "IVLCommon_PowerSetting_Type", "IVLCommon_PowerSetting_StopV", "IVLCommon_PowerSetting_StopC",
 "IVLCommon_Count_SweepList", "IVLCommon_UserSweepSetting_Bias", "IVLCommon_Count_ColorList", "IVLCommon_SweepColor_Number", "IVLCommon_ViewingAngle", "IVLCommon_FirstSweep",
 "IVLCommon_LMeasLimit", "IVLCommon_CurrentLimit", "IVLCommon_LumiCorrection", "IVLCommon_BiasInvert", "IVLCommon_ValueForFast", "IVLCommon_FastNormalMode", "IVLCommon_FastBiasMode", "IVLCommon_LimitIsAnd",
 "IVLDevice_Keithley_IntegTime", "IVLDevice_Keithley_IntegTimeIndex", "IVLDevice_Keithley_LimitVoltage", "IVLDevice_Keithley_LimitCurrent", "IVLDevice_Keithley_MeasureMode", "IVLDevice_keithley_MeasureDelay", "IVLDevice_Keithley_MeasureDelayAuto",
@@ -214,21 +211,9 @@
         eIVLCommon_SweepSetting_Point
         eIVLCommon_SweepSetting_Level
         eIVLCommon_SweepSetting_Type '220829 Update by JKY
-        eIVLCommon_PowerSetting_Type1
-        eIVLCommon_PowerSetting_StopV1
-        eIVLCommon_PowerSetting_StopC1
-        eIVLCommon_PowerSetting_Type2
-        eIVLCommon_PowerSetting_StopV2
-        eIVLCommon_PowerSetting_StopC2
-        eIVLCommon_PowerSetting_Type3
-        eIVLCommon_PowerSetting_StopV3
-        eIVLCommon_PowerSetting_StopC3
-        eIVLCommon_PowerSetting_Type4
-        eIVLCommon_PowerSetting_StopV4
-        eIVLCommon_PowerSetting_StopC4
-        eIVLCommon_PowerSetting_Type5
-        eIVLCommon_PowerSetting_StopV5
-        eIVLCommon_PowerSetting_StopC5 ' ===
+        eIVLCommon_PowerSetting_Type
+        eIVLCommon_PowerSetting_StopV
+        eIVLCommon_PowerSetting_StopC ' ===
         eIVLCommon_Count_SweepList
         eIVLCommon_SweepList_Bias
         eIVLCommon_Count_ColorList
@@ -318,6 +303,18 @@
         IniWriteValue(sSection, sKey, value)
     End Sub
 
+    Public Sub SaveIniValue(ByVal nSection As eSecID, ByVal rcpSectionIndex As Integer, ByVal nKey As eKeyID, ByVal keyIndex1 As Integer, ByVal keyIndex2 As Integer, ByVal value As String)
+        Dim sSection As String
+        Dim sKey As String
+        If nSection = eSecID.eRecipe Then
+            sSection = strSection(nSection) & Format(rcpSectionIndex + 1, "00")
+        Else
+            sSection = strSection(nSection)
+        End If
+        sKey = strKey(nKey) & Format(keyIndex1 + 1, "00") & "_" & Format(keyIndex2 + 1, "00")
+        IniWriteValue(sSection, sKey, value)
+    End Sub
+
     Public Function LoadIniValue(ByVal nSection As eSecID, ByVal rcpSectionIndex As Integer, ByVal nkey As eKeyID) As String
         Dim sSection As String
         If nSection = eSecID.eRecipe Then
@@ -337,6 +334,18 @@
             sSection = strSection(nSection)
         End If
         sKey = strKey(nkey) & Format(keyIndex + 1, "00")
+        Return IniReadValue(sSection, sKey)
+    End Function
+
+    Public Function LoadIniValue(ByVal nSection As eSecID, ByVal rcpSectionIndex As Integer, ByVal nkey As eKeyID, ByVal keyIndex1 As Integer, ByVal keyIndex2 As Integer) As String
+        Dim sSection As String
+        Dim sKey As String
+        If nSection = eSecID.eRecipe Then
+            sSection = strSection(nSection) & Format(rcpSectionIndex + 1, "00")
+        Else
+            sSection = strSection(nSection)
+        End If
+        sKey = strKey(nkey) & Format(keyIndex1 + 1, "00") & "_" & Format(keyIndex2 + 1, "00")
         Return IniReadValue(sSection, sKey)
     End Function
 
