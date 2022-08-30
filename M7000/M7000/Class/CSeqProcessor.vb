@@ -2316,7 +2316,8 @@ Public Class CSeqProcessor
                 ElseIf nSpeedMode = 1 Then
                     nSpeedMode = g_SystemOptions.sOptionData.IVLSpectrometer.nExposureTime
                 End If
-
+            ElseIf fMain.cSpectormeter(0).mySpectrometer.Model = CDevSpectrometerCommonNode.eModel.SPECTROMETER_SR3AR Then
+                '220830 Update by JKY : NEED CHECK
             End If
 
             If fMain.cSpectormeter(0).mySpectrometer.SetMeasSpeed(nSpeedMode) = False Then
@@ -2371,7 +2372,7 @@ Public Class CSeqProcessor
         ' ReDim fMain.g_MeasuredDatas(procParam.index).sCellIVLParams.sSpectrometer(measCnt)
         ' ReDim spectrumMeasBiasList(spectrumCnt)
 
-        Select Case procParam.recipe.sIVLSweepInfo.sCommon.nColorList(0)
+        Select Case procParam.recipe.sIVLSweepInfo.sCommon.nColorList(0) 'NEED CHECK
             Case ucMeasureColorList.eColor._Red
                 nDevSwitch = frmSettingWind.GetAllocationValue(procParam.index, frmSettingWind.eChAllocationItem.eDevNoOfSwitch)
                 nChOfSwitch = frmSettingWind.GetAllocationValue(procParam.index, frmSettingWind.eChAllocationItem.eChOfSwitch)

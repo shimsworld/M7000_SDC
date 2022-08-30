@@ -49,23 +49,6 @@ Partial Class ucSweepSetting
         Me.gbMain.TabStop = False
         Me.gbMain.Text = "Sweep Settings"
         '
-        'ucRGBSweepRegion
-        '
-        Me.ucRGBSweepRegion.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ucRGBSweepRegion.AutoScroll = True
-        Me.ucRGBSweepRegion.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ucRGBSweepRegion.Location = New System.Drawing.Point(6, 47)
-        Me.ucRGBSweepRegion.MaximumSize = New System.Drawing.Size(289, 300)
-        Me.ucRGBSweepRegion.MinimumSize = New System.Drawing.Size(261, 237)
-        Me.ucRGBSweepRegion.Name = "ucRGBSweepRegion"
-        Me.ucRGBSweepRegion.Setting = Nothing
-        Me.ucRGBSweepRegion.Size = New System.Drawing.Size(276, 270)
-        Me.ucRGBSweepRegion.SweepList = Nothing
-        Me.ucRGBSweepRegion.SweepType = M7000.ucMeasureSweepRegion.eSweepType._RGBSweep
-        Me.ucRGBSweepRegion.TabIndex = 3
-        Me.ucRGBSweepRegion.UnitType = M7000.ucSweepSetting.eUnitType._Voltage
-        '
         'cbSelSweepType
         '
         Me.cbSelSweepType.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
@@ -103,6 +86,23 @@ Partial Class ucSweepSetting
         Me.ucSweepRegion.SweepType = M7000.ucMeasureSweepRegion.eSweepType._IVLSweep
         Me.ucSweepRegion.TabIndex = 1
         Me.ucSweepRegion.UnitType = M7000.ucSweepSetting.eUnitType._Voltage
+        '
+        'ucRGBSweepRegion
+        '
+        Me.ucRGBSweepRegion.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ucRGBSweepRegion.AutoScroll = True
+        Me.ucRGBSweepRegion.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ucRGBSweepRegion.Location = New System.Drawing.Point(6, 47)
+        Me.ucRGBSweepRegion.MaximumSize = New System.Drawing.Size(289, 300)
+        Me.ucRGBSweepRegion.MinimumSize = New System.Drawing.Size(224, 257)
+        Me.ucRGBSweepRegion.Name = "ucRGBSweepRegion"
+        Me.ucRGBSweepRegion.Setting = Nothing
+        Me.ucRGBSweepRegion.Size = New System.Drawing.Size(248, 270)
+        Me.ucRGBSweepRegion.SweepList = Nothing
+        Me.ucRGBSweepRegion.SweepType = M7000.ucMeasureSweepRegion.eSweepType._RGBSweep
+        Me.ucRGBSweepRegion.TabIndex = 3
+        Me.ucRGBSweepRegion.UnitType = M7000.ucSweepSetting.eUnitType._Voltage
         '
         'ucUserPatternList
         '

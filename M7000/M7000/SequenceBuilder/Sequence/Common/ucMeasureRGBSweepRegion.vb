@@ -2,11 +2,11 @@
 
 #Region "Define"
     Dim m_SetBias() As sSetSweepRegion
-    Dim m_SweepList() As Double
-    Dim m_sPowerType() As String = New String() {"Vdd", "Vss", "Dr", "Dg", "Db"}
     Dim m_bIsVisibleUnit As Boolean = True
     Dim m_SweepType As eSweepType
     Dim m_UnitType As ucSweepSetting.eUnitType
+    Dim m_SweepList() As Double
+    Dim m_sPowerType() As String = New String() {"Vdd", "Vss", "Dr", "Dg", "Db"}
 
     Public rbSweepList(4) As RadioButton
     Public cbUseList(4) As CheckBox
@@ -126,6 +126,7 @@
 
             If m_UnitType <> value Then
                 m_UnitType = value
+                CheckedChangeUIState()
                 'UpdateUnitType()
             End If
 
@@ -161,7 +162,6 @@
         rbSweep1.Checked = True
         cbUse1.Checked = True
         cbUse2.Checked = True
-        lblSweepPS.TextAlign = ContentAlignment.MiddleRight
 
         '220826 Update by JKY : 사용하는 PS 개수에 따라 Visible Change
         For i = 0 To txtVCList.GetLength(0) - 1
@@ -326,6 +326,9 @@
 
         For nCnt = 0 To sweepRegions.Length - 1
 
+            dStartValue = sweepRegions(nCnt).dStart 'SweepParameter(nCnt).dStart
+            dStopValue = sweepRegions(nCnt).dStop
+            dStepValue = sweepRegions(nCnt).dStep
             nPoint = sweepRegions(nCnt).nPoint
 
             If dStartValue < dStopValue Then   '정방향 Sweep -Bias --> +Bias
@@ -519,14 +522,20 @@ MakeSweep:
         Next
         For i = 0 To txtVCList.GetLength(0) - 1
             If rbSweepList(i).Checked Then
-                lblSweepPS.Text = m_sPowerType(i) & Chr(13) & "Sweep"
-                tbStop.Text = txtVCList(i, 0).Text
+                If UnitType = ucSweepSetting.eUnitType._Voltage Then
+                    lblSweepPS.Text = m_sPowerType(i) & Chr(13) & "V Sweep"
+                    tbStop.Text = txtVCList(i, 0).Text
+                Else
+                    lblSweepPS.Text = m_sPowerType(i) & Chr(13) & "mA Sweep"
+                    tbStop.Text = txtVCList(i, 1).Text
+                End If
             End If
         Next
     End Sub
 
     Private Sub CalSweepPoint()
         Dim dStart As Double
+        Dim dStop As Double
         Dim dStopV() As Double
         Dim dStopC() As Double
         Dim dStep As Double
@@ -543,14 +552,27 @@ MakeSweep:
             Exit Sub
         End Try
 
+        Try
+            dStop = CDbl(tbStop.Text)
+        Catch ex As Exception
+            dStop = 0
+            Exit Sub
+        End Try
+
         For i = 0 To txtVCList.GetLength(0) - 1
             Try
                 dStopV(i) = CDbl(txtVCList(i, 0).Text)
+                If rbSweepList(i).Checked Then
+                    tbStop.Text = txtVCList(i, 0).Text
+                End If
             Catch ex As Exception
                 dStopV(i) = 0
             End Try
             Try
                 dStopC(i) = CDbl(txtVCList(i, 1).Text)
+                If rbSweepList(i).Checked Then
+                    tbStop.Text = txtVCList(i, 1).Text
+                End If
             Catch ex As Exception
                 dStopC(i) = 0
             End Try
@@ -563,20 +585,11 @@ MakeSweep:
             Exit Sub
         End Try
 
-        For i = 0 To txtVCList.GetLength(0) - 1
-            Try
-                If rbSweepList(i).Checked Then
-                    tbStop.Text = txtVCList(i, 0).Text
-                    If dStart < dStopV(i) Then
-                        dDelta = dStopV(i) - dStart
-                    Else
-                        dDelta = dStart - dStopV(i)
-                    End If
-                End If
-            Catch ex As Exception
-
-            End Try
-        Next
+        If dStart < dStop Then
+            dDelta = dStop - dStart
+        Else
+            dDelta = dStart - dStop
+        End If
 
         sPoint = CStr((dDelta / dStep) + 1)
         tbPoint.Text = sPoint

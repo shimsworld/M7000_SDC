@@ -523,7 +523,7 @@ Partial Class ucMeasureRGBSweepRegion
         Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Button1.BackColor = System.Drawing.Color.Silver
         Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.Location = New System.Drawing.Point(212, 148)
+        Me.Button1.Location = New System.Drawing.Point(230, 148)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(57, 23)
         Me.Button1.TabIndex = 7
@@ -560,9 +560,9 @@ Partial Class ucMeasureRGBSweepRegion
         Me.Controls.Add(Me.Button1)
         Me.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.MaximumSize = New System.Drawing.Size(289, 300)
-        Me.MinimumSize = New System.Drawing.Size(261, 237)
+        Me.MinimumSize = New System.Drawing.Size(224, 257)
         Me.Name = "ucMeasureRGBSweepRegion"
-        Me.Size = New System.Drawing.Size(272, 300)
+        Me.Size = New System.Drawing.Size(269, 300)
         Me.gbSweepCommon.ResumeLayout(False)
         Me.gbSweepCommon.PerformLayout()
         Me.ResumeLayout(False)

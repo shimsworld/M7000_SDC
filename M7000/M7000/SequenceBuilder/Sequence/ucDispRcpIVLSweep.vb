@@ -679,11 +679,13 @@ Public Class ucDispRcpIVLSweep
 
 #Region "Change Event"
     Private Sub cbBiasMode_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbBiasMode.SelectedIndexChanged
+        '220830 Update by JKY
         If cbBiasMode.SelectedIndex = eBiasMode.eCV Then
             lblOffsetBiasValueUnit.Text = "V"
             lblLMeasValueUnit.Text = "V"
             ucSweepSetting.ucUserPatternList.UnitType = ucSweepSetting.eUnitType._Voltage
             ucSweepSetting.ucSweepRegion.UnitType = ucSweepSetting.eUnitType._Voltage
+            ucSweepSetting.ucRGBSweepRegion.UnitType = ucSweepSetting.eUnitType._Voltage
             ucDispKeithley.cboBiasMode.SelectedItem = "Voltage"
 
         ElseIf cbBiasMode.SelectedIndex = eBiasMode.eCC Then
@@ -691,6 +693,7 @@ Public Class ucDispRcpIVLSweep
             lblLMeasValueUnit.Text = "mA"
             ucSweepSetting.ucUserPatternList.UnitType = ucSweepSetting.eUnitType._milliAmpere
             ucSweepSetting.ucSweepRegion.UnitType = ucSweepSetting.eUnitType._milliAmpere
+            ucSweepSetting.ucRGBSweepRegion.UnitType = ucSweepSetting.eUnitType._milliAmpere
             ucDispKeithley.cboBiasMode.SelectedItem = "Current"
         End If
     End Sub
