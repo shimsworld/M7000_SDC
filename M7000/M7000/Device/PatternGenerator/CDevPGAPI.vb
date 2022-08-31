@@ -1,5 +1,5 @@
 ﻿Imports System.Threading
-
+Imports CCommLib
 Public Class CDevPGAPI
 
 #Region "Defines"
@@ -35,6 +35,12 @@ Public Class CDevPGAPI
 
                 AddHandler PatternGenerator(0).evStatusMessage, AddressOf statusMessageEventHandler
                 AddHandler PatternGenerator(0).evChangedConnectedClients, AddressOf changeConnectedDevListEventHandler
+
+                '김세훈 _EIP추가
+            Case CDevPGCommonNode.eDevModel._EIP
+                ReDim PatternGenerator(0)
+                PatternGenerator(0) = New CDevEIPPG()
+
         End Select
 
     End Sub
@@ -66,7 +72,27 @@ Public Class CDevPGAPI
         Return True
     End Function
 
+    Public Function Connection(ByVal config As CCommLib.CComCommonNode.sCommInfo) As Boolean
+        If PatternGenerator Is Nothing = False Then
+            If PatternGenerator(0).Connection(config) = False Then Return False
+        End If
 
+        Return True
+    End Function
+    'Public Sub PG_ON()
+
+    '    Dim asd() As Byte
+    '    asd(0) = "0x02"
+    '    asd(1) = "0x00"
+    '    asd(2) = "0x80"
+    '    asd(3) = "0x02"
+    '    asd(4) = "0x81"
+    '    asd(5) = "0x00"
+    '    asd(6) = "0x03"
+    '    asd(7) = "0x03"
+    '    Dim communicator As CComAPI
+    '    communicator.Communicator.SendToBytes(asd)
+    'End Sub
 
     Private Sub statusMessageEventHandler(ByVal msg As String)
         RaiseEvent evStatusMessage(msg)

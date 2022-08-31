@@ -3,9 +3,9 @@
 Public Class ucMcIVLPowerSupplyConfig
 #Region "Define"
     '정현기
-    Dim m_ColorLabel() As Label
-    Dim m_ColorType() As String
-    Dim m_ucRs232Dev() As ucConfigRs232
+    Public m_ColorLabel() As Label
+    Public m_ColorType() As String
+    Public m_ucRs232Dev() As ucConfigRs232
 
 
     Dim m_sConfigData As sConfig

@@ -10,7 +10,7 @@
 
     Public rbSweepList(4) As RadioButton
     Public cbUseList(4) As CheckBox
-    Public txtVCList(4, 12) As TextBox
+    Public txtVCList(4, 1) As TextBox
 
     Public Event evErrMsgSend(ByVal ErrMsg As String)
 
@@ -490,7 +490,7 @@ MakeSweep:
         CheckedChangeUIState()
     End Sub
 
-    Private Sub tbStart_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tbStart.TextChanged, tbStop.TextChanged
+    Private Sub tbStart_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tbStart.TextChanged
         CalSweepPoint()
     End Sub
 

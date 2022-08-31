@@ -81,6 +81,9 @@ Partial Class frmMain
         Me.SpectrometerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SVSCameraToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StrobeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EIPPGToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.IVLPowerSupplyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SW7700ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LogToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ShowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -127,9 +130,6 @@ Partial Class frmMain
         Me.ToolStripSeparator9 = New System.Windows.Forms.ToolStripSeparator()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
-        Me.EIPPGToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.IVLPowerSupplyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SW7700ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mainStatus.SuspendLayout()
         Me.MainToolStrip.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -547,6 +547,24 @@ Partial Class frmMain
         Me.StrobeToolStripMenuItem.Text = "Strobe"
         Me.StrobeToolStripMenuItem.Visible = False
         '
+        'EIPPGToolStripMenuItem
+        '
+        Me.EIPPGToolStripMenuItem.Name = "EIPPGToolStripMenuItem"
+        Me.EIPPGToolStripMenuItem.Size = New System.Drawing.Size(195, 22)
+        Me.EIPPGToolStripMenuItem.Text = "EIP Pattern Generator"
+        '
+        'IVLPowerSupplyToolStripMenuItem
+        '
+        Me.IVLPowerSupplyToolStripMenuItem.Name = "IVLPowerSupplyToolStripMenuItem"
+        Me.IVLPowerSupplyToolStripMenuItem.Size = New System.Drawing.Size(195, 22)
+        Me.IVLPowerSupplyToolStripMenuItem.Text = "IVL Power Supply"
+        '
+        'SW7700ToolStripMenuItem
+        '
+        Me.SW7700ToolStripMenuItem.Name = "SW7700ToolStripMenuItem"
+        Me.SW7700ToolStripMenuItem.Size = New System.Drawing.Size(195, 22)
+        Me.SW7700ToolStripMenuItem.Text = "SW7700"
+        '
         'ViewToolStripMenuItem
         '
         Me.ViewToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LogToolStripMenuItem})
@@ -823,7 +841,7 @@ Partial Class frmMain
         Me.ToolStripButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton1.Name = "ToolStripButton1"
-        Me.ToolStripButton1.Size = New System.Drawing.Size(79, 63)
+        Me.ToolStripButton1.Size = New System.Drawing.Size(79, 69)
         Me.ToolStripButton1.Text = "Manual Stop"
         Me.ToolStripButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         '
@@ -834,7 +852,7 @@ Partial Class frmMain
         Me.tsBtnExit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.tsBtnExit.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsBtnExit.Name = "tsBtnExit"
-        Me.tsBtnExit.Size = New System.Drawing.Size(54, 63)
+        Me.tsBtnExit.Size = New System.Drawing.Size(54, 69)
         Me.tsBtnExit.Text = "Exit"
         Me.tsBtnExit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         '
@@ -845,7 +863,7 @@ Partial Class frmMain
         Me.tsbPretestViewMode.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.tsbPretestViewMode.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbPretestViewMode.Name = "tsbPretestViewMode"
-        Me.tsbPretestViewMode.Size = New System.Drawing.Size(50, 63)
+        Me.tsbPretestViewMode.Size = New System.Drawing.Size(50, 51)
         Me.tsbPretestViewMode.Text = "Pretest"
         Me.tsbPretestViewMode.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         Me.tsbPretestViewMode.Visible = False
@@ -864,7 +882,7 @@ Partial Class frmMain
         Me.tsIVLDisplayShow.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.tsIVLDisplayShow.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsIVLDisplayShow.Name = "tsIVLDisplayShow"
-        Me.tsIVLDisplayShow.Size = New System.Drawing.Size(72, 63)
+        Me.tsIVLDisplayShow.Size = New System.Drawing.Size(72, 51)
         Me.tsIVLDisplayShow.Text = "IVL Display"
         Me.tsIVLDisplayShow.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         Me.tsIVLDisplayShow.Visible = False
@@ -883,7 +901,7 @@ Partial Class frmMain
         Me.tsBtnCare.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.tsBtnCare.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsBtnCare.Name = "tsBtnCare"
-        Me.tsBtnCare.Size = New System.Drawing.Size(38, 63)
+        Me.tsBtnCare.Size = New System.Drawing.Size(38, 51)
         Me.tsBtnCare.Text = "Care"
         Me.tsBtnCare.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         Me.tsBtnCare.Visible = False
@@ -895,7 +913,7 @@ Partial Class frmMain
         Me.tsBtnAlarm.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.tsBtnAlarm.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsBtnAlarm.Name = "tsBtnAlarm"
-        Me.tsBtnAlarm.Size = New System.Drawing.Size(43, 63)
+        Me.tsBtnAlarm.Size = New System.Drawing.Size(43, 51)
         Me.tsBtnAlarm.Text = "Alarm"
         Me.tsBtnAlarm.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         Me.tsBtnAlarm.Visible = False
@@ -913,7 +931,7 @@ Partial Class frmMain
         Me.tsbIVLGraph.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.tsbIVLGraph.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbIVLGraph.Name = "tsbIVLGraph"
-        Me.tsbIVLGraph.Size = New System.Drawing.Size(65, 63)
+        Me.tsbIVLGraph.Size = New System.Drawing.Size(65, 51)
         Me.tsbIVLGraph.Text = "IVL Graph"
         Me.tsbIVLGraph.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         Me.tsbIVLGraph.Visible = False
@@ -963,24 +981,6 @@ Partial Class frmMain
         Me.SplitContainer1.SplitterDistance = 1251
         Me.SplitContainer1.SplitterWidth = 1
         Me.SplitContainer1.TabIndex = 0
-        '
-        'EIPPGToolStripMenuItem
-        '
-        Me.EIPPGToolStripMenuItem.Name = "EIPPGToolStripMenuItem"
-        Me.EIPPGToolStripMenuItem.Size = New System.Drawing.Size(195, 22)
-        Me.EIPPGToolStripMenuItem.Text = "EIP Pattern Generator"
-        '
-        'IVLPowerSupplyToolStripMenuItem
-        '
-        Me.IVLPowerSupplyToolStripMenuItem.Name = "IVLPowerSupplyToolStripMenuItem"
-        Me.IVLPowerSupplyToolStripMenuItem.Size = New System.Drawing.Size(195, 22)
-        Me.IVLPowerSupplyToolStripMenuItem.Text = "IVL Power Supply"
-        '
-        'SW7700ToolStripMenuItem
-        '
-        Me.SW7700ToolStripMenuItem.Name = "SW7700ToolStripMenuItem"
-        Me.SW7700ToolStripMenuItem.Size = New System.Drawing.Size(195, 22)
-        Me.SW7700ToolStripMenuItem.Text = "SW7700"
         '
         'frmMain
         '

@@ -1174,18 +1174,14 @@ Public Class ucDispListView
 
         ReDim sBufData(listColumn.Count - 2)
 
-        Try '220829 Update by JKY : 예외처리 추가
-            For i As Integer = 1 To listColumn.Count - 1
-                '    item = GetListViewItem(nRow)
-                item = listItem.Item(nRow)
-                subItem = item.SubItems(i)
-                sBufData(i - 1) = subItem.Text
-            Next
+        For i As Integer = 1 To listColumn.Count - 1
+            '    item = GetListViewItem(nRow)
+            item = listItem.Item(nRow)
+            subItem = item.SubItems(i)
+            sBufData(i - 1) = subItem.Text
+        Next
 
-            sRowData = sBufData.Clone   'GetListViewItem(nRow) '
-        Catch ex As Exception
-            Return eUcListErrCode.eNothingData
-        End Try
+        sRowData = sBufData.Clone   'GetListViewItem(nRow) '
 
         Return eUcListErrCode.eNoError
     End Function

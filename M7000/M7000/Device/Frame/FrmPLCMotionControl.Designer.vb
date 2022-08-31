@@ -24,12 +24,12 @@ Partial Class frmPLCMotionControl
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.gbManualCtrl = New System.Windows.Forms.GroupBox()
-        Me.btn_Theta4Move = New System.Windows.Forms.Button()
-        Me.btn_Theta3Move = New System.Windows.Forms.Button()
-        Me.btn_Theta2Move = New System.Windows.Forms.Button()
+        Me.chkTheta4 = New System.Windows.Forms.CheckBox()
+        Me.chkTheta3 = New System.Windows.Forms.CheckBox()
+        Me.chkTheta2 = New System.Windows.Forms.CheckBox()
         Me.btnHomming = New System.Windows.Forms.Button()
-        Me.btnTheta1Move = New System.Windows.Forms.Button()
         Me.GroupBox8 = New System.Windows.Forms.GroupBox()
+        Me.lblY2Pos = New System.Windows.Forms.Label()
         Me.lblTheta4Pos = New System.Windows.Forms.Label()
         Me.lblTheta2Pos = New System.Windows.Forms.Label()
         Me.lblTheta3Pos = New System.Windows.Forms.Label()
@@ -42,12 +42,16 @@ Partial Class frmPLCMotionControl
         Me.Label15 = New System.Windows.Forms.Label()
         Me.btnZmove = New System.Windows.Forms.Button()
         Me.btnYmove = New System.Windows.Forms.Button()
+        Me.btnXmove = New System.Windows.Forms.Button()
         Me.chkTheta1 = New System.Windows.Forms.CheckBox()
         Me.rbAbs = New System.Windows.Forms.RadioButton()
         Me.rbMicroAdjust = New System.Windows.Forms.RadioButton()
         Me.txtPosition = New System.Windows.Forms.TextBox()
         Me.Label14 = New System.Windows.Forms.Label()
-        Me.btnXmove = New System.Windows.Forms.Button()
+        Me.btn_Theta4Move = New System.Windows.Forms.Button()
+        Me.btn_Theta3Move = New System.Windows.Forms.Button()
+        Me.btn_Theta2Move = New System.Windows.Forms.Button()
+        Me.btnTheta1Move = New System.Windows.Forms.Button()
         Me.GroupBox7 = New System.Windows.Forms.GroupBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.cbSelStatus = New System.Windows.Forms.ComboBox()
@@ -66,14 +70,14 @@ Partial Class frmPLCMotionControl
         Me.btnGetDO = New System.Windows.Forms.Button()
         Me.GroupBox12 = New System.Windows.Forms.GroupBox()
         Me.btnSetVelocity = New System.Windows.Forms.Button()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.tbVelocity_Theta = New System.Windows.Forms.TextBox()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.tbVelocity_Z = New System.Windows.Forms.TextBox()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.tbVelocity_X = New System.Windows.Forms.TextBox()
         Me.tbVelocity_Y = New System.Windows.Forms.TextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.tbVelocity_Theta = New System.Windows.Forms.TextBox()
         Me.gbJOG = New System.Windows.Forms.GroupBox()
         Me.tlpJOG = New System.Windows.Forms.TableLayoutPanel()
         Me.btnR = New System.Windows.Forms.Button()
@@ -130,9 +134,10 @@ Partial Class frmPLCMotionControl
         Me.btnJogOFF = New System.Windows.Forms.Button()
         Me.btnJogON = New System.Windows.Forms.Button()
         Me.btnInterrock = New System.Windows.Forms.Button()
-        Me.chkTheta2 = New System.Windows.Forms.CheckBox()
-        Me.chkTheta3 = New System.Windows.Forms.CheckBox()
-        Me.chkTheta4 = New System.Windows.Forms.CheckBox()
+        Me.chkY = New System.Windows.Forms.CheckBox()
+        Me.chkZ = New System.Windows.Forms.CheckBox()
+        Me.btnSWReadyOFF = New System.Windows.Forms.Button()
+        Me.btnSWReadyON = New System.Windows.Forms.Button()
         Me.gbManualCtrl.SuspendLayout()
         Me.GroupBox8.SuspendLayout()
         Me.GroupBox7.SuspendLayout()
@@ -151,20 +156,13 @@ Partial Class frmPLCMotionControl
         '
         'gbManualCtrl
         '
-        Me.gbManualCtrl.Controls.Add(Me.chkTheta4)
-        Me.gbManualCtrl.Controls.Add(Me.chkTheta3)
-        Me.gbManualCtrl.Controls.Add(Me.chkTheta2)
-        Me.gbManualCtrl.Controls.Add(Me.btn_Theta4Move)
-        Me.gbManualCtrl.Controls.Add(Me.btn_Theta3Move)
-        Me.gbManualCtrl.Controls.Add(Me.btn_Theta2Move)
         Me.gbManualCtrl.Controls.Add(Me.btnHomming)
-        Me.gbManualCtrl.Controls.Add(Me.btnTheta1Move)
         Me.gbManualCtrl.Controls.Add(Me.GroupBox8)
         Me.gbManualCtrl.Controls.Add(Me.txtVelocity)
         Me.gbManualCtrl.Controls.Add(Me.Label15)
         Me.gbManualCtrl.Controls.Add(Me.btnZmove)
         Me.gbManualCtrl.Controls.Add(Me.btnYmove)
-        Me.gbManualCtrl.Controls.Add(Me.chkTheta1)
+        Me.gbManualCtrl.Controls.Add(Me.btnXmove)
         Me.gbManualCtrl.Controls.Add(Me.rbAbs)
         Me.gbManualCtrl.Controls.Add(Me.rbMicroAdjust)
         Me.gbManualCtrl.Controls.Add(Me.txtPosition)
@@ -176,32 +174,38 @@ Partial Class frmPLCMotionControl
         Me.gbManualCtrl.TabStop = False
         Me.gbManualCtrl.Text = "Manual Control"
         '
-        'btn_Theta4Move
+        'chkTheta4
         '
-        Me.btn_Theta4Move.Location = New System.Drawing.Point(172, 168)
-        Me.btn_Theta4Move.Name = "btn_Theta4Move"
-        Me.btn_Theta4Move.Size = New System.Drawing.Size(105, 26)
-        Me.btn_Theta4Move.TabIndex = 54
-        Me.btn_Theta4Move.Text = "θ4 Axis Move"
-        Me.btn_Theta4Move.UseVisualStyleBackColor = True
+        Me.chkTheta4.AutoSize = True
+        Me.chkTheta4.Location = New System.Drawing.Point(268, 763)
+        Me.chkTheta4.Name = "chkTheta4"
+        Me.chkTheta4.Size = New System.Drawing.Size(91, 16)
+        Me.chkTheta4.TabIndex = 57
+        Me.chkTheta4.Text = "Theta4 Axis"
+        Me.chkTheta4.UseVisualStyleBackColor = True
+        Me.chkTheta4.Visible = False
         '
-        'btn_Theta3Move
+        'chkTheta3
         '
-        Me.btn_Theta3Move.Location = New System.Drawing.Point(172, 138)
-        Me.btn_Theta3Move.Name = "btn_Theta3Move"
-        Me.btn_Theta3Move.Size = New System.Drawing.Size(105, 26)
-        Me.btn_Theta3Move.TabIndex = 53
-        Me.btn_Theta3Move.Text = "θ3 Axis Move"
-        Me.btn_Theta3Move.UseVisualStyleBackColor = True
+        Me.chkTheta3.AutoSize = True
+        Me.chkTheta3.Location = New System.Drawing.Point(268, 741)
+        Me.chkTheta3.Name = "chkTheta3"
+        Me.chkTheta3.Size = New System.Drawing.Size(91, 16)
+        Me.chkTheta3.TabIndex = 56
+        Me.chkTheta3.Text = "Theta3 Axis"
+        Me.chkTheta3.UseVisualStyleBackColor = True
+        Me.chkTheta3.Visible = False
         '
-        'btn_Theta2Move
+        'chkTheta2
         '
-        Me.btn_Theta2Move.Location = New System.Drawing.Point(172, 108)
-        Me.btn_Theta2Move.Name = "btn_Theta2Move"
-        Me.btn_Theta2Move.Size = New System.Drawing.Size(105, 26)
-        Me.btn_Theta2Move.TabIndex = 52
-        Me.btn_Theta2Move.Text = "θ2 Axis Move"
-        Me.btn_Theta2Move.UseVisualStyleBackColor = True
+        Me.chkTheta2.AutoSize = True
+        Me.chkTheta2.Location = New System.Drawing.Point(268, 720)
+        Me.chkTheta2.Name = "chkTheta2"
+        Me.chkTheta2.Size = New System.Drawing.Size(91, 16)
+        Me.chkTheta2.TabIndex = 55
+        Me.chkTheta2.Text = "Theta2 Axis"
+        Me.chkTheta2.UseVisualStyleBackColor = True
+        Me.chkTheta2.Visible = False
         '
         'btnHomming
         '
@@ -212,17 +216,9 @@ Partial Class frmPLCMotionControl
         Me.btnHomming.Text = "Homming"
         Me.btnHomming.UseVisualStyleBackColor = True
         '
-        'btnTheta1Move
-        '
-        Me.btnTheta1Move.Location = New System.Drawing.Point(172, 79)
-        Me.btnTheta1Move.Name = "btnTheta1Move"
-        Me.btnTheta1Move.Size = New System.Drawing.Size(105, 26)
-        Me.btnTheta1Move.TabIndex = 51
-        Me.btnTheta1Move.Text = "θ1 Axis Move"
-        Me.btnTheta1Move.UseVisualStyleBackColor = True
-        '
         'GroupBox8
         '
+        Me.GroupBox8.Controls.Add(Me.lblY2Pos)
         Me.GroupBox8.Controls.Add(Me.lblTheta4Pos)
         Me.GroupBox8.Controls.Add(Me.lblTheta2Pos)
         Me.GroupBox8.Controls.Add(Me.lblTheta3Pos)
@@ -238,41 +234,54 @@ Partial Class frmPLCMotionControl
         Me.GroupBox8.TabStop = False
         Me.GroupBox8.Text = "Current Position"
         '
+        'lblY2Pos
+        '
+        Me.lblY2Pos.AutoSize = True
+        Me.lblY2Pos.Location = New System.Drawing.Point(138, 72)
+        Me.lblY2Pos.Name = "lblY2Pos"
+        Me.lblY2Pos.Size = New System.Drawing.Size(39, 12)
+        Me.lblY2Pos.TabIndex = 57
+        Me.lblY2Pos.Text = "Y Pos"
+        '
         'lblTheta4Pos
         '
         Me.lblTheta4Pos.AutoSize = True
-        Me.lblTheta4Pos.Location = New System.Drawing.Point(138, 159)
+        Me.lblTheta4Pos.Location = New System.Drawing.Point(10, 156)
         Me.lblTheta4Pos.Name = "lblTheta4Pos"
         Me.lblTheta4Pos.Size = New System.Drawing.Size(47, 12)
         Me.lblTheta4Pos.TabIndex = 56
         Me.lblTheta4Pos.Text = "θ4 Pos"
+        Me.lblTheta4Pos.Visible = False
         '
         'lblTheta2Pos
         '
         Me.lblTheta2Pos.AutoSize = True
-        Me.lblTheta2Pos.Location = New System.Drawing.Point(138, 115)
+        Me.lblTheta2Pos.Location = New System.Drawing.Point(10, 112)
         Me.lblTheta2Pos.Name = "lblTheta2Pos"
         Me.lblTheta2Pos.Size = New System.Drawing.Size(47, 12)
         Me.lblTheta2Pos.TabIndex = 55
         Me.lblTheta2Pos.Text = "θ2 Pos"
+        Me.lblTheta2Pos.Visible = False
         '
         'lblTheta3Pos
         '
         Me.lblTheta3Pos.AutoSize = True
-        Me.lblTheta3Pos.Location = New System.Drawing.Point(138, 138)
+        Me.lblTheta3Pos.Location = New System.Drawing.Point(10, 135)
         Me.lblTheta3Pos.Name = "lblTheta3Pos"
         Me.lblTheta3Pos.Size = New System.Drawing.Size(47, 12)
         Me.lblTheta3Pos.TabIndex = 54
         Me.lblTheta3Pos.Text = "θ3 Pos"
+        Me.lblTheta3Pos.Visible = False
         '
         'lblTheta1Pos
         '
         Me.lblTheta1Pos.AutoSize = True
-        Me.lblTheta1Pos.Location = New System.Drawing.Point(138, 91)
+        Me.lblTheta1Pos.Location = New System.Drawing.Point(10, 88)
         Me.lblTheta1Pos.Name = "lblTheta1Pos"
         Me.lblTheta1Pos.Size = New System.Drawing.Size(47, 12)
         Me.lblTheta1Pos.TabIndex = 53
         Me.lblTheta1Pos.Text = "θ1 Pos"
+        Me.lblTheta1Pos.Visible = False
         '
         'lblYPos
         '
@@ -295,7 +304,7 @@ Partial Class frmPLCMotionControl
         'lblZPos
         '
         Me.lblZPos.AutoSize = True
-        Me.lblZPos.Location = New System.Drawing.Point(138, 69)
+        Me.lblZPos.Location = New System.Drawing.Point(138, 98)
         Me.lblZPos.Name = "lblZPos"
         Me.lblZPos.Size = New System.Drawing.Size(39, 12)
         Me.lblZPos.TabIndex = 51
@@ -309,7 +318,6 @@ Partial Class frmPLCMotionControl
         Me.lblXPos.Size = New System.Drawing.Size(39, 12)
         Me.lblXPos.TabIndex = 50
         Me.lblXPos.Text = "X Pos"
-        Me.lblXPos.Visible = False
         '
         'txtVelocity
         '
@@ -332,7 +340,7 @@ Partial Class frmPLCMotionControl
         '
         'btnZmove
         '
-        Me.btnZmove.Location = New System.Drawing.Point(172, 47)
+        Me.btnZmove.Location = New System.Drawing.Point(167, 80)
         Me.btnZmove.Name = "btnZmove"
         Me.btnZmove.Size = New System.Drawing.Size(105, 26)
         Me.btnZmove.TabIndex = 8
@@ -341,22 +349,32 @@ Partial Class frmPLCMotionControl
         '
         'btnYmove
         '
-        Me.btnYmove.Location = New System.Drawing.Point(172, 17)
+        Me.btnYmove.Location = New System.Drawing.Point(167, 50)
         Me.btnYmove.Name = "btnYmove"
         Me.btnYmove.Size = New System.Drawing.Size(105, 27)
         Me.btnYmove.TabIndex = 7
         Me.btnYmove.Text = "Y Axis Move"
         Me.btnYmove.UseVisualStyleBackColor = True
         '
+        'btnXmove
+        '
+        Me.btnXmove.Location = New System.Drawing.Point(167, 20)
+        Me.btnXmove.Name = "btnXmove"
+        Me.btnXmove.Size = New System.Drawing.Size(105, 27)
+        Me.btnXmove.TabIndex = 6
+        Me.btnXmove.Text = "X Axis Move"
+        Me.btnXmove.UseVisualStyleBackColor = True
+        '
         'chkTheta1
         '
         Me.chkTheta1.AutoSize = True
-        Me.chkTheta1.Location = New System.Drawing.Point(21, 172)
+        Me.chkTheta1.Location = New System.Drawing.Point(268, 698)
         Me.chkTheta1.Name = "chkTheta1"
         Me.chkTheta1.Size = New System.Drawing.Size(91, 16)
         Me.chkTheta1.TabIndex = 5
         Me.chkTheta1.Text = "Theta1 Axis"
         Me.chkTheta1.UseVisualStyleBackColor = True
+        Me.chkTheta1.Visible = False
         '
         'rbAbs
         '
@@ -399,15 +417,45 @@ Partial Class frmPLCMotionControl
         Me.Label14.Text = "Position (mm)"
         Me.Label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'btnXmove
+        'btn_Theta4Move
         '
-        Me.btnXmove.Location = New System.Drawing.Point(875, 686)
-        Me.btnXmove.Name = "btnXmove"
-        Me.btnXmove.Size = New System.Drawing.Size(105, 38)
-        Me.btnXmove.TabIndex = 6
-        Me.btnXmove.Text = "X Axis Move"
-        Me.btnXmove.UseVisualStyleBackColor = True
-        Me.btnXmove.Visible = False
+        Me.btn_Theta4Move.Location = New System.Drawing.Point(737, 787)
+        Me.btn_Theta4Move.Name = "btn_Theta4Move"
+        Me.btn_Theta4Move.Size = New System.Drawing.Size(105, 26)
+        Me.btn_Theta4Move.TabIndex = 54
+        Me.btn_Theta4Move.Text = "θ4 Axis Move"
+        Me.btn_Theta4Move.UseVisualStyleBackColor = True
+        Me.btn_Theta4Move.Visible = False
+        '
+        'btn_Theta3Move
+        '
+        Me.btn_Theta3Move.Location = New System.Drawing.Point(737, 757)
+        Me.btn_Theta3Move.Name = "btn_Theta3Move"
+        Me.btn_Theta3Move.Size = New System.Drawing.Size(105, 26)
+        Me.btn_Theta3Move.TabIndex = 53
+        Me.btn_Theta3Move.Text = "θ3 Axis Move"
+        Me.btn_Theta3Move.UseVisualStyleBackColor = True
+        Me.btn_Theta3Move.Visible = False
+        '
+        'btn_Theta2Move
+        '
+        Me.btn_Theta2Move.Location = New System.Drawing.Point(737, 727)
+        Me.btn_Theta2Move.Name = "btn_Theta2Move"
+        Me.btn_Theta2Move.Size = New System.Drawing.Size(105, 26)
+        Me.btn_Theta2Move.TabIndex = 52
+        Me.btn_Theta2Move.Text = "θ2 Axis Move"
+        Me.btn_Theta2Move.UseVisualStyleBackColor = True
+        Me.btn_Theta2Move.Visible = False
+        '
+        'btnTheta1Move
+        '
+        Me.btnTheta1Move.Location = New System.Drawing.Point(737, 698)
+        Me.btnTheta1Move.Name = "btnTheta1Move"
+        Me.btnTheta1Move.Size = New System.Drawing.Size(105, 26)
+        Me.btnTheta1Move.TabIndex = 51
+        Me.btnTheta1Move.Text = "θ1 Axis Move"
+        Me.btnTheta1Move.UseVisualStyleBackColor = True
+        Me.btnTheta1Move.Visible = False
         '
         'GroupBox7
         '
@@ -568,9 +616,9 @@ Partial Class frmPLCMotionControl
         '
         'GroupBox12
         '
+        Me.GroupBox12.Controls.Add(Me.chkZ)
         Me.GroupBox12.Controls.Add(Me.btnSetVelocity)
-        Me.GroupBox12.Controls.Add(Me.Label3)
-        Me.GroupBox12.Controls.Add(Me.tbVelocity_Theta)
+        Me.GroupBox12.Controls.Add(Me.chkY)
         Me.GroupBox12.Controls.Add(Me.Label11)
         Me.GroupBox12.Controls.Add(Me.tbVelocity_Z)
         Me.GroupBox12.Controls.Add(Me.Label13)
@@ -579,51 +627,32 @@ Partial Class frmPLCMotionControl
         Me.GroupBox12.Controls.Add(Me.tbVelocity_Y)
         Me.GroupBox12.Location = New System.Drawing.Point(13, 516)
         Me.GroupBox12.Name = "GroupBox12"
-        Me.GroupBox12.Size = New System.Drawing.Size(172, 170)
+        Me.GroupBox12.Size = New System.Drawing.Size(172, 151)
         Me.GroupBox12.TabIndex = 56
         Me.GroupBox12.TabStop = False
         Me.GroupBox12.Text = "JOG Control"
         '
         'btnSetVelocity
         '
-        Me.btnSetVelocity.Location = New System.Drawing.Point(61, 101)
+        Me.btnSetVelocity.Location = New System.Drawing.Point(72, 112)
         Me.btnSetVelocity.Name = "btnSetVelocity"
-        Me.btnSetVelocity.Size = New System.Drawing.Size(104, 25)
+        Me.btnSetVelocity.Size = New System.Drawing.Size(93, 25)
         Me.btnSetVelocity.TabIndex = 49
         Me.btnSetVelocity.Text = "1.Set Velocity"
         Me.btnSetVelocity.UseVisualStyleBackColor = True
         '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(9, 75)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(76, 12)
-        Me.Label3.TabIndex = 48
-        Me.Label3.Text = "θ Velocity : "
-        '
-        'tbVelocity_Theta
-        '
-        Me.tbVelocity_Theta.Location = New System.Drawing.Point(93, 70)
-        Me.tbVelocity_Theta.Name = "tbVelocity_Theta"
-        Me.tbVelocity_Theta.Size = New System.Drawing.Size(72, 21)
-        Me.tbVelocity_Theta.TabIndex = 49
-        Me.tbVelocity_Theta.Text = "10"
-        Me.tbVelocity_Theta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(9, 147)
+        Me.Label11.Location = New System.Drawing.Point(10, 28)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(70, 12)
         Me.Label11.TabIndex = 42
         Me.Label11.Text = "X Velocity :"
-        Me.Label11.Visible = False
         '
         'tbVelocity_Z
         '
-        Me.tbVelocity_Z.Location = New System.Drawing.Point(93, 43)
+        Me.tbVelocity_Z.Location = New System.Drawing.Point(94, 76)
         Me.tbVelocity_Z.Name = "tbVelocity_Z"
         Me.tbVelocity_Z.Size = New System.Drawing.Size(72, 21)
         Me.tbVelocity_Z.TabIndex = 47
@@ -633,7 +662,7 @@ Partial Class frmPLCMotionControl
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(9, 47)
+        Me.Label13.Location = New System.Drawing.Point(10, 80)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(70, 12)
         Me.Label13.TabIndex = 46
@@ -642,7 +671,7 @@ Partial Class frmPLCMotionControl
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(9, 21)
+        Me.Label12.Location = New System.Drawing.Point(10, 54)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(70, 12)
         Me.Label12.TabIndex = 44
@@ -650,22 +679,41 @@ Partial Class frmPLCMotionControl
         '
         'tbVelocity_X
         '
-        Me.tbVelocity_X.Location = New System.Drawing.Point(82, 142)
+        Me.tbVelocity_X.Location = New System.Drawing.Point(94, 22)
         Me.tbVelocity_X.Name = "tbVelocity_X"
         Me.tbVelocity_X.Size = New System.Drawing.Size(72, 21)
         Me.tbVelocity_X.TabIndex = 43
         Me.tbVelocity_X.Text = "50"
         Me.tbVelocity_X.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.tbVelocity_X.Visible = False
         '
         'tbVelocity_Y
         '
-        Me.tbVelocity_Y.Location = New System.Drawing.Point(93, 16)
+        Me.tbVelocity_Y.Location = New System.Drawing.Point(94, 49)
         Me.tbVelocity_Y.Name = "tbVelocity_Y"
         Me.tbVelocity_Y.Size = New System.Drawing.Size(72, 21)
         Me.tbVelocity_Y.TabIndex = 45
         Me.tbVelocity_Y.Text = "50"
         Me.tbVelocity_Y.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(16, 698)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(76, 12)
+        Me.Label3.TabIndex = 48
+        Me.Label3.Text = "θ Velocity : "
+        Me.Label3.Visible = False
+        '
+        'tbVelocity_Theta
+        '
+        Me.tbVelocity_Theta.Location = New System.Drawing.Point(100, 693)
+        Me.tbVelocity_Theta.Name = "tbVelocity_Theta"
+        Me.tbVelocity_Theta.Size = New System.Drawing.Size(72, 21)
+        Me.tbVelocity_Theta.TabIndex = 49
+        Me.tbVelocity_Theta.Text = "10"
+        Me.tbVelocity_Theta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.tbVelocity_Theta.Visible = False
         '
         'gbJOG
         '
@@ -1298,7 +1346,7 @@ Partial Class frmPLCMotionControl
         '
         'btnInterrock
         '
-        Me.btnInterrock.Location = New System.Drawing.Point(308, 590)
+        Me.btnInterrock.Location = New System.Drawing.Point(139, 734)
         Me.btnInterrock.Name = "btnInterrock"
         Me.btnInterrock.Size = New System.Drawing.Size(79, 38)
         Me.btnInterrock.TabIndex = 64
@@ -1306,48 +1354,67 @@ Partial Class frmPLCMotionControl
         Me.btnInterrock.UseVisualStyleBackColor = True
         Me.btnInterrock.Visible = False
         '
-        'chkTheta2
+        'chkY
         '
-        Me.chkTheta2.AutoSize = True
-        Me.chkTheta2.Location = New System.Drawing.Point(21, 194)
-        Me.chkTheta2.Name = "chkTheta2"
-        Me.chkTheta2.Size = New System.Drawing.Size(91, 16)
-        Me.chkTheta2.TabIndex = 55
-        Me.chkTheta2.Text = "Theta2 Axis"
-        Me.chkTheta2.UseVisualStyleBackColor = True
+        Me.chkY.AutoSize = True
+        Me.chkY.Location = New System.Drawing.Point(5, 106)
+        Me.chkY.Name = "chkY"
+        Me.chkY.Size = New System.Drawing.Size(61, 16)
+        Me.chkY.TabIndex = 67
+        Me.chkY.Text = "Y Axis"
+        Me.chkY.UseVisualStyleBackColor = True
         '
-        'chkTheta3
+        'chkZ
         '
-        Me.chkTheta3.AutoSize = True
-        Me.chkTheta3.Location = New System.Drawing.Point(21, 215)
-        Me.chkTheta3.Name = "chkTheta3"
-        Me.chkTheta3.Size = New System.Drawing.Size(91, 16)
-        Me.chkTheta3.TabIndex = 56
-        Me.chkTheta3.Text = "Theta3 Axis"
-        Me.chkTheta3.UseVisualStyleBackColor = True
+        Me.chkZ.AutoSize = True
+        Me.chkZ.Location = New System.Drawing.Point(5, 125)
+        Me.chkZ.Name = "chkZ"
+        Me.chkZ.Size = New System.Drawing.Size(61, 16)
+        Me.chkZ.TabIndex = 68
+        Me.chkZ.Text = "Z Axis"
+        Me.chkZ.UseVisualStyleBackColor = True
         '
-        'chkTheta4
+        'btnSWReadyOFF
         '
-        Me.chkTheta4.AutoSize = True
-        Me.chkTheta4.Location = New System.Drawing.Point(21, 237)
-        Me.chkTheta4.Name = "chkTheta4"
-        Me.chkTheta4.Size = New System.Drawing.Size(91, 16)
-        Me.chkTheta4.TabIndex = 57
-        Me.chkTheta4.Text = "Theta4 Axis"
-        Me.chkTheta4.UseVisualStyleBackColor = True
+        Me.btnSWReadyOFF.Location = New System.Drawing.Point(292, 589)
+        Me.btnSWReadyOFF.Name = "btnSWReadyOFF"
+        Me.btnSWReadyOFF.Size = New System.Drawing.Size(95, 24)
+        Me.btnSWReadyOFF.TabIndex = 68
+        Me.btnSWReadyOFF.Text = "Ready OFF"
+        Me.btnSWReadyOFF.UseVisualStyleBackColor = True
+        '
+        'btnSWReadyON
+        '
+        Me.btnSWReadyON.Location = New System.Drawing.Point(191, 589)
+        Me.btnSWReadyON.Name = "btnSWReadyON"
+        Me.btnSWReadyON.Size = New System.Drawing.Size(95, 25)
+        Me.btnSWReadyON.TabIndex = 67
+        Me.btnSWReadyON.Text = "Ready ON"
+        Me.btnSWReadyON.UseVisualStyleBackColor = True
         '
         'frmPLCMotionControl
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1000, 861)
+        Me.Controls.Add(Me.btnSWReadyOFF)
+        Me.Controls.Add(Me.btnSWReadyON)
+        Me.Controls.Add(Me.chkTheta4)
         Me.Controls.Add(Me.btnAllReset)
+        Me.Controls.Add(Me.chkTheta3)
+        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.chkTheta2)
+        Me.Controls.Add(Me.tbVelocity_Theta)
         Me.Controls.Add(Me.BtnAlaramReset)
         Me.Controls.Add(Me.btnJogOFF)
+        Me.Controls.Add(Me.btn_Theta4Move)
         Me.Controls.Add(Me.btnJogON)
+        Me.Controls.Add(Me.btn_Theta3Move)
         Me.Controls.Add(Me.btnInterrock)
+        Me.Controls.Add(Me.btn_Theta2Move)
+        Me.Controls.Add(Me.chkTheta1)
         Me.Controls.Add(Me.GroupBox9)
-        Me.Controls.Add(Me.btnXmove)
+        Me.Controls.Add(Me.btnTheta1Move)
         Me.Controls.Add(Me.ledConnectionStateCheck)
         Me.Controls.Add(Me.GroupBox6)
         Me.Controls.Add(Me.gbManualCtrl)
@@ -1495,4 +1562,9 @@ Partial Class frmPLCMotionControl
     Friend WithEvents chkTheta4 As System.Windows.Forms.CheckBox
     Friend WithEvents chkTheta2 As System.Windows.Forms.CheckBox
     Friend WithEvents chkTheta3 As System.Windows.Forms.CheckBox
+    Friend WithEvents lblY2Pos As Label
+    Friend WithEvents chkZ As CheckBox
+    Friend WithEvents chkY As CheckBox
+    Friend WithEvents btnSWReadyOFF As Button
+    Friend WithEvents btnSWReadyON As Button
 End Class

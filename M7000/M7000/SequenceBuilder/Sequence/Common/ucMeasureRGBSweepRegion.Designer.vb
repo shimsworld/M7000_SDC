@@ -34,6 +34,7 @@ Partial Class ucMeasureRGBSweepRegion
         Me.cbUse2 = New System.Windows.Forms.CheckBox()
         Me.cbUse1 = New System.Windows.Forms.CheckBox()
         Me.tbPoint = New System.Windows.Forms.TextBox()
+        Me.ucListMeasSweep = New M7000.ucDispListView()
         Me.tbStep = New System.Windows.Forms.TextBox()
         Me.btnAdd = New System.Windows.Forms.Button()
         Me.lblSweepPS = New System.Windows.Forms.Label()
@@ -60,7 +61,6 @@ Partial Class ucMeasureRGBSweepRegion
         Me.lblPoint = New System.Windows.Forms.Label()
         Me.lblStep = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.ucListMeasSweep = New M7000.ucDispListView()
         Me.gbSweepCommon.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -234,6 +234,26 @@ Partial Class ucMeasureRGBSweepRegion
         Me.tbPoint.Text = "0"
         Me.tbPoint.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
+        'ucListMeasSweep
+        '
+        Me.ucListMeasSweep.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ucListMeasSweep.ColHeader = New String() {"No.", "SweepType", "Start", "Stop", "Step", "Point", "else"}
+        Me.ucListMeasSweep.ColHeaderWidthRatio = "10,20,15,15,15,15,20"
+        Me.ucListMeasSweep.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ucListMeasSweep.FullRawSelection = True
+        Me.ucListMeasSweep.HideSelection = False
+        Me.ucListMeasSweep.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.ucListMeasSweep.LabelEdit = True
+        Me.ucListMeasSweep.LabelWrap = True
+        Me.ucListMeasSweep.Location = New System.Drawing.Point(6, 171)
+        Me.ucListMeasSweep.Margin = New System.Windows.Forms.Padding(4)
+        Me.ucListMeasSweep.Name = "ucListMeasSweep"
+        Me.ucListMeasSweep.Size = New System.Drawing.Size(246, 116)
+        Me.ucListMeasSweep.TabIndex = 25
+        Me.ucListMeasSweep.UseCheckBoxex = False
+        '
         'tbStep
         '
         Me.tbStep.BackColor = System.Drawing.SystemColors.Control
@@ -243,7 +263,7 @@ Partial Class ucMeasureRGBSweepRegion
         Me.tbStep.Name = "tbStep"
         Me.tbStep.Size = New System.Drawing.Size(53, 21)
         Me.tbStep.TabIndex = 2
-        Me.tbStep.Text = "20"
+        Me.tbStep.Text = "0"
         Me.tbStep.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'btnAdd
@@ -376,7 +396,7 @@ Partial Class ucMeasureRGBSweepRegion
         Me.tbC2.Name = "tbC2"
         Me.tbC2.Size = New System.Drawing.Size(41, 21)
         Me.tbC2.TabIndex = 1
-        Me.tbC2.Text = "10"
+        Me.tbC2.Text = "0"
         Me.tbC2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'tbC1
@@ -389,7 +409,7 @@ Partial Class ucMeasureRGBSweepRegion
         Me.tbC1.Name = "tbC1"
         Me.tbC1.Size = New System.Drawing.Size(41, 21)
         Me.tbC1.TabIndex = 1
-        Me.tbC1.Text = "10"
+        Me.tbC1.Text = "0"
         Me.tbC1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'tbV5
@@ -441,7 +461,7 @@ Partial Class ucMeasureRGBSweepRegion
         Me.tbV2.Name = "tbV2"
         Me.tbV2.Size = New System.Drawing.Size(41, 21)
         Me.tbV2.TabIndex = 1
-        Me.tbV2.Text = "10"
+        Me.tbV2.Text = "0"
         Me.tbV2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'tbV1
@@ -454,7 +474,7 @@ Partial Class ucMeasureRGBSweepRegion
         Me.tbV1.Name = "tbV1"
         Me.tbV1.Size = New System.Drawing.Size(41, 21)
         Me.tbV1.TabIndex = 1
-        Me.tbV1.Text = "10"
+        Me.tbV1.Text = "0"
         Me.tbV1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'tbStop
@@ -479,7 +499,7 @@ Partial Class ucMeasureRGBSweepRegion
         Me.tbStart.Name = "tbStart"
         Me.tbStart.Size = New System.Drawing.Size(53, 21)
         Me.tbStart.TabIndex = 0
-        Me.tbStart.Text = "-10"
+        Me.tbStart.Text = "0"
         Me.tbStart.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label4
@@ -530,26 +550,6 @@ Partial Class ucMeasureRGBSweepRegion
         Me.Button1.Text = "Update"
         Me.Button1.UseVisualStyleBackColor = False
         Me.Button1.Visible = False
-        '
-        'ucListMeasSweep
-        '
-        Me.ucListMeasSweep.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ucListMeasSweep.ColHeader = New String() {"No.", "SweepType", "Start", "Stop", "Step", "Point", "else"}
-        Me.ucListMeasSweep.ColHeaderWidthRatio = "10,20,15,15,15,15,20"
-        Me.ucListMeasSweep.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ucListMeasSweep.FullRawSelection = True
-        Me.ucListMeasSweep.HideSelection = False
-        Me.ucListMeasSweep.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.ucListMeasSweep.LabelEdit = True
-        Me.ucListMeasSweep.LabelWrap = True
-        Me.ucListMeasSweep.Location = New System.Drawing.Point(6, 171)
-        Me.ucListMeasSweep.Margin = New System.Windows.Forms.Padding(4)
-        Me.ucListMeasSweep.Name = "ucListMeasSweep"
-        Me.ucListMeasSweep.Size = New System.Drawing.Size(246, 116)
-        Me.ucListMeasSweep.TabIndex = 25
-        Me.ucListMeasSweep.UseCheckBoxex = False
         '
         'ucMeasureRGBSweepRegion
         '

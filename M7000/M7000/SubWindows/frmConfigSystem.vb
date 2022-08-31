@@ -39,7 +39,7 @@ Public Class frmConfigSystem
                                          "BCR",
                                          "Strobe",
                                          "DMM",
-                                         "IVLPowerSupply"'김세훈
+                                         "IVL_PS"'김세훈
                                             }
 
 
@@ -68,7 +68,7 @@ Public Class frmConfigSystem
         eBCR
         eStrobe
         eDMM
-        eIVLPowerSupply
+        eIVLPowerSupply '정현기
     End Enum
 
 

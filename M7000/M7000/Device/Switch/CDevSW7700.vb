@@ -365,45 +365,49 @@ ErrorHandler:
         Dim strBuffCH As String = ""
         Dim strBuffDev As String = ""
         If ConvertIntChToMcProtocolCh(DevNum, In_iCH, strBuffDev, strBuffCH) = False Then
-            strBuffCH = "@@"  '오류 처리를 해야 하나, 함수의 형태가 그렇지 못함...나중에 고쳐야 겠음.
+            strBuffDev = "@@" '오류 처리를 해야 하나, 함수의 형태가 그렇지 못함...나중에 고쳐야 겠음.
+            strBuffCH = "@@@"
+
         End If
 
-        strBuffCH = "(" & strBuffCH & "," & In_strCommand & ")"
+        strBuffCH = "(" & strBuffDev & "," & strBuffCH & "," & In_strCommand & ")"
 
         Return strBuffCH
     End Function
 
     Private Function ConvertIntChToMcProtocolCh(ByVal DevNum As Integer, ByVal in_Ch As Integer, ByRef outDev As String, ByRef outCh As String) As Boolean
 
-        Dim strHexVal As String
+        Dim strHexVal_Ch As String
+        Dim strHexVal_DevNum As String
 
         Dim nHighByteVal As Integer
         Dim nMidleByteVal As Integer
         Dim nLowByteVal As Integer
 
+
         Dim sHighByteVal As String
         Dim sMiddleByteVal As String
         Dim sLowByteval As String
 
-        strHexVal = Hex(in_Ch)
+        strHexVal_Ch = Hex(in_Ch)
 
-        Select Case strHexVal.Length
+        Select Case strHexVal_Ch.Length
             Case 1
-                nLowByteVal = ConvertHexToInt(strHexVal)
+                nLowByteVal = ConvertHexToInt(strHexVal_Ch)
                 sLowByteval = Convert.ToChar(64 + nLowByteVal)
                 outCh = "@@" & sLowByteval
             Case 2
-                nMidleByteVal = ConvertHexToInt(strHexVal.Substring(0, 1))
-                nLowByteVal = ConvertHexToInt(strHexVal.Substring(1, 1))
+                nMidleByteVal = ConvertHexToInt(strHexVal_Ch.Substring(0, 1))
+                nLowByteVal = ConvertHexToInt(strHexVal_Ch.Substring(1, 1))
 
                 sLowByteval = Convert.ToChar(64 + nLowByteVal)
                 sMiddleByteVal = Convert.ToChar(64 + nMidleByteVal)
 
                 outCh = "@" & sMiddleByteVal & sLowByteval
             Case 3
-                nHighByteVal = ConvertHexToInt(strHexVal.Substring(0, 1))
-                nMidleByteVal = ConvertHexToInt(strHexVal.Substring(1, 1))
-                nLowByteVal = ConvertHexToInt(strHexVal.Substring(2, 1))
+                nHighByteVal = ConvertHexToInt(strHexVal_Ch.Substring(0, 1))
+                nMidleByteVal = ConvertHexToInt(strHexVal_Ch.Substring(1, 1))
+                nLowByteVal = ConvertHexToInt(strHexVal_Ch.Substring(2, 1))
 
 
                 sLowByteval = Convert.ToChar(64 + nLowByteVal)
@@ -415,6 +419,47 @@ ErrorHandler:
             Case Else
                 Return False
         End Select
+
+        nHighByteVal = 0
+        nMidleByteVal = 0
+        nLowByteVal = 0
+        sHighByteVal = ""
+        sMiddleByteVal = ""
+        sLowByteval = ""
+        strHexVal_DevNum = Hex(DevNum)
+
+        Select Case strHexVal_DevNum.Length
+            Case 1
+                nLowByteVal = ConvertHexToInt(strHexVal_DevNum)
+                sLowByteval = Convert.ToChar(64 + nLowByteVal)
+                outDev = "@" & sLowByteval
+            Case 2
+                nMidleByteVal = ConvertHexToInt(strHexVal_DevNum.Substring(0, 1))
+                nLowByteVal = ConvertHexToInt(strHexVal_DevNum.Substring(1, 1))
+
+                sLowByteval = Convert.ToChar(64 + nLowByteVal)
+                sMiddleByteVal = Convert.ToChar(64 + nMidleByteVal)
+
+                outDev = sMiddleByteVal & sLowByteval
+                'Case 3
+                '    nHighByteVal = ConvertHexToInt(strHexVal_DevNum.Substring(0, 1))
+                '    nMidleByteVal = ConvertHexToInt(strHexVal_DevNum.Substring(1, 1))
+                '    nLowByteVal = ConvertHexToInt(strHexVal_DevNum.Substring(2, 1))
+
+
+                '    sLowByteval = Convert.ToChar(64 + nLowByteVal)
+                '    sMiddleByteVal = Convert.ToChar(64 + nMidleByteVal)
+                '    sHighByteVal = Convert.ToChar(64 + nHighByteVal)
+
+                '    outDev = sHighByteVal & sMiddleByteVal & sLowByteval
+
+            Case Else
+                Return False
+        End Select
+
+
+
+
 
         Return True
     End Function

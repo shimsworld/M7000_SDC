@@ -525,9 +525,9 @@ Public Class frmMotionUI
         '모션 Homeing , 설정 된 축 모두 적용
         myParent.g_StateMsgHandler.messageToString(CStateMsg.eType.eMSG_State, CStateMsg.eStateMsg.eSYSTEM_STATUS_HOMMING)
 
-        'XMove(0, g_ConfigInfos.MotionConfig(0).dVelocity, CDevPLCCommonNode.eMovingMethod.eABS)
-        'Application.DoEvents()
-        'Thread.Sleep(500)
+        XMove(0, g_ConfigInfos.MotionConfig(0).dVelocity, CDevPLCCommonNode.eMovingMethod.eABS)
+        Application.DoEvents()
+        Thread.Sleep(500)
 
         YMove(0, g_ConfigInfos.MotionConfig(1).dVelocity, CDevPLCCommonNode.eMovingMethod.eABS)
         Application.DoEvents()
@@ -580,24 +580,24 @@ Public Class frmMotionUI
     End Sub
 
     Private Sub btnXmove_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnXmove.Click
-        'If myParent.cPLC.IsConnected = False Then
-        '    MsgBox("Motion 과 연결이 되지 않았습니다!!", MsgBoxStyle.Critical, "Care!!")
-        '    Exit Sub
-        'End If
+        If myParent.cPLC.IsConnected = False Then
+            MsgBox("Motion 과 연결이 되지 않았습니다!!", MsgBoxStyle.Critical, "Care!!")
+            Exit Sub
+        End If
 
-        'Dim dist As Double = frmBuilderSettings.ConvertToDouble(txtPosition.Text)
+        Dim dist As Double = frmBuilderSettings.ConvertToDouble(txtPosition.Text)
 
-        'ControlEnable(False)
+        ControlEnable(False)
 
-        'If rbAbs.Checked = True Then
-        '    XMove(dist, g_ConfigInfos.MotionConfig(0).dVelocity, CDevPLCCommonNode.eMovingMethod.eABS)
-        'Else
-        '    XMove(dist, g_ConfigInfos.MotionConfig(0).dVelocity, CDevPLCCommonNode.eMovingMethod.eINC)
-        'End If
-        ''myParent.cMotion.AxisMove(0, dist, rbAbs.Checked)
+        If rbAbs.Checked = True Then
+            XMove(dist, g_ConfigInfos.MotionConfig(0).dVelocity, CDevPLCCommonNode.eMovingMethod.eABS)
+        Else
+            XMove(dist, g_ConfigInfos.MotionConfig(0).dVelocity, CDevPLCCommonNode.eMovingMethod.eINC)
+        End If
+        'myParent.cMotion.AxisMove(0, dist, rbAbs.Checked)
 
-        ''  myParent.cMotion.XMove(dist, rbAbs.Checked)
-        'ControlEnable(True)
+        '  myParent.cMotion.XMove(dist, rbAbs.Checked)
+        ControlEnable(True)
 
     End Sub
 
@@ -647,6 +647,16 @@ Public Class frmMotionUI
     End Sub
 
     Private Sub btnThetaMove_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnThetaMove.Click
+        ''If myParent.cPLC.IsConnected = False Then
+        ''    MsgBox("Motion 과 연결이 되지 않았습니다!!", MsgBoxStyle.Critical, "Care!!")
+        ''    Exit Sub
+        ''End If
+
+        ''Dim dDist As Double = frmBuilderSettings.ConvertToDouble(txtPosition.Text)
+
+        ''ControlEnable(False)
+        ''myParent.cMotion.ViewAngleMove(dDist, rbAbs.Checked)
+        ''ControlEnable(True)
         'If myParent.cPLC.IsConnected = False Then
         '    MsgBox("Motion 과 연결이 되지 않았습니다!!", MsgBoxStyle.Critical, "Care!!")
         '    Exit Sub
@@ -655,26 +665,16 @@ Public Class frmMotionUI
         'Dim dDist As Double = frmBuilderSettings.ConvertToDouble(txtPosition.Text)
 
         'ControlEnable(False)
-        'myParent.cMotion.ViewAngleMove(dDist, rbAbs.Checked)
+
+        'If rbAbs.Checked = True Then
+        '    Theta1Move(dDist, g_ConfigInfos.MotionConfig(2).dVelocity, CDevPLCCommonNode.eMovingMethod.eABS)
+        'Else
+        '    Theta1Move(dDist, g_ConfigInfos.MotionConfig(2).dVelocity, CDevPLCCommonNode.eMovingMethod.eINC)
+        'End If
+
+        ''myParent.cMotion.AxisMove(2, dDist, rbAbs.Checked)
+        ''myParent.cMotion.ZMove(dDist, rbAbs.Checked)
         'ControlEnable(True)
-        If myParent.cPLC.IsConnected = False Then
-            MsgBox("Motion 과 연결이 되지 않았습니다!!", MsgBoxStyle.Critical, "Care!!")
-            Exit Sub
-        End If
-
-        Dim dDist As Double = frmBuilderSettings.ConvertToDouble(txtPosition.Text)
-
-        ControlEnable(False)
-
-        If rbAbs.Checked = True Then
-            Theta1Move(dDist, g_ConfigInfos.MotionConfig(2).dVelocity, CDevPLCCommonNode.eMovingMethod.eABS)
-        Else
-            Theta1Move(dDist, g_ConfigInfos.MotionConfig(2).dVelocity, CDevPLCCommonNode.eMovingMethod.eINC)
-        End If
-
-        'myParent.cMotion.AxisMove(2, dDist, rbAbs.Checked)
-        'myParent.cMotion.ZMove(dDist, rbAbs.Checked)
-        ControlEnable(True)
     End Sub
 
 #Region "JOG Control"
@@ -1280,7 +1280,7 @@ Public Class frmMotionUI
         Dim sTemp As String = ""
 
         'Loop Until chkPos
-        ' XMove(dDistance(0), g_ConfigInfos.MotionConfig(0).dVelocity, CDevPLCCommonNode.eMovingMethod.eABS)
+        XMove(dDistance(0), g_ConfigInfos.MotionConfig(0).dVelocity, CDevPLCCommonNode.eMovingMethod.eABS)
 
         'Application.DoEvents()
         'Thread.Sleep(1000)
@@ -1397,9 +1397,9 @@ Public Class frmMotionUI
 
                         For Cnt As Integer = 0 To tPositionArr.Length - 1
 
-                            'If Cnt = 0 Then
-                            '    ucMotionIndicator.XPos = tPositionArr(Cnt)
                             If Cnt = 0 Then
+                                ucMotionIndicator.XPos = tPositionArr(Cnt)
+                            ElseIf Cnt = 0 Then
                                 ucMotionIndicator.YPos = tPositionArr(Cnt)
                             ElseIf Cnt = 1 Then
                                 ucMotionIndicator.ZPos = tPositionArr(Cnt)
@@ -3303,43 +3303,43 @@ Public Class frmMotionUI
 
         MoveCompletedAllAxis()
     End Sub
-    ' Public Function XMove(ByVal position As Double, ByVal velocity As Integer, ByVal MovingMethod As CDevPLCCommonNode.eMovingMethod) As Boolean
-    'Dim reqInfo As CDevPLCCommonNode.sRequestInfo
+    Public Function XMove(ByVal position As Double, ByVal velocity As Integer, ByVal MovingMethod As CDevPLCCommonNode.eMovingMethod) As Boolean
+        Dim reqInfo As CDevPLCCommonNode.sRequestInfo
 
-    'reqInfo.nCMD = CDevPLCCommonNode.eRequestCMD.eMotionCtrl
-    'reqInfo.nSYSStatus = CDevPLCCommonNode.eSystemStatus.eMotion_Pos_Move_X ' CDevPLC.eSystemStatus.ePauseAndProcess 'state
-    'ReDim reqInfo.Param(1)
-    'Try
-    '    If MovingMethod = CDevPLCCommonNode.eMovingMethod.eABS Then
+        reqInfo.nCMD = CDevPLCCommonNode.eRequestCMD.eMotionCtrl
+        reqInfo.nSYSStatus = CDevPLCCommonNode.eSystemStatus.eMotion_Pos_Move_X ' CDevPLC.eSystemStatus.ePauseAndProcess 'state
+        ReDim reqInfo.Param(1)
+        Try
+            If MovingMethod = CDevPLCCommonNode.eMovingMethod.eABS Then
 
-    '        'If position < 0 Then
-    '        '    MsgBox("음수 일 수 없습니다.")
-    '        '    Return False
-    '        'Else
-    '        reqInfo.Param(0) = position * 1000
-    '        reqInfo.Param(1) = velocity * 1000
-    '        reqInfo.eMovingMethod = CDevPLCCommonNode.eMovingMethod.eABS
-    '        '  End If
-    '    Else
-    '        '  reqInfo.Param(0) = (myParent.cPLC.CurrentPosition(1) * 1000) + (position * 1000) ' (ucMotionIndicator.XPos * 1000) + (position * 1000)
-    '        reqInfo.Param(0) = (position * 1000) ' (myParent.cPLC.CurrentPosition(0)) + (position * 1000)
-    '        reqInfo.Param(1) = velocity * 1000
-    '        reqInfo.eMovingMethod = CDevPLCCommonNode.eMovingMethod.eINC
-    '    End If
+                'If position < 0 Then
+                '    MsgBox("음수 일 수 없습니다.")
+                '    Return False
+                'Else
+                reqInfo.Param(0) = position * 1000
+                reqInfo.Param(1) = velocity * 1000
+                reqInfo.eMovingMethod = CDevPLCCommonNode.eMovingMethod.eABS
+                '  End If
+            Else
+                '  reqInfo.Param(0) = (myParent.cPLC.CurrentPosition(1) * 1000) + (position * 1000) ' (ucMotionIndicator.XPos * 1000) + (position * 1000)
+                reqInfo.Param(0) = (position * 1000) ' (myParent.cPLC.CurrentPosition(0)) + (position * 1000)
+                reqInfo.Param(1) = velocity * 1000
+                reqInfo.eMovingMethod = CDevPLCCommonNode.eMovingMethod.eINC
+            End If
 
-    'Catch ex As Exception
-    '    MsgBox(ex.ToString)
-    '    Return False
-    'End Try
+        Catch ex As Exception
+            MsgBox(ex.ToString)
+            Return False
+        End Try
 
-    'myParent.cPLC.Request(reqInfo)
+        myParent.cPLC.Request(reqInfo)
 
-    'Application.DoEvents()
-    'Thread.Sleep(500)
+        Application.DoEvents()
+        Thread.Sleep(500)
 
-    'MoveCompletedAllAxis(CDevPLCCommonNode.eAxis.eX)
-    '     Return True
-    ' End Function
+        MoveCompletedAllAxis(CDevPLCCommonNode.eAxis.eX)
+        Return True
+    End Function
 
     Public Function Theta1Move(ByVal position As Double, ByVal velocity As Integer, ByVal MovingMethod As CDevPLCCommonNode.eMovingMethod) As Boolean
         Dim reqInfo As CDevPLCCommonNode.sRequestInfo
@@ -3374,8 +3374,8 @@ Public Class frmMotionUI
 
         Thread.Sleep(100)
         Application.DoEvents()
-
-        MoveCompletedAllAxis(CDevPLCCommonNode.eAxis.eTHETA1)
+        '정현기
+        'MoveCompletedAllAxis(CDevPLCCommonNode.eAxis.eTHETA1)
 
         Return True
     End Function
@@ -3413,8 +3413,8 @@ Public Class frmMotionUI
 
         Thread.Sleep(100)
         Application.DoEvents()
-
-        MoveCompletedAllAxis(CDevPLCCommonNode.eAxis.eTHETA2)
+        '정현기
+        'MoveCompletedAllAxis(CDevPLCCommonNode.eAxis.eTHETA2)
 
         Return True
     End Function
@@ -3452,8 +3452,8 @@ Public Class frmMotionUI
 
         Thread.Sleep(100)
         Application.DoEvents()
-
-        MoveCompletedAllAxis(CDevPLCCommonNode.eAxis.eTHETA3)
+        '정현기
+        'MoveCompletedAllAxis(CDevPLCCommonNode.eAxis.eTHETA3)
 
         Return True
     End Function
@@ -3491,91 +3491,91 @@ Public Class frmMotionUI
 
         Thread.Sleep(100)
         Application.DoEvents()
-
-        MoveCompletedAllAxis(CDevPLCCommonNode.eAxis.eTHETA4)
-
-        Return True
-    End Function
-
-    Public Function ThetaHomming() As Boolean
-
-        Dim reqInfo As CDevPLCCommonNode.sRequestInfo
-
-        reqInfo.nCMD = CDevPLCCommonNode.eRequestCMD.eMotionCtrl
-        reqInfo.nSYSStatus = CDevPLCCommonNode.eSystemStatus.eMotion_Pos_Move_Theta1  ' CDevPLC.eSystemStatus.ePauseAndProcess 'state
-        ReDim reqInfo.Param(1)
-
-        Try
-         
-            reqInfo.Param(0) = 0 * 1000
-            reqInfo.Param(1) = g_ConfigInfos.MotionConfig(2).dVelocity * 1000
-            reqInfo.eMovingMethod = CDevPLCCommonNode.eMovingMethod.eABS
-           
-        Catch ex As Exception
-            MsgBox(ex.ToString)
-            Return False
-        End Try
-
-        myParent.cPLC.Request(reqInfo)
-
-        reqInfo.nCMD = CDevPLCCommonNode.eRequestCMD.eMotionCtrl
-        reqInfo.nSYSStatus = CDevPLCCommonNode.eSystemStatus.eMotion_Pos_Move_Theta2  ' CDevPLC.eSystemStatus.ePauseAndProcess 'state
-        ReDim reqInfo.Param(1)
-
-        Try
-
-            reqInfo.Param(0) = 0 * 1000
-            reqInfo.Param(1) = g_ConfigInfos.MotionConfig(3).dVelocity * 1000
-            reqInfo.eMovingMethod = CDevPLCCommonNode.eMovingMethod.eABS
-
-        Catch ex As Exception
-            MsgBox(ex.ToString)
-            Return False
-        End Try
-
-        myParent.cPLC.Request(reqInfo)
-
-
-        reqInfo.nCMD = CDevPLCCommonNode.eRequestCMD.eMotionCtrl
-        reqInfo.nSYSStatus = CDevPLCCommonNode.eSystemStatus.eMotion_Pos_Move_Theta3  ' CDevPLC.eSystemStatus.ePauseAndProcess 'state
-        ReDim reqInfo.Param(1)
-
-        Try
-
-            reqInfo.Param(0) = 0 * 1000
-            reqInfo.Param(1) = g_ConfigInfos.MotionConfig(4).dVelocity * 1000
-            reqInfo.eMovingMethod = CDevPLCCommonNode.eMovingMethod.eABS
-
-        Catch ex As Exception
-            MsgBox(ex.ToString)
-            Return False
-        End Try
-
-        myParent.cPLC.Request(reqInfo)
-
-
-        reqInfo.nCMD = CDevPLCCommonNode.eRequestCMD.eMotionCtrl
-        reqInfo.nSYSStatus = CDevPLCCommonNode.eSystemStatus.eMotion_Pos_Move_Theta4  ' CDevPLC.eSystemStatus.ePauseAndProcess 'state
-        ReDim reqInfo.Param(1)
-
-        Try
-
-            reqInfo.Param(0) = 0 * 1000
-            reqInfo.Param(1) = g_ConfigInfos.MotionConfig(5).dVelocity * 1000
-            reqInfo.eMovingMethod = CDevPLCCommonNode.eMovingMethod.eABS
-
-        Catch ex As Exception
-            MsgBox(ex.ToString)
-            Return False
-        End Try
-
-        myParent.cPLC.Request(reqInfo)
-
-
-        MoveCompletedThetaAxis()
+        '정현기
+        'MoveCompletedAllAxis(CDevPLCCommonNode.eAxis.eTHETA4)
 
         Return True
     End Function
+
+    'Public Function ThetaHomming() As Boolean
+
+    '    Dim reqInfo As CDevPLCCommonNode.sRequestInfo
+
+    '    reqInfo.nCMD = CDevPLCCommonNode.eRequestCMD.eMotionCtrl
+    '    reqInfo.nSYSStatus = CDevPLCCommonNode.eSystemStatus.eMotion_Pos_Move_Theta1  ' CDevPLC.eSystemStatus.ePauseAndProcess 'state
+    '    ReDim reqInfo.Param(1)
+
+    '    Try
+
+    '        reqInfo.Param(0) = 0 * 1000
+    '        reqInfo.Param(1) = g_ConfigInfos.MotionConfig(2).dVelocity * 1000
+    '        reqInfo.eMovingMethod = CDevPLCCommonNode.eMovingMethod.eABS
+
+    '    Catch ex As Exception
+    '        MsgBox(ex.ToString)
+    '        Return False
+    '    End Try
+
+    '    myParent.cPLC.Request(reqInfo)
+
+    '    reqInfo.nCMD = CDevPLCCommonNode.eRequestCMD.eMotionCtrl
+    '    reqInfo.nSYSStatus = CDevPLCCommonNode.eSystemStatus.eMotion_Pos_Move_Theta2  ' CDevPLC.eSystemStatus.ePauseAndProcess 'state
+    '    ReDim reqInfo.Param(1)
+
+    '    Try
+
+    '        reqInfo.Param(0) = 0 * 1000
+    '        reqInfo.Param(1) = g_ConfigInfos.MotionConfig(3).dVelocity * 1000
+    '        reqInfo.eMovingMethod = CDevPLCCommonNode.eMovingMethod.eABS
+
+    '    Catch ex As Exception
+    '        MsgBox(ex.ToString)
+    '        Return False
+    '    End Try
+
+    '    myParent.cPLC.Request(reqInfo)
+
+
+    '    reqInfo.nCMD = CDevPLCCommonNode.eRequestCMD.eMotionCtrl
+    '    reqInfo.nSYSStatus = CDevPLCCommonNode.eSystemStatus.eMotion_Pos_Move_Theta3  ' CDevPLC.eSystemStatus.ePauseAndProcess 'state
+    '    ReDim reqInfo.Param(1)
+
+    '    Try
+
+    '        reqInfo.Param(0) = 0 * 1000
+    '        reqInfo.Param(1) = g_ConfigInfos.MotionConfig(4).dVelocity * 1000
+    '        reqInfo.eMovingMethod = CDevPLCCommonNode.eMovingMethod.eABS
+
+    '    Catch ex As Exception
+    '        MsgBox(ex.ToString)
+    '        Return False
+    '    End Try
+
+    '    myParent.cPLC.Request(reqInfo)
+
+
+    '    reqInfo.nCMD = CDevPLCCommonNode.eRequestCMD.eMotionCtrl
+    '    reqInfo.nSYSStatus = CDevPLCCommonNode.eSystemStatus.eMotion_Pos_Move_Theta4  ' CDevPLC.eSystemStatus.ePauseAndProcess 'state
+    '    ReDim reqInfo.Param(1)
+
+    '    Try
+
+    '        reqInfo.Param(0) = 0 * 1000
+    '        reqInfo.Param(1) = g_ConfigInfos.MotionConfig(5).dVelocity * 1000
+    '        reqInfo.eMovingMethod = CDevPLCCommonNode.eMovingMethod.eABS
+
+    '    Catch ex As Exception
+    '        MsgBox(ex.ToString)
+    '        Return False
+    '    End Try
+
+    '    myParent.cPLC.Request(reqInfo)
+
+
+    '    MoveCompletedThetaAxis()
+
+    '    Return True
+    'End Function
 
 
     Public Function YMove(ByVal position As Double, ByVal velocity As Integer, ByVal MovingMethod As CDevPLCCommonNode.eMovingMethod) As Boolean
@@ -3655,8 +3655,23 @@ Public Class frmMotionUI
     End Function
     Public Sub MoveCompletedAllAxis(ByVal Axis As CDevPLCCommonNode.eAxis)
         Dim reqInfo As CDevPLCCommonNode.sRequestInfo
-        
-        If Axis = CDevPLCCommonNode.eAxis.eY Then
+        If Axis = CDevPLCCommonNode.eAxis.eX Then
+            myParent.cPLC.XMoveCompleted = False
+            Do
+                Thread.Sleep(100)
+                Application.DoEvents()
+            Loop Until myParent.cPLC.XMoveCompleted = True
+
+            '완료 후 ACK 신호 날림
+            reqInfo.nCMD = CDevPLCCommonNode.eRequestCMD.eMotionCtrl
+            reqInfo.nSYSStatus = CDevPLCCommonNode.eSystemStatus.eMotion_Complete_ACK ' CDevPLC.eSystemStatus.ePauseAndProcess 'state
+            reqInfo.Param = Nothing
+            ReDim reqInfo.Param(0)
+            reqInfo.Param(0) = CDevPLCCommonNode.eAxis.eX
+            myParent.cPLC.Request(reqInfo)
+
+
+        ElseIf Axis = CDevPLCCommonNode.eAxis.eY Then
             myParent.cPLC.YMoveCompleted = False
             Do
                 Thread.Sleep(100)
@@ -3687,68 +3702,68 @@ Public Class frmMotionUI
             reqInfo.Param(0) = CDevPLCCommonNode.eAxis.eZ
             myParent.cPLC.Request(reqInfo)
 
-        ElseIf Axis = CDevPLCCommonNode.eAxis.eTHETA1 Then
-            myParent.cPLC.Theta1MoveCompleted = False
-            Do
-                Thread.Sleep(100)
-                Application.DoEvents()
-            Loop Until myParent.cPLC.Theta1MoveCompleted = True
+            'ElseIf Axis = CDevPLCCommonNode.eAxis.eTHETA1 Then
+            '    myParent.cPLC.Theta1MoveCompleted = False
+            '    Do
+            '        Thread.Sleep(100)
+            '        Application.DoEvents()
+            '    Loop Until myParent.cPLC.Theta1MoveCompleted = True
 
-            '완료 후 ACK 신호 날림
-            reqInfo.nCMD = CDevPLCCommonNode.eRequestCMD.eMotionCtrl
-            reqInfo.nSYSStatus = CDevPLCCommonNode.eSystemStatus.eMotion_Complete_ACK ' CDevPLC.eSystemStatus.ePauseAndProcess 'state
-            reqInfo.Param = Nothing
-            ReDim reqInfo.Param(0)
-            reqInfo.Param(0) = CDevPLCCommonNode.eAxis.eTHETA1
-            myParent.cPLC.Request(reqInfo)
-
-
-        ElseIf Axis = CDevPLCCommonNode.eAxis.eTHETA2 Then
-            myParent.cPLC.Theta2MoveCompleted = False
-            Do
-                Thread.Sleep(100)
-                Application.DoEvents()
-            Loop Until myParent.cPLC.Theta2MoveCompleted = True
-
-            '완료 후 ACK 신호 날림
-            reqInfo.nCMD = CDevPLCCommonNode.eRequestCMD.eMotionCtrl
-            reqInfo.nSYSStatus = CDevPLCCommonNode.eSystemStatus.eMotion_Complete_ACK ' CDevPLC.eSystemStatus.ePauseAndProcess 'state
-            reqInfo.Param = Nothing
-            ReDim reqInfo.Param(0)
-            reqInfo.Param(0) = CDevPLCCommonNode.eAxis.eTHETA2
-            myParent.cPLC.Request(reqInfo)
+            '    '완료 후 ACK 신호 날림
+            '    reqInfo.nCMD = CDevPLCCommonNode.eRequestCMD.eMotionCtrl
+            '    reqInfo.nSYSStatus = CDevPLCCommonNode.eSystemStatus.eMotion_Complete_ACK ' CDevPLC.eSystemStatus.ePauseAndProcess 'state
+            '    reqInfo.Param = Nothing
+            '    ReDim reqInfo.Param(0)
+            '    reqInfo.Param(0) = CDevPLCCommonNode.eAxis.eTHETA1
+            '    myParent.cPLC.Request(reqInfo)
 
 
-        ElseIf Axis = CDevPLCCommonNode.eAxis.eTHETA3 Then
-            myParent.cPLC.Theta3MoveCompleted = False
-            Do
-                Thread.Sleep(100)
-                Application.DoEvents()
-            Loop Until myParent.cPLC.Theta3MoveCompleted = True
+            'ElseIf Axis = CDevPLCCommonNode.eAxis.eTHETA2 Then
+            '    myParent.cPLC.Theta2MoveCompleted = False
+            '    Do
+            '        Thread.Sleep(100)
+            '        Application.DoEvents()
+            '    Loop Until myParent.cPLC.Theta2MoveCompleted = True
 
-            '완료 후 ACK 신호 날림
-            reqInfo.nCMD = CDevPLCCommonNode.eRequestCMD.eMotionCtrl
-            reqInfo.nSYSStatus = CDevPLCCommonNode.eSystemStatus.eMotion_Complete_ACK ' CDevPLC.eSystemStatus.ePauseAndProcess 'state
-            reqInfo.Param = Nothing
-            ReDim reqInfo.Param(0)
-            reqInfo.Param(0) = CDevPLCCommonNode.eAxis.eTHETA3
-            myParent.cPLC.Request(reqInfo)
+            '    '완료 후 ACK 신호 날림
+            '    reqInfo.nCMD = CDevPLCCommonNode.eRequestCMD.eMotionCtrl
+            '    reqInfo.nSYSStatus = CDevPLCCommonNode.eSystemStatus.eMotion_Complete_ACK ' CDevPLC.eSystemStatus.ePauseAndProcess 'state
+            '    reqInfo.Param = Nothing
+            '    ReDim reqInfo.Param(0)
+            '    reqInfo.Param(0) = CDevPLCCommonNode.eAxis.eTHETA2
+            '    myParent.cPLC.Request(reqInfo)
 
 
-        ElseIf Axis = CDevPLCCommonNode.eAxis.eTHETA4 Then
-            myParent.cPLC.Theta4MoveCompleted = False
-            Do
-                Thread.Sleep(100)
-                Application.DoEvents()
-            Loop Until myParent.cPLC.Theta4MoveCompleted = True
+            'ElseIf Axis = CDevPLCCommonNode.eAxis.eTHETA3 Then
+            '    myParent.cPLC.Theta3MoveCompleted = False
+            '    Do
+            '        Thread.Sleep(100)
+            '        Application.DoEvents()
+            '    Loop Until myParent.cPLC.Theta3MoveCompleted = True
 
-            '완료 후 ACK 신호 날림
-            reqInfo.nCMD = CDevPLCCommonNode.eRequestCMD.eMotionCtrl
-            reqInfo.nSYSStatus = CDevPLCCommonNode.eSystemStatus.eMotion_Complete_ACK ' CDevPLC.eSystemStatus.ePauseAndProcess 'state
-            reqInfo.Param = Nothing
-            ReDim reqInfo.Param(0)
-            reqInfo.Param(0) = CDevPLCCommonNode.eAxis.eTHETA4
-            myParent.cPLC.Request(reqInfo)
+            '    '완료 후 ACK 신호 날림
+            '    reqInfo.nCMD = CDevPLCCommonNode.eRequestCMD.eMotionCtrl
+            '    reqInfo.nSYSStatus = CDevPLCCommonNode.eSystemStatus.eMotion_Complete_ACK ' CDevPLC.eSystemStatus.ePauseAndProcess 'state
+            '    reqInfo.Param = Nothing
+            '    ReDim reqInfo.Param(0)
+            '    reqInfo.Param(0) = CDevPLCCommonNode.eAxis.eTHETA3
+            '    myParent.cPLC.Request(reqInfo)
+
+
+            'ElseIf Axis = CDevPLCCommonNode.eAxis.eTHETA4 Then
+            '    myParent.cPLC.Theta4MoveCompleted = False
+            '    Do
+            '        Thread.Sleep(100)
+            '        Application.DoEvents()
+            '    Loop Until myParent.cPLC.Theta4MoveCompleted = True
+
+            '    '완료 후 ACK 신호 날림
+            '    reqInfo.nCMD = CDevPLCCommonNode.eRequestCMD.eMotionCtrl
+            '    reqInfo.nSYSStatus = CDevPLCCommonNode.eSystemStatus.eMotion_Complete_ACK ' CDevPLC.eSystemStatus.ePauseAndProcess 'state
+            '    reqInfo.Param = Nothing
+            '    ReDim reqInfo.Param(0)
+            '    reqInfo.Param(0) = CDevPLCCommonNode.eAxis.eTHETA4
+            '    myParent.cPLC.Request(reqInfo)
 
         End If
     End Sub
@@ -3757,6 +3772,19 @@ Public Class frmMotionUI
         Dim reqInfo As CDevPLCCommonNode.sRequestInfo
         Application.DoEvents()
         Thread.Sleep(100)
+        myParent.cPLC.XMoveCompleted = False
+        Do
+            Thread.Sleep(100)
+            Application.DoEvents()
+        Loop Until myParent.cPLC.XMoveCompleted = True
+
+        '완료 후 ACK 신호 날림
+        reqInfo.nCMD = CDevPLCCommonNode.eRequestCMD.eMotionCtrl
+        reqInfo.nSYSStatus = CDevPLCCommonNode.eSystemStatus.eMotion_Complete_ACK ' CDevPLC.eSystemStatus.ePauseAndProcess 'state
+        reqInfo.Param = Nothing
+        ReDim reqInfo.Param(0)
+        reqInfo.Param(0) = CDevPLCCommonNode.eAxis.eX
+        myParent.cPLC.Request(reqInfo)
 
         myParent.cPLC.YMoveCompleted = False
         Do
@@ -3786,123 +3814,123 @@ Public Class frmMotionUI
         reqInfo.Param(0) = CDevPLCCommonNode.eAxis.eZ
         myParent.cPLC.Request(reqInfo)
 
-        myParent.cPLC.Theta1MoveCompleted = False
-        Do
-            Thread.Sleep(100)
-            Application.DoEvents()
-        Loop Until myParent.cPLC.Theta1MoveCompleted = True
+        'myParent.cPLC.Theta1MoveCompleted = False
+        'Do
+        '    Thread.Sleep(100)
+        '    Application.DoEvents()
+        'Loop Until myParent.cPLC.Theta1MoveCompleted = True
 
-        '완료 후 ACK 신호 날림
-        reqInfo.nCMD = CDevPLCCommonNode.eRequestCMD.eMotionCtrl
-        reqInfo.nSYSStatus = CDevPLCCommonNode.eSystemStatus.eMotion_Complete_ACK ' CDevPLC.eSystemStatus.ePauseAndProcess 'state
-        reqInfo.Param = Nothing
-        ReDim reqInfo.Param(0)
-        reqInfo.Param(0) = CDevPLCCommonNode.eAxis.eTHETA1
-        myParent.cPLC.Request(reqInfo)
+        ''완료 후 ACK 신호 날림
+        'reqInfo.nCMD = CDevPLCCommonNode.eRequestCMD.eMotionCtrl
+        'reqInfo.nSYSStatus = CDevPLCCommonNode.eSystemStatus.eMotion_Complete_ACK ' CDevPLC.eSystemStatus.ePauseAndProcess 'state
+        'reqInfo.Param = Nothing
+        'ReDim reqInfo.Param(0)
+        'reqInfo.Param(0) = CDevPLCCommonNode.eAxis.eTHETA1
+        'myParent.cPLC.Request(reqInfo)
 
-        myParent.cPLC.Theta2MoveCompleted = False
-        Do
-            Thread.Sleep(100)
-            Application.DoEvents()
-        Loop Until myParent.cPLC.Theta2MoveCompleted = True
+        'myParent.cPLC.Theta2MoveCompleted = False
+        'Do
+        '    Thread.Sleep(100)
+        '    Application.DoEvents()
+        'Loop Until myParent.cPLC.Theta2MoveCompleted = True
 
-        '완료 후 ACK 신호 날림
-        reqInfo.nCMD = CDevPLCCommonNode.eRequestCMD.eMotionCtrl
-        reqInfo.nSYSStatus = CDevPLCCommonNode.eSystemStatus.eMotion_Complete_ACK ' CDevPLC.eSystemStatus.ePauseAndProcess 'state
-        reqInfo.Param = Nothing
-        ReDim reqInfo.Param(0)
-        reqInfo.Param(0) = CDevPLCCommonNode.eAxis.eTHETA2
-        myParent.cPLC.Request(reqInfo)
+        ''완료 후 ACK 신호 날림
+        'reqInfo.nCMD = CDevPLCCommonNode.eRequestCMD.eMotionCtrl
+        'reqInfo.nSYSStatus = CDevPLCCommonNode.eSystemStatus.eMotion_Complete_ACK ' CDevPLC.eSystemStatus.ePauseAndProcess 'state
+        'reqInfo.Param = Nothing
+        'ReDim reqInfo.Param(0)
+        'reqInfo.Param(0) = CDevPLCCommonNode.eAxis.eTHETA2
+        'myParent.cPLC.Request(reqInfo)
 
-        myParent.cPLC.Theta3MoveCompleted = False
-        Do
-            Thread.Sleep(100)
-            Application.DoEvents()
-        Loop Until myParent.cPLC.Theta3MoveCompleted = True
+        'myParent.cPLC.Theta3MoveCompleted = False
+        'Do
+        '    Thread.Sleep(100)
+        '    Application.DoEvents()
+        'Loop Until myParent.cPLC.Theta3MoveCompleted = True
 
-        '완료 후 ACK 신호 날림
-        reqInfo.nCMD = CDevPLCCommonNode.eRequestCMD.eMotionCtrl
-        reqInfo.nSYSStatus = CDevPLCCommonNode.eSystemStatus.eMotion_Complete_ACK ' CDevPLC.eSystemStatus.ePauseAndProcess 'state
-        reqInfo.Param = Nothing
-        ReDim reqInfo.Param(0)
-        reqInfo.Param(0) = CDevPLCCommonNode.eAxis.eTHETA3
-        myParent.cPLC.Request(reqInfo)
+        ''완료 후 ACK 신호 날림
+        'reqInfo.nCMD = CDevPLCCommonNode.eRequestCMD.eMotionCtrl
+        'reqInfo.nSYSStatus = CDevPLCCommonNode.eSystemStatus.eMotion_Complete_ACK ' CDevPLC.eSystemStatus.ePauseAndProcess 'state
+        'reqInfo.Param = Nothing
+        'ReDim reqInfo.Param(0)
+        'reqInfo.Param(0) = CDevPLCCommonNode.eAxis.eTHETA3
+        'myParent.cPLC.Request(reqInfo)
 
-        myParent.cPLC.Theta4MoveCompleted = False
-        Do
-            Thread.Sleep(100)
-            Application.DoEvents()
-        Loop Until myParent.cPLC.Theta4MoveCompleted = True
+        'myParent.cPLC.Theta4MoveCompleted = False
+        'Do
+        '    Thread.Sleep(100)
+        '    Application.DoEvents()
+        'Loop Until myParent.cPLC.Theta4MoveCompleted = True
 
-        '완료 후 ACK 신호 날림
-        reqInfo.nCMD = CDevPLCCommonNode.eRequestCMD.eMotionCtrl
-        reqInfo.nSYSStatus = CDevPLCCommonNode.eSystemStatus.eMotion_Complete_ACK ' CDevPLC.eSystemStatus.ePauseAndProcess 'state
-        reqInfo.Param = Nothing
-        ReDim reqInfo.Param(0)
-        reqInfo.Param(0) = CDevPLCCommonNode.eAxis.eTHETA4
-        myParent.cPLC.Request(reqInfo)
+        ''완료 후 ACK 신호 날림
+        'reqInfo.nCMD = CDevPLCCommonNode.eRequestCMD.eMotionCtrl
+        'reqInfo.nSYSStatus = CDevPLCCommonNode.eSystemStatus.eMotion_Complete_ACK ' CDevPLC.eSystemStatus.ePauseAndProcess 'state
+        'reqInfo.Param = Nothing
+        'ReDim reqInfo.Param(0)
+        'reqInfo.Param(0) = CDevPLCCommonNode.eAxis.eTHETA4
+        'myParent.cPLC.Request(reqInfo)
     End Sub
-    Public Sub MoveCompletedThetaAxis()
-        Dim reqInfo As CDevPLCCommonNode.sRequestInfo
-        '   Application.DoEvents()
-        '  Thread.Sleep(100)
+    'Public Sub MoveCompletedThetaAxis()
+    '    Dim reqInfo As CDevPLCCommonNode.sRequestInfo
+    '    '   Application.DoEvents()
+    '    '  Thread.Sleep(100)
 
-        myParent.cPLC.Theta1MoveCompleted = False
-        Do
-            Thread.Sleep(50)
-            Application.DoEvents()
-        Loop Until myParent.cPLC.Theta1MoveCompleted = True
+    '    myParent.cPLC.Theta1MoveCompleted = False
+    '    Do
+    '        Thread.Sleep(50)
+    '        Application.DoEvents()
+    '    Loop Until myParent.cPLC.Theta1MoveCompleted = True
 
-        '완료 후 ACK 신호 날림
-        reqInfo.nCMD = CDevPLCCommonNode.eRequestCMD.eMotionCtrl
-        reqInfo.nSYSStatus = CDevPLCCommonNode.eSystemStatus.eMotion_Complete_ACK ' CDevPLC.eSystemStatus.ePauseAndProcess 'state
-        reqInfo.Param = Nothing
-        ReDim reqInfo.Param(0)
-        reqInfo.Param(0) = CDevPLCCommonNode.eAxis.eTHETA1
-        myParent.cPLC.Request(reqInfo)
+    '    '완료 후 ACK 신호 날림
+    '    reqInfo.nCMD = CDevPLCCommonNode.eRequestCMD.eMotionCtrl
+    '    reqInfo.nSYSStatus = CDevPLCCommonNode.eSystemStatus.eMotion_Complete_ACK ' CDevPLC.eSystemStatus.ePauseAndProcess 'state
+    '    reqInfo.Param = Nothing
+    '    ReDim reqInfo.Param(0)
+    '    reqInfo.Param(0) = CDevPLCCommonNode.eAxis.eTHETA1
+    '    myParent.cPLC.Request(reqInfo)
 
-        myParent.cPLC.Theta2MoveCompleted = False
-        Do
-            Thread.Sleep(50)
-            Application.DoEvents()
-        Loop Until myParent.cPLC.Theta2MoveCompleted = True
+    '    myParent.cPLC.Theta2MoveCompleted = False
+    '    Do
+    '        Thread.Sleep(50)
+    '        Application.DoEvents()
+    '    Loop Until myParent.cPLC.Theta2MoveCompleted = True
 
-        '완료 후 ACK 신호 날림
-        reqInfo.nCMD = CDevPLCCommonNode.eRequestCMD.eMotionCtrl
-        reqInfo.nSYSStatus = CDevPLCCommonNode.eSystemStatus.eMotion_Complete_ACK ' CDevPLC.eSystemStatus.ePauseAndProcess 'state
-        reqInfo.Param = Nothing
-        ReDim reqInfo.Param(0)
-        reqInfo.Param(0) = CDevPLCCommonNode.eAxis.eTHETA2
-        myParent.cPLC.Request(reqInfo)
+    '    '완료 후 ACK 신호 날림
+    '    reqInfo.nCMD = CDevPLCCommonNode.eRequestCMD.eMotionCtrl
+    '    reqInfo.nSYSStatus = CDevPLCCommonNode.eSystemStatus.eMotion_Complete_ACK ' CDevPLC.eSystemStatus.ePauseAndProcess 'state
+    '    reqInfo.Param = Nothing
+    '    ReDim reqInfo.Param(0)
+    '    reqInfo.Param(0) = CDevPLCCommonNode.eAxis.eTHETA2
+    '    myParent.cPLC.Request(reqInfo)
 
-        myParent.cPLC.Theta3MoveCompleted = False
-        Do
-            Thread.Sleep(50)
-            Application.DoEvents()
-        Loop Until myParent.cPLC.Theta3MoveCompleted = True
+    '    myParent.cPLC.Theta3MoveCompleted = False
+    '    Do
+    '        Thread.Sleep(50)
+    '        Application.DoEvents()
+    '    Loop Until myParent.cPLC.Theta3MoveCompleted = True
 
-        '완료 후 ACK 신호 날림
-        reqInfo.nCMD = CDevPLCCommonNode.eRequestCMD.eMotionCtrl
-        reqInfo.nSYSStatus = CDevPLCCommonNode.eSystemStatus.eMotion_Complete_ACK ' CDevPLC.eSystemStatus.ePauseAndProcess 'state
-        reqInfo.Param = Nothing
-        ReDim reqInfo.Param(0)
-        reqInfo.Param(0) = CDevPLCCommonNode.eAxis.eTHETA3
-        myParent.cPLC.Request(reqInfo)
+    '    '완료 후 ACK 신호 날림
+    '    reqInfo.nCMD = CDevPLCCommonNode.eRequestCMD.eMotionCtrl
+    '    reqInfo.nSYSStatus = CDevPLCCommonNode.eSystemStatus.eMotion_Complete_ACK ' CDevPLC.eSystemStatus.ePauseAndProcess 'state
+    '    reqInfo.Param = Nothing
+    '    ReDim reqInfo.Param(0)
+    '    reqInfo.Param(0) = CDevPLCCommonNode.eAxis.eTHETA3
+    '    myParent.cPLC.Request(reqInfo)
 
-        myParent.cPLC.Theta4MoveCompleted = False
-        Do
-            Thread.Sleep(50)
-            Application.DoEvents()
-        Loop Until myParent.cPLC.Theta4MoveCompleted = True
+    '    myParent.cPLC.Theta4MoveCompleted = False
+    '    Do
+    '        Thread.Sleep(50)
+    '        Application.DoEvents()
+    '    Loop Until myParent.cPLC.Theta4MoveCompleted = True
 
-        '완료 후 ACK 신호 날림
-        reqInfo.nCMD = CDevPLCCommonNode.eRequestCMD.eMotionCtrl
-        reqInfo.nSYSStatus = CDevPLCCommonNode.eSystemStatus.eMotion_Complete_ACK ' CDevPLC.eSystemStatus.ePauseAndProcess 'state
-        reqInfo.Param = Nothing
-        ReDim reqInfo.Param(0)
-        reqInfo.Param(0) = CDevPLCCommonNode.eAxis.eTHETA4
-        myParent.cPLC.Request(reqInfo)
-    End Sub
+    '    '완료 후 ACK 신호 날림
+    '    reqInfo.nCMD = CDevPLCCommonNode.eRequestCMD.eMotionCtrl
+    '    reqInfo.nSYSStatus = CDevPLCCommonNode.eSystemStatus.eMotion_Complete_ACK ' CDevPLC.eSystemStatus.ePauseAndProcess 'state
+    '    reqInfo.Param = Nothing
+    '    ReDim reqInfo.Param(0)
+    '    reqInfo.Param(0) = CDevPLCCommonNode.eAxis.eTHETA4
+    '    myParent.cPLC.Request(reqInfo)
+    'End Sub
 
     Public Sub SetStop()
         Dim reqInfo As CDevPLCCommonNode.sRequestInfo
@@ -3959,75 +3987,75 @@ Public Class frmMotionUI
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        If myParent.cPLC.IsConnected = False Then
-            MsgBox("Motion 과 연결이 되지 않았습니다!!", MsgBoxStyle.Critical, "Care!!")
-            Exit Sub
-        End If
+        'If myParent.cPLC.IsConnected = False Then
+        '    MsgBox("Motion 과 연결이 되지 않았습니다!!", MsgBoxStyle.Critical, "Care!!")
+        '    Exit Sub
+        'End If
 
-        Dim dDist As Double = frmBuilderSettings.ConvertToDouble(txtPosition.Text)
+        'Dim dDist As Double = frmBuilderSettings.ConvertToDouble(txtPosition.Text)
 
-        ControlEnable(False)
+        'ControlEnable(False)
 
-        If rbAbs.Checked = True Then
-            Theta3Move(dDist, g_ConfigInfos.MotionConfig(4).dVelocity, CDevPLCCommonNode.eMovingMethod.eABS)
-        Else
-            Theta3Move(dDist, g_ConfigInfos.MotionConfig(4).dVelocity, CDevPLCCommonNode.eMovingMethod.eINC)
-        End If
+        'If rbAbs.Checked = True Then
+        '    Theta3Move(dDist, g_ConfigInfos.MotionConfig(4).dVelocity, CDevPLCCommonNode.eMovingMethod.eABS)
+        'Else
+        '    Theta3Move(dDist, g_ConfigInfos.MotionConfig(4).dVelocity, CDevPLCCommonNode.eMovingMethod.eINC)
+        'End If
 
-        'myParent.cMotion.AxisMove(2, dDist, rbAbs.Checked)
-        'myParent.cMotion.ZMove(dDist, rbAbs.Checked)
-        ControlEnable(True)
+        ''myParent.cMotion.AxisMove(2, dDist, rbAbs.Checked)
+        ''myParent.cMotion.ZMove(dDist, rbAbs.Checked)
+        'ControlEnable(True)
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        If myParent.cPLC.IsConnected = False Then
-            MsgBox("Motion 과 연결이 되지 않았습니다!!", MsgBoxStyle.Critical, "Care!!")
-            Exit Sub
-        End If
+        'If myParent.cPLC.IsConnected = False Then
+        '    MsgBox("Motion 과 연결이 되지 않았습니다!!", MsgBoxStyle.Critical, "Care!!")
+        '    Exit Sub
+        'End If
 
-        Dim dDist As Double = frmBuilderSettings.ConvertToDouble(txtPosition.Text)
+        'Dim dDist As Double = frmBuilderSettings.ConvertToDouble(txtPosition.Text)
 
-        ControlEnable(False)
+        'ControlEnable(False)
 
-        If rbAbs.Checked = True Then
-            Theta2Move(dDist, g_ConfigInfos.MotionConfig(3).dVelocity, CDevPLCCommonNode.eMovingMethod.eABS)
-        Else
-            Theta2Move(dDist, g_ConfigInfos.MotionConfig(3).dVelocity, CDevPLCCommonNode.eMovingMethod.eINC)
-        End If
+        'If rbAbs.Checked = True Then
+        '    Theta2Move(dDist, g_ConfigInfos.MotionConfig(3).dVelocity, CDevPLCCommonNode.eMovingMethod.eABS)
+        'Else
+        '    Theta2Move(dDist, g_ConfigInfos.MotionConfig(3).dVelocity, CDevPLCCommonNode.eMovingMethod.eINC)
+        'End If
 
-        'myParent.cMotion.AxisMove(2, dDist, rbAbs.Checked)
-        'myParent.cMotion.ZMove(dDist, rbAbs.Checked)
-        ControlEnable(True)
+        ''myParent.cMotion.AxisMove(2, dDist, rbAbs.Checked)
+        ''myParent.cMotion.ZMove(dDist, rbAbs.Checked)
+        'ControlEnable(True)
     End Sub
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
-        If myParent.cPLC.IsConnected = False Then
-            MsgBox("Motion 과 연결이 되지 않았습니다!!", MsgBoxStyle.Critical, "Care!!")
-            Exit Sub
-        End If
+        'If myParent.cPLC.IsConnected = False Then
+        '    MsgBox("Motion 과 연결이 되지 않았습니다!!", MsgBoxStyle.Critical, "Care!!")
+        '    Exit Sub
+        'End If
 
-        Dim dDist As Double = frmBuilderSettings.ConvertToDouble(txtPosition.Text)
+        'Dim dDist As Double = frmBuilderSettings.ConvertToDouble(txtPosition.Text)
 
-        ControlEnable(False)
+        'ControlEnable(False)
 
-        If rbAbs.Checked = True Then
-            Theta4Move(dDist, g_ConfigInfos.MotionConfig(5).dVelocity, CDevPLCCommonNode.eMovingMethod.eABS)
-        Else
-            Theta4Move(dDist, g_ConfigInfos.MotionConfig(5).dVelocity, CDevPLCCommonNode.eMovingMethod.eINC)
-        End If
+        'If rbAbs.Checked = True Then
+        '    Theta4Move(dDist, g_ConfigInfos.MotionConfig(5).dVelocity, CDevPLCCommonNode.eMovingMethod.eABS)
+        'Else
+        '    Theta4Move(dDist, g_ConfigInfos.MotionConfig(5).dVelocity, CDevPLCCommonNode.eMovingMethod.eINC)
+        'End If
 
-        'myParent.cMotion.AxisMove(2, dDist, rbAbs.Checked)
-        'myParent.cMotion.ZMove(dDist, rbAbs.Checked)
-        ControlEnable(True)
+        ''myParent.cMotion.AxisMove(2, dDist, rbAbs.Checked)
+        ''myParent.cMotion.ZMove(dDist, rbAbs.Checked)
+        'ControlEnable(True)
     End Sub
 
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
 
 
-        ControlEnable(False)
-        ThetaHomming()
-        Application.DoEvents()
-        Thread.Sleep(1000)
-        ControlEnable(True)
+        'ControlEnable(False)
+        'ThetaHomming()
+        'Application.DoEvents()
+        'Thread.Sleep(1000)
+        'ControlEnable(True)
     End Sub
 End Class

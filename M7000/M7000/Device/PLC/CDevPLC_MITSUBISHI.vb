@@ -1,7 +1,4 @@
-﻿
-Imports System
-Imports System.IO
-Imports System.Threading
+﻿Imports System.Threading
 Imports ActProgTypeLib
 Imports ActUtlTypeLib
 
@@ -38,7 +35,7 @@ Public Class CDevPLC_MITSUBISHI
     Dim m_bIsRequest As Boolean = False
 
     Const CommRetryCount As Integer = 5
-
+    '정현기 수정 2022.08.28
     '===================================================================================================================================
 
     'GET
@@ -51,18 +48,19 @@ Public Class CDevPLC_MITSUBISHI
     'Const PLCCOMMAND_LD_SLOT_CHK As String = "B1060" 'LD 슬롯 상태 확인 0번은 C/V 슬롯 1부터 1 ~ 12까지 사용 가능
     'Const PLCCOMMAND_ULD_SLOT_CHK As String = "B1070" 'ULD 슬롯 상태 확인 0번은 C/V 슬롯, 1부터  1~12 까지 사용 가능
     'Const PLCCOMMAND_EQP_DETECT_CHK As String = "B108" '제품감지ㅋ
-    Const PLCCOMMAND_SERVO_STATUS_CHK As String = "B10A0"    'Servo 상태 체크 (Y축,Z축,THETA1축,THETA2축,THETA3축,THETA4축)
-    Const PLCCOMMAND_AXIS_ALARAM_STATUS_CHK As String = "B10B0"  '축 알람 체크 (Y축,Z축,THETA1축,THETA2축,THETA3축,THETA4축)
+    Const PLCCOMMAND_SERVO_STATUS_CHK As String = "B10A0"    'Servo 상태 체크 (X축, Y축,Z축)
+    Const PLCCOMMAND_AXIS_ALARAM_STATUS_CHK As String = "B10B0"  '축 알람 체크 (X축, Y축,Z축)
     'Const PLCCOMMAND_LD_MOVE_CHK As String = "B10C0" 'LD 이동 가능 상태 확인
     'Const PLCCOMMAND_ULD_MOVE_CHK As String = "B10D0" 'ULD 이동 가능 상태 확인
-    Const PLCCOMMAND_ALL_RESET_CURRENT_CHK As String = "B10F0"    '전체 초기화 상태 체크(현재 상태 체크)
     Const PLCCOMMAND_MODE_CHANGE_CONDITION_CHK As String = "B10E0" '수동, 자동 모드 변경 전환 조건 체크
+    Const PLCCOMMAND_ALL_RESET_CURRENT_CHK As String = "B10F0"    '전체 초기화 상태 체크(현재 상태 체크)
 
     '===================================================================================================================================
 
     'SET
     Const PLCCOMMAND_SET_MODE As String = "B2000" '수동모드, 자동모드 전환
     Const PLCCOMMAND_CONNECT_STATE_CHK As String = "B2010"   '연결 상태 조회
+    Const PLCCOMMAND_PC_READY As String = "B2020"   '소프트웨어 Run
     Const PLCCOMMAND_SET_EQP_STATE As String = "B2030"   '실험 상태 설정 (RUN, STOP, PAUSE)
     Const PLCCOMMAND_SET_PC_MANUAL_MODE As String = "B2040"  'PC 수동조작 모드 설정
     Const PLCCOMMAND_SET_ERROR_RESET As String = "B20F0" 'Error Reset
@@ -83,22 +81,30 @@ Public Class CDevPLC_MITSUBISHI
     'Const PLCCOMMAND_ALL_RESET_CHK As String = "B11D0" '전체 초기화 가능 여부 조회 (0번 가능여부, 1번 ACK)
     'Const PLCCOMMAND_SUPPLY_CHK As String = "B11E0" '투입 연속 동작 가능 여부 조회 (0번 가능여부, 1번 ACK)
     'Const PLCCOMMAND_EXHAUST_CHK As String = "B11F0" '배출 연속 동작 가능 여부 조회 (0번 가능여부, 1번 ACK)
-    'GET
+
+
+    'Get
     Const PLCCOMMAND_MANUAL_MODE_CHK As String = "B1100"  '수동운전 가능 상태 조회 (0번 가능여부, 1번 ACK)
+    Const PLCCOMMAND_JOG_X_MOVE_CHK As String = "B1110"   'X축 조그 운전 가능 여부 조회 (0번 가능여부, 1번 BUSY)
     Const PLCCOMMAND_JOG_Y_MOVE_CHK As String = "B1120"   'Y축 조그 운전 가능 여부 조회 (0번 가능여부, 1번 BUSY)
     Const PLCCOMMAND_JOG_Z_MOVE_CHK As String = "B1130"   'Z축 조그 운전 가능 여부 조회 (0번 가능여부, 1번 BUSY)
-    Const PLCCOMMAND_JOG_THETA1_MOVE_CHK As String = "B1140"   'THETA1축 조그 운전 가능 여부 조회 (0번 가능여부, 1번 BUSY)
-    Const PLCCOMMAND_JOG_THETA2_MOVE_CHK As String = "B1150"   'THETA2축 조그 운전 가능 여부 조회 (0번 가능여부, 1번 BUSY)
-    Const PLCCOMMAND_JOG_THETA3_MOVE_CHK As String = "B1160"   'THETA3축 조그 운전 가능 여부 조회 (0번 가능여부, 1번 BUSY)
-    Const PLCCOMMAND_JOG_THETA4_MOVE_CHK As String = "B1170"   'THETA4축 조그 운전 가능 여부 조회 (0번 가능여부, 1번 BUSY)
-    Const PLCCOMMAND_Y_STATE_CHK As String = "B1190"
-    Const PLCCOMMAND_Z_STATE_CHK As String = "B11A0"
-    Const PLCCOMMAND_THETA1_STATE_CHK As String = "B11B0"
-    Const PLCCOMMAND_THETA2_STATE_CHK As String = "B11C0"
-    Const PLCCOMMAND_THETA3_STATE_CHK As String = "B11D0"
-    Const PLCCOMMAND_THETA4_STATE_CHK As String = "B11E0"
-    Const PLCCOMMAND_ALL_RESET_CHK As String = "B11F0"
-    Const PLCCOMMAND_ALL_RESET_ACK As String = "B11F1"
+    'Const PLCCOMMAND_JOG_THETA1_MOVE_CHK As String = "B1140"   'THETA1축 조그 운전 가능 여부 조회 (0번 가능여부, 1번 BUSY)
+    'Const PLCCOMMAND_JOG_THETA2_MOVE_CHK As String = "B1150"   'THETA2축 조그 운전 가능 여부 조회 (0번 가능여부, 1번 BUSY)
+    'Const PLCCOMMAND_JOG_THETA3_MOVE_CHK As String = "B1160"   'THETA3축 조그 운전 가능 여부 조회 (0번 가능여부, 1번 BUSY)
+    'Const PLCCOMMAND_JOG_THETA4_MOVE_CHK As String = "B1170"   'THETA4축 조그 운전 가능 여부 조회 (0번 가능여부, 1번 BUSY)
+    'Const PLCCOMMAND_Y_STATE_CHK As String = "B1190"
+    Const PLCCOMMAND_X_STATE_CHK As String = "B11A0"  'X축 이동 가능 여부 조회 (0번 가능여부, 1번 ACK, 2번 위치 완료)
+    Const PLCCOMMAND_Y_STATE_CHK As String = "B11B0" 'Y축 이동 가능 여부 조회 (0번 가능여부, 1번 ACK, 2번 위치 완료)
+    Const PLCCOMMAND_Z_STATE_CHK As String = "B11C0" 'Z축 이동 가능 여부 조회 (0번 가능여부, 1번 ACK, 2번 위치 완료)
+
+    '정현기 
+    Const PLCCOMMAND_X_STATE_ACK As String = "B11A1"  'X축 위치명령 ACK (0번 가능여부, 1번 ACK, 2번 위치 완료)
+    Const PLCCOMMAND_Y_STATE_ACK As String = "B11B1" 'Y축 위치명령 ACK (0번 가능여부, 1번 ACK, 2번 위치 완료)
+    Const PLCCOMMAND_Z_STATE_ACK As String = "B11C1" 'Z축 위치명령 ACK (0번 가능여부, 1번 ACK, 2번 위치 완료)
+    'Const PLCCOMMAND_THETA3_STATE_CHK As String = "B11D0"
+    'Const PLCCOMMAND_THETA4_STATE_CHK As String = "B11E0"
+    Const PLCCOMMAND_ALL_RESET_CHK As String = "B11F0" '전체 초기화 가능
+    Const PLCCOMMAND_ALL_RESET_ACK As String = "B11F1" '전체 초기화 ACK
     'Const PLCCOMMAND_X_STATE_CHK As String = "B11B0" 'X축 이동 가능 여부 조회 (0번 가능여부, 1번 ACK, 2번 위치 완료)
     'Const PLCCOMMAND_Y_STATE_CHK As String = "B11A0" 'Y축 이동 가능 여부 조회 (0번 가능여부, 1번 ACK, 2번 위치 완료)
     'Const PLCCOMMAND_Z_STATE_CHK As String = "B11C0" 'Z축 이동 가능 여부 조회 (0번 가능여부, 1번 ACK, 2번 위치 완료)
@@ -123,18 +129,21 @@ Public Class CDevPLC_MITSUBISHI
     'Const PLCCOMMAND_EXHAUST_REQUEST As String = "B21F0" '배출 연속 동작 설정 REQUEST (BIT5)
 
     Const PLCCOMMAND_MANUAL_MODE_REQUEST As String = "B2100" '수동운전 설정 REQUEST
-    Const PLCCOMMAND_JOG_Y_MOVE As String = "B2120"    'X축 조그 운전 설정 (0번 +, 1번 -)
-    Const PLCCOMMAND_JOG_Z_MOVE As String = "B2130"    'Y축 조그 운전 설정 (0번 +, 1번 -)
-    Const PLCCOMMAND_JOG_THETA1_MOVE As String = "B2140"    'Z축 조그 운전 설정 (0번 +, 1번 -)
-    Const PLCCOMMAND_JOG_THETA2_MOVE As String = "B2150"    'HITTING축 조그 운전 설정 (0번 +, 1번 -)
-    Const PLCCOMMAND_JOG_THETA3_MOVE As String = "B2160"    'LD축 조그 운전 설정 (0번 +, 1번 -)
-    Const PLCCOMMAND_JOG_THETA4_MOVE As String = "B2170"    'ULD축 조그 운전 설정 (0번 +, 1번 -)
-    Const PLCCOMMAND_Y_MOVE_REQUEST As String = "B2190"  'X축 이동 설정 REQUEST
-    Const PLCCOMMAND_Z_MOVE_REQUEST As String = "B21A0"  'Y축 이동 설정 REQUEST
-    Const PLCCOMMAND_THETA1_MOVE_REQUEST As String = "B21B0"  'Z축 이동 설정 REQUEST
-    Const PLCCOMMAND_THETA2_MOVE_REQUEST As String = "B21C0"  'Z축 이동 설정 REQUEST
-    Const PLCCOMMAND_THETA3_MOVE_REQUEST As String = "B21D0"  'Z축 이동 설정 REQUEST
-    Const PLCCOMMAND_THETA4_MOVE_REQUEST As String = "B21E0"  'Z축 이동 설정 REQUEST
+    Const PLCCOMMAND_JOG_X_MOVE As String = "B2110"    'X축 조그 운전 설정 (0번 +, 1번 -)
+    Const PLCCOMMAND_JOG_Y_MOVE As String = "B2120"    'Y축 조그 운전 설정 (0번 +, 1번 -)
+    Const PLCCOMMAND_JOG_Z_MOVE As String = "B2130"    'Z축 조그 운전 설정 (0번 +, 1번 -)
+    'Const PLCCOMMAND_JOG_THETA1_MOVE As String = "B2140"    'Z축 조그 운전 설정 (0번 +, 1번 -)
+    'Const PLCCOMMAND_JOG_THETA2_MOVE As String = "B2150"    'HITTING축 조그 운전 설정 (0번 +, 1번 -)
+    'Const PLCCOMMAND_JOG_THETA3_MOVE As String = "B2160"    'LD축 조그 운전 설정 (0번 +, 1번 -)
+    'Const PLCCOMMAND_JOG_THETA4_MOVE As String = "B2170"    'ULD축 조그 운전 설정 (0번 +, 1번 -)
+    'Const PLCCOMMAND_Y_MOVE_REQUEST As String = "B2190"  'X축 이동 설정 REQUEST
+    Const PLCCOMMAND_X_MOVE_REQUEST As String = "B21A0"  'Y축 이동 설정 REQUEST
+    Const PLCCOMMAND_Y_MOVE_REQUEST As String = "B21B0"  'Y축 이동 설정 REQUEST
+    Const PLCCOMMAND_Z_MOVE_REQUEST As String = "B21C0"  'Z축 이동 설정 REQUEST
+    'Const PLCCOMMAND_THETA1_MOVE_REQUEST As String = "B21B0"  'Z축 이동 설정 REQUEST
+    'Const PLCCOMMAND_THETA2_MOVE_REQUEST As String = "B21C0"  'Z축 이동 설정 REQUEST
+    'Const PLCCOMMAND_THETA3_MOVE_REQUEST As String = "B21D0"  'Z축 이동 설정 REQUEST
+    'Const PLCCOMMAND_THETA4_MOVE_REQUEST As String = "B21E0"  'Z축 이동 설정 REQUEST
     'Const PLCCOMMAND_ALL_RESET_REQUSET As String = "B21D0"   '전체 초기화 설정 REQUEST (BIT0)
     'Const PLCCOMMAND_SUPPLY_REQUEST As String = "B21E0"  '투입 연속 동작 설정 REQUEST (BIT0)
     Const PLCCOMMAND_ALL_RESET_REQUSET As String = "B21F0" '배출 연속 동작 설정 REQUEST (BIT5)
@@ -148,47 +157,59 @@ Public Class CDevPLC_MITSUBISHI
     'Const PLCCOMMAND_SUPPLY_STATUS_CHK As String = "W11E0" '투입 연속 동작 STATUS 조회 (0)
     'Const PLCCOMMAND_EXHAUST_STATUS_CHK As String = "W11F0" '배출 연속 동작 STATUS 조회 (0)
     'GET
-    Const PLCCOMMAND_CURRENT_Y_POSITION As String = "W1190"  'X축 현재 위치 조회 (0, 1 2WORD(4BYTE) 사용)
-    Const PLCCOMMAND_CURRENT_Z_POSITION As String = "W11A0"  'Y축 현재 위치 조회 (0, 1 2WORD(4BYTE) 사용)
-    Const PLCCOMMAND_CURRENT_THETA1_POSITION As String = "W11B0"  'Z축 현재 위치 조회 (0, 1 2WORD(4BYTE) 사용)
-    Const PLCCOMMAND_CURRENT_THETA2_POSITION As String = "W11C0"  'Z축 현재 위치 조회 (0, 1 2WORD(4BYTE) 사용)
-    Const PLCCOMMAND_CURRENT_THETA3_POSITION As String = "W11D0"  'Z축 현재 위치 조회 (0, 1 2WORD(4BYTE) 사용)
-    Const PLCCOMMAND_CURRENT_THETA4_POSITION As String = "W11E0"  'Z축 현재 위치 조회 (0, 1 2WORD(4BYTE) 사용)
+    Const PLCCOMMAND_CURRENT_X_POSITION As String = "W11A0"  'X축 현재 위치 조회 (0, 1 2WORD(4BYTE) 사용)
+    Const PLCCOMMAND_CURRENT_Y1_POSITION As String = "W11B0"  'Y1축 현재 위치 조회 (0, 1 2WORD(4BYTE) 사용)
+    Const PLCCOMMAND_CURRENT_Y2_POSITION As String = "W11B2"  'Y2축 현재 위치 조회 (0, 1 2WORD(4BYTE) 사용)
+    Const PLCCOMMAND_CURRENT_Z_POSITION As String = "W11C0"  'Z축 현재 위치 조회 (0, 1 2WORD(4BYTE) 사용)
+    'Const PLCCOMMAND_CURRENT_THETA1_POSITION As String = "W11B0"  'Z축 현재 위치 조회 (0, 1 2WORD(4BYTE) 사용)
+    'Const PLCCOMMAND_CURRENT_THETA2_POSITION As String = "W11C0"  'Z축 현재 위치 조회 (0, 1 2WORD(4BYTE) 사용)
+    'Const PLCCOMMAND_CURRENT_THETA3_POSITION As String = "W11D0"  'Z축 현재 위치 조회 (0, 1 2WORD(4BYTE) 사용)
+    'Const PLCCOMMAND_CURRENT_THETA4_POSITION As String = "W11E0"  'Z축 현재 위치 조회 (0, 1 2WORD(4BYTE) 사용)
     Const PLCCOMMAND_ALL_RESET_STATUS_CHK As String = "W11F0"   '전체 초기화 STATUS 조회 (0)
 
     '===================================================================================================================================
 
     'SET
-    Const PLCCOMMAND_JOG_Y_SPEED_SET As String = "W2100"  'Y축 조그 운전 속도 설정 (0, 1 2WORD(4BYTE) 사용)
-    Const PLCCOMMAND_JOG_Z_SPEED_SET As String = "W2110" 'Z축 조그 운전 속도 설정 (0, 1 2WORD(4BYTE) 사용)
-    Const PLCCOMMAND_JOG_THETA_SPEED_SET As String = "W2120" 'THETA축 조그 운전 속도 설정 (0, 1 2WORD(4BYTE) 사용)
- 
-    Const PLCCOMMAND_Y_POSITION_METHOD_SET As String = "W2140" 'Y축 위치 명령 및 결정(제어명령코드 (HOME = 1, POSITION =2), 위치결정코드 (1=ABS, 2=INC))
-    Const PLCCOMMAND_Y_MOVING_METHOD_SET As String = "W2141" 'Y축 위치 결정 코드 (1 = ABS , 2 =INC )
-    Const PLCCOMMAND_Z_POSITION_METHOD_SET As String = "W2150" 'Z축 위치 명령 및 결정(제어명령코드 (HOME = 1, POSITION =2), 위치결정코드 (1=ABS, 2=INC))
-    Const PLCCOMMAND_Z_MOVING_METHOD_SET As String = "W2151" 'Z축 위치 결정 코드 (1 = ABS , 2 =INC )
-    Const PLCCOMMAND_THETA1_POSITION_METHOD_SET As String = "W2160" 'Z축 위치 결정 코드 (1 = ABS , 2 =INC )
-    Const PLCCOMMAND_THETA1_MOVING_METHOD_SET As String = "W2161" 'Z축 위치 명령 및 결정(제어명령코드 (HOME = 1, POSITION =2), 위치결정코드 (1=ABS, 2=INC))
-    Const PLCCOMMAND_THETA2_POSITION_METHOD_SET As String = "W2170" 'Z축 위치 결정 코드 (1 = ABS , 2 =INC )
-    Const PLCCOMMAND_THETA2_MOVING_METHOD_SET As String = "W2171" 'Z축 위치 명령 및 결정(제어명령코드 (HOME = 1, POSITION =2), 위치결정코드 (1=ABS, 2=INC))
-    Const PLCCOMMAND_THETA3_POSITION_METHOD_SET As String = "W2180" 'Z축 위치 결정 코드 (1 = ABS , 2 =INC )
-    Const PLCCOMMAND_THETA3_MOVING_METHOD_SET As String = "W2181" 'Z축 위치 명령 및 결정(제어명령코드 (HOME = 1, POSITION =2), 위치결정코드 (1=ABS, 2=INC))
-    Const PLCCOMMAND_THETA4_POSITION_METHOD_SET As String = "W2190" 'Z축 위치 결정 코드 (1 = ABS , 2 =INC )
-    Const PLCCOMMAND_THETA4_MOVING_METHOD_SET As String = "W2191" 'Z축 위치 명령 및 결정(제어명령코드 (HOME = 1, POSITION =2), 위치결정코드 (1=ABS, 2=INC))
+    Const PLCCOMMAND_JOG_X_SPEED_SET As String = "W2110"  'X축 조그 운전 속도 설정 (0, 1 2WORD(4BYTE) 사용)
+    Const PLCCOMMAND_JOG_Y_SPEED_SET As String = "W2120"  'Y축 조그 운전 속도 설정 (0, 1 2WORD(4BYTE) 사용)
+    Const PLCCOMMAND_JOG_Z_SPEED_SET As String = "W2130" 'Z축 조그 운전 속도 설정 (0, 1 2WORD(4BYTE) 사용)
+    'Const PLCCOMMAND_JOG_THETA_SPEED_SET As String = "W2120" 'THETA축 조그 운전 속도 설정 (0, 1 2WORD(4BYTE) 사용)
 
-    Const PLCCOMMAND_Y_MOVE_SPEED_SET As String = "W21A0"   'Y축 설정 (위치 ,속도), 속도(0,1), 위치(2,3)
-    Const PLCCOMMAND_Z_MOVE_SPEED_SET As String = "W21B0"   'Z축 설정 (위치, 속도), 속도(0,1), 위치(2,3)
-    Const PLCCOMMAND_THETA1_MOVE_SPEED_SET As String = "W21C0"   'THETA1축 설정 (위치, 속도), 속도(0,1), 위치(2,3)
-    Const PLCCOMMAND_THETA2_MOVE_SPEED_SET As String = "W21D0"   'THETA2축 설정 (위치, 속도), 속도(0,1), 위치(2,3)
-    Const PLCCOMMAND_THETA3_MOVE_SPEED_SET As String = "W21E0"   'THETA3축 설정 (위치, 속도), 속도(0,1), 위치(2,3)
-    Const PLCCOMMAND_THETA4_MOVE_SPEED_SET As String = "W21F0"   'THETA4축 설정 (위치, 속도), 속도(0,1), 위치(2,3)
+    Const PLCCOMMAND_X_POSITION_METHOD_SET As String = "W2160" 'X축 위치 명령 및 결정(제어명령코드 (HOME = 1, POSITION =2), 위치결정코드 (1=ABS, 2=INC))
+    Const PLCCOMMAND_X_MOVING_METHOD_SET As String = "W2161" 'X축 위치 결정 코드 (1 = ABS , 2 =INC )
+    Const PLCCOMMAND_Y_POSITION_METHOD_SET As String = "W2170" 'Y축 위치 명령 및 결정(제어명령코드 (HOME = 1, POSITION =2), 위치결정코드 (1=ABS, 2=INC))
+    Const PLCCOMMAND_Y_MOVING_METHOD_SET As String = "W2171" 'Y축 위치 결정 코드 (1 = ABS , 2 =INC )
+    Const PLCCOMMAND_Z_POSITION_METHOD_SET As String = "W2180" 'Z축 위치 명령 및 결정(제어명령코드 (HOME = 1, POSITION =2), 위치결정코드 (1=ABS, 2=INC))
+    Const PLCCOMMAND_Z_MOVING_METHOD_SET As String = "W2181" 'Z축 위치 결정 코드 (1 = ABS , 2 =INC )
 
-    Const PLCCOMMAND_Y_MOVE_POSITION_SET As String = "W21A2"    'Y축 위치 설정 (2,3)
-    Const PLCCOMMAND_Z_MOVE_POSITION_SET As String = "W21B2"    'X축 위치 설정 (2,3)
-    Const PLCCOMMAND_THETA1_MOVE_POSITION_SET As String = "W21C2"    'Z축 위치 설정 (2,3)
-    Const PLCCOMMAND_THETA2_MOVE_POSITION_SET As String = "W21D2"    'Z축 위치 설정 (2,3)
-    Const PLCCOMMAND_THETA3_MOVE_POSITION_SET As String = "W21E2"    'Z축 위치 설정 (2,3)
-    Const PLCCOMMAND_THETA4_MOVE_POSITION_SET As String = "W21F2"    'Z축 위치 설정 (2,3)
+    'Const PLCCOMMAND_THETA1_POSITION_METHOD_SET As String = "W2160" 'Z축 위치 결정 코드 (1 = ABS , 2 =INC )
+    'Const PLCCOMMAND_THETA1_MOVING_METHOD_SET As String = "W2161" 'Z축 위치 명령 및 결정(제어명령코드 (HOME = 1, POSITION =2), 위치결정코드 (1=ABS, 2=INC))
+    'Const PLCCOMMAND_THETA2_POSITION_METHOD_SET As String = "W2170" 'Z축 위치 결정 코드 (1 = ABS , 2 =INC )
+    'Const PLCCOMMAND_THETA2_MOVING_METHOD_SET As String = "W2171" 'Z축 위치 명령 및 결정(제어명령코드 (HOME = 1, POSITION =2), 위치결정코드 (1=ABS, 2=INC))
+    'Const PLCCOMMAND_THETA3_POSITION_METHOD_SET As String = "W2180" 'Z축 위치 결정 코드 (1 = ABS , 2 =INC )
+    'Const PLCCOMMAND_THETA3_MOVING_METHOD_SET As String = "W2181" 'Z축 위치 명령 및 결정(제어명령코드 (HOME = 1, POSITION =2), 위치결정코드 (1=ABS, 2=INC))
+    'Const PLCCOMMAND_THETA4_POSITION_METHOD_SET As String = "W2190" 'Z축 위치 결정 코드 (1 = ABS , 2 =INC )
+    'Const PLCCOMMAND_THETA4_MOVING_METHOD_SET As String = "W2191" 'Z축 위치 명령 및 결정(제어명령코드 (HOME = 1, POSITION =2), 위치결정코드 (1=ABS, 2=INC))
+
+    Const PLCCOMMAND_X_MOVE_SPEED_SET As String = "W21B0"   'X축 설정 (위치 ,속도), 속도(0,1), 위치(2,3)
+    Const PLCCOMMAND_Y_MOVE_SPEED_SET As String = "W21C0"   'Y축 설정 (위치 ,속도), 속도(0,1), 위치(2,3)
+    Const PLCCOMMAND_Z_MOVE_SPEED_SET As String = "W21D0"   'Z축 설정 (위치, 속도), 속도(0,1), 위치(2,3)
+
+    Const PLCCOMMAND_X_MOVE_POSITION_SET As String = "W21B2"   'X축 설정 (위치 ,속도), 속도(0,1), 위치(2,3)
+    Const PLCCOMMAND_Y_MOVE_POSITION_SET As String = "W21C2"   'Y축 설정 (위치 ,속도), 속도(0,1), 위치(2,3)
+    Const PLCCOMMAND_Z_MOVE_POSITION_SET As String = "W21D2"   'Z축 설정 (위치, 속도), 속도(0,1), 위치(2,3)
+
+    'Const PLCCOMMAND_THETA1_MOVE_SPEED_SET As String = "W21C0"   'THETA1축 설정 (위치, 속도), 속도(0,1), 위치(2,3)
+    'Const PLCCOMMAND_THETA2_MOVE_SPEED_SET As String = "W21D0"   'THETA2축 설정 (위치, 속도), 속도(0,1), 위치(2,3)
+    'Const PLCCOMMAND_THETA3_MOVE_SPEED_SET As String = "W21E0"   'THETA3축 설정 (위치, 속도), 속도(0,1), 위치(2,3)
+    'Const PLCCOMMAND_THETA4_MOVE_SPEED_SET As String = "W21F0"   'THETA4축 설정 (위치, 속도), 속도(0,1), 위치(2,3)
+
+    'Const PLCCOMMAND_Y_MOVE_POSITION_SET As String = "W21A2"    'Y축 위치 설정 (2,3)
+    'Const PLCCOMMAND_Z_MOVE_POSITION_SET As String = "W21B2"    'X축 위치 설정 (2,3)
+    'Const PLCCOMMAND_THETA1_MOVE_POSITION_SET As String = "W21C2"    'Z축 위치 설정 (2,3)
+    'Const PLCCOMMAND_THETA2_MOVE_POSITION_SET As String = "W21D2"    'Z축 위치 설정 (2,3)
+    'Const PLCCOMMAND_THETA3_MOVE_POSITION_SET As String = "W21E2"    'Z축 위치 설정 (2,3)
+    'Const PLCCOMMAND_THETA4_MOVE_POSITION_SET As String = "W21F2"    'Z축 위치 설정 (2,3)
 
     ''SET
     'Const PLCCOMMAND_MANUAL_MODE_COMMAND_NO_SET As String = "W2100"  '수동운전 COMMAND NO.(0) , LD슬롯 NO(1), ULD슬롯(2)
@@ -218,22 +239,74 @@ Public Class CDevPLC_MITSUBISHI
     '===================================================================================================================================
 
     'ALARM
-    Const PLCCOMMAND_ALARM_EMS As String = "D9200"  '0(EMS), A(컨트롤박스 내부 온도알람) , B(컨트롤박스 연기감지 센서)
-    'Const PLCCOMMAND_ALARM_STRANGETEMP As String = "D9201"     '1~9 (히터유닛 1~9 온도 이상)
-    'Const PLCCOMMAND_ALARM_EOCRTEMP As String = "D9202"     '1-9 (히터유닛 1~9 EOCR 상태 이상)
-    'Const PLCCOMMAND_ALARM_SSRTEMP As String = "D9203"      '1~9 (히터유닛 1~9 SSR 80도 알람)
-    'Const PLCCOMMAND_ALARM_OVERTEMP_1 As String = "D9205"   '(히터온도 센서 1~9 - 1 과온 알람)
-    'Const PLCCOMMAND_ALARM_OVERTEMP_2 As String = "D9206"   '(히터온도 센서 1~9 - 2 과온 알람)
-    Const PLCCOMMAND_ALARM_DOOROPEN As String = "D9208"     '도어오픈에러 0(세이프티 도어루프 에러), 1(로더세이프티 개방), 2(암실 좌측 세이프티 개방), 3(암실 우측 세이프티 개방), 4(언로더 개방), 5(암실하부좌측), 6(하부 우측)
-    'Const PLCCOMMAND_ALARM_LOADER_AXIS As String = "D9210"  '7 (로더 AMP 과온알람), 8(로더 과전류 알람)
+    '정현기 경알람
+    Const PLCCOMMAND_ALARM_WEAK1 As String = "D9148"
+    Const PLCCOMMAND_ALARM_WEAK2 As String = "D9149"
+    '정현기 중알람
+    Const PLCCOMMAND_ALARM_EMS As String = "D9200"
+    '0(EMS), 4(세이프티 컨트롤러-1 알람), 5(세이프티 컨트롤러-2 알람), 8(구동부메인 M/C1 Power OFF), 9(구동부메인 M/C2 Power OFF)
+    'A(컨트롤박스 내부 온도알람) , B(컨트롤박스 연기감지 센서)
+
+    Const PLCCOMMAND_ALARM_STRANGETEMP As String = "D9201"     '1~4 (히터유닛 1~4 온도 이상)
+    '정현기(알람 어디다가 추가해야할까...?)
+    Const PLCCOMMAND_ALARM_EOCRTEMP As String = "D9202"     '1-4 (히터유닛 1~4 EOCR 상태 이상)
+    Const PLCCOMMAND_ALARM_SSRTEMP As String = "D9203"      '1~4 (히터유닛 1~4 SSR 80도 알람)
+    Const PLCCOMMAND_ALARM_SSRTEMP2 As String = "D9204"      '1~4 (히터유닛 1~4 SSR 60도 알람)
+    Const PLCCOMMAND_ALARM_TEMPSENSOR1 As String = "D9205"   '(히터온도 센서 1~4 - 1 과온 알람)
+    Const PLCCOMMAND_ALARM_TEMPSENSOR2 As String = "D9206"   '(히터온도 센서 1~4 - 2 과온 알람)
+    Const PLCCOMMAND_ALARM_DOOROPEN As String = "D9208"     '도어오픈에러 0(세이프티 도어루프 에러), 1(로더세이프티 개방), 2(암실 좌측 세이프티 개방)
+    Const PLCCOMMAND_ALARM_Y1_AXIS As String = "D9210" 'Y1 서보 알람
+    ' 0 : [Ax.01] IVL-Y1 축 알람
+    ' 1 : [Ax.01] IVL-Y1 서보 알람
+    ' 2 : [Ax.01] IVL-Y1 RLS 리밋센서 알람
+    ' 3 : [Ax.01] IVL-Y1 FLS 리밋센서 알람
+    ' 4 : [Ax.01] IVL-Y1 충돌감지 알람
+    ' 5 : [Ax.01] IVL-Y1 원점운전 타임아웃
+    ' 6 : [Ax.01] IVL-Y1 위치운전 타임아웃
+    ' 7 : [Ax.01] IVL-Y1 AMP 과온 알람
+    ' 8 : [Ax.01] IVL-Y1 과전류 알람
+    ' A : [Ax.01] IVL-Y 동기축 위치편차 알람
+    Const PLCCOMMAND_ALARM_Y2_AXIS As String = "D9211" 'Y2 서보 알람
+    ' 0 : [Ax.02] IVL-Y2 축 알람
+    ' 1 : [Ax.02] IVL-Y2 서보 알람
+    ' 2 : [Ax.02] IVL-Y2 RLS 리밋센서 알람
+    ' 3 : [Ax.02] IVL-Y2 FLS 리밋센서 알람
+    ' 4 : [Ax.01] IVL-Y2 충돌감지 알람
+    ' 5 : [Ax.02] IVL-Y2 원점운전 타임아웃
+    ' 6 : [Ax.02] IVL-Y2 위치운전 타임아웃
+    ' 7 : [Ax.02] IVL-Y2 AMP 과온 알람
+    ' 8 : [Ax.02] IVL-Y2 과전류 알람
+    Const PLCCOMMAND_ALARM_X_AXIS As String = "D9212" 'X 서보 알람
+    ' 0 : [Ax.03] IVL-X 축 알람
+    ' 1 : [Ax.03] IVL-X 서보 알람
+    ' 2 : [Ax.03] IVL-X RLS 리밋센서 알람
+    ' 3 : [Ax.03] IVL-X FLS 리밋센서 알람
+    ' 4 : [Ax.03] IVL-X 충돌감지 알람
+    ' 5 : [Ax.03] IVL-X 원점운전 타임아웃
+    ' 6 : [Ax.03] IVL-X 위치운전 타임아웃
+    ' 7 : [Ax.03] IVL-X AMP 과온 알람
+    ' 8 : [Ax.03] IVL-X 과전류 알람
+    Const PLCCOMMAND_ALARM_Z_AXIS As String = "D9213" 'Z 서보 알람
+    ' 0 : [Ax.04] IVL-Z 축 알람
+    ' 1 : [Ax.04] IVL-Z 서보 알람
+    ' 2 : [Ax.04] IVL-Z RLS 리밋센서 알람
+    ' 3 : [Ax.04] IVL-Z FLS 리밋센서 알람
+    ' 4 : [Ax.04] IVL-Z 충돌감지 알람
+    ' 5 : [Ax.04] IVL-Z 원점운전 타임아웃
+    ' 6 : [Ax.04] IVL-Z 위치운전 타임아웃
+    ' 7 : [Ax.04] IVL-Z AMP 과온 알람
+    ' 8 : [Ax.04] IVL-Z 과전류 알람
+
+
+
     'Const PLCCOMMAND_ALARM_HITTER_AXIS As String = "D9220"  '7 (히터 AMP 과온알람), 8(히터 과전류 알람)
     'Const PLCCOMMAND_ALARM_X_AXIS As String = "D9230" ' 7 (X AMP 과온알람), 8(X 과전류 알람)
-    Const PLCCOMMAND_ALARM_Y_AXIS As String = "D9231"   '7 (Y AMP 과온알람) , 8(Y 과전류 알람)
-    Const PLCCOMMAND_ALARM_Z_AXIS As String = "D9232"   '7 (Z AMP 과온알람) , 8(Z 과전류 알람)
-    Const PLCCOMMAND_ALARM_THETA1_AXIS As String = "D9233"
-    Const PLCCOMMAND_ALARM_THETA2_AXIS As String = "D9234"
-    Const PLCCOMMAND_ALARM_THETA3_AXIS As String = "D9235"
-    Const PLCCOMMAND_ALARM_THETA4_AXIS As String = "D9236"
+    'Const PLCCOMMAND_ALARM_Y_AXIS As String = "D9231"   '7 (Y AMP 과온알람) , 8(Y 과전류 알람)
+    'Const PLCCOMMAND_ALARM_Z_AXIS As String = "D9232"   '7 (Z AMP 과온알람) , 8(Z 과전류 알람)
+    'Const PLCCOMMAND_ALARM_THETA1_AXIS As String = "D9233"
+    'Const PLCCOMMAND_ALARM_THETA2_AXIS As String = "D9234"
+    'Const PLCCOMMAND_ALARM_THETA3_AXIS As String = "D9235"
+    'Const PLCCOMMAND_ALARM_THETA4_AXIS As String = "D9236"
     ' Const PLCCOMMAND_ALARM_UNLOADER_AXIS As String = "D9240"    '7(언로더 AMP 과온알람), 8(언로더 과전류 알람)
 
     '===================================================================================================================================
@@ -488,6 +561,15 @@ Public Class CDevPLC_MITSUBISHI
         End If
         Return True
     End Function
+    '정현기 추가
+    Public Overrides Function SetSWRun_ON() As Boolean
+        If SetData(PLCCOMMAND_PC_READY, CShort(1)) = False Then Return False
+        Return True
+    End Function
+    Public Overrides Function SetSWRun_OFF() As Boolean
+        If SetData(PLCCOMMAND_PC_READY, CShort(0)) = False Then Return False
+        Return True
+    End Function
 #Region "Magazine Control"
 
     'Public Overrides Function GetSupplySlotStatus(ByVal state() As eSlotSignal) As Boolean
@@ -546,7 +628,144 @@ Public Class CDevPLC_MITSUBISHI
 
     '    Return True
     'End Function
+    '정현기(경알람)
+    Public Overrides Function GetWeak1Alarm(ByVal state() As eWeakAlarm) As Boolean
+        Dim sRcvValue As String = ""
 
+        If GetData(PLCCOMMAND_ALARM_WEAK1, sRcvValue) = True Then
+
+            If sRcvValue = "0" Then
+                ReDim state(0)
+                state(0) = eWeakAlarm.eNoError
+                myParent.cPLC.m_PLCDatas.nWeakAlarm1 = state.Clone '    m_PLCDatas.nSystemStatus = state.Clone
+                Return True
+            Else
+
+                Dim nCnt As Integer
+                Dim nBinery() As Integer
+
+                nBinery = hex2bin(sRcvValue)
+
+                For i As Integer = 0 To nBinery.Length - 1
+                    If nBinery(i) = -1 Then
+                        Return False
+                    ElseIf nBinery(i) = 1 Then
+                        ReDim Preserve state(nCnt)
+
+                        Select Case i
+                            Case 0
+                                state(nCnt) = eWeakAlarm.eError1
+                            Case 1
+                                state(nCnt) = eWeakAlarm.eError2
+                            Case 2
+                                state(nCnt) = eWeakAlarm.eError3
+                            Case 3
+                                state(nCnt) = eWeakAlarm.eError4
+                            Case 4
+                                state(nCnt) = eWeakAlarm.eError5
+                            Case 5
+                                state(nCnt) = eWeakAlarm.eError6
+                            Case 6
+                                state(nCnt) = eWeakAlarm.eError7
+                            Case 7
+                                state(nCnt) = eWeakAlarm.eError8
+                            Case 8
+                                state(nCnt) = eWeakAlarm.eError9
+                            Case 9
+                                state(nCnt) = eWeakAlarm.eError10
+                            Case 10
+                                state(nCnt) = eWeakAlarm.eError11
+                            Case 11
+                                state(nCnt) = eWeakAlarm.eError12
+                            Case 12
+                                state(nCnt) = eWeakAlarm.eError13
+                            Case 13
+                                state(nCnt) = eWeakAlarm.eError14
+                            Case 14
+                                state(nCnt) = eWeakAlarm.eError15
+                            Case 15
+                                state(nCnt) = eWeakAlarm.eError16
+                        End Select
+                        nCnt += 1
+                    End If
+                Next
+
+                myParent.cPLC.m_PLCDatas.nWeakAlarm1 = state.Clone
+
+            End If
+        End If
+
+        Return True
+    End Function
+    Public Overrides Function GetWeak2Alarm(ByVal state() As eWeakAlarm) As Boolean
+        Dim sRcvValue As String = ""
+
+        If GetData(PLCCOMMAND_ALARM_WEAK2, sRcvValue) = True Then
+
+            If sRcvValue = "0" Then
+                ReDim state(0)
+                state(0) = eWeakAlarm.eNoError
+                myParent.cPLC.m_PLCDatas.nWeakAlarm2 = state.Clone '    m_PLCDatas.nSystemStatus = state.Clone
+                Return True
+            Else
+
+                Dim nCnt As Integer
+                Dim nBinery() As Integer
+
+                nBinery = hex2bin(sRcvValue)
+
+                For i As Integer = 0 To nBinery.Length - 1
+                    If nBinery(i) = -1 Then
+                        Return False
+                    ElseIf nBinery(i) = 1 Then
+                        ReDim Preserve state(nCnt)
+
+                        Select Case i
+                            Case 0
+                                state(nCnt) = eWeakAlarm.eError1
+                            Case 1
+                                state(nCnt) = eWeakAlarm.eError2
+                            Case 2
+                                state(nCnt) = eWeakAlarm.eError3
+                            Case 3
+                                state(nCnt) = eWeakAlarm.eError4
+                            Case 4
+                                state(nCnt) = eWeakAlarm.eError5
+                            Case 5
+                                state(nCnt) = eWeakAlarm.eError6
+                            Case 6
+                                state(nCnt) = eWeakAlarm.eError7
+                            Case 7
+                                state(nCnt) = eWeakAlarm.eError8
+                            Case 8
+                                state(nCnt) = eWeakAlarm.eError9
+                            Case 9
+                                state(nCnt) = eWeakAlarm.eError10
+                            Case 10
+                                state(nCnt) = eWeakAlarm.eError11
+                            Case 11
+                                state(nCnt) = eWeakAlarm.eError12
+                            Case 12
+                                state(nCnt) = eWeakAlarm.eError13
+                            Case 13
+                                state(nCnt) = eWeakAlarm.eError14
+                            Case 14
+                                state(nCnt) = eWeakAlarm.eError15
+                            Case 15
+                                state(nCnt) = eWeakAlarm.eError16
+                        End Select
+                        nCnt += 1
+                    End If
+                Next
+
+                myParent.cPLC.m_PLCDatas.nWeakAlarm2 = state.Clone
+
+            End If
+        End If
+
+        Return True
+    End Function
+    '정현기(중알람)
     Public Overrides Function GetEMSAlarm(ByVal state() As eEMSAlarm) As Boolean
         Dim sRcvValue As String = ""
 
@@ -573,8 +792,8 @@ Public Class CDevPLC_MITSUBISHI
                         Select Case i
                             Case 0
                                 state(nCnt) = eEMSAlarm.eEMS1
-                            Case 1
-                                state(nCnt) = eEMSAlarm.eEMS2
+                            'Case 1
+                            '    state(nCnt) = eEMSAlarm.eEMS2
                             Case 4
                                 state(nCnt) = eEMSAlarm.eSafety_Control_Alarm1
                             Case 5
@@ -585,9 +804,9 @@ Public Class CDevPLC_MITSUBISHI
                                 state(nCnt) = eEMSAlarm.eMC2_POWEROFF_Alarm
                             Case 10
                                 state(nCnt) = eEMSAlarm.eControlBoxTempLightAlarm
+                            'Case 11
+                            '    state(nCnt) = eEMSAlarm.eControlBoxTempHeavyAlarm
                             Case 11
-                                state(nCnt) = eEMSAlarm.eControlBoxTempHeavyAlarm
-                            Case 12
                                 state(nCnt) = eEMSAlarm.eControlBoxSmokeAlarm
                         End Select
                         nCnt += 1
@@ -601,165 +820,379 @@ Public Class CDevPLC_MITSUBISHI
 
         Return True
     End Function
-    'Public Overrides Function GetStrangeTempAlarm(ByVal state() As eTemperatureAlarm) As Boolean
-    '    Dim sRcvValue As String = ""
+    Public Overrides Function GetStrangeTempAlarm(ByVal state() As eTemperatureAlarm) As Boolean
+        Dim sRcvValue As String = ""
 
-    '    If GetData(PLCCOMMAND_ALARM_STRANGETEMP, sRcvValue) = True Then
+        If GetData(PLCCOMMAND_ALARM_STRANGETEMP, sRcvValue) = True Then
 
-    '        If sRcvValue = "0" Then
-    '            state(0) = eTemperatureAlarm.eNoError
-    '            myParent.cPLC.m_PLCDatas.nStrangeTempAlarm = state.Clone '    m_PLCDatas.nSystemStatus = state.Clone
-    '            Return True
-    '        Else
+            If sRcvValue = "0" Then
+                state(0) = eTemperatureAlarm.eNoError
+                myParent.cPLC.m_PLCDatas.nStrangeTempAlarm = state.Clone '    m_PLCDatas.nSystemStatus = state.Clone
+                Return True
+            Else
 
-    '            Dim nCnt As Integer
-    '            Dim nBinery() As Integer
+                Dim nCnt As Integer
+                Dim nBinery() As Integer
 
-    '            nBinery = hex2bin(sRcvValue)
+                nBinery = hex2bin(sRcvValue)
 
-    '            For i As Integer = 0 To nBinery.Length - 1
-    '                If nBinery(i) = -1 Then
-    '                    Return False
-    '                ElseIf nBinery(i) = 1 Then
-    '                    ReDim Preserve state(nCnt)
+                For i As Integer = 0 To nBinery.Length - 1
+                    If nBinery(i) = -1 Then
+                        Return False
+                    ElseIf nBinery(i) = 1 Then
+                        ReDim Preserve state(nCnt)
 
-    '                    Select Case i
-    '                        Case 0
-    '                            state(nCnt) = eTemperatureAlarm.eT1
-    '                        Case 1
-    '                            state(nCnt) = eTemperatureAlarm.eT2
-    '                        Case 2
-    '                            state(nCnt) = eTemperatureAlarm.eT3
-    '                        Case 3
-    '                            state(nCnt) = eTemperatureAlarm.eT4
-    '                        Case 4
-    '                            state(nCnt) = eTemperatureAlarm.eT5
-    '                        Case 5
-    '                            state(nCnt) = eTemperatureAlarm.eT6
-    '                        Case 6
-    '                            state(nCnt) = eTemperatureAlarm.eT7
-    '                        Case 7
-    '                            state(nCnt) = eTemperatureAlarm.eT8
-    '                        Case 8
-    '                            state(nCnt) = eTemperatureAlarm.eT9
-    '                    End Select
-    '                    nCnt += 1
-    '                End If
-    '            Next
+                        Select Case i
+                            Case 0
+                                state(nCnt) = eTemperatureAlarm.eT1
+                            Case 1
+                                state(nCnt) = eTemperatureAlarm.eT2
+                            Case 2
+                                state(nCnt) = eTemperatureAlarm.eT3
+                            Case 3
+                                state(nCnt) = eTemperatureAlarm.eT4
+                            Case 4
+                                state(nCnt) = eTemperatureAlarm.eT5
+                            Case 5
+                                state(nCnt) = eTemperatureAlarm.eT6
+                            Case 6
+                                state(nCnt) = eTemperatureAlarm.eT7
+                            Case 7
+                                state(nCnt) = eTemperatureAlarm.eT8
+                            Case 8
+                                state(nCnt) = eTemperatureAlarm.eT9
+                        End Select
+                        nCnt += 1
+                    End If
+                Next
 
-    '            myParent.cPLC.m_PLCDatas.nStrangeTempAlarm = state.Clone
+                myParent.cPLC.m_PLCDatas.nStrangeTempAlarm = state.Clone
 
-    '        End If
-    '    End If
+            End If
+        End If
 
-    '    Return True
-    'End Function
-    'Public Overrides Function GetEOCRAlarm(ByVal state() As eTemperatureAlarm) As Boolean
-    '    Dim sRcvValue As String = ""
+        Return True
+    End Function
+    Public Overrides Function GetEOCRAlarm(ByVal state() As eTemperatureAlarm) As Boolean
+        Dim sRcvValue As String = ""
 
-    '    If GetData(PLCCOMMAND_ALARM_EOCRTEMP, sRcvValue) = True Then
+        If GetData(PLCCOMMAND_ALARM_EOCRTEMP, sRcvValue) = True Then
 
-    '        If sRcvValue = "0" Then
-    '            state(0) = eTemperatureAlarm.eNoError
-    '            myParent.cPLC.m_PLCDatas.nEOCRTempAlarm = state.Clone '    m_PLCDatas.nSystemStatus = state.Clone
-    '            Return True
-    '        Else
+            If sRcvValue = "0" Then
+                state(0) = eTemperatureAlarm.eNoError
+                myParent.cPLC.m_PLCDatas.nEOCRTempAlarm = state.Clone '    m_PLCDatas.nSystemStatus = state.Clone
+                Return True
+            Else
 
-    '            Dim nCnt As Integer
-    '            Dim nBinery() As Integer
+                Dim nCnt As Integer
+                Dim nBinery() As Integer
 
-    '            nBinery = hex2bin(sRcvValue)
+                nBinery = hex2bin(sRcvValue)
 
-    '            For i As Integer = 0 To nBinery.Length - 1
-    '                If nBinery(i) = -1 Then
-    '                    Return False
-    '                ElseIf nBinery(i) = 1 Then
-    '                    ReDim Preserve state(nCnt)
+                For i As Integer = 0 To nBinery.Length - 1
+                    If nBinery(i) = -1 Then
+                        Return False
+                    ElseIf nBinery(i) = 1 Then
+                        ReDim Preserve state(nCnt)
 
-    '                    Select Case i
-    '                        Case 0
-    '                            state(nCnt) = eTemperatureAlarm.eT1
-    '                        Case 1
-    '                            state(nCnt) = eTemperatureAlarm.eT2
-    '                        Case 2
-    '                            state(nCnt) = eTemperatureAlarm.eT3
-    '                        Case 3
-    '                            state(nCnt) = eTemperatureAlarm.eT4
-    '                        Case 4
-    '                            state(nCnt) = eTemperatureAlarm.eT5
-    '                        Case 5
-    '                            state(nCnt) = eTemperatureAlarm.eT6
-    '                        Case 6
-    '                            state(nCnt) = eTemperatureAlarm.eT7
-    '                        Case 7
-    '                            state(nCnt) = eTemperatureAlarm.eT8
-    '                        Case 8
-    '                            state(nCnt) = eTemperatureAlarm.eT9
-    '                    End Select
-    '                    nCnt += 1
-    '                End If
-    '            Next
+                        Select Case i
+                            Case 0
+                                state(nCnt) = eTemperatureAlarm.eT1
+                            Case 1
+                                state(nCnt) = eTemperatureAlarm.eT2
+                            Case 2
+                                state(nCnt) = eTemperatureAlarm.eT3
+                            Case 3
+                                state(nCnt) = eTemperatureAlarm.eT4
+                            Case 4
+                                state(nCnt) = eTemperatureAlarm.eT5
+                            Case 5
+                                state(nCnt) = eTemperatureAlarm.eT6
+                            Case 6
+                                state(nCnt) = eTemperatureAlarm.eT7
+                            Case 7
+                                state(nCnt) = eTemperatureAlarm.eT8
+                            Case 8
+                                state(nCnt) = eTemperatureAlarm.eT9
+                        End Select
+                        nCnt += 1
+                    End If
+                Next
 
-    '            myParent.cPLC.m_PLCDatas.nEOCRTempAlarm = state.Clone
+                myParent.cPLC.m_PLCDatas.nEOCRTempAlarm = state.Clone
 
-    '        End If
-    '    End If
+            End If
+        End If
 
-    '    Return True
-    'End Function
-    'Public Overrides Function GetSSRAlarm(ByVal state() As eTemperatureAlarm) As Boolean
-    '    Dim sRcvValue As String = ""
+        Return True
+    End Function
+    Public Overrides Function GetSSR1Alarm(ByVal state() As eTemperatureAlarm) As Boolean
+        Dim sRcvValue As String = ""
 
-    '    If GetData(PLCCOMMAND_ALARM_SSRTEMP, sRcvValue) = True Then
+        If GetData(PLCCOMMAND_ALARM_SSRTEMP, sRcvValue) = True Then
 
-    '        If sRcvValue = "0" Then
-    '            state(0) = eTemperatureAlarm.eNoError
-    '            myParent.cPLC.m_PLCDatas.nSSRTempAlarm = state.Clone '    m_PLCDatas.nSystemStatus = state.Clone
-    '            Return True
-    '        Else
+            If sRcvValue = "0" Then
+                state(0) = eTemperatureAlarm.eNoError
+                myParent.cPLC.m_PLCDatas.nSSRTemp1Alarm = state.Clone '    m_PLCDatas.nSystemStatus = state.Clone
+                Return True
+            Else
 
-    '            Dim nCnt As Integer
-    '            Dim nBinery() As Integer
+                Dim nCnt As Integer
+                Dim nBinery() As Integer
 
-    '            nBinery = hex2bin(sRcvValue)
+                nBinery = hex2bin(sRcvValue)
 
-    '            For i As Integer = 0 To nBinery.Length - 1
-    '                If nBinery(i) = -1 Then
-    '                    Return False
-    '                ElseIf nBinery(i) = 1 Then
-    '                    ReDim Preserve state(nCnt)
+                For i As Integer = 0 To nBinery.Length - 1
+                    If nBinery(i) = -1 Then
+                        Return False
+                    ElseIf nBinery(i) = 1 Then
+                        ReDim Preserve state(nCnt)
 
-    '                    Select Case i
-    '                        Case 0
-    '                            state(nCnt) = eTemperatureAlarm.eT1
-    '                        Case 1
-    '                            state(nCnt) = eTemperatureAlarm.eT2
-    '                        Case 2
-    '                            state(nCnt) = eTemperatureAlarm.eT3
-    '                        Case 3
-    '                            state(nCnt) = eTemperatureAlarm.eT4
-    '                        Case 4
-    '                            state(nCnt) = eTemperatureAlarm.eT5
-    '                        Case 5
-    '                            state(nCnt) = eTemperatureAlarm.eT6
-    '                        Case 6
-    '                            state(nCnt) = eTemperatureAlarm.eT7
-    '                        Case 7
-    '                            state(nCnt) = eTemperatureAlarm.eT8
-    '                        Case 8
-    '                            state(nCnt) = eTemperatureAlarm.eT9
-    '                    End Select
-    '                    nCnt += 1
-    '                End If
-    '            Next
+                        Select Case i
+                            Case 0
+                                state(nCnt) = eTemperatureAlarm.eT1
+                            Case 1
+                                state(nCnt) = eTemperatureAlarm.eT2
+                            Case 2
+                                state(nCnt) = eTemperatureAlarm.eT3
+                            Case 3
+                                state(nCnt) = eTemperatureAlarm.eT4
+                            Case 4
+                                state(nCnt) = eTemperatureAlarm.eT5
+                            Case 5
+                                state(nCnt) = eTemperatureAlarm.eT6
+                            Case 6
+                                state(nCnt) = eTemperatureAlarm.eT7
+                            Case 7
+                                state(nCnt) = eTemperatureAlarm.eT8
+                            Case 8
+                                state(nCnt) = eTemperatureAlarm.eT9
+                        End Select
+                        nCnt += 1
+                    End If
+                Next
 
-    '            myParent.cPLC.m_PLCDatas.nSSRTempAlarm = state.Clone
+                myParent.cPLC.m_PLCDatas.nSSRTemp1Alarm = state.Clone
 
-    '        End If
-    '    End If
+            End If
+        End If
 
-    '    Return True
-    'End Function
+        Return True
+    End Function
+    Public Overrides Function GetSSR2Alarm(ByVal state() As eTemperatureAlarm) As Boolean
+        Dim sRcvValue As String = ""
+
+        If GetData(PLCCOMMAND_ALARM_SSRTEMP2, sRcvValue) = True Then
+
+            If sRcvValue = "0" Then
+                state(0) = eTemperatureAlarm.eNoError
+                myParent.cPLC.m_PLCDatas.nSSRTemp2Alarm = state.Clone '    m_PLCDatas.nSystemStatus = state.Clone
+                Return True
+            Else
+
+                Dim nCnt As Integer
+                Dim nBinery() As Integer
+
+                nBinery = hex2bin(sRcvValue)
+
+                For i As Integer = 0 To nBinery.Length - 1
+                    If nBinery(i) = -1 Then
+                        Return False
+                    ElseIf nBinery(i) = 1 Then
+                        ReDim Preserve state(nCnt)
+
+                        Select Case i
+                            Case 0
+                                state(nCnt) = eTemperatureAlarm.eT1
+                            Case 1
+                                state(nCnt) = eTemperatureAlarm.eT2
+                            Case 2
+                                state(nCnt) = eTemperatureAlarm.eT3
+                            Case 3
+                                state(nCnt) = eTemperatureAlarm.eT4
+                            Case 4
+                                state(nCnt) = eTemperatureAlarm.eT5
+                            Case 5
+                                state(nCnt) = eTemperatureAlarm.eT6
+                            Case 6
+                                state(nCnt) = eTemperatureAlarm.eT7
+                            Case 7
+                                state(nCnt) = eTemperatureAlarm.eT8
+                            Case 8
+                                state(nCnt) = eTemperatureAlarm.eT9
+                        End Select
+                        nCnt += 1
+                    End If
+                Next
+
+                myParent.cPLC.m_PLCDatas.nSSRTemp2Alarm = state.Clone
+
+            End If
+        End If
+
+        Return True
+    End Function
+
+    Public Overrides Function GetTempSensor1Alarm(ByVal state() As eTemperatureAlarm) As Boolean
+        Dim sRcvValue As String = ""
+
+        If GetData(PLCCOMMAND_ALARM_TEMPSENSOR1, sRcvValue) = True Then
+
+            If sRcvValue = "0" Then
+                state(0) = eTemperatureAlarm.eNoError
+                myParent.cPLC.m_PLCDatas.nTempSensor1Alarm = state.Clone '    m_PLCDatas.nSystemStatus = state.Clone
+                Return True
+            Else
+
+                Dim nCnt As Integer
+                Dim nBinery() As Integer
+
+                nBinery = hex2bin(sRcvValue)
+
+                For i As Integer = 0 To nBinery.Length - 1
+                    If nBinery(i) = -1 Then
+                        Return False
+                    ElseIf nBinery(i) = 1 Then
+                        ReDim Preserve state(nCnt)
+
+                        Select Case i
+                            Case 0
+                                state(nCnt) = eTemperatureAlarm.eT1
+                            Case 1
+                                state(nCnt) = eTemperatureAlarm.eT2
+                            Case 2
+                                state(nCnt) = eTemperatureAlarm.eT3
+                            Case 3
+                                state(nCnt) = eTemperatureAlarm.eT4
+                            Case 4
+                                state(nCnt) = eTemperatureAlarm.eT5
+                            Case 5
+                                state(nCnt) = eTemperatureAlarm.eT6
+                            Case 6
+                                state(nCnt) = eTemperatureAlarm.eT7
+                            Case 7
+                                state(nCnt) = eTemperatureAlarm.eT8
+                            Case 8
+                                state(nCnt) = eTemperatureAlarm.eT9
+                        End Select
+                        nCnt += 1
+                    End If
+                Next
+
+                myParent.cPLC.m_PLCDatas.nTempSensor1Alarm = state.Clone
+
+            End If
+        End If
+
+        Return True
+    End Function
+    Public Overrides Function GetTempSensor2Alarm(ByVal state() As eTemperatureAlarm) As Boolean
+        Dim sRcvValue As String = ""
+
+        If GetData(PLCCOMMAND_ALARM_TEMPSENSOR2, sRcvValue) = True Then
+
+            If sRcvValue = "0" Then
+                state(0) = eTemperatureAlarm.eNoError
+                myParent.cPLC.m_PLCDatas.nTempSensor2Alarm = state.Clone '    m_PLCDatas.nSystemStatus = state.Clone
+                Return True
+            Else
+
+                Dim nCnt As Integer
+                Dim nBinery() As Integer
+
+                nBinery = hex2bin(sRcvValue)
+
+                For i As Integer = 0 To nBinery.Length - 1
+                    If nBinery(i) = -1 Then
+                        Return False
+                    ElseIf nBinery(i) = 1 Then
+                        ReDim Preserve state(nCnt)
+
+                        Select Case i
+                            Case 0
+                                state(nCnt) = eTemperatureAlarm.eT1
+                            Case 1
+                                state(nCnt) = eTemperatureAlarm.eT2
+                            Case 2
+                                state(nCnt) = eTemperatureAlarm.eT3
+                            Case 3
+                                state(nCnt) = eTemperatureAlarm.eT4
+                            Case 4
+                                state(nCnt) = eTemperatureAlarm.eT5
+                            Case 5
+                                state(nCnt) = eTemperatureAlarm.eT6
+                            Case 6
+                                state(nCnt) = eTemperatureAlarm.eT7
+                            Case 7
+                                state(nCnt) = eTemperatureAlarm.eT8
+                            Case 8
+                                state(nCnt) = eTemperatureAlarm.eT9
+                        End Select
+                        nCnt += 1
+                    End If
+                Next
+
+                myParent.cPLC.m_PLCDatas.nTempSensor2Alarm = state.Clone
+
+            End If
+        End If
+
+        Return True
+    End Function
+    Public Overrides Function GetDoorAlarm(ByVal state() As eDoorAlarm) As Boolean
+        Dim sRcvValue As String = ""
+
+        If GetData(PLCCOMMAND_ALARM_DOOROPEN, sRcvValue) = True Then '도어알람 필요하다.
+
+            If sRcvValue = "0" Then
+                ReDim state(0)
+                state(0) = eTemperatureAlarm.eNoError
+                myParent.cPLC.m_PLCDatas.nDoorAlarm = state.Clone '    m_PLCDatas.nSystemStatus = state.Clone
+                Return True
+            Else
+
+                Dim nCnt As Integer
+                Dim nBinery() As Integer
+
+                nBinery = hex2bin(sRcvValue)
+
+                For i As Integer = 0 To nBinery.Length - 1
+                    If nBinery(i) = -1 Then
+                        Return False
+                    ElseIf nBinery(i) = 1 Then
+                        ReDim Preserve state(nCnt)
+
+                        Select Case i
+                            Case 0
+                                state(nCnt) = eDoorAlarm.eSafety_Door_Loop
+                            Case 1
+                                state(nCnt) = eDoorAlarm.eSafety_Door_1
+                            Case 2
+                                state(nCnt) = eDoorAlarm.eSafety_Door_2
+                            Case 3
+                                state(nCnt) = eDoorAlarm.eSafety_Door_3
+                            Case 4
+                                state(nCnt) = eDoorAlarm.eSafety_Door_4
+                            Case 5
+                                state(nCnt) = eDoorAlarm.eSafety_Door_5
+                            Case 6
+                                state(nCnt) = eDoorAlarm.eSafety_Door_6
+                            Case 7
+                                state(nCnt) = eDoorAlarm.eSafety_Door_7
+                            Case 8
+                                state(nCnt) = eDoorAlarm.eSafety_Door_8
+                        End Select
+                        nCnt += 1
+                    End If
+                Next
+
+                myParent.cPLC.m_PLCDatas.nDoorAlarm = state.Clone
+
+            End If
+        End If
+
+        Return True
+    End Function
     'Public Overrides Function GetOverTempZone1Alarm(ByVal state() As eTemperatureAlarm) As Boolean
     '    Dim sRcvValue As String = ""
 
@@ -1025,68 +1458,15 @@ Public Class CDevPLC_MITSUBISHI
 
     '    Return True
     'End Function
-    'Public Overrides Function GetXAxisAlarm(ByVal state() As eAxisAlarm) As Boolean
-    '    Dim sRcvValue As String = ""
-    '    ReDim state(0)
-    '    If GetData(PLCCOMMAND_ALARM_X_AXIS, sRcvValue) = True Then
-
-    '        If sRcvValue = "0" Then
-    '            state(0) = eAxisAlarm.eNoError
-    '            myParent.cPLC.m_PLCDatas.nXAxisAlarm = state.Clone '    m_PLCDatas.nSystemStatus = state.Clone
-    '            Return True
-    '        Else
-
-    '            Dim nCnt As Integer
-    '            Dim nBinery() As Integer
-
-    '            nBinery = hex2bin(sRcvValue)
-
-    '            For i As Integer = 0 To nBinery.Length - 1
-    '                If nBinery(i) = -1 Then
-    '                    Return False
-    '                ElseIf nBinery(i) = 1 Then
-    '                    ReDim Preserve state(nCnt)
-
-    '                    Select Case i
-    '                        Case 0
-    '                            state(nCnt) = eAxisAlarm.eAxis_Alarm
-    '                        Case 1
-    '                            state(nCnt) = eAxisAlarm.eAxis_Servo_Alarm
-    '                        Case 2
-    '                            state(nCnt) = eAxisAlarm.eAxis_RLS_Limit_Alarm
-    '                        Case 3
-    '                            state(nCnt) = eAxisAlarm.eAxis_FLS_Limit_Alarm
-    '                        Case 4
-    '                            state(nCnt) = eAxisAlarm.eAxis_Crush_Alarm
-    '                        Case 5
-    '                            state(nCnt) = eAxisAlarm.eAxis_Homming_Timeout
-    '                        Case 6
-    '                            state(nCnt) = eAxisAlarm.eAxis_Moving_Timeout
-    '                        Case 7
-    '                            state(nCnt) = eAxisAlarm.eAMP_Over_Temp
-    '                        Case 8
-    '                            state(nCnt) = eAxisAlarm.eOver_Current
-    '                    End Select
-    '                    nCnt += 1
-    '                End If
-    '            Next
-
-    '            myParent.cPLC.m_PLCDatas.nXAxisAlarm = state.Clone
-
-    '        End If
-    '    End If
-
-    '    Return True
-    'End Function
-    Public Overrides Function GetYAxisAlarm(ByVal state() As eAxisAlarm) As Boolean
+    '정현기
+    Public Overrides Function GetXAxisAlarm(ByVal state() As eAxisAlarm) As Boolean
         Dim sRcvValue As String = ""
-
-        If GetData(PLCCOMMAND_ALARM_Y_AXIS, sRcvValue) = True Then
+        ReDim state(0)
+        If GetData(PLCCOMMAND_ALARM_X_AXIS, sRcvValue) = True Then
 
             If sRcvValue = "0" Then
-                ReDim state(0)
                 state(0) = eAxisAlarm.eNoError
-                myParent.cPLC.m_PLCDatas.nYAxisAlarm = state.Clone '    m_PLCDatas.nSystemStatus = state.Clone
+                myParent.cPLC.m_PLCDatas.nXAxisAlarm = state.Clone '    m_PLCDatas.nSystemStatus = state.Clone
                 Return True
             Else
 
@@ -1125,7 +1505,119 @@ Public Class CDevPLC_MITSUBISHI
                     End If
                 Next
 
-                myParent.cPLC.m_PLCDatas.nYAxisAlarm = state.Clone
+                myParent.cPLC.m_PLCDatas.nXAxisAlarm = state.Clone
+
+            End If
+        End If
+
+        Return True
+    End Function
+    Public Overrides Function GetY1AxisAlarm(ByVal state() As eAxisAlarm) As Boolean
+        Dim sRcvValue As String = ""
+
+        If GetData(PLCCOMMAND_ALARM_Y1_AXIS, sRcvValue) = True Then
+
+            If sRcvValue = "0" Then
+                ReDim state(0)
+                state(0) = eAxisAlarm.eNoError
+                myParent.cPLC.m_PLCDatas.nY1AxisAlarm = state.Clone '    m_PLCDatas.nSystemStatus = state.Clone
+                Return True
+            Else
+
+                Dim nCnt As Integer
+                Dim nBinery() As Integer
+
+                nBinery = hex2bin(sRcvValue)
+
+                For i As Integer = 0 To nBinery.Length - 1
+                    If nBinery(i) = -1 Then
+                        Return False
+                    ElseIf nBinery(i) = 1 Then
+                        ReDim Preserve state(nCnt)
+
+                        Select Case i
+                            Case 0
+                                state(nCnt) = eAxisAlarm.eAxis_Alarm
+                            Case 1
+                                state(nCnt) = eAxisAlarm.eAxis_Servo_Alarm
+                            Case 2
+                                state(nCnt) = eAxisAlarm.eAxis_RLS_Limit_Alarm
+                            Case 3
+                                state(nCnt) = eAxisAlarm.eAxis_FLS_Limit_Alarm
+                            Case 4
+                                state(nCnt) = eAxisAlarm.eAxis_Crush_Alarm
+                            Case 5
+                                state(nCnt) = eAxisAlarm.eAxis_Homming_Timeout
+                            Case 6
+                                state(nCnt) = eAxisAlarm.eAxis_Moving_Timeout
+                            Case 7
+                                state(nCnt) = eAxisAlarm.eAMP_Over_Temp
+                            Case 8
+                                state(nCnt) = eAxisAlarm.eOver_Current
+                            Case 10
+                                state(nCnt) = eAxisAlarm.eSynchronous_axispositional_alarm
+                        End Select
+                        nCnt += 1
+                    End If
+                Next
+
+                myParent.cPLC.m_PLCDatas.nY1AxisAlarm = state.Clone
+
+            End If
+        End If
+
+        Return True
+    End Function
+    Public Overrides Function GetY2AxisAlarm(ByVal state() As eAxisAlarm) As Boolean
+        Dim sRcvValue As String = ""
+
+        If GetData(PLCCOMMAND_ALARM_Y2_AXIS, sRcvValue) = True Then
+
+            If sRcvValue = "0" Then
+                ReDim state(0)
+                state(0) = eAxisAlarm.eNoError
+                myParent.cPLC.m_PLCDatas.nY2AxisAlarm = state.Clone '    m_PLCDatas.nSystemStatus = state.Clone
+                Return True
+            Else
+
+                Dim nCnt As Integer
+                Dim nBinery() As Integer
+
+                nBinery = hex2bin(sRcvValue)
+
+                For i As Integer = 0 To nBinery.Length - 1
+                    If nBinery(i) = -1 Then
+                        Return False
+                    ElseIf nBinery(i) = 1 Then
+                        ReDim Preserve state(nCnt)
+
+                        Select Case i
+                            Case 0
+                                state(nCnt) = eAxisAlarm.eAxis_Alarm
+                            Case 1
+                                state(nCnt) = eAxisAlarm.eAxis_Servo_Alarm
+                            Case 2
+                                state(nCnt) = eAxisAlarm.eAxis_RLS_Limit_Alarm
+                            Case 3
+                                state(nCnt) = eAxisAlarm.eAxis_FLS_Limit_Alarm
+                            Case 4
+                                state(nCnt) = eAxisAlarm.eAxis_Crush_Alarm
+                            Case 5
+                                state(nCnt) = eAxisAlarm.eAxis_Homming_Timeout
+                            Case 6
+                                state(nCnt) = eAxisAlarm.eAxis_Moving_Timeout
+                            Case 7
+                                state(nCnt) = eAxisAlarm.eAMP_Over_Temp
+                            Case 8
+                                state(nCnt) = eAxisAlarm.eOver_Current
+                            Case 10
+                                state(nCnt) = eAxisAlarm.eSynchronous_axispositional_alarm
+                        End Select
+                        nCnt += 1
+                    End If
+                Next
+
+                myParent.cPLC.m_PLCDatas.nY2AxisAlarm = state.Clone
 
             End If
         End If
@@ -1174,6 +1666,8 @@ Public Class CDevPLC_MITSUBISHI
                                 state(nCnt) = eAxisAlarm.eAMP_Over_Temp
                             Case 8
                                 state(nCnt) = eAxisAlarm.eOver_Current
+                            Case 10
+                                state(nCnt) = eAxisAlarm.eSynchronous_axispositional_alarm
                         End Select
                         nCnt += 1
                     End If
@@ -1186,222 +1680,222 @@ Public Class CDevPLC_MITSUBISHI
 
         Return True
     End Function
-    Public Overrides Function GetTheta1AxisAlarm(ByVal state() As eAxisAlarm) As Boolean
-        Dim sRcvValue As String = ""
+    'Public Overrides Function GetTheta1AxisAlarm(ByVal state() As eAxisAlarm) As Boolean
+    '    Dim sRcvValue As String = ""
 
-        If GetData(PLCCOMMAND_ALARM_Theta1_AXIS, sRcvValue) = True Then
+    '    If GetData(PLCCOMMAND_ALARM_Theta1_AXIS, sRcvValue) = True Then
 
-            If sRcvValue = "0" Then
-                ReDim state(0)
-                state(0) = eAxisAlarm.eNoError
-                myParent.cPLC.m_PLCDatas.nTheta1AxisAlarm = state.Clone '    m_PLCDatas.nSystemStatus = state.Clone
-                Return True
-            Else
+    '        If sRcvValue = "0" Then
+    '            ReDim state(0)
+    '            state(0) = eAxisAlarm.eNoError
+    '            myParent.cPLC.m_PLCDatas.nTheta1AxisAlarm = state.Clone '    m_PLCDatas.nSystemStatus = state.Clone
+    '            Return True
+    '        Else
 
-                Dim nCnt As Integer
-                Dim nBinery() As Integer
+    '            Dim nCnt As Integer
+    '            Dim nBinery() As Integer
 
-                nBinery = hex2bin(sRcvValue)
+    '            nBinery = hex2bin(sRcvValue)
 
-                For i As Integer = 0 To nBinery.Length - 1
-                    If nBinery(i) = -1 Then
-                        Return False
-                    ElseIf nBinery(i) = 1 Then
-                        ReDim Preserve state(nCnt)
+    '            For i As Integer = 0 To nBinery.Length - 1
+    '                If nBinery(i) = -1 Then
+    '                    Return False
+    '                ElseIf nBinery(i) = 1 Then
+    '                    ReDim Preserve state(nCnt)
 
-                        Select Case i
-                            Case 0
-                                state(nCnt) = eAxisAlarm.eAxis_Alarm
-                            Case 1
-                                state(nCnt) = eAxisAlarm.eAxis_Servo_Alarm
-                            Case 2
-                                state(nCnt) = eAxisAlarm.eAxis_RLS_Limit_Alarm
-                            Case 3
-                                state(nCnt) = eAxisAlarm.eAxis_FLS_Limit_Alarm
-                            Case 4
-                                state(nCnt) = eAxisAlarm.eAxis_Crush_Alarm
-                            Case 5
-                                state(nCnt) = eAxisAlarm.eAxis_Homming_Timeout
-                            Case 6
-                                state(nCnt) = eAxisAlarm.eAxis_Moving_Timeout
-                            Case 7
-                                state(nCnt) = eAxisAlarm.eAMP_Over_Temp
-                            Case 8
-                                state(nCnt) = eAxisAlarm.eOver_Current
-                        End Select
-                        nCnt += 1
-                    End If
-                Next
+    '                    Select Case i
+    '                        Case 0
+    '                            state(nCnt) = eAxisAlarm.eAxis_Alarm
+    '                        Case 1
+    '                            state(nCnt) = eAxisAlarm.eAxis_Servo_Alarm
+    '                        Case 2
+    '                            state(nCnt) = eAxisAlarm.eAxis_RLS_Limit_Alarm
+    '                        Case 3
+    '                            state(nCnt) = eAxisAlarm.eAxis_FLS_Limit_Alarm
+    '                        Case 4
+    '                            state(nCnt) = eAxisAlarm.eAxis_Crush_Alarm
+    '                        Case 5
+    '                            state(nCnt) = eAxisAlarm.eAxis_Homming_Timeout
+    '                        Case 6
+    '                            state(nCnt) = eAxisAlarm.eAxis_Moving_Timeout
+    '                        Case 7
+    '                            state(nCnt) = eAxisAlarm.eAMP_Over_Temp
+    '                        Case 8
+    '                            state(nCnt) = eAxisAlarm.eOver_Current
+    '                    End Select
+    '                    nCnt += 1
+    '                End If
+    '            Next
 
-                myParent.cPLC.m_PLCDatas.nTheta1AxisAlarm = state.Clone
+    '            myParent.cPLC.m_PLCDatas.nTheta1AxisAlarm = state.Clone
 
-            End If
-        End If
+    '        End If
+    '    End If
 
-        Return True
-    End Function
-    Public Overrides Function GetTheta2AxisAlarm(ByVal state() As eAxisAlarm) As Boolean
-        Dim sRcvValue As String = ""
+    '    Return True
+    'End Function
+    'Public Overrides Function GetTheta2AxisAlarm(ByVal state() As eAxisAlarm) As Boolean
+    '    Dim sRcvValue As String = ""
 
-        If GetData(PLCCOMMAND_ALARM_THETA2_AXIS, sRcvValue) = True Then
+    '    If GetData(PLCCOMMAND_ALARM_THETA2_AXIS, sRcvValue) = True Then
 
-            If sRcvValue = "0" Then
-                ReDim state(0)
-                state(0) = eAxisAlarm.eNoError
-                myParent.cPLC.m_PLCDatas.nTheta2AxisAlarm = state.Clone '    m_PLCDatas.nSystemStatus = state.Clone
-                Return True
-            Else
+    '        If sRcvValue = "0" Then
+    '            ReDim state(0)
+    '            state(0) = eAxisAlarm.eNoError
+    '            myParent.cPLC.m_PLCDatas.nTheta2AxisAlarm = state.Clone '    m_PLCDatas.nSystemStatus = state.Clone
+    '            Return True
+    '        Else
 
-                Dim nCnt As Integer
-                Dim nBinery() As Integer
+    '            Dim nCnt As Integer
+    '            Dim nBinery() As Integer
 
-                nBinery = hex2bin(sRcvValue)
+    '            nBinery = hex2bin(sRcvValue)
 
-                For i As Integer = 0 To nBinery.Length - 1
-                    If nBinery(i) = -1 Then
-                        Return False
-                    ElseIf nBinery(i) = 1 Then
-                        ReDim Preserve state(nCnt)
+    '            For i As Integer = 0 To nBinery.Length - 1
+    '                If nBinery(i) = -1 Then
+    '                    Return False
+    '                ElseIf nBinery(i) = 1 Then
+    '                    ReDim Preserve state(nCnt)
 
-                        Select Case i
-                            Case 0
-                                state(nCnt) = eAxisAlarm.eAxis_Alarm
-                            Case 1
-                                state(nCnt) = eAxisAlarm.eAxis_Servo_Alarm
-                            Case 2
-                                state(nCnt) = eAxisAlarm.eAxis_RLS_Limit_Alarm
-                            Case 3
-                                state(nCnt) = eAxisAlarm.eAxis_FLS_Limit_Alarm
-                            Case 4
-                                state(nCnt) = eAxisAlarm.eAxis_Crush_Alarm
-                            Case 5
-                                state(nCnt) = eAxisAlarm.eAxis_Homming_Timeout
-                            Case 6
-                                state(nCnt) = eAxisAlarm.eAxis_Moving_Timeout
-                            Case 7
-                                state(nCnt) = eAxisAlarm.eAMP_Over_Temp
-                            Case 8
-                                state(nCnt) = eAxisAlarm.eOver_Current
-                        End Select
-                        nCnt += 1
-                    End If
-                Next
+    '                    Select Case i
+    '                        Case 0
+    '                            state(nCnt) = eAxisAlarm.eAxis_Alarm
+    '                        Case 1
+    '                            state(nCnt) = eAxisAlarm.eAxis_Servo_Alarm
+    '                        Case 2
+    '                            state(nCnt) = eAxisAlarm.eAxis_RLS_Limit_Alarm
+    '                        Case 3
+    '                            state(nCnt) = eAxisAlarm.eAxis_FLS_Limit_Alarm
+    '                        Case 4
+    '                            state(nCnt) = eAxisAlarm.eAxis_Crush_Alarm
+    '                        Case 5
+    '                            state(nCnt) = eAxisAlarm.eAxis_Homming_Timeout
+    '                        Case 6
+    '                            state(nCnt) = eAxisAlarm.eAxis_Moving_Timeout
+    '                        Case 7
+    '                            state(nCnt) = eAxisAlarm.eAMP_Over_Temp
+    '                        Case 8
+    '                            state(nCnt) = eAxisAlarm.eOver_Current
+    '                    End Select
+    '                    nCnt += 1
+    '                End If
+    '            Next
 
-                myParent.cPLC.m_PLCDatas.nTheta2AxisAlarm = state.Clone
+    '            myParent.cPLC.m_PLCDatas.nTheta2AxisAlarm = state.Clone
 
-            End If
-        End If
+    '        End If
+    '    End If
 
-        Return True
-    End Function
-    Public Overrides Function GetTheta3AxisAlarm(ByVal state() As eAxisAlarm) As Boolean
-        Dim sRcvValue As String = ""
+    '    Return True
+    'End Function
+    'Public Overrides Function GetTheta3AxisAlarm(ByVal state() As eAxisAlarm) As Boolean
+    '    Dim sRcvValue As String = ""
 
-        If GetData(PLCCOMMAND_ALARM_Theta3_AXIS, sRcvValue) = True Then
+    '    If GetData(PLCCOMMAND_ALARM_Theta3_AXIS, sRcvValue) = True Then
 
-            If sRcvValue = "0" Then
-                ReDim state(0)
-                state(0) = eAxisAlarm.eNoError
-                myParent.cPLC.m_PLCDatas.nTheta3AxisAlarm = state.Clone '    m_PLCDatas.nSystemStatus = state.Clone
-                Return True
-            Else
+    '        If sRcvValue = "0" Then
+    '            ReDim state(0)
+    '            state(0) = eAxisAlarm.eNoError
+    '            myParent.cPLC.m_PLCDatas.nTheta3AxisAlarm = state.Clone '    m_PLCDatas.nSystemStatus = state.Clone
+    '            Return True
+    '        Else
 
-                Dim nCnt As Integer
-                Dim nBinery() As Integer
+    '            Dim nCnt As Integer
+    '            Dim nBinery() As Integer
 
-                nBinery = hex2bin(sRcvValue)
+    '            nBinery = hex2bin(sRcvValue)
 
-                For i As Integer = 0 To nBinery.Length - 1
-                    If nBinery(i) = -1 Then
-                        Return False
-                    ElseIf nBinery(i) = 1 Then
-                        ReDim Preserve state(nCnt)
+    '            For i As Integer = 0 To nBinery.Length - 1
+    '                If nBinery(i) = -1 Then
+    '                    Return False
+    '                ElseIf nBinery(i) = 1 Then
+    '                    ReDim Preserve state(nCnt)
 
-                        Select Case i
-                            Case 0
-                                state(nCnt) = eAxisAlarm.eAxis_Alarm
-                            Case 1
-                                state(nCnt) = eAxisAlarm.eAxis_Servo_Alarm
-                            Case 2
-                                state(nCnt) = eAxisAlarm.eAxis_RLS_Limit_Alarm
-                            Case 3
-                                state(nCnt) = eAxisAlarm.eAxis_FLS_Limit_Alarm
-                            Case 4
-                                state(nCnt) = eAxisAlarm.eAxis_Crush_Alarm
-                            Case 5
-                                state(nCnt) = eAxisAlarm.eAxis_Homming_Timeout
-                            Case 6
-                                state(nCnt) = eAxisAlarm.eAxis_Moving_Timeout
-                            Case 7
-                                state(nCnt) = eAxisAlarm.eAMP_Over_Temp
-                            Case 8
-                                state(nCnt) = eAxisAlarm.eOver_Current
-                        End Select
-                        nCnt += 1
-                    End If
-                Next
+    '                    Select Case i
+    '                        Case 0
+    '                            state(nCnt) = eAxisAlarm.eAxis_Alarm
+    '                        Case 1
+    '                            state(nCnt) = eAxisAlarm.eAxis_Servo_Alarm
+    '                        Case 2
+    '                            state(nCnt) = eAxisAlarm.eAxis_RLS_Limit_Alarm
+    '                        Case 3
+    '                            state(nCnt) = eAxisAlarm.eAxis_FLS_Limit_Alarm
+    '                        Case 4
+    '                            state(nCnt) = eAxisAlarm.eAxis_Crush_Alarm
+    '                        Case 5
+    '                            state(nCnt) = eAxisAlarm.eAxis_Homming_Timeout
+    '                        Case 6
+    '                            state(nCnt) = eAxisAlarm.eAxis_Moving_Timeout
+    '                        Case 7
+    '                            state(nCnt) = eAxisAlarm.eAMP_Over_Temp
+    '                        Case 8
+    '                            state(nCnt) = eAxisAlarm.eOver_Current
+    '                    End Select
+    '                    nCnt += 1
+    '                End If
+    '            Next
 
-                myParent.cPLC.m_PLCDatas.nTheta3AxisAlarm = state.Clone
+    '            myParent.cPLC.m_PLCDatas.nTheta3AxisAlarm = state.Clone
 
-            End If
-        End If
+    '        End If
+    '    End If
 
-        Return True
-    End Function
-    Public Overrides Function GetTheta4AxisAlarm(ByVal state() As eAxisAlarm) As Boolean
-        Dim sRcvValue As String = ""
+    '    Return True
+    'End Function
+    'Public Overrides Function GetTheta4AxisAlarm(ByVal state() As eAxisAlarm) As Boolean
+    '    Dim sRcvValue As String = ""
 
-        If GetData(PLCCOMMAND_ALARM_Theta4_AXIS, sRcvValue) = True Then
+    '    If GetData(PLCCOMMAND_ALARM_Theta4_AXIS, sRcvValue) = True Then
 
-            If sRcvValue = "0" Then
-                ReDim state(0)
-                state(0) = eAxisAlarm.eNoError
-                myParent.cPLC.m_PLCDatas.nTheta4AxisAlarm = state.Clone '    m_PLCDatas.nSystemStatus = state.Clone
-                Return True
-            Else
+    '        If sRcvValue = "0" Then
+    '            ReDim state(0)
+    '            state(0) = eAxisAlarm.eNoError
+    '            myParent.cPLC.m_PLCDatas.nTheta4AxisAlarm = state.Clone '    m_PLCDatas.nSystemStatus = state.Clone
+    '            Return True
+    '        Else
 
-                Dim nCnt As Integer
-                Dim nBinery() As Integer
+    '            Dim nCnt As Integer
+    '            Dim nBinery() As Integer
 
-                nBinery = hex2bin(sRcvValue)
+    '            nBinery = hex2bin(sRcvValue)
 
-                For i As Integer = 0 To nBinery.Length - 1
-                    If nBinery(i) = -1 Then
-                        Return False
-                    ElseIf nBinery(i) = 1 Then
-                        ReDim Preserve state(nCnt)
+    '            For i As Integer = 0 To nBinery.Length - 1
+    '                If nBinery(i) = -1 Then
+    '                    Return False
+    '                ElseIf nBinery(i) = 1 Then
+    '                    ReDim Preserve state(nCnt)
 
-                        Select Case i
-                            Case 0
-                                state(nCnt) = eAxisAlarm.eAxis_Alarm
-                            Case 1
-                                state(nCnt) = eAxisAlarm.eAxis_Servo_Alarm
-                            Case 2
-                                state(nCnt) = eAxisAlarm.eAxis_RLS_Limit_Alarm
-                            Case 3
-                                state(nCnt) = eAxisAlarm.eAxis_FLS_Limit_Alarm
-                            Case 4
-                                state(nCnt) = eAxisAlarm.eAxis_Crush_Alarm
-                            Case 5
-                                state(nCnt) = eAxisAlarm.eAxis_Homming_Timeout
-                            Case 6
-                                state(nCnt) = eAxisAlarm.eAxis_Moving_Timeout
-                            Case 7
-                                state(nCnt) = eAxisAlarm.eAMP_Over_Temp
-                            Case 8
-                                state(nCnt) = eAxisAlarm.eOver_Current
-                        End Select
-                        nCnt += 1
-                    End If
-                Next
+    '                    Select Case i
+    '                        Case 0
+    '                            state(nCnt) = eAxisAlarm.eAxis_Alarm
+    '                        Case 1
+    '                            state(nCnt) = eAxisAlarm.eAxis_Servo_Alarm
+    '                        Case 2
+    '                            state(nCnt) = eAxisAlarm.eAxis_RLS_Limit_Alarm
+    '                        Case 3
+    '                            state(nCnt) = eAxisAlarm.eAxis_FLS_Limit_Alarm
+    '                        Case 4
+    '                            state(nCnt) = eAxisAlarm.eAxis_Crush_Alarm
+    '                        Case 5
+    '                            state(nCnt) = eAxisAlarm.eAxis_Homming_Timeout
+    '                        Case 6
+    '                            state(nCnt) = eAxisAlarm.eAxis_Moving_Timeout
+    '                        Case 7
+    '                            state(nCnt) = eAxisAlarm.eAMP_Over_Temp
+    '                        Case 8
+    '                            state(nCnt) = eAxisAlarm.eOver_Current
+    '                    End Select
+    '                    nCnt += 1
+    '                End If
+    '            Next
 
-                myParent.cPLC.m_PLCDatas.nTheta4AxisAlarm = state.Clone
+    '            myParent.cPLC.m_PLCDatas.nTheta4AxisAlarm = state.Clone
 
-            End If
-        End If
+    '        End If
+    '    End If
 
-        Return True
-    End Function
+    '    Return True
+    'End Function
     'Public Overrides Function GetExhausSlotStatus(ByVal state() As eSlotSignal) As Boolean
     '    Dim sRcvValue As String = ""
 
@@ -1769,14 +2263,14 @@ Public Class CDevPLC_MITSUBISHI
                         Return False
                     ElseIf nBinery(i) = 1 Then
                         ReDim Preserve state(nCnt)
-
+                        '나중에 수정해야함
                         Select Case i
                             Case 0
                                 state(nCnt) = eAllAxisAlarm.eY1_Axis_Alarm
-                                'Case 1
-                                '    state(nCnt) = eAllAxisAlarm.eY2_Axis_Alarm
-                                'Case 2
-                                '    state(nCnt) = eAllAxisAlarm.eX_Axis_Alarm
+                            Case 1
+                                state(nCnt) = eAllAxisAlarm.eY2_Axis_Alarm
+                            Case 2
+                                state(nCnt) = eAllAxisAlarm.eX_Axis_Alarm
                             Case 1
                                 state(nCnt) = eAllAxisAlarm.eZ_Axis_Alarm
                             Case 2
@@ -1870,78 +2364,23 @@ Public Class CDevPLC_MITSUBISHI
 
                         Select Case i
                             Case 0
-                                state(nCnt) = eServoAlarm.eY1_Axis_Servo_ON
+                                state(nCnt) = eServoAlarm.eX_Axis_Servo_ON
                             Case 1
-                                state(nCnt) = eServoAlarm.eZ_Axis_Servo_ON
+                                state(nCnt) = eServoAlarm.eY1_Axis_Servo_ON
                             Case 2
-                                state(nCnt) = eServoAlarm.eTheta1_Axis_Servo_ON
+                                state(nCnt) = eServoAlarm.eY2_Axis_Servo_ON
                             Case 3
-                                state(nCnt) = eServoAlarm.eTheta2_Axis_Servo_ON
-                            Case 4
-                                state(nCnt) = eServoAlarm.eTheta3_Axis_Servo_ON
-                            Case 5
-                                state(nCnt) = eServoAlarm.eTheta4_Axis_Servo_ON
+                                state(nCnt) = eServoAlarm.eZ_Axis_Servo_ON
+                                'Case 4
+                                '    state(nCnt) = eServoAlarm.eTheta3_Axis_Servo_ON
+                                'Case 5
+                                '    state(nCnt) = eServoAlarm.eTheta4_Axis_Servo_ON
                         End Select
                         nCnt += 1
                     End If
                 Next
 
                 myParent.cPLC.m_PLCDatas.nServoAlarm = state.Clone
-
-            End If
-        End If
-
-        Return True
-    End Function
-
-    Public Overrides Function GetDoorAlarm(ByVal state() As eDoorAlarm) As Boolean
-        Dim sRcvValue As String = ""
-
-        If GetData(PLCCOMMAND_ALARM_DOOROPEN, sRcvValue) = True Then '도어알람 필요하다.
-
-            If sRcvValue = "0" Then
-                ReDim state(0)
-                state(0) = eTemperatureAlarm.eNoError
-                myParent.cPLC.m_PLCDatas.nDoorAlarm = state.Clone '    m_PLCDatas.nSystemStatus = state.Clone
-                Return True
-            Else
-
-                Dim nCnt As Integer
-                Dim nBinery() As Integer
-
-                nBinery = hex2bin(sRcvValue)
-
-                For i As Integer = 0 To nBinery.Length - 1
-                    If nBinery(i) = -1 Then
-                        Return False
-                    ElseIf nBinery(i) = 1 Then
-                        ReDim Preserve state(nCnt)
-
-                        Select Case i
-                            Case 0
-                                state(nCnt) = eDoorAlarm.eSafety_Door_Loop
-                            Case 1
-                                state(nCnt) = eDoorAlarm.eSafety_Door_1
-                            Case 2
-                                state(nCnt) = eDoorAlarm.eSafety_Door_2
-                            Case 3
-                                state(nCnt) = eDoorAlarm.eSafety_Door_3
-                            Case 4
-                                state(nCnt) = eDoorAlarm.eSafety_Door_4
-                            Case 5
-                                state(nCnt) = eDoorAlarm.eSafety_Door_5
-                            Case 6
-                                state(nCnt) = eDoorAlarm.eSafety_Door_6
-                            Case 7
-                                state(nCnt) = eDoorAlarm.eSafety_Door_7
-                            Case 8
-                                state(nCnt) = eDoorAlarm.eSafety_Door_8
-                        End Select
-                        nCnt += 1
-                    End If
-                Next
-
-                myParent.cPLC.m_PLCDatas.nDoorAlarm = state.Clone
 
             End If
         End If
@@ -2210,7 +2649,7 @@ Public Class CDevPLC_MITSUBISHI
     '    Return True
     'End Function
     Public Overrides Function SetRunState(ByVal State As CDevPLCCommonNode.eRunState) As Boolean
-
+        '정현기 재술이형 물어봐야함
         If State = eRunState.eRun Then
             If SetData(PLCCOMMAND_SET_EQP_STATE, EQE_RUN_REQUEST) = False Then Return False
         ElseIf State = eRunState.eStop Then
@@ -2245,7 +2684,7 @@ Public Class CDevPLC_MITSUBISHI
 #End Region
     Public Overrides Function GetEQPState(ByRef State() As CDevPLCCommonNode.eEQPStatus) As Boolean
         Dim sRcvValue As String = ""
-
+        '정현기 재술이형 물어봐야함
         If GetData(PLCCOMMAND_EQP_STATE_CHK, sRcvValue) = True Then
 
             If sRcvValue = "0" Then
@@ -3591,20 +4030,20 @@ Public Class CDevPLC_MITSUBISHI
         Dim sRcvValue As String = Nothing
         Dim PLC_Command As String = Nothing
 
-        'If nAxis = CDevPLCCommonNode.eAxis.eX Then
-        '    PLC_Command = PLCCOMMAND_X_STATE_CHK
-        If nAxis = CDevPLCCommonNode.eAxis.eY Then
+        If nAxis = CDevPLCCommonNode.eAxis.eX Then
+            PLC_Command = PLCCOMMAND_X_STATE_CHK
+        ElseIf nAxis = CDevPLCCommonNode.eAxis.eY Then
             PLC_Command = PLCCOMMAND_Y_STATE_CHK
         ElseIf nAxis = CDevPLCCommonNode.eAxis.eZ Then
             PLC_Command = PLCCOMMAND_Z_STATE_CHK
-        ElseIf nAxis = CDevPLCCommonNode.eAxis.eTHETA1 Then
-            PLC_Command = PLCCOMMAND_THETA1_STATE_CHK
-        ElseIf nAxis = CDevPLCCommonNode.eAxis.eTHETA2 Then
-            PLC_Command = PLCCOMMAND_THETA2_STATE_CHK
-        ElseIf nAxis = CDevPLCCommonNode.eAxis.eTHETA3 Then
-            PLC_Command = PLCCOMMAND_THETA3_STATE_CHK
-        ElseIf nAxis = CDevPLCCommonNode.eAxis.eTHETA4 Then
-            PLC_Command = PLCCOMMAND_THETA4_STATE_CHK
+            'ElseIf nAxis = CDevPLCCommonNode.eAxis.eTHETA1 Then
+            '    PLC_Command = PLCCOMMAND_THETA1_STATE_CHK
+            'ElseIf nAxis = CDevPLCCommonNode.eAxis.eTHETA2 Then
+            '    PLC_Command = PLCCOMMAND_THETA2_STATE_CHK
+            'ElseIf nAxis = CDevPLCCommonNode.eAxis.eTHETA3 Then
+            '    PLC_Command = PLCCOMMAND_THETA3_STATE_CHK
+            'ElseIf nAxis = CDevPLCCommonNode.eAxis.eTHETA4 Then
+            '    PLC_Command = PLCCOMMAND_THETA4_STATE_CHK
         End If
 
         If GetData(PLC_Command, sRcvValue) = False Then Return False
@@ -3661,16 +4100,21 @@ Public Class CDevPLC_MITSUBISHI
         Dim RcvData As String = Nothing
 
         '각 축마다 진행해야함 일단 고정으로 두는데 나중에 바꾸자.
-        For idx As Integer = 0 To 5
+        For idx As Integer = 0 To 2
 
             If idx = 0 Then
+                Axis_Speed_Command = PLCCOMMAND_X_MOVE_SPEED_SET
+                Axis_Moving_Method = PLCCOMMAND_X_POSITION_METHOD_SET
+                Axis_Move_Command = PLCCOMMAND_X_MOVE_REQUEST
+                Axis_Checking_Move = PLCCOMMAND_X_STATE_CHK
+                Axis_Complete_ACK = X_MOVING_COMPLETE_ACK
+            ElseIf idx = 1 Then
                 Axis_Speed_Command = PLCCOMMAND_Y_MOVE_SPEED_SET
                 Axis_Moving_Method = PLCCOMMAND_Y_POSITION_METHOD_SET
                 Axis_Move_Command = PLCCOMMAND_Y_MOVE_REQUEST
                 Axis_Checking_Move = PLCCOMMAND_Y_STATE_CHK
                 Axis_Complete_ACK = Y_MOVING_COMPLETE_ACK
-
-            ElseIf idx = 1 Then
+            ElseIf idx = 2 Then
                 Axis_Speed_Command = PLCCOMMAND_Z_MOVE_SPEED_SET
                 Axis_Moving_Method = PLCCOMMAND_Z_POSITION_METHOD_SET
                 Axis_Move_Command = PLCCOMMAND_Z_MOVE_REQUEST
@@ -3681,30 +4125,30 @@ Public Class CDevPLC_MITSUBISHI
                 'Axis_Move_Command = PLCCOMMAND_X_MOVE_REQUEST
                 'Axis_Checking_Move = PLCCOMMAND_X_STATE_CHK
                 'Axis_Complete_ACK = X_MOVING_COMPLETE_ACK
-            ElseIf idx = 2 Then
-                Axis_Speed_Command = PLCCOMMAND_THETA1_MOVE_SPEED_SET
-                Axis_Moving_Method = PLCCOMMAND_THETA1_POSITION_METHOD_SET
-                Axis_Move_Command = PLCCOMMAND_THETA1_MOVE_REQUEST
-                Axis_Checking_Move = PLCCOMMAND_THETA1_STATE_CHK
-                Axis_Complete_ACK = THETA1_MOVING_COMPLETE_ACK
-            ElseIf idx = 3 Then
-                Axis_Speed_Command = PLCCOMMAND_THETA2_MOVE_SPEED_SET
-                Axis_Moving_Method = PLCCOMMAND_THETA2_POSITION_METHOD_SET
-                Axis_Move_Command = PLCCOMMAND_THETA2_MOVE_REQUEST
-                Axis_Checking_Move = PLCCOMMAND_THETA2_STATE_CHK
-                Axis_Complete_ACK = THETA2_MOVING_COMPLETE_ACK
-            ElseIf idx = 4 Then
-                Axis_Speed_Command = PLCCOMMAND_THETA3_MOVE_SPEED_SET
-                Axis_Moving_Method = PLCCOMMAND_THETA3_POSITION_METHOD_SET
-                Axis_Move_Command = PLCCOMMAND_THETA3_MOVE_REQUEST
-                Axis_Checking_Move = PLCCOMMAND_THETA3_STATE_CHK
-                Axis_Complete_ACK = THETA3_MOVING_COMPLETE_ACK
-            ElseIf idx = 5 Then
-                Axis_Speed_Command = PLCCOMMAND_THETA4_MOVE_SPEED_SET
-                Axis_Moving_Method = PLCCOMMAND_THETA4_POSITION_METHOD_SET
-                Axis_Move_Command = PLCCOMMAND_THETA4_MOVE_REQUEST
-                Axis_Checking_Move = PLCCOMMAND_THETA4_STATE_CHK
-                Axis_Complete_ACK = THETA4_MOVING_COMPLETE_ACK
+                'ElseIf idx = 2 Then
+                '    Axis_Speed_Command = PLCCOMMAND_THETA1_MOVE_SPEED_SET
+                '    Axis_Moving_Method = PLCCOMMAND_THETA1_POSITION_METHOD_SET
+                '    Axis_Move_Command = PLCCOMMAND_THETA1_MOVE_REQUEST
+                '    Axis_Checking_Move = PLCCOMMAND_THETA1_STATE_CHK
+                '    Axis_Complete_ACK = THETA1_MOVING_COMPLETE_ACK
+                'ElseIf idx = 3 Then
+                '    Axis_Speed_Command = PLCCOMMAND_THETA2_MOVE_SPEED_SET
+                '    Axis_Moving_Method = PLCCOMMAND_THETA2_POSITION_METHOD_SET
+                '    Axis_Move_Command = PLCCOMMAND_THETA2_MOVE_REQUEST
+                '    Axis_Checking_Move = PLCCOMMAND_THETA2_STATE_CHK
+                '    Axis_Complete_ACK = THETA2_MOVING_COMPLETE_ACK
+                'ElseIf idx = 4 Then
+                '    Axis_Speed_Command = PLCCOMMAND_THETA3_MOVE_SPEED_SET
+                '    Axis_Moving_Method = PLCCOMMAND_THETA3_POSITION_METHOD_SET
+                '    Axis_Move_Command = PLCCOMMAND_THETA3_MOVE_REQUEST
+                '    Axis_Checking_Move = PLCCOMMAND_THETA3_STATE_CHK
+                '    Axis_Complete_ACK = THETA3_MOVING_COMPLETE_ACK
+                'ElseIf idx = 5 Then
+                '    Axis_Speed_Command = PLCCOMMAND_THETA4_MOVE_SPEED_SET
+                '    Axis_Moving_Method = PLCCOMMAND_THETA4_POSITION_METHOD_SET
+                '    Axis_Move_Command = PLCCOMMAND_THETA4_MOVE_REQUEST
+                '    Axis_Checking_Move = PLCCOMMAND_THETA4_STATE_CHK
+                '    Axis_Complete_ACK = THETA4_MOVING_COMPLETE_ACK
             End If
 
             '알람이 있다면 클리어하고 진행한다.
@@ -3723,7 +4167,7 @@ Public Class CDevPLC_MITSUBISHI
                     Thread.Sleep(1)
 
                     ' 2. 위치 명령 set
-                    If SetData(Axis_Moving_Method, 1, 1) = False Then Return False
+                    If SetData(Axis_Moving_Method, eMovingPosition.eHome, 1) = False Then Return False
 
 
                     ' 3. 축 이동전 위치명령 가능여부 확인
@@ -3748,6 +4192,9 @@ Public Class CDevPLC_MITSUBISHI
                     '7 축 이동 완료 ACK 신호
                     If SetData(Axis_Move_Command, Axis_Complete_ACK) = False Then Return False
 
+                    '컴플리트 Ack
+
+
                 Else
                     Return False
                 End If
@@ -3761,7 +4208,7 @@ Public Class CDevPLC_MITSUBISHI
                 Thread.Sleep(1)
 
                 ' 2. 위치 명령 set
-                If SetData(Axis_Moving_Method, 1, 1) = False Then Return False
+                If SetData(Axis_Moving_Method, eMovingPosition.eHome, 1) = False Then Return False
 
 
                 ' 3. 축 이동전 위치명령 가능여부 확인
@@ -3795,24 +4242,30 @@ Public Class CDevPLC_MITSUBISHI
         ReDim pos(m_nTotalAxis - 1)
 
         '표기값으로 인해 나눠서 표기해야함
-        If GetData(PLCCOMMAND_CURRENT_Y_POSITION, nPosValue) = False Then Return False
+        If GetData(PLCCOMMAND_CURRENT_X_POSITION, nPosValue) = False Then Return False
         pos(0) = nPosValue / 1000
 
-        If GetData(PLCCOMMAND_CURRENT_Z_POSITION, nPosValue) = False Then Return False
+        If GetData(PLCCOMMAND_CURRENT_Y1_POSITION, nPosValue) = False Then Return False
         pos(1) = nPosValue / 1000
 
-        If GetData(PLCCOMMAND_CURRENT_THETA1_POSITION, nPosValue) = False Then Return False
-
+        If GetData(PLCCOMMAND_CURRENT_Y2_POSITION, nPosValue) = False Then Return False
         pos(2) = nPosValue / 1000
-        If GetData(PLCCOMMAND_CURRENT_THETA2_POSITION, nPosValue) = False Then Return False
 
+        If GetData(PLCCOMMAND_CURRENT_Z_POSITION, nPosValue) = False Then Return False
         pos(3) = nPosValue / 1000
-        If GetData(PLCCOMMAND_CURRENT_THETA3_POSITION, nPosValue) = False Then Return False
 
-        pos(4) = nPosValue / 1000
-        If GetData(PLCCOMMAND_CURRENT_THETA4_POSITION, nPosValue) = False Then Return False
+        'If GetData(PLCCOMMAND_CURRENT_THETA1_POSITION, nPosValue) = False Then Return False
 
-        pos(5) = nPosValue / 1000
+        'pos(2) = nPosValue / 1000
+        'If GetData(PLCCOMMAND_CURRENT_THETA2_POSITION, nPosValue) = False Then Return False
+
+        'pos(3) = nPosValue / 1000
+        'If GetData(PLCCOMMAND_CURRENT_THETA3_POSITION, nPosValue) = False Then Return False
+
+        'pos(4) = nPosValue / 1000
+        'If GetData(PLCCOMMAND_CURRENT_THETA4_POSITION, nPosValue) = False Then Return False
+
+        'pos(5) = nPosValue / 1000
         Return True
     End Function
     Public Overrides Function MoveCompleted() As Boolean
@@ -3835,20 +4288,20 @@ Public Class CDevPLC_MITSUBISHI
         Dim sStateVal As String = Nothing
 
         Select Case axis
-            'Case 0
-            '    If SetData(PLCCOMMAND_X_MOVE_REQUEST, X_MOVING_COMPLETE_ACK) = False Then Return False
             Case 0
-                If SetData(PLCCOMMAND_Y_MOVE_REQUEST, Y_MOVING_COMPLETE_ACK) = False Then Return False
+                If SetData(PLCCOMMAND_X_MOVE_REQUEST, X_MOVING_COMPLETE_ACK) = False Then Return False
             Case 1
-                If SetData(PLCCOMMAND_Z_MOVE_REQUEST, Z_MOVING_COMPLETE_ACK) = False Then Return False
+                If SetData(PLCCOMMAND_Y_MOVE_REQUEST, Y_MOVING_COMPLETE_ACK) = False Then Return False
             Case 2
-                If SetData(PLCCOMMAND_THETA1_MOVE_REQUEST, THETA1_MOVING_COMPLETE_ACK) = False Then Return False
-            Case 3
-                If SetData(PLCCOMMAND_THETA2_MOVE_REQUEST, THETA2_MOVING_COMPLETE_ACK) = False Then Return False
-            Case 4
-                If SetData(PLCCOMMAND_THETA3_MOVE_REQUEST, THETA3_MOVING_COMPLETE_ACK) = False Then Return False
-            Case 5
-                If SetData(PLCCOMMAND_THETA4_MOVE_REQUEST, THETA4_MOVING_COMPLETE_ACK) = False Then Return False
+                If SetData(PLCCOMMAND_Z_MOVE_REQUEST, Z_MOVING_COMPLETE_ACK) = False Then Return False
+                'Case 2
+                '    If SetData(PLCCOMMAND_THETA1_MOVE_REQUEST, THETA1_MOVING_COMPLETE_ACK) = False Then Return False
+                'Case 3
+                '    If SetData(PLCCOMMAND_THETA2_MOVE_REQUEST, THETA2_MOVING_COMPLETE_ACK) = False Then Return False
+                'Case 4
+                '    If SetData(PLCCOMMAND_THETA3_MOVE_REQUEST, THETA3_MOVING_COMPLETE_ACK) = False Then Return False
+                'Case 5
+                '    If SetData(PLCCOMMAND_THETA4_MOVE_REQUEST, THETA4_MOVING_COMPLETE_ACK) = False Then Return False
         End Select
 
         Return True
@@ -3880,47 +4333,49 @@ Public Class CDevPLC_MITSUBISHI
     Public Overrides Function JOG_MOVE_STOP() As Boolean
         ' If SetData(PLCCOMMAND_JOG_X_MOVE, CShort(0)) = False Then Return False
 
+        If SetData(PLCCOMMAND_JOG_X_MOVE, CShort(0)) = False Then Return False
+
         If SetData(PLCCOMMAND_JOG_Y_MOVE, CShort(0)) = False Then Return False
 
         If SetData(PLCCOMMAND_JOG_Z_MOVE, CShort(0)) = False Then Return False
 
-        If SetData(PLCCOMMAND_JOG_THETA1_MOVE, CShort(0)) = False Then Return False
+        'If SetData(PLCCOMMAND_JOG_THETA1_MOVE, CShort(0)) = False Then Return False
 
-        If SetData(PLCCOMMAND_JOG_THETA2_MOVE, CShort(0)) = False Then Return False
+        'If SetData(PLCCOMMAND_JOG_THETA2_MOVE, CShort(0)) = False Then Return False
 
-        If SetData(PLCCOMMAND_JOG_THETA3_MOVE, CShort(0)) = False Then Return False
+        'If SetData(PLCCOMMAND_JOG_THETA3_MOVE, CShort(0)) = False Then Return False
 
-        If SetData(PLCCOMMAND_JOG_THETA4_MOVE, CShort(0)) = False Then Return False
+        'If SetData(PLCCOMMAND_JOG_THETA4_MOVE, CShort(0)) = False Then Return False
 
         Return True
     End Function
-    'Public Overrides Function JogXRMove(ByVal vel As Double) As Boolean
-    '    '1. 조그 운전 가능 여부 확인
-    '    If JOG_Can_Move(0) = False Then Return False
-    '    ' SetData(PLCCOMMAND_JOG_X_MOVE, CShort(0))
-    '    '2. 조그 속도 지정
-    '    If SetData(PLCCOMMAND_JOG_X_SPEED_SET, vel) = False Then Return False
+    Public Overrides Function JogXRMove(ByVal vel As Double) As Boolean
+        '1. 조그 운전 가능 여부 확인
+        If JOG_Can_Move(0) = False Then Return False
+        ' SetData(PLCCOMMAND_JOG_X_MOVE, CShort(0))
+        '2. 조그 속도 지정
+        If SetData(PLCCOMMAND_JOG_X_SPEED_SET, vel) = False Then Return False
 
-    '    '3 조그 이동
-    '    If SetData(PLCCOMMAND_JOG_X_MOVE, CShort(2)) = False Then Return False
+        '3 조그 이동
+        If SetData(PLCCOMMAND_JOG_X_MOVE, CShort(2)) = False Then Return False
 
-    '    Return True
+        Return True
 
-    'End Function
+    End Function
 
 
-    'Public Overrides Function JogXLMove(ByVal vel As Double) As Boolean
+    Public Overrides Function JogXLMove(ByVal vel As Double) As Boolean
 
-    '    '1. 조그 운전 가능 여부 확인
-    '    If JOG_Can_Move(0) = False Then Return False
+        '1. 조그 운전 가능 여부 확인
+        If JOG_Can_Move(0) = False Then Return False
 
-    '    '2. 조그 속도 지정
-    '    If SetData(PLCCOMMAND_JOG_X_SPEED_SET, vel) = False Then Return False
+        '2. 조그 속도 지정
+        If SetData(PLCCOMMAND_JOG_X_SPEED_SET, vel) = False Then Return False
 
-    '    '3 조그 이동
-    '    If SetData(PLCCOMMAND_JOG_X_MOVE, CShort(1)) = False Then Return False
-    '    Return True
-    'End Function
+        '3 조그 이동
+        If SetData(PLCCOMMAND_JOG_X_MOVE, CShort(1)) = False Then Return False
+        Return True
+    End Function
 
     Public Overrides Function JogYuPMove(ByVal vel As Double) As Boolean
 
@@ -3976,106 +4431,106 @@ Public Class CDevPLC_MITSUBISHI
         Return True
     End Function
 
-    Public Overrides Function JogTheta1UpMove(ByVal vel As Double) As Boolean
-        '1. 조그 운전 가능 여부 확인
-        If JOG_Can_Move(2) = False Then Return False
+    'Public Overrides Function JogTheta1UpMove(ByVal vel As Double) As Boolean
+    '    '1. 조그 운전 가능 여부 확인
+    '    If JOG_Can_Move(2) = False Then Return False
 
-        '2. 조그 속도 지정
-        If SetData(PLCCOMMAND_JOG_THETA_SPEED_SET, vel) = False Then Return False
+    '    '2. 조그 속도 지정
+    '    If SetData(PLCCOMMAND_JOG_THETA_SPEED_SET, vel) = False Then Return False
 
-        '3. 조그 이동
-        If SetData(PLCCOMMAND_JOG_THETA1_MOVE, CShort(2)) = False Then Return False
+    '    '3. 조그 이동
+    '    If SetData(PLCCOMMAND_JOG_THETA1_MOVE, CShort(2)) = False Then Return False
 
-        Return True
-    End Function
+    '    Return True
+    'End Function
 
-    Public Overrides Function JogTheta1DownMove(ByVal vel As Double) As Boolean
-        '1. 조그 운전 가능 여부 확인
-        If JOG_Can_Move(2) = False Then Return False
+    'Public Overrides Function JogTheta1DownMove(ByVal vel As Double) As Boolean
+    '    '1. 조그 운전 가능 여부 확인
+    '    If JOG_Can_Move(2) = False Then Return False
 
-        '2. 조그 속도 지정
-        If SetData(PLCCOMMAND_JOG_THETA_SPEED_SET, vel) = False Then Return False
+    '    '2. 조그 속도 지정
+    '    If SetData(PLCCOMMAND_JOG_THETA_SPEED_SET, vel) = False Then Return False
 
-        '3. 조그 이동
-        If SetData(PLCCOMMAND_JOG_THETA1_MOVE, CShort(1)) = False Then Return False
+    '    '3. 조그 이동
+    '    If SetData(PLCCOMMAND_JOG_THETA1_MOVE, CShort(1)) = False Then Return False
 
-        Return True
-    End Function
-    Public Overrides Function JogTheta2UpMove(ByVal vel As Double) As Boolean
-        '1. 조그 운전 가능 여부 확인
-        If JOG_Can_Move(3) = False Then Return False
+    '    Return True
+    'End Function
+    'Public Overrides Function JogTheta2UpMove(ByVal vel As Double) As Boolean
+    '    '1. 조그 운전 가능 여부 확인
+    '    If JOG_Can_Move(3) = False Then Return False
 
-        '2. 조그 속도 지정
-        If SetData(PLCCOMMAND_JOG_THETA_SPEED_SET, vel) = False Then Return False
+    '    '2. 조그 속도 지정
+    '    If SetData(PLCCOMMAND_JOG_THETA_SPEED_SET, vel) = False Then Return False
 
-        '3. 조그 이동
-        If SetData(PLCCOMMAND_JOG_THETA2_MOVE, CShort(2)) = False Then Return False
+    '    '3. 조그 이동
+    '    If SetData(PLCCOMMAND_JOG_THETA2_MOVE, CShort(2)) = False Then Return False
 
-        Return True
-    End Function
+    '    Return True
+    'End Function
 
-    Public Overrides Function JogTheta2DownMove(ByVal vel As Double) As Boolean
-        '1. 조그 운전 가능 여부 확인
-        If JOG_Can_Move(3) = False Then Return False
+    'Public Overrides Function JogTheta2DownMove(ByVal vel As Double) As Boolean
+    '    '1. 조그 운전 가능 여부 확인
+    '    If JOG_Can_Move(3) = False Then Return False
 
-        '2. 조그 속도 지정
-        If SetData(PLCCOMMAND_JOG_THETA_SPEED_SET, vel) = False Then Return False
+    '    '2. 조그 속도 지정
+    '    If SetData(PLCCOMMAND_JOG_THETA_SPEED_SET, vel) = False Then Return False
 
-        '3. 조그 이동
-        If SetData(PLCCOMMAND_JOG_THETA2_MOVE, CShort(1)) = False Then Return False
+    '    '3. 조그 이동
+    '    If SetData(PLCCOMMAND_JOG_THETA2_MOVE, CShort(1)) = False Then Return False
 
-        Return True
-    End Function
-    Public Overrides Function JogTheta3UpMove(ByVal vel As Double) As Boolean
-        '1. 조그 운전 가능 여부 확인
-        If JOG_Can_Move(4) = False Then Return False
+    '    Return True
+    'End Function
+    'Public Overrides Function JogTheta3UpMove(ByVal vel As Double) As Boolean
+    '    '1. 조그 운전 가능 여부 확인
+    '    If JOG_Can_Move(4) = False Then Return False
 
-        '2. 조그 속도 지정
-        If SetData(PLCCOMMAND_JOG_THETA_SPEED_SET, vel) = False Then Return False
+    '    '2. 조그 속도 지정
+    '    If SetData(PLCCOMMAND_JOG_THETA_SPEED_SET, vel) = False Then Return False
 
-        '3. 조그 이동
-        If SetData(PLCCOMMAND_JOG_THETA3_MOVE, CShort(2)) = False Then Return False
+    '    '3. 조그 이동
+    '    If SetData(PLCCOMMAND_JOG_THETA3_MOVE, CShort(2)) = False Then Return False
 
-        Return True
-    End Function
+    '    Return True
+    'End Function
 
-    Public Overrides Function JogTheta3DownMove(ByVal vel As Double) As Boolean
-        '1. 조그 운전 가능 여부 확인
-        If JOG_Can_Move(4) = False Then Return False
+    'Public Overrides Function JogTheta3DownMove(ByVal vel As Double) As Boolean
+    '    '1. 조그 운전 가능 여부 확인
+    '    If JOG_Can_Move(4) = False Then Return False
 
-        '2. 조그 속도 지정
-        If SetData(PLCCOMMAND_JOG_THETA_SPEED_SET, vel) = False Then Return False
+    '    '2. 조그 속도 지정
+    '    If SetData(PLCCOMMAND_JOG_THETA_SPEED_SET, vel) = False Then Return False
 
-        '3. 조그 이동
-        If SetData(PLCCOMMAND_JOG_THETA3_MOVE, CShort(1)) = False Then Return False
+    '    '3. 조그 이동
+    '    If SetData(PLCCOMMAND_JOG_THETA3_MOVE, CShort(1)) = False Then Return False
 
-        Return True
-    End Function
-    Public Overrides Function JogTheta4UpMove(ByVal vel As Double) As Boolean
-        '1. 조그 운전 가능 여부 확인
-        If JOG_Can_Move(5) = False Then Return False
+    '    Return True
+    'End Function
+    'Public Overrides Function JogTheta4UpMove(ByVal vel As Double) As Boolean
+    '    '1. 조그 운전 가능 여부 확인
+    '    If JOG_Can_Move(5) = False Then Return False
 
-        '2. 조그 속도 지정
-        If SetData(PLCCOMMAND_JOG_THETA_SPEED_SET, vel) = False Then Return False
+    '    '2. 조그 속도 지정
+    '    If SetData(PLCCOMMAND_JOG_THETA_SPEED_SET, vel) = False Then Return False
 
-        '3. 조그 이동
-        If SetData(PLCCOMMAND_JOG_THETA4_MOVE, CShort(2)) = False Then Return False
+    '    '3. 조그 이동
+    '    If SetData(PLCCOMMAND_JOG_THETA4_MOVE, CShort(2)) = False Then Return False
 
-        Return True
-    End Function
+    '    Return True
+    'End Function
 
-    Public Overrides Function JogTheta4DownMove(ByVal vel As Double) As Boolean
-        '1. 조그 운전 가능 여부 확인
-        If JOG_Can_Move(5) = False Then Return False
+    'Public Overrides Function JogTheta4DownMove(ByVal vel As Double) As Boolean
+    '    '1. 조그 운전 가능 여부 확인
+    '    If JOG_Can_Move(5) = False Then Return False
 
-        '2. 조그 속도 지정
-        If SetData(PLCCOMMAND_JOG_THETA_SPEED_SET, vel) = False Then Return False
+    '    '2. 조그 속도 지정
+    '    If SetData(PLCCOMMAND_JOG_THETA_SPEED_SET, vel) = False Then Return False
 
-        '3. 조그 이동
-        If SetData(PLCCOMMAND_JOG_THETA4_MOVE, CShort(1)) = False Then Return False
+    '    '3. 조그 이동
+    '    If SetData(PLCCOMMAND_JOG_THETA4_MOVE, CShort(1)) = False Then Return False
 
-        Return True
-    End Function
+    '    Return True
+    'End Function
 
 
 
@@ -4167,20 +4622,20 @@ Public Class CDevPLC_MITSUBISHI
     Public Function JOG_Can_Move(ByVal nAxis As Integer) As Boolean
         Dim sRcvData As String = Nothing
         Dim PLC_Command As String = Nothing
-        'If nAxis = 0 Then
-        '    PLC_Command = PLCCOMMAND_JOG_X_MOVE_CHK
         If nAxis = 0 Then
-            PLC_Command = PLCCOMMAND_JOG_Y_MOVE_CHK
+            PLC_Command = PLCCOMMAND_JOG_X_MOVE_CHK
         ElseIf nAxis = 1 Then
-            PLC_Command = PLCCOMMAND_JOG_Z_MOVE_CHK
+            PLC_Command = PLCCOMMAND_JOG_Y_MOVE_CHK
         ElseIf nAxis = 2 Then
-            PLC_Command = PLCCOMMAND_JOG_THETA1_MOVE_CHK
-        ElseIf nAxis = 3 Then
-            PLC_Command = PLCCOMMAND_JOG_THETA2_MOVE_CHK
-        ElseIf nAxis = 4 Then
-            PLC_Command = PLCCOMMAND_JOG_THETA3_MOVE_CHK
-        ElseIf nAxis = 5 Then
-            PLC_Command = PLCCOMMAND_JOG_THETA4_MOVE_CHK
+            PLC_Command = PLCCOMMAND_JOG_Z_MOVE_CHK
+            'ElseIf nAxis = 2 Then
+            '    PLC_Command = PLCCOMMAND_JOG_THETA1_MOVE_CHK
+            'ElseIf nAxis = 3 Then
+            '    PLC_Command = PLCCOMMAND_JOG_THETA2_MOVE_CHK
+            'ElseIf nAxis = 4 Then
+            '    PLC_Command = PLCCOMMAND_JOG_THETA3_MOVE_CHK
+            'ElseIf nAxis = 5 Then
+            '    PLC_Command = PLCCOMMAND_JOG_THETA4_MOVE_CHK
         End If
 
         If GetData(PLC_Command, sRcvData) = False Then Return False
@@ -4198,10 +4653,10 @@ Public Class CDevPLC_MITSUBISHI
         End If
         Return True
     End Function
-    'Public Overrides Function SetJogXVelocity(ByVal Velocity As Double) As Boolean
-    '    If SetData(PLCCOMMAND_JOG_X_SPEED_SET, Velocity) = False Then Return False
-    '    Return True
-    'End Function
+    Public Overrides Function SetJogXVelocity(ByVal Velocity As Double) As Boolean
+        If SetData(PLCCOMMAND_JOG_X_SPEED_SET, Velocity) = False Then Return False
+        Return True
+    End Function
 
     Public Overrides Function SetJogYVelocity(ByVal Velocity As Double) As Boolean
         If SetData(PLCCOMMAND_JOG_Y_SPEED_SET, Velocity) = False Then Return False
@@ -4213,10 +4668,10 @@ Public Class CDevPLC_MITSUBISHI
         Return True
     End Function
 
-    Public Overrides Function SetJogThetaVelocity(ByVal Velocity As Double) As Boolean
-        If SetData(PLCCOMMAND_JOG_THETA_SPEED_SET, Velocity) = False Then Return False
-        Return True
-    End Function
+    'Public Overrides Function SetJogThetaVelocity(ByVal Velocity As Double) As Boolean
+    '    If SetData(PLCCOMMAND_JOG_THETA_SPEED_SET, Velocity) = False Then Return False
+    '    Return True
+    'End Function
 
     'Public Overrides Function PositionMoveX(ByVal pos As Double, ByVal vel As Double, ByVal MoveMethod As CDevPLCCommonNode.eMovingMethod) As Boolean
     '    '1. X축 속도 지정
@@ -4249,7 +4704,39 @@ Public Class CDevPLC_MITSUBISHI
 
     '    Return True
     'End Function
+    Public Overrides Function PositionMoveX(ByVal pos As Double, ByVal vel As Double, ByVal MoveMethod As CDevPLCCommonNode.eMovingMethod) As Boolean
 
+        '1. X축 속도 지정
+        If SetData(PLCCOMMAND_X_MOVE_SPEED_SET, vel) = False Then Return False
+
+        '2. X축 이동 명령
+        If MoveMethod = eMovingMethod.eABS Then
+            If SetData(PLCCOMMAND_X_MOVING_METHOD_SET, eMovingMethod.eABS, 1) = False Then Return False
+        Else
+            If SetData(PLCCOMMAND_X_MOVING_METHOD_SET, eMovingMethod.eINC, 1) = False Then Return False
+        End If
+
+        '2-1. X축 위치 결정
+        If SetData(PLCCOMMAND_X_POSITION_METHOD_SET, eMovingPosition.ePosition, 1) = False Then Return False
+
+        '3. X축 위치 명령
+        If SetData(PLCCOMMAND_X_MOVE_POSITION_SET, pos) = False Then Return False
+
+        '4. X축 명령 가능 여부 확인
+        If Axis_Moving_Status(CDevPLCCommonNode.eAxis.eX, eAxisStatus.eAxis_Can_Move) = False Then Return False
+
+        '5. X축 위치 명령 Request
+        If SetData(PLCCOMMAND_X_MOVE_REQUEST, CShort(1)) = False Then Return False
+
+        '6  X축 ACK 신호 확인
+        If Axis_Moving_Status(CDevPLCCommonNode.eAxis.eX, eAxisStatus.eAxis_ACK) = False Then Return False
+
+        '7. X축 위치 명령 Request off
+        If SetData(PLCCOMMAND_X_MOVE_REQUEST, CShort(0)) = False Then Return False
+
+        Return True
+
+    End Function
     Public Overrides Function PositionMoveY(ByVal pos As Double, ByVal vel As Double, ByVal MoveMethod As CDevPLCCommonNode.eMovingMethod) As Boolean
 
         '1. Y축 속도 지정
@@ -4317,154 +4804,154 @@ Public Class CDevPLC_MITSUBISHI
         Return True
     End Function
 
-    Public Overrides Function PositionMoveTheta1(ByVal pos As Double, ByVal vel As Double, ByVal MoveMethod As CDevPLCCommonNode.eMovingMethod) As Boolean
+    'Public Overrides Function PositionMoveTheta1(ByVal pos As Double, ByVal vel As Double, ByVal MoveMethod As CDevPLCCommonNode.eMovingMethod) As Boolean
 
-        '1. Y축 속도 지정
-        If SetData(PLCCOMMAND_THETA1_MOVE_SPEED_SET, vel) = False Then Return False
+    '    '1. Y축 속도 지정
+    '    If SetData(PLCCOMMAND_THETA1_MOVE_SPEED_SET, vel) = False Then Return False
 
-        '2. Y축 이동 명령
-        If MoveMethod = eMovingMethod.eABS Then
-            If SetData(PLCCOMMAND_THETA1_MOVING_METHOD_SET, eMovingMethod.eABS, 1) = False Then Return False
-        Else
-            If SetData(PLCCOMMAND_THETA1_MOVING_METHOD_SET, eMovingMethod.eINC, 1) = False Then Return False
-        End If
+    '    '2. Y축 이동 명령
+    '    If MoveMethod = eMovingMethod.eABS Then
+    '        If SetData(PLCCOMMAND_THETA1_MOVING_METHOD_SET, eMovingMethod.eABS, 1) = False Then Return False
+    '    Else
+    '        If SetData(PLCCOMMAND_THETA1_MOVING_METHOD_SET, eMovingMethod.eINC, 1) = False Then Return False
+    '    End If
 
-        '2-1. Y축 위치 결정
-        If SetData(PLCCOMMAND_THETA1_POSITION_METHOD_SET, eMovingPosition.ePosition, 1) = False Then Return False
+    '    '2-1. Y축 위치 결정
+    '    If SetData(PLCCOMMAND_THETA1_POSITION_METHOD_SET, eMovingPosition.ePosition, 1) = False Then Return False
 
-        '3. Y축 위치 명령
-        If SetData(PLCCOMMAND_THETA1_MOVE_POSITION_SET, pos) = False Then Return False
+    '    '3. Y축 위치 명령
+    '    If SetData(PLCCOMMAND_THETA1_MOVE_POSITION_SET, pos) = False Then Return False
 
-        '4. Y축 명령 가능 여부 확인
-        If Axis_Moving_Status(CDevPLCCommonNode.eAxis.eTHETA1, eAxisStatus.eAxis_Can_Move) = False Then Return False
+    '    '4. Y축 명령 가능 여부 확인
+    '    If Axis_Moving_Status(CDevPLCCommonNode.eAxis.eTHETA1, eAxisStatus.eAxis_Can_Move) = False Then Return False
 
-        '5. Y축 위치 명령 Request
-        If SetData(PLCCOMMAND_THETA1_MOVE_REQUEST, CShort(1)) = False Then Return False
+    '    '5. Y축 위치 명령 Request
+    '    If SetData(PLCCOMMAND_THETA1_MOVE_REQUEST, CShort(1)) = False Then Return False
 
-        '6  Y축 ACK 신호 확인
-        If Axis_Moving_Status(CDevPLCCommonNode.eAxis.eTHETA1, eAxisStatus.eAxis_ACK) = False Then Return False
+    '    '6  Y축 ACK 신호 확인
+    '    If Axis_Moving_Status(CDevPLCCommonNode.eAxis.eTHETA1, eAxisStatus.eAxis_ACK) = False Then Return False
 
-        '7. Y축 위치 명령 Request off
-        If SetData(PLCCOMMAND_THETA1_MOVE_REQUEST, CShort(0)) = False Then Return False
+    '    '7. Y축 위치 명령 Request off
+    '    If SetData(PLCCOMMAND_THETA1_MOVE_REQUEST, CShort(0)) = False Then Return False
 
-        Return True
+    '    Return True
 
-    End Function
-    Public Overrides Function PositionMoveTheta2(ByVal pos As Double, ByVal vel As Double, ByVal MoveMethod As CDevPLCCommonNode.eMovingMethod) As Boolean
+    'End Function
+    'Public Overrides Function PositionMoveTheta2(ByVal pos As Double, ByVal vel As Double, ByVal MoveMethod As CDevPLCCommonNode.eMovingMethod) As Boolean
 
-        '1. Y축 속도 지정
-        If SetData(PLCCOMMAND_THETA2_MOVE_SPEED_SET, vel) = False Then Return False
+    '    '1. Y축 속도 지정
+    '    If SetData(PLCCOMMAND_THETA2_MOVE_SPEED_SET, vel) = False Then Return False
 
-        '2. Y축 이동 명령
-        If MoveMethod = eMovingMethod.eABS Then
-            If SetData(PLCCOMMAND_THETA2_MOVING_METHOD_SET, eMovingMethod.eABS, 1) = False Then Return False
-        Else
-            If SetData(PLCCOMMAND_THETA2_MOVING_METHOD_SET, eMovingMethod.eINC, 1) = False Then Return False
-        End If
+    '    '2. Y축 이동 명령
+    '    If MoveMethod = eMovingMethod.eABS Then
+    '        If SetData(PLCCOMMAND_THETA2_MOVING_METHOD_SET, eMovingMethod.eABS, 1) = False Then Return False
+    '    Else
+    '        If SetData(PLCCOMMAND_THETA2_MOVING_METHOD_SET, eMovingMethod.eINC, 1) = False Then Return False
+    '    End If
 
-        '2-1. Y축 위치 결정
-        If SetData(PLCCOMMAND_THETA2_POSITION_METHOD_SET, eMovingPosition.ePosition, 1) = False Then Return False
+    '    '2-1. Y축 위치 결정
+    '    If SetData(PLCCOMMAND_THETA2_POSITION_METHOD_SET, eMovingPosition.ePosition, 1) = False Then Return False
 
-        '3. Y축 위치 명령
-        If SetData(PLCCOMMAND_THETA2_MOVE_POSITION_SET, pos) = False Then Return False
+    '    '3. Y축 위치 명령
+    '    If SetData(PLCCOMMAND_THETA2_MOVE_POSITION_SET, pos) = False Then Return False
 
-        '4. Y축 명령 가능 여부 확인
-        If Axis_Moving_Status(CDevPLCCommonNode.eAxis.eTHETA2, eAxisStatus.eAxis_Can_Move) = False Then Return False
+    '    '4. Y축 명령 가능 여부 확인
+    '    If Axis_Moving_Status(CDevPLCCommonNode.eAxis.eTHETA2, eAxisStatus.eAxis_Can_Move) = False Then Return False
 
-        '5. Y축 위치 명령 Request
-        If SetData(PLCCOMMAND_THETA2_MOVE_REQUEST, CShort(1)) = False Then Return False
+    '    '5. Y축 위치 명령 Request
+    '    If SetData(PLCCOMMAND_THETA2_MOVE_REQUEST, CShort(1)) = False Then Return False
 
-        '6  Y축 ACK 신호 확인
-        If Axis_Moving_Status(CDevPLCCommonNode.eAxis.eTHETA2, eAxisStatus.eAxis_ACK) = False Then Return False
+    '    '6  Y축 ACK 신호 확인
+    '    If Axis_Moving_Status(CDevPLCCommonNode.eAxis.eTHETA2, eAxisStatus.eAxis_ACK) = False Then Return False
 
-        '7. Y축 위치 명령 Request off
-        If SetData(PLCCOMMAND_THETA2_MOVE_REQUEST, CShort(0)) = False Then Return False
+    '    '7. Y축 위치 명령 Request off
+    '    If SetData(PLCCOMMAND_THETA2_MOVE_REQUEST, CShort(0)) = False Then Return False
 
-        Return True
+    '    Return True
 
-    End Function
-    Public Overrides Function PositionMoveTheta3(ByVal pos As Double, ByVal vel As Double, ByVal MoveMethod As CDevPLCCommonNode.eMovingMethod) As Boolean
+    'End Function
+    'Public Overrides Function PositionMoveTheta3(ByVal pos As Double, ByVal vel As Double, ByVal MoveMethod As CDevPLCCommonNode.eMovingMethod) As Boolean
 
-        '1. Y축 속도 지정
-        If SetData(PLCCOMMAND_THETA3_MOVE_SPEED_SET, vel) = False Then Return False
+    '    '1. Y축 속도 지정
+    '    If SetData(PLCCOMMAND_THETA3_MOVE_SPEED_SET, vel) = False Then Return False
 
-        '2. Y축 이동 명령
-        If MoveMethod = eMovingMethod.eABS Then
-            If SetData(PLCCOMMAND_THETA3_MOVING_METHOD_SET, eMovingMethod.eABS, 1) = False Then Return False
-        Else
-            If SetData(PLCCOMMAND_THETA3_MOVING_METHOD_SET, eMovingMethod.eINC, 1) = False Then Return False
-        End If
+    '    '2. Y축 이동 명령
+    '    If MoveMethod = eMovingMethod.eABS Then
+    '        If SetData(PLCCOMMAND_THETA3_MOVING_METHOD_SET, eMovingMethod.eABS, 1) = False Then Return False
+    '    Else
+    '        If SetData(PLCCOMMAND_THETA3_MOVING_METHOD_SET, eMovingMethod.eINC, 1) = False Then Return False
+    '    End If
 
-        '2-1. Y축 위치 결정
-        If SetData(PLCCOMMAND_THETA3_POSITION_METHOD_SET, eMovingPosition.ePosition, 1) = False Then Return False
+    '    '2-1. Y축 위치 결정
+    '    If SetData(PLCCOMMAND_THETA3_POSITION_METHOD_SET, eMovingPosition.ePosition, 1) = False Then Return False
 
-        '3. Y축 위치 명령
-        If SetData(PLCCOMMAND_THETA3_MOVE_POSITION_SET, pos) = False Then Return False
+    '    '3. Y축 위치 명령
+    '    If SetData(PLCCOMMAND_THETA3_MOVE_POSITION_SET, pos) = False Then Return False
 
-        '4. Y축 명령 가능 여부 확인
-        If Axis_Moving_Status(CDevPLCCommonNode.eAxis.eTHETA3, eAxisStatus.eAxis_Can_Move) = False Then Return False
+    '    '4. Y축 명령 가능 여부 확인
+    '    If Axis_Moving_Status(CDevPLCCommonNode.eAxis.eTHETA3, eAxisStatus.eAxis_Can_Move) = False Then Return False
 
-        '5. Y축 위치 명령 Request
-        If SetData(PLCCOMMAND_THETA3_MOVE_REQUEST, CShort(1)) = False Then Return False
+    '    '5. Y축 위치 명령 Request
+    '    If SetData(PLCCOMMAND_THETA3_MOVE_REQUEST, CShort(1)) = False Then Return False
 
-        '6  Y축 ACK 신호 확인
-        If Axis_Moving_Status(CDevPLCCommonNode.eAxis.eTHETA3, eAxisStatus.eAxis_ACK) = False Then Return False
+    '    '6  Y축 ACK 신호 확인
+    '    If Axis_Moving_Status(CDevPLCCommonNode.eAxis.eTHETA3, eAxisStatus.eAxis_ACK) = False Then Return False
 
-        '7. Y축 위치 명령 Request off
-        If SetData(PLCCOMMAND_THETA3_MOVE_REQUEST, CShort(0)) = False Then Return False
+    '    '7. Y축 위치 명령 Request off
+    '    If SetData(PLCCOMMAND_THETA3_MOVE_REQUEST, CShort(0)) = False Then Return False
 
-        Return True
+    '    Return True
 
-    End Function
+    'End Function
 
-    Public Overrides Function PositionMoveTheta4(ByVal pos As Double, ByVal vel As Double, ByVal MoveMethod As CDevPLCCommonNode.eMovingMethod) As Boolean
+    'Public Overrides Function PositionMoveTheta4(ByVal pos As Double, ByVal vel As Double, ByVal MoveMethod As CDevPLCCommonNode.eMovingMethod) As Boolean
 
-        '1. Y축 속도 지정
-        If SetData(PLCCOMMAND_THETA4_MOVE_SPEED_SET, vel) = False Then Return False
+    '    '1. Y축 속도 지정
+    '    If SetData(PLCCOMMAND_THETA4_MOVE_SPEED_SET, vel) = False Then Return False
 
-        '2. Y축 이동 명령
-        If MoveMethod = eMovingMethod.eABS Then
-            If SetData(PLCCOMMAND_THETA4_MOVING_METHOD_SET, eMovingMethod.eABS, 1) = False Then Return False
-        Else
-            If SetData(PLCCOMMAND_THETA4_MOVING_METHOD_SET, eMovingMethod.eINC, 1) = False Then Return False
-        End If
+    '    '2. Y축 이동 명령
+    '    If MoveMethod = eMovingMethod.eABS Then
+    '        If SetData(PLCCOMMAND_THETA4_MOVING_METHOD_SET, eMovingMethod.eABS, 1) = False Then Return False
+    '    Else
+    '        If SetData(PLCCOMMAND_THETA4_MOVING_METHOD_SET, eMovingMethod.eINC, 1) = False Then Return False
+    '    End If
 
-        '2-1. Y축 위치 결정
-        If SetData(PLCCOMMAND_THETA4_POSITION_METHOD_SET, eMovingPosition.ePosition, 1) = False Then Return False
+    '    '2-1. Y축 위치 결정
+    '    If SetData(PLCCOMMAND_THETA4_POSITION_METHOD_SET, eMovingPosition.ePosition, 1) = False Then Return False
 
-        '3. Y축 위치 명령
-        If SetData(PLCCOMMAND_THETA4_MOVE_POSITION_SET, pos) = False Then Return False
+    '    '3. Y축 위치 명령
+    '    If SetData(PLCCOMMAND_THETA4_MOVE_POSITION_SET, pos) = False Then Return False
 
-        '4. Y축 명령 가능 여부 확인
-        If Axis_Moving_Status(CDevPLCCommonNode.eAxis.eTHETA4, eAxisStatus.eAxis_Can_Move) = False Then Return False
+    '    '4. Y축 명령 가능 여부 확인
+    '    If Axis_Moving_Status(CDevPLCCommonNode.eAxis.eTHETA4, eAxisStatus.eAxis_Can_Move) = False Then Return False
 
-        '5. Y축 위치 명령 Request
-        If SetData(PLCCOMMAND_THETA4_MOVE_REQUEST, CShort(1)) = False Then Return False
+    '    '5. Y축 위치 명령 Request
+    '    If SetData(PLCCOMMAND_THETA4_MOVE_REQUEST, CShort(1)) = False Then Return False
 
-        '6  Y축 ACK 신호 확인
-        If Axis_Moving_Status(CDevPLCCommonNode.eAxis.eTHETA4, eAxisStatus.eAxis_ACK) = False Then Return False
+    '    '6  Y축 ACK 신호 확인
+    '    If Axis_Moving_Status(CDevPLCCommonNode.eAxis.eTHETA4, eAxisStatus.eAxis_ACK) = False Then Return False
 
-        '7. Y축 위치 명령 Request off
-        If SetData(PLCCOMMAND_THETA4_MOVE_REQUEST, CShort(0)) = False Then Return False
+    '    '7. Y축 위치 명령 Request off
+    '    If SetData(PLCCOMMAND_THETA4_MOVE_REQUEST, CShort(0)) = False Then Return False
 
-        Return True
+    '    Return True
 
-    End Function
+    'End Function
     Public Overrides Function SetCompleteACK(ByVal Axis As CDevPLCCommonNode.eAxis) As Boolean
-        'If Axis = eAxis.eX Then
-        '    If SetData(PLCCOMMAND_X_MOVE_REQUEST, X_MOVING_COMPLETE_ACK) = False Then Return False
-        If Axis = eAxis.eY Then
-            If SetData(PLCCOMMAND_Y_MOVE_REQUEST, Y_MOVING_COMPLETE_ACK) = False Then Return False
+        If Axis = eAxis.eX Then
+            If SetData(PLCCOMMAND_X_MOVE_REQUEST, X_MOVING_COMPLETE_ACK) = False Then Return False
+        ElseIf Axis = eAxis.eY Then
+        If SetData(PLCCOMMAND_Y_MOVE_REQUEST, Y_MOVING_COMPLETE_ACK) = False Then Return False
         ElseIf Axis = eAxis.eZ Then
             If SetData(PLCCOMMAND_Z_MOVE_REQUEST, Z_MOVING_COMPLETE_ACK) = False Then Return False
-        ElseIf Axis = eAxis.eTHETA1 Then
-            If SetData(PLCCOMMAND_THETA1_MOVE_REQUEST, THETA1_MOVING_COMPLETE_ACK) = False Then Return False
-        ElseIf Axis = eAxis.eTHETA2 Then
-            If SetData(PLCCOMMAND_THETA2_MOVE_REQUEST, THETA2_MOVING_COMPLETE_ACK) = False Then Return False
-        ElseIf Axis = eAxis.eTHETA3 Then
-            If SetData(PLCCOMMAND_THETA3_MOVE_REQUEST, THETA3_MOVING_COMPLETE_ACK) = False Then Return False
-        ElseIf Axis = eAxis.eTHETA4 Then
-            If SetData(PLCCOMMAND_THETA4_MOVE_REQUEST, THETA4_MOVING_COMPLETE_ACK) = False Then Return False
+            'ElseIf Axis = eAxis.eTHETA1 Then
+            '    If SetData(PLCCOMMAND_THETA1_MOVE_REQUEST, THETA1_MOVING_COMPLETE_ACK) = False Then Return False
+            'ElseIf Axis = eAxis.eTHETA2 Then
+            '    If SetData(PLCCOMMAND_THETA2_MOVE_REQUEST, THETA2_MOVING_COMPLETE_ACK) = False Then Return False
+            'ElseIf Axis = eAxis.eTHETA3 Then
+            '    If SetData(PLCCOMMAND_THETA3_MOVE_REQUEST, THETA3_MOVING_COMPLETE_ACK) = False Then Return False
+            'ElseIf Axis = eAxis.eTHETA4 Then
+            '    If SetData(PLCCOMMAND_THETA4_MOVE_REQUEST, THETA4_MOVING_COMPLETE_ACK) = False Then Return False
         End If
         Return True
     End Function

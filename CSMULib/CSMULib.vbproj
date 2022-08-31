@@ -72,6 +72,7 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CCommLib\CComCommonNode.vb" />
     <Compile Include="Class\CDevK23x.vb" />
     <Compile Include="Class\CDevK24xx.vb" />
     <Compile Include="Class\CDevK26xx.vb" />

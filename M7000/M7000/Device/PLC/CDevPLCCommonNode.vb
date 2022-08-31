@@ -14,14 +14,27 @@
     Public Event evChangeAlarm(ByVal alarm() As eDISignal)
     Shared sSupportDeviceList() As String = New String() {"LS", "MITSUBISHI"}
     Public Shared sTCUnit() As String = New String() {"CH1", "CH2", "CH3", "CH4", "CH5", "CH6", "CH7", "CH8", "CH9"}
-    Public Shared sEMSAlarm() As String = New String() {"긴급정지 알람(EMS-1)", "긴급정지 알람(EMS-2)", "", "", "세이프티 컨트롤러-1", "세이프티 컨트롤러-2", "", "", "MC1 POWER OFF", "MC2 POWER OFF", "컨트롤박스 내부온도 경알람", "컨트롤박스 내부온도 중알람", "컨트롤박스 연기감지 센서 알람"}
-    Public Shared sTempAlarm() As String = New String() {"히터유닛 CH.1", "히터유닛 CH.2", "히터유닛 CH.3", "히터유닛 CH.4", "히터유닛 CH.5", "히터유닛 CH.6", "히터유닛 CH.7", "히터유닛 CH.8", "히터유닛 CH.9"}
-    Public Shared sTempAlarmZone1() As String = New String() {"히터 1-1", "히터 2-1", "히터 3-1", "히터 4-1", "히터 5-1", "히터 6-1", "히터 7-1", "히터 8-1", "히터 9-1"}
-    Public Shared sTempAlarmZone2() As String = New String() {"히터 1-2", "히터 2-2", "히터 3-2", "히터 4-2", "히터 5-2", "히터 6-2", "히터 7-2", "히터 8-2", "히터 9-2"}
-    '  Public Shared sDoorOpenAlarm() As String = New String() {"세이트피 도어 루프 에러", "로더 세이프티 도어 개방", "암실 좌측 세이프티 도어 개방", "암실 우측 세이프티 도어 개방", "언로더 세이프티 도어 개방", "암실 하부 좌측 세이프티 도어 개방", "암실 하부 우측 세이프티 도어 개방"}
-    Public Shared sDoorOpenAlarm() As String = New String() {"세이트피 도어 루프 에러", "암실 세이프티 도어 개방1", "암실 세이프티 도어 개방2", "암실 세이프티 도어 개방3", "암실 세이프티 도어 개방4", "암실 세이프티 도어 개방5", "암실 세이프티 도어 개방6", "암실 세이프티 도어 개방7", "암실 세이프티 도어 개방8"}
-    Public Shared sAxisAlarm() As String = New String() {"Y1 알람", "Y2 알람", "X 알람", "Z 알람"} ', "충돌감지 알람", "원점운전 타임아웃", "위치운전 타임아웃", "AMP 과온 알람", "과전류 알람"}
-    Public Shared AxisAlarm() As String = New String() {"축 알람", "서보 알람", "RLS 리밋센서 알람", "FLS 리밋센서 알람", "충돌감지 알람", "원점운전 타임아웃", "위치운전 타임아웃", "AMP 과온 알람", "과전류 알람"}
+    '정현기(경알람)
+    Public Shared sWeakAlarm1() As String = New String() {"No Alarm", "쿨링 팬#1 알람 (X080)", "쿨링 팬#2 알람 (X081)", "쿨링 팬#3 알람 (X082)", "쿨링 팬#4 알람 (X083)", "쿨링 팬#5 알람 (X084)", "쿨링 팬#6 알람 (X085)", "쿨링 팬#7 알람 (X086)", "쿨링 팬#8 알람 (X087)", "쿨링 팬#9 알람 (X088)",
+        "쿨링 팬#10 알람 (X089)", "쿨링 팬#11 알람 (X08A)", "쿨링 팬#12 알람 (X08B)", "온도 센서 알람 (도어오픈금지)", "", "", "컨트롤박스 내부 온도 알람 (경알람)"}
+    Public Shared sWeakAlarm2() As String = New String() {"No Alarm", "쿨링 팬#13 알람 (X08C)", "쿨링 팬#14 알람 (X08D)", "쿨링 팬#15 알람 (X08E)", "쿨링 팬#16 알람 (X08F)", "쿨링 팬#17 알람 (X090)", "쿨링 팬#18 알람 (X091)", "", "", "",
+        "", "", "", "", "", "", ""}
+
+    '정현기 다 수정(중알람)
+    Public Shared sEMSAlarm() As String = New String() {"No Alarm", "긴급정지 알람(EMS-1)", "", "", "", "세이프티 컨트롤러-1 알람", "세이프티 컨트롤러-2 알람", "", "", "구동부 메인 M/C1 POWER OFF", "구동부 메인 M/C2 POWER OFF", "컨트롤박스 내부 온도 알람 (중알람)", "컨트롤박스 연기감지 센서 알람"}
+    Public Shared sStrangeTempAlarm() As String = New String() {"No Alarm", "", "히터유닛 CH.1 온도 이상", "히터유닛 CH.2 온도 이상", "히터유닛 CH.3 온도 이상", "히터유닛 CH.4 온도 이상"}
+    Public Shared sEOCRAlarm() As String = New String() {"No Alarm", "", "히터유닛 CH.1 EOCR 상태 이상", "히터유닛 CH.2 EOCR 상태 이상", "히터유닛 CH.3 EOCR 상태 이상", "히터유닛 CH.4 EOCR 상태 이상"}
+    Public Shared sSSR1Alarm() As String = New String() {"No Alarm", "", "히터유닛 CH.1 SSR 80도 알람", "히터유닛 CH.2 SSR 80도 알람", "히터유닛 CH.3 SSR 80도 알람", "히터유닛 CH.4 SSR 80도 알람"}
+    Public Shared sSSR2Alarm() As String = New String() {"No Alarm", "", "히터유닛 CH.1 SSR 60도 알람", "히터유닛 CH.2 SSR 60도 알람", "히터유닛 CH.3 SSR 60도 알람", "히터유닛 CH.4 SSR 60도 알람"}
+    Public Shared sTempSensor1Alarm() As String = New String() {"No Alarm", "", "히터 온도센서 1-1 과온 알람", "히터 온도센서 2-1 과온 알람", "히터 온도센서 3-1 과온 알람", "히터 온도센서 4-1 과온 알람"}
+    Public Shared sTempSensor2Alarm() As String = New String() {"No Alarm", "", "히터 온도센서 1-2 과온 알람", "히터 온도센서 2-2 과온 알람", "히터 온도센서 3-2 과온 알람", "히터 온도센서 4-2 과온 알람"}
+    Public Shared sDoorOpenAlarm() As String = New String() {"No Alarm", "세이프티 도어 루프 에러", "세이프티 도어-1 개방 (X00C)", "세이프티 도어-2 개방 (X016)"}
+    Public Shared sY1AxisAlarm() As String = New String() {"No Alarm", "[Ax.02] IVL-Y1 축 알람", "[Ax.02] IVL-Y1 서보 알람", "[Ax.02] IVL-Y1 RLS 리밋센서 알람", "[Ax.02] IVL-Y1 FLS 리밋센서 알람", "[Ax.02] IVL-Y1 충돌감지 알람", "[Ax.02] IVL-Y1 원점운전 타임아웃", "[Ax.02] IVL-Y1 위치운전 타임아웃", "[Ax.02] IVL-Y1 AMP 과온 알람", "[Ax.02] IVL-Y1 과전류 알람"}
+    Public Shared sY2AxisAlarm() As String = New String() {"No Alarm", "[Ax.02] IVL-Y2 축 알람", "[Ax.02] IVL-Y2 서보 알람", "[Ax.02] IVL-Y2 RLS 리밋센서 알람", "[Ax.02] IVL-Y2 FLS 리밋센서 알람", "[Ax.02] IVL-Y2 충돌감지 알람", "[Ax.02] IVL-Y2 원점운전 타임아웃", "[Ax.02] IVL-Y2 위치운전 타임아웃", "[Ax.02] IVL-Y2 AMP 과온 알람", "[Ax.02] IVL-Y2 과전류 알람"}
+    Public Shared sXAxisAlarm() As String = New String() {"No Alarm", "[Ax.02] IVL-X 축 알람", "[Ax.02] IVL-X 서보 알람", "[Ax.02] IVL-X RLS 리밋센서 알람", "[Ax.02] IVL-X FLS 리밋센서 알람", "[Ax.02] IVL-X 충돌감지 알람", "[Ax.02] IVL-X 원점운전 타임아웃", "[Ax.02] IVL-X 위치운전 타임아웃", "[Ax.02] IVL-X AMP 과온 알람", "[Ax.02] IVL-X 과전류 알람"}
+    Public Shared sZAxisAlarm() As String = New String() {"No Alarm", "[Ax.02] IVL-Z 축 알람", "[Ax.02] IVL-Y2 서보 알람", "[Ax.02] IVL-Z RLS 리밋센서 알람", "[Ax.02] IVL-Z FLS 리밋센서 알람", "[Ax.02] IVL-Z 충돌감지 알람", "[Ax.02] IVL-Z 원점운전 타임아웃", "[Ax.02] IVL-Z 위치운전 타임아웃", "[Ax.02] IVL-Z AMP 과온 알람", "[Ax.02] IVL-Z 과전류 알람"}
+
+
     Public Shared EQPAlaram() As String = New String() {"Light Alaram", "Heavy Alaram"}
 
     Public Enum eModel
@@ -81,20 +94,33 @@
         Dim nExhausSlotSignal() As eSlotSignal
         Dim nExhausPositionSignal() As ePositionSignal
         Dim nExhausMagazineStatus() As eMagazineStatus
-        Dim nDoorAlarm() As eDoorAlarm
+
+        '정현기(경알람)
+        Dim nWeakAlarm1() As eWeakAlarm
+        Dim nWeakAlarm2() As eWeakAlarm
+
+        '정현기 수정
         Dim nEmsAlarm() As eEMSAlarm
         Dim nStrangeTempAlarm() As eTemperatureAlarm
         Dim nEOCRTempAlarm() As eTemperatureAlarm
-        Dim nSSRTempAlarm() As eTemperatureAlarm
+        Dim nSSRTemp1Alarm() As eTemperatureAlarm
+        Dim nSSRTemp2Alarm() As eTemperatureAlarm
+        Dim nTempSensor1Alarm() As eTemperatureAlarm
+        Dim nTempSensor2Alarm() As eTemperatureAlarm
+        Dim nDoorAlarm() As eDoorAlarm
+        Dim nXAxisAlarm() As eAxisAlarm
+        Dim nY1AxisAlarm() As eAxisAlarm
+        Dim nY2AxisAlarm() As eAxisAlarm
+        Dim nZAxisAlarm() As eAxisAlarm
+
+
         Dim nOverTempAlarm_Zone1() As eTemperatureAlarm
         Dim nOverTempAlarm_Zone2() As eTemperatureAlarm
         Dim nTemperatureControlAlarm() As eTemperatureAlarm
         Dim nTemperatureAlarm() As eTemperatureAlarm
         Dim nLoaderAxisAlarm() As eAxisAlarm
         Dim nHitterAxisAlarm() As eAxisAlarm
-        Dim nXAxisAlarm() As eAxisAlarm
-        Dim nYAxisAlarm() As eAxisAlarm
-        Dim nZAxisAlarm() As eAxisAlarm
+
         Dim nTheta1AxisAlarm() As eAxisAlarm
         Dim nTheta2AxisAlarm() As eAxisAlarm
         Dim nTheta3AxisAlarm() As eAxisAlarm
@@ -148,13 +174,13 @@
         eReset = 3
     End Enum
     Public Enum eAxis
-        '   eX = 0
-        eY = 0
-        eZ
-        eTHETA1
-        eTHETA2
-        eTHETA3
-        eTHETA4
+        eX = 0
+        eY = 1
+        eZ = 2
+        'eTHETA1
+        'eTHETA2
+        'eTHETA3
+        'eTHETA4
     End Enum
     Public Enum eSystemStatus
         'eDown = 0
@@ -221,6 +247,9 @@
         eAlarm_Reset
         eAll_Reset
         eChangeMode
+        '정현기
+        eSoftWareReadyON
+        eSoftWareReadyOFF
     End Enum
     Public Enum eEQPStatus
         eRun
@@ -380,39 +409,58 @@
         eT8
         eT9
     End Enum
-
+    Public Enum eWeakAlarm
+        eNoError = 0
+        eError1
+        eError2
+        eError3
+        eError4
+        eError5
+        eError6
+        eError7
+        eError8
+        eError9
+        eError10
+        eError11
+        eError12
+        eError13
+        eError14
+        eError15
+        eError16
+    End Enum
     Public Enum eEMSAlarm
         eNoError = 0
         eEMS1 = 1
-        eEMS2 = 2
         eSafety_Control_Alarm1 = 5
         eSafety_Control_Alarm2 = 6
         eMC1_POWEROFF_Alarm = 9
         eMC2_POWEROFF_Alarm = 10
         eControlBoxTempLightAlarm = 11
-        eControlBoxTempHeavyAlarm = 12
-        eControlBoxSmokeAlarm = 13
+        'eControlBoxTempHeavyAlarm = 12
+        eControlBoxSmokeAlarm = 12
     End Enum
     Public Enum eServoAlarm
         eY1_Axis_Servo_ON
         eZ_Axis_Servo_ON
-        eTheta1_Axis_Servo_ON
-        eTheta2_Axis_Servo_ON
-        eTheta3_Axis_Servo_ON
-        eTheta4_Axis_Servo_ON
-        ' eY2_Axis_Servo_ON
-        'eX_Axis_Servo_ON
+        'eTheta1_Axis_Servo_ON
+        'eTheta2_Axis_Servo_ON
+        'eTheta3_Axis_Servo_ON
+        'eTheta4_Axis_Servo_ON
+        eY2_Axis_Servo_ON
+        eX_Axis_Servo_ON
     End Enum
     Public Enum eAllAxisAlarm
         eNoError = 0
-        eY1_Axis_Alarm = 1
-        eZ_Axis_Alarm = 2
-        eTheta1_Axis_Alarm = 3
-        eTheta2_Axis_Alarm = 4
-        eTheta3_Axis_Alarm = 5
-        eTheta4_Axis_Alarm = 6
-        'eY2_Axis_Alarm = 2
-        'eX_Axis_Alarm = 3
+        eX_Axis_Alarm = 1
+        eY1_Axis_Alarm = 2
+        eY2_Axis_Alarm = 3
+        eZ_Axis_Alarm = 4
+        eTheta1_Axis_Alarm = 5
+        eTheta2_Axis_Alarm = 6
+        eTheta3_Axis_Alarm = 7
+        eTheta4_Axis_Alarm = 8
+
+
 
     End Enum
     Public Enum eAxisAlarm
@@ -426,6 +474,7 @@
         eAxis_Moving_Timeout = 7
         eAMP_Over_Temp = 8
         eOver_Current = 9
+        eSynchronous_axispositional_alarm = 11
     End Enum
     Public Enum ePCBInfoAlarm
         eNoError = 0
@@ -582,10 +631,6 @@
 
 #Region "Control Functions"
 
-    Public Overridable Function GetDoorAlarm(ByVal state() As eDoorAlarm) As Boolean
-
-        Return False
-    End Function
 
     Public Overridable Function GetTemperatureAlarm(ByVal state() As eTemperatureAlarm) As Boolean
 
@@ -726,6 +771,12 @@
     Public Overridable Function Jog_Mode_Off_Auto() As Boolean
         Return False
     End Function
+    Public Overridable Function GetWeak1Alarm(ByVal state() As eWeakAlarm) As Boolean
+        Return False
+    End Function
+    Public Overridable Function GetWeak2Alarm(ByVal state() As eWeakAlarm) As Boolean
+        Return False
+    End Function
     Public Overridable Function GetEMSAlarm(ByVal state() As eEMSAlarm) As Boolean
         Return False
     End Function
@@ -735,9 +786,35 @@
     Public Overridable Function GetEOCRAlarm(ByVal state() As eTemperatureAlarm) As Boolean
         Return False
     End Function
-    Public Overridable Function GetSSRAlarm(ByVal state() As eTemperatureAlarm) As Boolean
+    Public Overridable Function GetSSR1Alarm(ByVal state() As eTemperatureAlarm) As Boolean
         Return False
     End Function
+    Public Overridable Function GetSSR2Alarm(ByVal state() As eTemperatureAlarm) As Boolean
+        Return False
+    End Function
+    Public Overridable Function GetTempSensor1Alarm(ByVal state() As eTemperatureAlarm) As Boolean
+        Return False
+    End Function
+    Public Overridable Function GetTempSensor2Alarm(ByVal state() As eTemperatureAlarm) As Boolean
+        Return False
+    End Function
+    Public Overridable Function GetDoorAlarm(ByVal state() As eDoorAlarm) As Boolean
+
+        Return False
+    End Function
+    Public Overridable Function GetXAxisAlarm(ByVal state() As eAxisAlarm) As Boolean
+        Return False
+    End Function
+    Public Overridable Function GetY1AxisAlarm(ByVal state() As eAxisAlarm) As Boolean
+        Return False
+    End Function
+    Public Overridable Function GetY2AxisAlarm(ByVal state() As eAxisAlarm) As Boolean
+        Return False
+    End Function
+    Public Overridable Function GetZAxisAlarm(ByVal state() As eAxisAlarm) As Boolean
+        Return False
+    End Function
+
     Public Overridable Function GetOverTempZone1Alarm(ByVal state() As eTemperatureAlarm) As Boolean
         Return False
     End Function
@@ -753,15 +830,7 @@
     Public Overridable Function GetHitterAxisAlarm(ByVal state() As eAxisAlarm) As Boolean
         Return False
     End Function
-    Public Overridable Function GetXAxisAlarm(ByVal state() As eAxisAlarm) As Boolean
-        Return False
-    End Function
-    Public Overridable Function GetYAxisAlarm(ByVal state() As eAxisAlarm) As Boolean
-        Return False
-    End Function
-    Public Overridable Function GetZAxisAlarm(ByVal state() As eAxisAlarm) As Boolean
-        Return False
-    End Function
+
     Public Overridable Function GetTheta1AxisAlarm(ByVal state() As eAxisAlarm) As Boolean
         Return False
     End Function
@@ -948,6 +1017,12 @@
         Return False
     End Function
     Public Overridable Function SetChangeMode(ByVal Mode As eRunningMode) As Boolean
+        Return False
+    End Function
+    Public Overridable Function SetSWRun_ON() As Boolean
+        Return False
+    End Function
+    Public Overridable Function SetSWRun_OFF() As Boolean
         Return False
     End Function
     Public Overridable Function SetCompleteACK(ByVal Axis As CDevPLCCommonNode.eAxis) As Boolean
