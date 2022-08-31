@@ -212,18 +212,20 @@
     'End Sub
 
 
-    Private Sub CellEvent_Selected(ByVal nCh As Integer, ByVal cellNo As Integer)
+    Private Sub CellEvent_Selected(ByVal nCh As Integer, ByVal cellNo As Integer) '220831 Update by JKY : 버그 수정
 
         If m_bIsLoaded = False Then Exit Sub
 
         Dim myJIGNo As Integer
+        Dim myChNo As Integer
         Dim myPalletNo As Integer
         Dim combindChNum() As Integer
-        myJIGNo = frmSettingWind.GetAllocationValue(nCh, frmSettingWind.eChAllocationItem.eChOfSwitch)
+        myJIGNo = frmSettingWind.GetAllocationValue(nCh, frmSettingWind.eChAllocationItem.eJIG_No)
+        myChNo = frmSettingWind.GetAllocationValue(nCh, frmSettingWind.eChAllocationItem.eChOfSwitch)
         myPalletNo = frmSettingWind.GetAllocationValue(nCh, frmSettingWind.eChAllocationItem.ePallet_No)
 
         '20220825 Update By SSH : Set Cell at Main UI Jig
-        combindChNum = frmSettingWind.CheckCombinedChannelAsJIG(myJIGNo)
+        combindChNum = frmSettingWind.CheckCombinedChannelAsJIG(myChNo)
 
         If m_nCheckedCh(myPalletNo) >= m_nMaxCheckedOfJig Then
             dispJIG(myJIGNo).IsSelected = False
@@ -261,18 +263,20 @@
 
     End Sub
 
-    Private Sub CellEvent_UnSelected(ByVal nCh As Integer, ByVal CellNo As Integer)
+    Private Sub CellEvent_UnSelected(ByVal nCh As Integer, ByVal CellNo As Integer) '220831 Update by JKY : 버그 수정
 
         If m_bIsLoaded = False Then Exit Sub
 
         Dim myJIGNo As Integer
+        Dim myChNo As Integer
         Dim myPalletNo As Integer
 
         Dim combindChNum() As Integer
-        myJIGNo = frmSettingWind.GetAllocationValue(nCh, frmSettingWind.eChAllocationItem.eChOfSwitch)
+        myJIGNo = frmSettingWind.GetAllocationValue(nCh, frmSettingWind.eChAllocationItem.eJIG_No)
+        myChNo = frmSettingWind.GetAllocationValue(nCh, frmSettingWind.eChAllocationItem.eChOfSwitch)
         myPalletNo = frmSettingWind.GetAllocationValue(nCh, frmSettingWind.eChAllocationItem.ePallet_No)
 
-        m_ucDispMain.SetCell(myPalletNo, myJIGNo, False)
+        m_ucDispMain.SetCell(myPalletNo, myChNo, False)
 
         '   dispJIG(myJIGNo).PreviouslySelectedCellIdx = CellNo
         If m_nCheckedCh(myPalletNo) > 0 Then

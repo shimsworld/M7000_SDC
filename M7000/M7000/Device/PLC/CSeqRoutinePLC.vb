@@ -766,7 +766,7 @@ Public Class CSeqRoutinePLC
                     '정현기 추가 알람 조회
                     '경알람
                     GetWeak1Alarm(beforeWeak1Alarm, retryCount) 'Weak1 Alarm 조회
-                    GetWeak1Alarm(beforeWeak2Alarm, retryCount) 'Weak2 Alarm 조회
+                    GetWeak2Alarm(beforeWeak2Alarm, retryCount) 'Weak2 Alarm 조회
                     '중알람
                     GetEMSAlarm(beforeEmsAlarm, retryCount) 'EMS Alarm 조회
                     GetStrangeTempAlarm(beforeTemperatureAlarm, retryCount) 'Temp Alarm 조회
