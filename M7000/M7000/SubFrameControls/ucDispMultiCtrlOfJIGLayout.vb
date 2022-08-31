@@ -231,7 +231,7 @@
             dispJIG(myJIGNo).IsSelected = False
             Exit Sub
         Else
-            m_ucDispMain.SetCell(myPalletNo, myJIGNo, True)
+            m_ucDispMain.SetCell(myPalletNo, myChNo, True)
             m_nCheckedCh(myPalletNo) += 1
         End If
         dispJIG(myJIGNo).PreviouslySelectedCellIdx = cellNo
