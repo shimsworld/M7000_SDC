@@ -5,7 +5,7 @@
 
     Public Event ChangedSweepType(ByVal type As eSweepType)
 
-    Public Shared m_sCaptions_SweepType() As String = New String() {"Standard", "User Pattern", "RGB Pattern"} '220825 Update by JKY : RGB Pattern 추가
+    Public Shared m_sCaptions_SweepType() As String = New String() {"Standard", "User Pattern", "RGB Pattern"} '220826 Update by JKY : RGB Pattern 추가
     Public Shared m_sCaptions_Unit() As String = New String() {"V", "mA", "Deg"}
 
     Dim m_SweepType As eSweepType
@@ -64,7 +64,7 @@
     Private Sub init()
         gbMain.Dock = DockStyle.Fill
 
-        ucRGBSweepRegion.Location = New System.Drawing.Point(5, Label1.Location.Y + 20) '220825 Update by JKY
+        ucRGBSweepRegion.Location = New System.Drawing.Point(5, Label1.Location.Y + 20) '220826 Update by JKY
         ucSweepRegion.Location = New System.Drawing.Point(5, Label1.Location.Y + 20)
         ucUserPatternList.Location = New System.Drawing.Point(5, Label1.Location.Y + 20)
 
@@ -104,6 +104,7 @@
                 lblSingleValue.Visible = False
                 tbSingleValue.Visible = False
                 lblSingleValueUnit.Visible = False
+                ucSweepRegion.BringToFront()
             Case eSweepType._UserPattern
                 ucSweepRegion.Visible = False
                 ucUserPatternList.Visible = True
@@ -111,6 +112,7 @@
                 lblSingleValue.Visible = False
                 tbSingleValue.Visible = False
                 lblSingleValueUnit.Visible = False
+                ucUserPatternList.BringToFront()
             Case eSweepType._RGBPattern
                 ucSweepRegion.Visible = False
                 ucUserPatternList.Visible = False
@@ -118,6 +120,7 @@
                 lblSingleValue.Visible = False
                 tbSingleValue.Visible = False
                 lblSingleValueUnit.Visible = False
+                ucRGBSweepRegion.BringToFront()
             Case Else
 
         End Select

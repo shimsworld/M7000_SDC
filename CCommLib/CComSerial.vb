@@ -437,7 +437,6 @@ Public Class CComSerial
             End Try
 
         Next
-
         logOutput("Send >> " & textToSend)
 
 

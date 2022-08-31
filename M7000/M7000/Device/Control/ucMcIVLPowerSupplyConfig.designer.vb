@@ -179,7 +179,7 @@ Partial Class ucMcIVLPowerSupplyConfig
         Me.Controls.Add(Me.UcConfigRs232_02)
         Me.Controls.Add(Me.UcConfigRs232_01)
         Me.Name = "ucMcIVLPowerSupplyConfig"
-        Me.Size = New System.Drawing.Size(1275, 458)
+        Me.Size = New System.Drawing.Size(1275, 259)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

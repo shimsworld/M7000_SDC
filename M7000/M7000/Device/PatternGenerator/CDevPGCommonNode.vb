@@ -1,6 +1,7 @@
 ﻿Imports G4xHMI
 Imports G4SDataLibrary
 Imports System.Threading
+Imports CCommLib
 
 Public Class CDevPGCommonNode
 
@@ -15,7 +16,7 @@ Public Class CDevPGCommonNode
     Public cMcPDMeasUnit() As CDevPDUnit  '1개의 Device는 32개의 PD 센싱 (모듈당 1개의 PD로 센싱하면 32채널임)
     Public cMcPGPwr As cDevMcPGPower
     Public cMcPGCtrl As cDevMcPGControl
-
+    Public cMcEIPPG As CDevEIPPG
 
     Protected m_MyModel As eDevModel
     Protected m_ConfigInfo As CCommLib.CComCommonNode.sCommInfo
@@ -237,6 +238,13 @@ Public Class CDevPGCommonNode
         End Get
     End Property
 
+    Public Overridable Function EIPPG_ON() As Boolean
+        Return False
+    End Function
+    Public Overridable Function EIPPG_OFF() As Boolean
+        Return False
+    End Function
+
 
     'Public Property OffLineMode() As Boolean
     '    Get
@@ -284,7 +292,12 @@ Public Class CDevPGCommonNode
         'StartThread()
         Return False
     End Function
-
+    Public Overridable Function Connection(ByVal config As CCommLib.CComCommonNode.sCommInfo) As Boolean
+        Return False
+    End Function
+    Public Overridable Function Connection(ByVal config As CComSerial.sSerialPortInfo) As Boolean
+        Return False
+    End Function
     ''' <summary>
     ''' 
     ''' </summary>

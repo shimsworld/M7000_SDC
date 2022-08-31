@@ -17,7 +17,8 @@ Public Class CSeqRoutinePLC
     Dim m_PLCSignalInfo As CDevPLCCommonNode.sSignalInfo
     Dim m_MotionPosition() As Double
     Const CommRetryCount As Integer = 100
-    Const numberOfAxis As Integer = 6
+    '정현기 4축으로 수정
+    Const numberOfAxis As Integer = 4
     Dim m_bIsConnected As Boolean = False
     Dim measQueue As New Queue
     Dim m_bIsRequest As Boolean = False
@@ -46,25 +47,42 @@ Public Class CSeqRoutinePLC
     Public Event evChangeMagazineAlarm(ByVal alarm() As CDevPLCCommonNode.eMagazineError)
     Public Event evChangeMagazineContactInspection(ByVal state() As CDevPLCCommonNode.eMagazineContactIspection)
 
-    Public Event evChangeDoorAlarm(ByVal state() As CDevPLCCommonNode.eDoorAlarm)
-    Public Event evChangeTemperatureAlarm(ByVal state() As CDevPLCCommonNode.eTemperatureAlarm)
+
+
+
+    'Public Event evChangeTemperatureAlarm(ByVal state() As CDevPLCCommonNode.eTemperatureAlarm)
     Public Event evChangeTemperatureControlAlarm(ByVal state() As CDevPLCCommonNode.eTemperatureAlarm)
     Public Event evChangeLiftAlarm(ByVal state() As CDevPLCCommonNode.eLiftAlarm)
     Public Event evChangeConbareAlarm(ByVal state() As CDevPLCCommonNode.eConbareConnection)
     Public Event evChangePCBInfoAlarm(ByVal state() As CDevPLCCommonNode.ePCBInfoAlarm)
 
     'semi'
+    '정현기 알람추가
+    '경알람
+    Public Event evChangeWeak1Alarm(ByVal alarm() As CDevPLCCommonNode.eWeakAlarm)
+    Public Event evChangeWeak2Alarm(ByVal alarm() As CDevPLCCommonNode.eWeakAlarm)
+    '중알람
     Public Event evChangeEMSAlarm(ByVal alarm() As CDevPLCCommonNode.eEMSAlarm)
-    '  Public Event evChangeStrangeTempAlarm(ByVal alarm() As CDevPLCCommonNode.eTemperatureAlarm)
-    ' Public Event evChangeEOCRAlarm(ByVal alarm() As CDevPLCCommonNode.eTemperatureAlarm)
+    Public Event evChangeStrangeTempAlarm(ByVal alarm() As CDevPLCCommonNode.eTemperatureAlarm)
+    Public Event evChangeEOCRAlarm(ByVal alarm() As CDevPLCCommonNode.eTemperatureAlarm)
+    Public Event evChangeSSR1Alarm(ByVal alarm() As CDevPLCCommonNode.eTemperatureAlarm)
+    Public Event evChangeSSR2Alarm(ByVal alarm() As CDevPLCCommonNode.eTemperatureAlarm)
+    Public Event evChangeTempSensor1Alarm(ByVal alarm() As CDevPLCCommonNode.eTemperatureAlarm)
+    Public Event evChangeTempSensor2Alarm(ByVal alarm() As CDevPLCCommonNode.eTemperatureAlarm)
+    Public Event evChangeDoorAlarm(ByVal state() As CDevPLCCommonNode.eDoorAlarm)
+    Public Event evChangeXAxisAlarm(ByVal alarm() As CDevPLCCommonNode.eAxisAlarm)
+    Public Event evChangeY1AxisAlarm(ByVal alarm() As CDevPLCCommonNode.eAxisAlarm)
+    Public Event evChangeY2AxisAlarm(ByVal alarm() As CDevPLCCommonNode.eAxisAlarm)
+    Public Event evChangeZAxisAlarm(ByVal alarm() As CDevPLCCommonNode.eAxisAlarm)
+
+
+
     ' Public Event evChangeSSRAlarm(ByVal alarm() As CDevPLCCommonNode.eTemperatureAlarm)
     '  Public Event evChangeOverTempZone1Alarm(ByVal alarm() As CDevPLCCommonNode.eTemperatureAlarm)
     ' Public Event evChangeOverTempZone2Alarm(ByVal alarm() As CDevPLCCommonNode.eTemperatureAlarm)
     ' Public Event evChangeLoaderAxisAlarm(ByVal alarm() As CDevPLCCommonNode.eAxisAlarm)
     '  Public Event evChangeHitterAxisAlarm(ByVal alarm() As CDevPLCCommonNode.eAxisAlarm)
-    '  Public Event evChangeXAxisAlarm(ByVal alarm() As CDevPLCCommonNode.eAxisAlarm)
-    Public Event evChangeYAxisAlarm(ByVal alarm() As CDevPLCCommonNode.eAxisAlarm)
-    Public Event evChangeZAxisAlarm(ByVal alarm() As CDevPLCCommonNode.eAxisAlarm)
+
     Public Event evChangeTheta1AxisAlarm(ByVal alarm() As CDevPLCCommonNode.eAxisAlarm)
     Public Event evChangeTheta2AxisAlarm(ByVal alarm() As CDevPLCCommonNode.eAxisAlarm)
     Public Event evChangeTheta3AxisAlarm(ByVal alarm() As CDevPLCCommonNode.eAxisAlarm)
@@ -238,35 +256,61 @@ Public Class CSeqRoutinePLC
         Dim nServoAlarm(0) As CDevPLCCommonNode.eServoAlarm
         Dim nAxisAlarm(0) As CDevPLCCommonNode.eAllAxisAlarm
 
+        '정현기 알람 추가
+        '경알람
+        Dim nWeak1Alarm(0) As CDevPLCCommonNode.eWeakAlarm
+        Dim nWeak2Alarm(0) As CDevPLCCommonNode.eWeakAlarm
+        '중알람
         Dim nEmsAlarm(0) As CDevPLCCommonNode.eEMSAlarm
         Dim nStrangeTempAlarm(0) As CDevPLCCommonNode.eTemperatureAlarm
         Dim nEOCRTempAlarm(0) As CDevPLCCommonNode.eTemperatureAlarm
-        Dim nSSRTempAlarm(0) As CDevPLCCommonNode.eTemperatureAlarm
+        Dim nSSRTemp1Alarm(0) As CDevPLCCommonNode.eTemperatureAlarm
+        Dim nSSRTemp2Alarm(0) As CDevPLCCommonNode.eTemperatureAlarm
+        Dim nTempSensor1Alarm(0) As CDevPLCCommonNode.eTemperatureAlarm
+        Dim nTempSensor2Alarm(0) As CDevPLCCommonNode.eTemperatureAlarm
+        Dim nDoorAlarm(0) As CDevPLCCommonNode.eDoorAlarm
+        Dim nXAxisAlarm(0) As CDevPLCCommonNode.eAxisAlarm
+        Dim nY1AxisAlarm(0) As CDevPLCCommonNode.eAxisAlarm
+        Dim nY2AxisAlarm(0) As CDevPLCCommonNode.eAxisAlarm
+        Dim nZAxisAlarm(0) As CDevPLCCommonNode.eAxisAlarm
+
+
         Dim nOverTempAlarm_Zone1(0) As CDevPLCCommonNode.eTemperatureAlarm
         Dim nOverTempAlarm_Zone2(0) As CDevPLCCommonNode.eTemperatureAlarm
         Dim nLoaderAxisAlarm(0) As CDevPLCCommonNode.eAxisAlarm
         Dim nHitterAxisAlarm(0) As CDevPLCCommonNode.eAxisAlarm
-        Dim nXAxisAlarm(0) As CDevPLCCommonNode.eAxisAlarm
-        Dim nYAxisAlarm(0) As CDevPLCCommonNode.eAxisAlarm
-        Dim nZAxisAlarm(0) As CDevPLCCommonNode.eAxisAlarm
+
         Dim nTheta1AxisAlarm(0) As CDevPLCCommonNode.eAxisAlarm
         Dim nTheta2AxisAlarm(0) As CDevPLCCommonNode.eAxisAlarm
         Dim nTheta3AxisAlarm(0) As CDevPLCCommonNode.eAxisAlarm
         Dim nTheta4AxisAlarm(0) As CDevPLCCommonNode.eAxisAlarm
         Dim nUnLoaderAxisAlarm(0) As CDevPLCCommonNode.eAxisAlarm
-        Dim nDoorAlarm(0) As CDevPLCCommonNode.eDoorAlarm
 
+        '정현기 알람 추가
+        '경알람
+        nWeak1Alarm(0) = CDevPLCCommonNode.eWeakAlarm.eNoError
+        nWeak2Alarm(0) = CDevPLCCommonNode.eWeakAlarm.eNoError
+        '중알람
         nEmsAlarm(0) = CDevPLCCommonNode.eEMSAlarm.eNoError
         nStrangeTempAlarm(0) = CDevPLCCommonNode.eTemperatureAlarm.eNoError
         nEOCRTempAlarm(0) = CDevPLCCommonNode.eTemperatureAlarm.eNoError
-        nSSRTempAlarm(0) = CDevPLCCommonNode.eTemperatureAlarm.eNoError
+        nSSRTemp1Alarm(0) = CDevPLCCommonNode.eTemperatureAlarm.eNoError
+        nSSRTemp2Alarm(0) = CDevPLCCommonNode.eTemperatureAlarm.eNoError
+        nTempSensor1Alarm(0) = CDevPLCCommonNode.eTemperatureAlarm.eNoError
+        nTempSensor2Alarm(0) = CDevPLCCommonNode.eTemperatureAlarm.eNoError
+        nDoorAlarm(0) = CDevPLCCommonNode.eDoorAlarm.eNoError
+        nXAxisAlarm(0) = CDevPLCCommonNode.eAxisAlarm.eNoError
+        nY1AxisAlarm(0) = CDevPLCCommonNode.eAxisAlarm.eNoError
+        nY2AxisAlarm(0) = CDevPLCCommonNode.eAxisAlarm.eNoError
+        nZAxisAlarm(0) = CDevPLCCommonNode.eAxisAlarm.eNoError
+
+
+
         nOverTempAlarm_Zone1(0) = CDevPLCCommonNode.eTemperatureAlarm.eNoError
         nOverTempAlarm_Zone2(0) = CDevPLCCommonNode.eTemperatureAlarm.eNoError
         nLoaderAxisAlarm(0) = CDevPLCCommonNode.eAxisAlarm.eNoError
         nHitterAxisAlarm(0) = CDevPLCCommonNode.eAxisAlarm.eNoError
-        nXAxisAlarm(0) = CDevPLCCommonNode.eAxisAlarm.eNoError
-        nYAxisAlarm(0) = CDevPLCCommonNode.eAxisAlarm.eNoError
-        nZAxisAlarm(0) = CDevPLCCommonNode.eAxisAlarm.eNoError
+
         nTheta1AxisAlarm(0) = CDevPLCCommonNode.eAxisAlarm.eNoError
         nTheta2AxisAlarm(0) = CDevPLCCommonNode.eAxisAlarm.eNoError
         nTheta3AxisAlarm(0) = CDevPLCCommonNode.eAxisAlarm.eNoError
@@ -316,17 +360,31 @@ Public Class CSeqRoutinePLC
         m_PLCDatas.nServoAlarm = nServoAlarm.Clone
         m_PLCDatas.nAxisAlarm = nAxisAlarm.Clone
         m_PLCDatas.nEQPState = nEQPState.Clone
+
+        '정현기 알람추가
+        '경알람
+        m_PLCDatas.nWeakAlarm1 = nWeak1Alarm.Clone
+        m_PLCDatas.nWeakAlarm2 = nWeak2Alarm.Clone
+        '중알람
         m_PLCDatas.nEmsAlarm = nEmsAlarm.Clone
         m_PLCDatas.nStrangeTempAlarm = nStrangeTempAlarm.Clone
         m_PLCDatas.nEOCRTempAlarm = nEOCRTempAlarm.Clone
-        m_PLCDatas.nSSRTempAlarm = nSSRTempAlarm.Clone
+        m_PLCDatas.nSSRTemp1Alarm = nSSRTemp2Alarm.Clone
+        m_PLCDatas.nSSRTemp2Alarm = nSSRTemp2Alarm.Clone
+        m_PLCDatas.nTempSensor1Alarm = nTempSensor1Alarm.Clone
+        m_PLCDatas.nTempSensor2Alarm = nTempSensor2Alarm.Clone
+        m_PLCDatas.nDoorAlarm = nDoorAlarm.Clone
+        m_PLCDatas.nXAxisAlarm = nAxisAlarm.Clone
+        m_PLCDatas.nY1AxisAlarm = nY1AxisAlarm.Clone
+        m_PLCDatas.nY2AxisAlarm = nY2AxisAlarm.Clone
+        m_PLCDatas.nZAxisAlarm = nZAxisAlarm.Clone
+
+
         m_PLCDatas.nOverTempAlarm_Zone1 = nOverTempAlarm_Zone1.Clone
         m_PLCDatas.nOverTempAlarm_Zone2 = nOverTempAlarm_Zone2.Clone
         m_PLCDatas.nLoaderAxisAlarm = nLoaderAxisAlarm.Clone
         m_PLCDatas.nHitterAxisAlarm = nHitterAxisAlarm.Clone
-        m_PLCDatas.nXAxisAlarm = nAxisAlarm.Clone
-        m_PLCDatas.nYAxisAlarm = nYAxisAlarm.Clone
-        m_PLCDatas.nZAxisAlarm = nZAxisAlarm.Clone
+
         m_PLCDatas.nTheta1AxisAlarm = nTheta1AxisAlarm.clone
         m_PLCDatas.nTheta2AxisAlarm = nTheta2AxisAlarm.clone
         m_PLCDatas.nTheta3AxisAlarm = nTheta3AxisAlarm.clone
@@ -375,18 +433,27 @@ Public Class CSeqRoutinePLC
         ReDim m_PLCDatas.nTemperatureAlarm(0)
         ReDim m_PLCDatas.nTemperatureControlAlarm(0)
 
-        ReDim m_PLCDatas.nDoorAlarm(0)
+
+
+
+        '정현기 알람 추가
         ReDim m_PLCDatas.nEmsAlarm(0)
         ReDim m_PLCDatas.nStrangeTempAlarm(0)
         ReDim m_PLCDatas.nEOCRTempAlarm(0)
-        ReDim m_PLCDatas.nSSRTempAlarm(0)
+        ReDim m_PLCDatas.nSSRTemp1Alarm(0)
+        ReDim m_PLCDatas.nSSRTemp2Alarm(0)
+        ReDim m_PLCDatas.nTempSensor1Alarm(0)
+        ReDim m_PLCDatas.nTempSensor2Alarm(0)
+        ReDim m_PLCDatas.nDoorAlarm(0)
+        ReDim m_PLCDatas.nXAxisAlarm(0)
+        ReDim m_PLCDatas.nY1AxisAlarm(0)
+        ReDim m_PLCDatas.nY2AxisAlarm(0)
+        ReDim m_PLCDatas.nZAxisAlarm(0)
+
         ReDim m_PLCDatas.nOverTempAlarm_Zone1(0)
         ReDim m_PLCDatas.nOverTempAlarm_Zone2(0)
         ReDim m_PLCDatas.nLoaderAxisAlarm(0)
         ReDim m_PLCDatas.nHitterAxisAlarm(0)
-        ReDim m_PLCDatas.nXAxisAlarm(0)
-        ReDim m_PLCDatas.nYAxisAlarm(0)
-        ReDim m_PLCDatas.nZAxisAlarm(0)
         ReDim m_PLCDatas.nTheta1AxisAlarm(0)
         ReDim m_PLCDatas.nTheta2AxisAlarm(0)
         ReDim m_PLCDatas.nTheta3AxisAlarm(0)
@@ -405,18 +472,24 @@ Public Class CSeqRoutinePLC
         m_PLCDatas.nTemperatureAlarm(0) = CDevPLCCommonNode.eTemperatureAlarm.eNoError
         m_PLCDatas.nTemperatureControlAlarm(0) = CDevPLCCommonNode.eTemperatureAlarm.eNoError
 
-        'Semi'
-        m_PLCDatas.nDoorAlarm(0) = CDevPLCCommonNode.eDoorAlarm.eNoError
+        'Semi' '정현기 알람 추가
         m_PLCDatas.nEmsAlarm(0) = CDevPLCCommonNode.eEMSAlarm.eNoError
         m_PLCDatas.nEOCRTempAlarm(0) = CDevPLCCommonNode.eTemperatureAlarm.eNoError
-        m_PLCDatas.nSSRTempAlarm(0) = CDevPLCCommonNode.eTemperatureAlarm.eNoError
+        m_PLCDatas.nSSRTemp1Alarm(0) = CDevPLCCommonNode.eTemperatureAlarm.eNoError
+        m_PLCDatas.nSSRTemp2Alarm(0) = CDevPLCCommonNode.eTemperatureAlarm.eNoError
+        m_PLCDatas.nTempSensor1Alarm(0) = CDevPLCCommonNode.eTemperatureAlarm.eNoError
+        m_PLCDatas.nTempSensor2Alarm(0) = CDevPLCCommonNode.eTemperatureAlarm.eNoError
+        m_PLCDatas.nDoorAlarm(0) = CDevPLCCommonNode.eDoorAlarm.eNoError
+        m_PLCDatas.nXAxisAlarm(0) = CDevPLCCommonNode.eAxisAlarm.eNoError
+        m_PLCDatas.nY1AxisAlarm(0) = CDevPLCCommonNode.eAxisAlarm.eNoError
+        m_PLCDatas.nY2AxisAlarm(0) = CDevPLCCommonNode.eAxisAlarm.eNoError
+        m_PLCDatas.nZAxisAlarm(0) = CDevPLCCommonNode.eAxisAlarm.eNoError
+
         m_PLCDatas.nOverTempAlarm_Zone1(0) = CDevPLCCommonNode.eTemperatureAlarm.eNoError
         m_PLCDatas.nOverTempAlarm_Zone2(0) = CDevPLCCommonNode.eTemperatureAlarm.eNoError
         m_PLCDatas.nLoaderAxisAlarm(0) = CDevPLCCommonNode.eAxisAlarm.eNoError
         m_PLCDatas.nHitterAxisAlarm(0) = CDevPLCCommonNode.eAxisAlarm.eNoError
-        m_PLCDatas.nXAxisAlarm(0) = CDevPLCCommonNode.eAxisAlarm.eNoError
-        m_PLCDatas.nYAxisAlarm(0) = CDevPLCCommonNode.eAxisAlarm.eNoError
-        m_PLCDatas.nZAxisAlarm(0) = CDevPLCCommonNode.eAxisAlarm.eNoError
+
         m_PLCDatas.nTheta1AxisAlarm(0) = CDevPLCCommonNode.eAxisAlarm.eNoError
         m_PLCDatas.nTheta2AxisAlarm(0) = CDevPLCCommonNode.eAxisAlarm.eNoError
         m_PLCDatas.nTheta3AxisAlarm(0) = CDevPLCCommonNode.eAxisAlarm.eNoError
@@ -435,21 +508,31 @@ Public Class CSeqRoutinePLC
         'RaiseEvent evChangeMagazineExhausPosition(m_PLCDatas.nExhausPositionSignal)
         'RaiseEvent evChangeMagazineExhausStatus(m_PLCDatas.nExhausMagazineStatus)
         ' RaiseEvent evChangeDoorAlarm(m_PLCDatas.nDoorAlarm)
-        RaiseEvent evChangeTemperatureAlarm(m_PLCDatas.nTemperatureAlarm)
+        'RaiseEvent evChangeTemperatureAlarm(m_PLCDatas.nTemperatureAlarm)
         ' RaiseEvent evChangeTemperatureControlAlarm(m_PLCDatas.nTemperatureControlAlarm)
 
-        'Semi'
+        '정현기 알람추가
+        '경알람
+        RaiseEvent evChangeWeak1Alarm(m_PLCDatas.nWeakAlarm1)
+        RaiseEvent evChangeWeak2Alarm(m_PLCDatas.nWeakAlarm2)
+        '중알람
         RaiseEvent evChangeEMSAlarm(m_PLCDatas.nEmsAlarm)
-        '  RaiseEvent evChangeStrangeTempAlarm(m_PLCDatas.nStrangeTempAlarm)
-        '  RaiseEvent evChangeEOCRAlarm(m_PLCDatas.nEOCRTempAlarm)
-        '  RaiseEvent evChangeSSRAlarm(m_PLCDatas.nSSRTempAlarm)
+        RaiseEvent evChangeStrangeTempAlarm(m_PLCDatas.nStrangeTempAlarm)
+        RaiseEvent evChangeEOCRAlarm(m_PLCDatas.nEOCRTempAlarm)
+        RaiseEvent evChangeSSR1Alarm(m_PLCDatas.nSSRTemp1Alarm)
+        RaiseEvent evChangeSSR2Alarm(m_PLCDatas.nSSRTemp2Alarm)
+        RaiseEvent evChangeTempSensor1Alarm(m_PLCDatas.nTempSensor1Alarm)
+        RaiseEvent evChangeTempSensor2Alarm(m_PLCDatas.nTempSensor2Alarm)
+        RaiseEvent evChangeDoorAlarm(m_PLCDatas.nDoorAlarm)
+        RaiseEvent evChangeXAxisAlarm(m_PLCDatas.nXAxisAlarm)
+        RaiseEvent evChangeY1AxisAlarm(m_PLCDatas.nY1AxisAlarm)
+        RaiseEvent evChangeY2AxisAlarm(m_PLCDatas.nY2AxisAlarm)
+        RaiseEvent evChangeZAxisAlarm(m_PLCDatas.nZAxisAlarm)
         ' RaiseEvent evChangeOverTempZone1Alarm(m_PLCDatas.nOverTempAlarm_Zone1)
         '  RaiseEvent evChangeOverTempZone2Alarm(m_PLCDatas.nOverTempAlarm_Zone2)
         '  RaiseEvent evChangeLoaderAxisAlarm(m_PLCDatas.nLoaderAxisAlarm)
         '  RaiseEvent evChangeHitterAxisAlarm(m_PLCDatas.nHitterAxisAlarm)
-        ' RaiseEvent evChangeXAxisAlarm(m_PLCDatas.nXAxisAlarm)
-        RaiseEvent evChangeYAxisAlarm(m_PLCDatas.nYAxisAlarm)
-        RaiseEvent evChangeZAxisAlarm(m_PLCDatas.nZAxisAlarm)
+
         RaiseEvent evChangeTheta1AxisAlarm(m_PLCDatas.nTheta1AxisAlarm)
         RaiseEvent evChangeTheta2AxisAlarm(m_PLCDatas.nTheta2AxisAlarm)
         RaiseEvent evChangeTheta3AxisAlarm(m_PLCDatas.nTheta3AxisAlarm)
@@ -520,14 +603,30 @@ Public Class CSeqRoutinePLC
 
         Dim beforState(0) As CDevPLCCommonNode.eSystemStatus
         Dim beforAlarm(0) As CDevPLCCommonNode.eDISignal
-        Dim beforeDoorAlarm(0) As CDevPLCCommonNode.eDoorAlarm
         Dim beforeServoAlarm(0) As CDevPLCCommonNode.eServoAlarm
         Dim beforeEQPAlarm(0) As CDevPLCCommonNode.eEQPLightAlaram
         Dim beforeAxisAlarm(0) As CDevPLCCommonNode.eAllAxisAlarm
         Dim beforeEQPState(0) As CDevPLCCommonNode.eEQPStatus
+
+        '정현기 추가
+        '경알람
+        Dim beforeWeak1Alarm(0) As CDevPLCCommonNode.eWeakAlarm
+        Dim beforeWeak2Alarm(0) As CDevPLCCommonNode.eWeakAlarm
+        '중알람
         Dim beforeEmsAlarm(0) As CDevPLCCommonNode.eEMSAlarm
-        Dim beforeYAxisAlarm(0) As CDevPLCCommonNode.eAxisAlarm
+        Dim beforeTemperatureAlarm(0) As CDevPLCCommonNode.eTemperatureAlarm
+        Dim beforeEOCRAlarm(0) As CDevPLCCommonNode.eTemperatureAlarm
+        Dim beforeSSR1Alarm(0) As CDevPLCCommonNode.eTemperatureAlarm
+        Dim beforeSSR2Alarm(0) As CDevPLCCommonNode.eTemperatureAlarm
+        Dim beforeTempSensor1Alarm(0) As CDevPLCCommonNode.eTemperatureAlarm
+        Dim beforeTempSensor2Alarm(0) As CDevPLCCommonNode.eTemperatureAlarm
+        Dim beforeDoorAlarm(0) As CDevPLCCommonNode.eDoorAlarm
+        Dim beforeXAxisAlarm(0) As CDevPLCCommonNode.eAxisAlarm
+        Dim beforeY1AxisAlarm(0) As CDevPLCCommonNode.eAxisAlarm
+        Dim beforeY2AxisAlarm(0) As CDevPLCCommonNode.eAxisAlarm
         Dim beforeZAxisAlarm(0) As CDevPLCCommonNode.eAxisAlarm
+
+
         Dim beforeTheta1AxisAlarm(0) As CDevPLCCommonNode.eAxisAlarm
         Dim beforeTheta2AxisAlarm(0) As CDevPLCCommonNode.eAxisAlarm
         Dim beforeTheta3AxisAlarm(0) As CDevPLCCommonNode.eAxisAlarm
@@ -537,16 +636,30 @@ Public Class CSeqRoutinePLC
 
         beforState(0) = CDevPLCCommonNode.eSystemStatus.ePower_Down
         beforAlarm(0) = CDevPLCCommonNode.eDISignal.eNoError
-        beforeDoorAlarm(0) = CDevPLCCommonNode.eDoorAlarm.eNoError
-       
+
+
         beforeEQPAlarm(0) = CDevPLCCommonNode.eEQPLightAlaram.eNoError
         beforeAxisAlarm(0) = CDevPLCCommonNode.eAllAxisAlarm.eNoError
         beforeEQPState(0) = CDevPLCCommonNode.eEQPStatus.eRun
 
-        'semi'
+        '정현기 추가
+        '경알람
+        beforeWeak1Alarm(0) = CDevPLCCommonNode.eWeakAlarm.eNoError
+        beforeWeak2Alarm(0) = CDevPLCCommonNode.eWeakAlarm.eNoError
+        '중알람
         beforeEmsAlarm(0) = CDevPLCCommonNode.eEMSAlarm.eNoError
-        beforeYAxisAlarm(0) = CDevPLCCommonNode.eAxisAlarm.eNoError
+        beforeTemperatureAlarm(0) = CDevPLCCommonNode.eTemperatureAlarm.eNoError
+        beforeEOCRAlarm(0) = CDevPLCCommonNode.eTemperatureAlarm.eNoError
+        beforeSSR1Alarm(0) = CDevPLCCommonNode.eTemperatureAlarm.eNoError
+        beforeSSR2Alarm(0) = CDevPLCCommonNode.eTemperatureAlarm.eNoError
+        beforeTempSensor1Alarm(0) = CDevPLCCommonNode.eTemperatureAlarm.eNoError
+        beforeTempSensor2Alarm(0) = CDevPLCCommonNode.eTemperatureAlarm.eNoError
+        beforeDoorAlarm(0) = CDevPLCCommonNode.eDoorAlarm.eNoError
+        beforeXAxisAlarm(0) = CDevPLCCommonNode.eAxisAlarm.eNoError
+        beforeY1AxisAlarm(0) = CDevPLCCommonNode.eAxisAlarm.eNoError
+        beforeY2AxisAlarm(0) = CDevPLCCommonNode.eAxisAlarm.eNoError
         beforeZAxisAlarm(0) = CDevPLCCommonNode.eAxisAlarm.eNoError
+
         beforeTheta1AxisAlarm(0) = CDevPLCCommonNode.eAxisAlarm.eNoError
         beforeTheta2AxisAlarm(0) = CDevPLCCommonNode.eAxisAlarm.eNoError
         beforeTheta3AxisAlarm(0) = CDevPLCCommonNode.eAxisAlarm.eNoError
@@ -626,12 +739,14 @@ Public Class CSeqRoutinePLC
                         retryCount = 0
                     End If
 
+                    m_bYMotionMoveCompleted = PLC.myPLC.MoveCompleted(CDevPLCCommonNode.eAxis.eX)
                     m_bYMotionMoveCompleted = PLC.myPLC.MoveCompleted(CDevPLCCommonNode.eAxis.eY)
                     m_bZMotionMoveCompleted = PLC.myPLC.MoveCompleted(CDevPLCCommonNode.eAxis.eZ)
-                    m_bTheta1MotionMoveCompleted = PLC.myPLC.MoveCompleted(CDevPLCCommonNode.eAxis.eTHETA1)
-                    m_bTheta2MotionMoveCompleted = PLC.myPLC.MoveCompleted(CDevPLCCommonNode.eAxis.eTHETA2)
-                    m_bTheta3MotionMoveCompleted = PLC.myPLC.MoveCompleted(CDevPLCCommonNode.eAxis.eTHETA3)
-                    m_bTheta4MotionMoveCompleted = PLC.myPLC.MoveCompleted(CDevPLCCommonNode.eAxis.eTHETA4)
+                    '정현기
+                    'm_bTheta1MotionMoveCompleted = PLC.myPLC.MoveCompleted(CDevPLCCommonNode.eAxis.eTHETA1)
+                    'm_bTheta2MotionMoveCompleted = PLC.myPLC.MoveCompleted(CDevPLCCommonNode.eAxis.eTHETA2)
+                    'm_bTheta3MotionMoveCompleted = PLC.myPLC.MoveCompleted(CDevPLCCommonNode.eAxis.eTHETA3)
+                    'm_bTheta4MotionMoveCompleted = PLC.myPLC.MoveCompleted(CDevPLCCommonNode.eAxis.eTHETA4)
                     m_CanAllReset = PLC.myPLC.GetCanAllReset(CDevPLCCommonNode.eAllResetChkState.eCan_All_Reset)
                     'System 상태 감시
                     Dim fIsAlarmState As Boolean = False
@@ -647,29 +762,37 @@ Public Class CSeqRoutinePLC
                     '개별 축 알람 올라오므로 현재는 필요없음
                     GetServoAlarm(beforeServoAlarm, retryCount)
 
-                    'EMS Alarm 조회
-                    GetEMSAlarm(beforeEmsAlarm, retryCount)
 
-                    'Door Alarm 조회
-                    GetAlarmDoor(beforeDoorAlarm, retryCount)
+                    '정현기 추가 알람 조회
+                    '경알람
+                    GetWeak1Alarm(beforeWeak1Alarm, retryCount) 'Weak1 Alarm 조회
+                    GetWeak1Alarm(beforeWeak2Alarm, retryCount) 'Weak2 Alarm 조회
+                    '중알람
+                    GetEMSAlarm(beforeEmsAlarm, retryCount) 'EMS Alarm 조회
+                    GetStrangeTempAlarm(beforeTemperatureAlarm, retryCount) 'Temp Alarm 조회
+                    GetEOCRAlarm(beforeEOCRAlarm, retryCount) 'EOCR Alarm 조회
+                    GetSSR1Alarm(beforeSSR1Alarm, retryCount) 'SSR1 Alarm 조회
+                    GetSSR2Alarm(beforeSSR1Alarm, retryCount) 'SSR2 Alarm 조회
+                    GetTempSensor1Alarm(beforeSSR1Alarm, retryCount) 'TempSensor1 Alarm 조회
+                    GetTempSensor2Alarm(beforeSSR1Alarm, retryCount) 'TempSensor2 Alarm 조회
+                    GetDoorAlarm(beforeDoorAlarm, retryCount) 'Door Alarm 조회
+                    GetXAxisAlarm(beforeXAxisAlarm, retryCount) 'X축 알람 조회
+                    GetY1AxisAlarm(beforeY1AxisAlarm, retryCount) 'Y1축 알람 조회
+                    GetY2AxisAlarm(beforeY2AxisAlarm, retryCount) 'Y2축 알람 조회
+                    GetZAxisAlarm(beforeZAxisAlarm, retryCount) 'Z축 알람 조회
 
-                    'Y축 알람 조회
-                    GetYAxisAlarm(beforeYAxisAlarm, retryCount)
 
-                    'Z축 알람 조회
-                    GetZAxisAlarm(beforeZAxisAlarm, retryCount)
+                    ''Theta1축 알람 조회
+                    'GetTheta1AxisAlarm(beforeTheta1AxisAlarm, retryCount)
 
-                    'Theta1축 알람 조회
-                    GetTheta1AxisAlarm(beforeTheta1AxisAlarm, retryCount)
+                    ''Theta2축 알람 조회
+                    'GetTheta2AxisAlarm(beforeTheta2AxisAlarm, retryCount)
 
-                    'Theta2축 알람 조회
-                    GetTheta2AxisAlarm(beforeTheta2AxisAlarm, retryCount)
+                    ''Theta3축 알람 조회
+                    'GetTheta3AxisAlarm(beforeTheta3AxisAlarm, retryCount)
 
-                    'Theta3축 알람 조회
-                    GetTheta3AxisAlarm(beforeTheta3AxisAlarm, retryCount)
-
-                    'Theta4축 알람 조회
-                    GetTheta4AxisAlarm(beforeTheta4AxisAlarm, retryCount)
+                    ''Theta4축 알람 조회
+                    'GetTheta4AxisAlarm(beforeTheta4AxisAlarm, retryCount)
 
                     'System 알람 체크
                     If fIsAlarmState = True Then
@@ -815,6 +938,20 @@ Public Class CSeqRoutinePLC
                             Else
                                 retryCount = 0
                             End If
+                            '정현기---------------------------------------------
+                        Case CDevPLCCommonNode.eSystemStatus.eSoftWareReadyON
+                            If PLC.myPLC.SetSWRun_ON() = False Then
+                                retryCount += 1
+                            Else
+                                retryCount = 0
+                            End If
+                        Case CDevPLCCommonNode.eSystemStatus.eSoftWareReadyOFF
+                            If PLC.myPLC.SetSWRun_OFF() = False Then
+                                retryCount += 1
+                            Else
+                                retryCount = 0
+                            End If
+                            '-----------------------------------------------------
                         Case CDevPLCCommonNode.eSystemStatus.eMotion_Set_Jog_X_Velocity
                             If PLC.myPLC.SetJogXVelocity(requestInfo.Param(0)) = False Then
                                 retryCount += 1
@@ -1411,6 +1548,53 @@ Public Class CSeqRoutinePLC
             beforState = m_PLCDatas.nAxisAlarm.Clone
         End If
     End Sub
+    '정현기 알람 추가
+    '경알람
+    Private Sub GetWeak1Alarm(ByRef beforState() As CDevPLCCommonNode.eWeakAlarm, ByRef retryCount As Integer)
+        If PLC.myPLC.GetWeak1Alarm(m_PLCDatas.nWeakAlarm1) = False Then
+            '통신에 문제가 발생하면, 재시도 카운트를 증가 시킴, 10번 재시도후 문제가 발생하면, 통신에 문제가 발생한 것으로 판단하고 종료
+            '재 연결 후에 다시 작동
+            retryCount += 1
+        Else
+            retryCount = 0
+
+            '시스템의 상태에 변화가 있으면 이벤트를 날린다.
+            If beforState.Length <> m_PLCDatas.nWeakAlarm1.Length Then
+                RaiseEvent evChangeWeak1Alarm(m_PLCDatas.nWeakAlarm1)
+            Else
+                For i As Integer = 0 To beforState.Length - 1
+                    If beforState(i) <> m_PLCDatas.nWeakAlarm1(i) Then
+                        RaiseEvent evChangeWeak1Alarm(m_PLCDatas.nWeakAlarm1)
+                    End If
+                Next
+            End If
+            '시스템의 상태를 갱신 한다.
+            beforState = m_PLCDatas.nWeakAlarm1.Clone
+        End If
+    End Sub
+    Private Sub GetWeak2Alarm(ByRef beforState() As CDevPLCCommonNode.eWeakAlarm, ByRef retryCount As Integer)
+        If PLC.myPLC.GetWeak2Alarm(m_PLCDatas.nWeakAlarm2) = False Then
+            '통신에 문제가 발생하면, 재시도 카운트를 증가 시킴, 10번 재시도후 문제가 발생하면, 통신에 문제가 발생한 것으로 판단하고 종료
+            '재 연결 후에 다시 작동
+            retryCount += 1
+        Else
+            retryCount = 0
+
+            '시스템의 상태에 변화가 있으면 이벤트를 날린다.
+            If beforState.Length <> m_PLCDatas.nWeakAlarm2.Length Then
+                RaiseEvent evChangeWeak2Alarm(m_PLCDatas.nWeakAlarm2)
+            Else
+                For i As Integer = 0 To beforState.Length - 1
+                    If beforState(i) <> m_PLCDatas.nWeakAlarm2(i) Then
+                        RaiseEvent evChangeWeak2Alarm(m_PLCDatas.nWeakAlarm2)
+                    End If
+                Next
+            End If
+            '시스템의 상태를 갱신 한다.
+            beforState = m_PLCDatas.nWeakAlarm2.Clone
+        End If
+    End Sub
+    '중알람
     Private Sub GetEMSAlarm(ByRef beforState() As CDevPLCCommonNode.eEMSAlarm, ByRef retryCount As Integer)
         If PLC.myPLC.GetEMSAlarm(m_PLCDatas.nEmsAlarm) = False Then
             '통신에 문제가 발생하면, 재시도 카운트를 증가 시킴, 10번 재시도후 문제가 발생하면, 통신에 문제가 발생한 것으로 판단하고 종료
@@ -1434,71 +1618,244 @@ Public Class CSeqRoutinePLC
         End If
     End Sub
     Private Sub GetStrangeTempAlarm(ByRef beforState() As CDevPLCCommonNode.eTemperatureAlarm, ByRef retryCount As Integer)
-        'If PLC.myPLC.GetStrangeTempAlarm(m_PLCDatas.nStrangeTempAlarm) = False Then
-        '    '통신에 문제가 발생하면, 재시도 카운트를 증가 시킴, 10번 재시도후 문제가 발생하면, 통신에 문제가 발생한 것으로 판단하고 종료
-        '    '재 연결 후에 다시 작동
-        '    retryCount += 1
-        'Else
-        '    retryCount = 0
+        If PLC.myPLC.GetStrangeTempAlarm(m_PLCDatas.nStrangeTempAlarm) = False Then
+            '통신에 문제가 발생하면, 재시도 카운트를 증가 시킴, 10번 재시도후 문제가 발생하면, 통신에 문제가 발생한 것으로 판단하고 종료
+            '재 연결 후에 다시 작동
+            retryCount += 1
+        Else
+            retryCount = 0
 
-        '    '시스템의 상태에 변화가 있으면 이벤트를 날린다.
-        '    If beforState.Length <> m_PLCDatas.nStrangeTempAlarm.Length Then
-        '        RaiseEvent evChangeStrangeTempAlarm(m_PLCDatas.nStrangeTempAlarm)
-        '    Else
-        '        For i As Integer = 0 To beforState.Length - 1
-        '            If beforState(i) <> m_PLCDatas.nStrangeTempAlarm(i) Then
-        '                RaiseEvent evChangeStrangeTempAlarm(m_PLCDatas.nStrangeTempAlarm)
-        '            End If
-        '        Next
-        '    End If
-        '    '시스템의 상태를 갱신 한다.
-        '    beforState = m_PLCDatas.nStrangeTempAlarm.Clone
-        'End If
+            '시스템의 상태에 변화가 있으면 이벤트를 날린다.
+            If beforState.Length <> m_PLCDatas.nStrangeTempAlarm.Length Then
+                RaiseEvent evChangeStrangeTempAlarm(m_PLCDatas.nStrangeTempAlarm)
+            Else
+                For i As Integer = 0 To beforState.Length - 1
+                    If beforState(i) <> m_PLCDatas.nStrangeTempAlarm(i) Then
+                        RaiseEvent evChangeStrangeTempAlarm(m_PLCDatas.nStrangeTempAlarm)
+                    End If
+                Next
+            End If
+            '시스템의 상태를 갱신 한다.
+            beforState = m_PLCDatas.nStrangeTempAlarm.Clone
+        End If
     End Sub
     Private Sub GetEOCRAlarm(ByRef beforState() As CDevPLCCommonNode.eTemperatureAlarm, ByRef retryCount As Integer)
-        'If PLC.myPLC.GetEOCRAlarm(m_PLCDatas.nEOCRTempAlarm) = False Then
-        '    '통신에 문제가 발생하면, 재시도 카운트를 증가 시킴, 10번 재시도후 문제가 발생하면, 통신에 문제가 발생한 것으로 판단하고 종료
-        '    '재 연결 후에 다시 작동
-        '    retryCount += 1
-        'Else
-        '    retryCount = 0
+        If PLC.myPLC.GetEOCRAlarm(m_PLCDatas.nEOCRTempAlarm) = False Then
+            '통신에 문제가 발생하면, 재시도 카운트를 증가 시킴, 10번 재시도후 문제가 발생하면, 통신에 문제가 발생한 것으로 판단하고 종료
+            '재 연결 후에 다시 작동
+            retryCount += 1
+        Else
+            retryCount = 0
 
-        '    '시스템의 상태에 변화가 있으면 이벤트를 날린다.
-        '    If beforState.Length <> m_PLCDatas.nEOCRTempAlarm.Length Then
-        '        RaiseEvent evChangeEOCRAlarm(m_PLCDatas.nEOCRTempAlarm)
-        '    Else
-        '        For i As Integer = 0 To beforState.Length - 1
-        '            If beforState(i) <> m_PLCDatas.nEOCRTempAlarm(i) Then
-        '                RaiseEvent evChangeEOCRAlarm(m_PLCDatas.nEOCRTempAlarm)
-        '            End If
-        '        Next
-        '    End If
-        '    '시스템의 상태를 갱신 한다.
-        '    beforState = m_PLCDatas.nEOCRTempAlarm.Clone
-        'End If
+            '시스템의 상태에 변화가 있으면 이벤트를 날린다.
+            If beforState.Length <> m_PLCDatas.nEOCRTempAlarm.Length Then
+                RaiseEvent evChangeEOCRAlarm(m_PLCDatas.nEOCRTempAlarm)
+            Else
+                For i As Integer = 0 To beforState.Length - 1
+                    If beforState(i) <> m_PLCDatas.nEOCRTempAlarm(i) Then
+                        RaiseEvent evChangeEOCRAlarm(m_PLCDatas.nEOCRTempAlarm)
+                    End If
+                Next
+            End If
+            '시스템의 상태를 갱신 한다.
+            beforState = m_PLCDatas.nEOCRTempAlarm.Clone
+        End If
     End Sub
-    Private Sub GetSSRAlarm(ByRef beforState() As CDevPLCCommonNode.eTemperatureAlarm, ByRef retryCount As Integer)
-        'If PLC.myPLC.GetSSRAlarm(m_PLCDatas.nSSRTempAlarm) = False Then
-        '    '통신에 문제가 발생하면, 재시도 카운트를 증가 시킴, 10번 재시도후 문제가 발생하면, 통신에 문제가 발생한 것으로 판단하고 종료
-        '    '재 연결 후에 다시 작동
-        '    retryCount += 1
-        'Else
-        '    retryCount = 0
+    Private Sub GetSSR1Alarm(ByRef beforState() As CDevPLCCommonNode.eTemperatureAlarm, ByRef retryCount As Integer)
+        If PLC.myPLC.GetSSR1Alarm(m_PLCDatas.nSSRTemp1Alarm) = False Then
+            '통신에 문제가 발생하면, 재시도 카운트를 증가 시킴, 10번 재시도후 문제가 발생하면, 통신에 문제가 발생한 것으로 판단하고 종료
+            '재 연결 후에 다시 작동
+            retryCount += 1
+        Else
+            retryCount = 0
 
-        '    '시스템의 상태에 변화가 있으면 이벤트를 날린다.
-        '    If beforState.Length <> m_PLCDatas.nSSRTempAlarm.Length Then
-        '        RaiseEvent evChangeSSRAlarm(m_PLCDatas.nSSRTempAlarm)
-        '    Else
-        '        For i As Integer = 0 To beforState.Length - 1
-        '            If beforState(i) <> m_PLCDatas.nSSRTempAlarm(i) Then
-        '                RaiseEvent evChangeSSRAlarm(m_PLCDatas.nSSRTempAlarm)
-        '            End If
-        '        Next
-        '    End If
-        '    '시스템의 상태를 갱신 한다.
-        '    beforState = m_PLCDatas.nSSRTempAlarm.Clone
-        'End If
+            '시스템의 상태에 변화가 있으면 이벤트를 날린다.
+            If beforState.Length <> m_PLCDatas.nSSRTemp1Alarm.Length Then
+                RaiseEvent evChangeSSR1Alarm(m_PLCDatas.nSSRTemp1Alarm)
+            Else
+                For i As Integer = 0 To beforState.Length - 1
+                    If beforState(i) <> m_PLCDatas.nSSRTemp1Alarm(i) Then
+                        RaiseEvent evChangeSSR1Alarm(m_PLCDatas.nSSRTemp1Alarm)
+                    End If
+                Next
+            End If
+            '시스템의 상태를 갱신 한다.
+            beforState = m_PLCDatas.nSSRTemp1Alarm.Clone
+        End If
     End Sub
+    Private Sub GetSSR2Alarm(ByRef beforState() As CDevPLCCommonNode.eTemperatureAlarm, ByRef retryCount As Integer)
+        If PLC.myPLC.GetSSR2Alarm(m_PLCDatas.nSSRTemp2Alarm) = False Then
+            '통신에 문제가 발생하면, 재시도 카운트를 증가 시킴, 10번 재시도후 문제가 발생하면, 통신에 문제가 발생한 것으로 판단하고 종료
+            '재 연결 후에 다시 작동
+            retryCount += 1
+        Else
+            retryCount = 0
+
+            '시스템의 상태에 변화가 있으면 이벤트를 날린다.
+            If beforState.Length <> m_PLCDatas.nSSRTemp2Alarm.Length Then
+                RaiseEvent evChangeSSR2Alarm(m_PLCDatas.nSSRTemp2Alarm)
+            Else
+                For i As Integer = 0 To beforState.Length - 1
+                    If beforState(i) <> m_PLCDatas.nSSRTemp2Alarm(i) Then
+                        RaiseEvent evChangeSSR2Alarm(m_PLCDatas.nSSRTemp2Alarm)
+                    End If
+                Next
+            End If
+            '시스템의 상태를 갱신 한다.
+            beforState = m_PLCDatas.nSSRTemp2Alarm.Clone
+        End If
+    End Sub
+    Private Sub GetTempSensor1Alarm(ByRef beforState() As CDevPLCCommonNode.eTemperatureAlarm, ByRef retryCount As Integer)
+        If PLC.myPLC.GetTempSensor1Alarm(m_PLCDatas.nTempSensor1Alarm) = False Then
+            '통신에 문제가 발생하면, 재시도 카운트를 증가 시킴, 10번 재시도후 문제가 발생하면, 통신에 문제가 발생한 것으로 판단하고 종료
+            '재 연결 후에 다시 작동
+            retryCount += 1
+        Else
+            retryCount = 0
+
+            '시스템의 상태에 변화가 있으면 이벤트를 날린다.
+            If beforState.Length <> m_PLCDatas.nSSRTemp2Alarm.Length Then
+                RaiseEvent evChangeTempSensor1Alarm(m_PLCDatas.nTempSensor1Alarm)
+            Else
+                For i As Integer = 0 To beforState.Length - 1
+                    If beforState(i) <> m_PLCDatas.nSSRTemp2Alarm(i) Then
+                        RaiseEvent evChangeTempSensor1Alarm(m_PLCDatas.nTempSensor1Alarm)
+                    End If
+                Next
+            End If
+            '시스템의 상태를 갱신 한다.
+            beforState = m_PLCDatas.nTempSensor1Alarm.Clone
+        End If
+    End Sub
+    Private Sub GetTempSensor2Alarm(ByRef beforState() As CDevPLCCommonNode.eTemperatureAlarm, ByRef retryCount As Integer)
+        If PLC.myPLC.GetTempSensor2Alarm(m_PLCDatas.nTempSensor2Alarm) = False Then
+            '통신에 문제가 발생하면, 재시도 카운트를 증가 시킴, 10번 재시도후 문제가 발생하면, 통신에 문제가 발생한 것으로 판단하고 종료
+            '재 연결 후에 다시 작동
+            retryCount += 1
+        Else
+            retryCount = 0
+
+            '시스템의 상태에 변화가 있으면 이벤트를 날린다.
+            If beforState.Length <> m_PLCDatas.nTempSensor2Alarm.Length Then
+                RaiseEvent evChangeTempSensor2Alarm(m_PLCDatas.nTempSensor2Alarm)
+            Else
+                For i As Integer = 0 To beforState.Length - 1
+                    If beforState(i) <> m_PLCDatas.nSSRTemp2Alarm(i) Then
+                        RaiseEvent evChangeTempSensor2Alarm(m_PLCDatas.nTempSensor2Alarm)
+                    End If
+                Next
+            End If
+            '시스템의 상태를 갱신 한다.
+            beforState = m_PLCDatas.nTempSensor2Alarm.Clone
+        End If
+    End Sub
+    Private Sub GetDoorAlarm(ByRef beforState() As CDevPLCCommonNode.eTemperatureAlarm, ByRef retryCount As Integer)
+        If PLC.myPLC.GetDoorAlarm(m_PLCDatas.nDoorAlarm) = False Then
+            '통신에 문제가 발생하면, 재시도 카운트를 증가 시킴, 10번 재시도후 문제가 발생하면, 통신에 문제가 발생한 것으로 판단하고 종료
+            '재 연결 후에 다시 작동
+            retryCount += 1
+        Else
+            retryCount = 0
+
+            '시스템의 상태에 변화가 있으면 이벤트를 날린다.
+            If beforState.Length <> m_PLCDatas.nDoorAlarm.Length Then
+                RaiseEvent evChangeDoorAlarm(m_PLCDatas.nDoorAlarm)
+            Else
+                For i As Integer = 0 To beforState.Length - 1
+                    If beforState(i) <> m_PLCDatas.nSSRTemp2Alarm(i) Then
+                        RaiseEvent evChangeDoorAlarm(m_PLCDatas.nDoorAlarm)
+                    End If
+                Next
+            End If
+            '시스템의 상태를 갱신 한다.
+            beforState = m_PLCDatas.nDoorAlarm.Clone
+        End If
+    End Sub
+    Private Sub GetXAxisAlarm(ByRef beforState() As CDevPLCCommonNode.eAxisAlarm, ByRef retryCount As Integer)
+        If PLC.myPLC.GetXAxisAlarm(m_PLCDatas.nXAxisAlarm) = False Then
+            '통신에 문제가 발생하면, 재시도 카운트를 증가 시킴, 10번 재시도후 문제가 발생하면, 통신에 문제가 발생한 것으로 판단하고 종료
+            '재 연결 후에 다시 작동
+            retryCount += 1
+        Else
+            retryCount = 0
+            '시스템의 상태에 변화가 있으면 이벤트를 날린다.
+            If beforState.Length <> m_PLCDatas.nXAxisAlarm.Length Then
+                RaiseEvent evChangeXAxisAlarm(m_PLCDatas.nXAxisAlarm)
+            Else
+                For i As Integer = 0 To beforState.Length - 1
+                    If beforState(i) <> m_PLCDatas.nXAxisAlarm(i) Then
+                        RaiseEvent evChangeXAxisAlarm(m_PLCDatas.nXAxisAlarm)
+                    End If
+                Next
+            End If
+            '시스템의 상태를 갱신 한다.
+            beforState = m_PLCDatas.nXAxisAlarm.Clone
+        End If
+    End Sub
+    Private Sub GetY1AxisAlarm(ByRef beforState() As CDevPLCCommonNode.eAxisAlarm, ByRef retryCount As Integer)
+        If PLC.myPLC.GetY1AxisAlarm(m_PLCDatas.nY1AxisAlarm) = False Then
+            '통신에 문제가 발생하면, 재시도 카운트를 증가 시킴, 10번 재시도후 문제가 발생하면, 통신에 문제가 발생한 것으로 판단하고 종료
+            '재 연결 후에 다시 작동
+            retryCount += 1
+        Else
+            retryCount = 0
+            '시스템의 상태에 변화가 있으면 이벤트를 날린다.
+            If beforState.Length <> m_PLCDatas.nY1AxisAlarm.Length Then
+                RaiseEvent evChangeY1AxisAlarm(m_PLCDatas.nY1AxisAlarm)
+            Else
+                For i As Integer = 0 To beforState.Length - 1
+                    If beforState(i) <> m_PLCDatas.nY1AxisAlarm(i) Then
+                        RaiseEvent evChangeY1AxisAlarm(m_PLCDatas.nY1AxisAlarm)
+                    End If
+                Next
+            End If
+            '시스템의 상태를 갱신 한다.
+            beforState = m_PLCDatas.nY1AxisAlarm.Clone
+        End If
+    End Sub
+    Private Sub GetY2AxisAlarm(ByRef beforState() As CDevPLCCommonNode.eAxisAlarm, ByRef retryCount As Integer)
+        If PLC.myPLC.GetY2AxisAlarm(m_PLCDatas.nY2AxisAlarm) = False Then
+            '통신에 문제가 발생하면, 재시도 카운트를 증가 시킴, 10번 재시도후 문제가 발생하면, 통신에 문제가 발생한 것으로 판단하고 종료
+            '재 연결 후에 다시 작동
+            retryCount += 1
+        Else
+            retryCount = 0
+            '시스템의 상태에 변화가 있으면 이벤트를 날린다.
+            If beforState.Length <> m_PLCDatas.nY2AxisAlarm.Length Then
+                RaiseEvent evChangeY2AxisAlarm(m_PLCDatas.nY2AxisAlarm)
+            Else
+                For i As Integer = 0 To beforState.Length - 1
+                    If beforState(i) <> m_PLCDatas.nY2AxisAlarm(i) Then
+                        RaiseEvent evChangeY2AxisAlarm(m_PLCDatas.nY2AxisAlarm)
+                    End If
+                Next
+            End If
+            '시스템의 상태를 갱신 한다.
+            beforState = m_PLCDatas.nY2AxisAlarm.Clone
+        End If
+    End Sub
+    Private Sub GetZAxisAlarm(ByRef beforState() As CDevPLCCommonNode.eAxisAlarm, ByRef retryCount As Integer)
+        If PLC.myPLC.GetZAxisAlarm(m_PLCDatas.nZAxisAlarm) = False Then
+            '통신에 문제가 발생하면, 재시도 카운트를 증가 시킴, 10번 재시도후 문제가 발생하면, 통신에 문제가 발생한 것으로 판단하고 종료
+            '재 연결 후에 다시 작동
+            retryCount += 1
+        Else
+            retryCount = 0
+            '시스템의 상태에 변화가 있으면 이벤트를 날린다.
+            If beforState.Length <> m_PLCDatas.nZAxisAlarm.Length Then
+                RaiseEvent evChangeZAxisAlarm(m_PLCDatas.nZAxisAlarm)
+            Else
+                For i As Integer = 0 To beforState.Length - 1
+                    If beforState(i) <> m_PLCDatas.nZAxisAlarm(i) Then
+                        RaiseEvent evChangeZAxisAlarm(m_PLCDatas.nZAxisAlarm)
+                    End If
+                Next
+            End If
+            '시스템의 상태를 갱신 한다.
+            beforState = m_PLCDatas.nZAxisAlarm.Clone
+        End If
+    End Sub
+
     Private Sub GetOverTempZone1Alarm(ByRef beforState() As CDevPLCCommonNode.eTemperatureAlarm, ByRef retryCount As Integer)
         'If PLC.myPLC.GetOverTempZone1Alarm(m_PLCDatas.nOverTempAlarm_Zone1) = False Then
         '    '통신에 문제가 발생하면, 재시도 카운트를 증가 시킴, 10번 재시도후 문제가 발생하면, 통신에 문제가 발생한 것으로 판단하고 종료
@@ -1609,69 +1966,7 @@ Public Class CSeqRoutinePLC
         '    beforState = m_PLCDatas.nHitterAxisAlarm.Clone
         'End If
     End Sub
-    Private Sub GetXAxisAlarm(ByRef beforState() As CDevPLCCommonNode.eAxisAlarm, ByRef retryCount As Integer)
-        'If PLC.myPLC.GetXAxisAlarm(m_PLCDatas.nXAxisAlarm) = False Then
-        '    '통신에 문제가 발생하면, 재시도 카운트를 증가 시킴, 10번 재시도후 문제가 발생하면, 통신에 문제가 발생한 것으로 판단하고 종료
-        '    '재 연결 후에 다시 작동
-        '    retryCount += 1
-        'Else
-        '    retryCount = 0
-        '    '시스템의 상태에 변화가 있으면 이벤트를 날린다.
-        '    If beforState.Length <> m_PLCDatas.nXAxisAlarm.Length Then
-        '        RaiseEvent evChangeXAxisAlarm(m_PLCDatas.nXAxisAlarm)
-        '    Else
-        '        For i As Integer = 0 To beforState.Length - 1
-        '            If beforState(i) <> m_PLCDatas.nXAxisAlarm(i) Then
-        '                RaiseEvent evChangeXAxisAlarm(m_PLCDatas.nXAxisAlarm)
-        '            End If
-        '        Next
-        '    End If
-        '    '시스템의 상태를 갱신 한다.
-        '    beforState = m_PLCDatas.nXAxisAlarm.Clone
-        'End If
-    End Sub
-    Private Sub GetYAxisAlarm(ByRef beforState() As CDevPLCCommonNode.eAxisAlarm, ByRef retryCount As Integer)
-        If PLC.myPLC.GetYAxisAlarm(m_PLCDatas.nYAxisAlarm) = False Then
-            '통신에 문제가 발생하면, 재시도 카운트를 증가 시킴, 10번 재시도후 문제가 발생하면, 통신에 문제가 발생한 것으로 판단하고 종료
-            '재 연결 후에 다시 작동
-            retryCount += 1
-        Else
-            retryCount = 0
-            '시스템의 상태에 변화가 있으면 이벤트를 날린다.
-            If beforState.Length <> m_PLCDatas.nYAxisAlarm.Length Then
-                RaiseEvent evChangeYAxisAlarm(m_PLCDatas.nYAxisAlarm)
-            Else
-                For i As Integer = 0 To beforState.Length - 1
-                    If beforState(i) <> m_PLCDatas.nYAxisAlarm(i) Then
-                        RaiseEvent evChangeYAxisAlarm(m_PLCDatas.nYAxisAlarm)
-                    End If
-                Next
-            End If
-            '시스템의 상태를 갱신 한다.
-            beforState = m_PLCDatas.nYAxisAlarm.Clone
-        End If
-    End Sub
-    Private Sub GetZAxisAlarm(ByRef beforState() As CDevPLCCommonNode.eAxisAlarm, ByRef retryCount As Integer)
-        If PLC.myPLC.GetZAxisAlarm(m_PLCDatas.nZAxisAlarm) = False Then
-            '통신에 문제가 발생하면, 재시도 카운트를 증가 시킴, 10번 재시도후 문제가 발생하면, 통신에 문제가 발생한 것으로 판단하고 종료
-            '재 연결 후에 다시 작동
-            retryCount += 1
-        Else
-            retryCount = 0
-            '시스템의 상태에 변화가 있으면 이벤트를 날린다.
-            If beforState.Length <> m_PLCDatas.nZAxisAlarm.Length Then
-                RaiseEvent evChangeZAxisAlarm(m_PLCDatas.nZAxisAlarm)
-            Else
-                For i As Integer = 0 To beforState.Length - 1
-                    If beforState(i) <> m_PLCDatas.nZAxisAlarm(i) Then
-                        RaiseEvent evChangeZAxisAlarm(m_PLCDatas.nZAxisAlarm)
-                    End If
-                Next
-            End If
-            '시스템의 상태를 갱신 한다.
-            beforState = m_PLCDatas.nZAxisAlarm.Clone
-        End If
-    End Sub
+
     Private Sub GetTheta1AxisAlarm(ByRef beforState() As CDevPLCCommonNode.eAxisAlarm, ByRef retryCount As Integer)
         If PLC.myPLC.GetTheta1AxisAlarm(m_PLCDatas.nTheta1AxisAlarm) = False Then
             '통신에 문제가 발생하면, 재시도 카운트를 증가 시킴, 10번 재시도후 문제가 발생하면, 통신에 문제가 발생한 것으로 판단하고 종료
@@ -1919,55 +2214,6 @@ Public Class CSeqRoutinePLC
             'beforAlarm = m_PLCDatas.nMagazineError.Clone
         End If
     End Sub
-
-    Private Sub GetAlarmDoor(ByRef beforState() As CDevPLCCommonNode.eDoorAlarm, ByRef retryCount As Integer)
-        If PLC.myPLC.GetDoorAlarm(m_PLCDatas.nDoorAlarm) = False Then
-            '통신에 문제가 발생하면, 재시도 카운트를 증가 시킴, 10번 재시도후 문제가 발생하면, 통신에 문제가 발생한 것으로 판단하고 종료
-            '재 연결 후에 다시 작동
-            retryCount += 1
-        Else
-            retryCount = 0
-
-            '시스템의 상태에 변화가 있으면 이벤트를 날린다.
-            If beforState.Length <> m_PLCDatas.nDoorAlarm.Length Then
-                RaiseEvent evChangeDoorAlarm(m_PLCDatas.nDoorAlarm)
-            Else
-                For i As Integer = 0 To beforState.Length - 1
-                    If beforState(i) <> m_PLCDatas.nDoorAlarm(i) Then
-                        RaiseEvent evChangeDoorAlarm(m_PLCDatas.nDoorAlarm)
-                    End If
-                Next
-            End If
-            '시스템의 상태를 갱신 한다.
-            beforState = m_PLCDatas.nDoorAlarm.Clone
-        End If
-
-    End Sub
-
-    Private Sub GetAlarmTemperature(ByRef beforState() As CDevPLCCommonNode.eTemperatureAlarm, ByRef retryCount As Integer)
-        If PLC.myPLC.GetTemperatureAlarm(m_PLCDatas.nTemperatureAlarm) = False Then
-            '통신에 문제가 발생하면, 재시도 카운트를 증가 시킴, 10번 재시도후 문제가 발생하면, 통신에 문제가 발생한 것으로 판단하고 종료
-            '재 연결 후에 다시 작동
-            retryCount += 1
-        Else
-            retryCount = 0
-
-            '시스템의 상태에 변화가 있으면 이벤트를 날린다.
-            If beforState.Length <> m_PLCDatas.nTemperatureAlarm.Length Then
-                RaiseEvent evChangeTemperatureAlarm(m_PLCDatas.nTemperatureAlarm)
-            Else
-                For i As Integer = 0 To beforState.Length - 1
-                    If beforState(i) <> m_PLCDatas.nTemperatureAlarm(i) Then
-                        RaiseEvent evChangeTemperatureAlarm(m_PLCDatas.nTemperatureAlarm)
-                    End If
-                Next
-            End If
-            '시스템의 상태를 갱신 한다.
-            beforState = m_PLCDatas.nTemperatureAlarm.Clone
-        End If
-
-    End Sub
-
     Private Sub GetAlarmTemperatureControl(ByRef beforState() As CDevPLCCommonNode.eTemperatureAlarm, ByRef retryCount As Integer)
         If PLC.myPLC.GetTemperatureControlAlarm(m_PLCDatas.nTemperatureControlAlarm) = False Then
             '통신에 문제가 발생하면, 재시도 카운트를 증가 시킴, 10번 재시도후 문제가 발생하면, 통신에 문제가 발생한 것으로 판단하고 종료

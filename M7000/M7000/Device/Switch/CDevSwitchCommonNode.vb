@@ -114,12 +114,6 @@
     Public Overridable Function SwitchON(ByVal nCh As Integer) As Boolean
         Return False
     End Function
-    ''' <summary>
-    ''' Selected Switch ON
-    ''' </summary>
-    ''' <param name="nCh"></param>
-    ''' <returns></returns>
-    ''' <remarks></remarks>
     Public Overridable Function SwitchON(ByVal nDevNum As Integer, ByVal nCh As Integer) As Boolean
         Return False
     End Function
@@ -133,12 +127,6 @@
     Public Overridable Function SwitchOFF(ByVal nCh As Integer) As Boolean
         Return False
     End Function
-    ''' <summary>
-    ''' Selected Switch OFF
-    ''' </summary>
-    ''' <param name="nCh"></param>
-    ''' <returns></returns>
-    ''' <remarks></remarks>
     Public Overridable Function SwitchOFF(ByVal nDevNum As Integer, ByVal nCh As Integer) As Boolean
         Return False
     End Function
@@ -151,11 +139,6 @@
     Public Overridable Function AllOFF() As Boolean
         Return False
     End Function
-    ''' <summary>
-    ''' All Switch OFF
-    ''' </summary>
-    ''' <returns></returns>
-    ''' <remarks></remarks>
     Public Overridable Function AllOFF(ByVal nDevNum As Integer) As Boolean
         Return False
     End Function
@@ -163,7 +146,6 @@
     Public Overridable Function AllON() As Boolean
         Return False
     End Function
-
     Public Overridable Function AllON(ByVal nDevNum As Integer) As Boolean
         Return False
     End Function

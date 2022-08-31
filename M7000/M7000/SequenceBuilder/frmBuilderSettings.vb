@@ -315,6 +315,7 @@ Public Class frmBuilderSettings
         m_sViewSettingCaptions(eViewSettingGroup._LifetimeAndIVL) = m_sViewSettingLifetimeAndIVLItemCaptions.Clone
         m_sViewSettingCaptions(eViewSettingGroup._Aging) = m_sViewSettingAgingItemCaptions.Clone
         dispViewSettingInfos()
+
     End Sub
 
 

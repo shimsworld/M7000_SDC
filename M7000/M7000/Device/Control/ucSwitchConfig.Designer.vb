@@ -172,7 +172,7 @@ Partial Class ucSwitchConfig
         'ucDispRs232
         '
         Me.ucDispRs232.BAUDRATE = 19200
-        Me.ucDispRs232.COMPORT = "COM1"
+        Me.ucDispRs232.COMPORT = "COM3"
         Me.ucDispRs232.DATABIT = 8
         Me.ucDispRs232.Location = New System.Drawing.Point(11, 70)
         Me.ucDispRs232.Name = "ucDispRs232"
@@ -215,7 +215,11 @@ Partial Class ucSwitchConfig
         '
         Me.ConfigList.ColHeader = New String() {"No", "Mode", "Setting Parametor", "Allocation Ch"}
         Me.ConfigList.ColHeaderWidthRatio = "15,15,35,35"
+        Me.ConfigList.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ConfigList.FullRawSelection = True
+        Me.ConfigList.HideSelection = False
+        Me.ConfigList.LabelEdit = True
+        Me.ConfigList.LabelWrap = True
         Me.ConfigList.Location = New System.Drawing.Point(11, 288)
         Me.ConfigList.Name = "ConfigList"
         Me.ConfigList.Size = New System.Drawing.Size(496, 193)

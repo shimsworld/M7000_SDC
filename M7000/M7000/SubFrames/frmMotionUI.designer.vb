@@ -80,6 +80,7 @@ Partial Class frmMotionUI
         Me.tbZCurrPos = New System.Windows.Forms.TextBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.Button6 = New System.Windows.Forms.Button()
         Me.chkManualPos = New System.Windows.Forms.CheckBox()
         Me.btnLampOnOff = New System.Windows.Forms.Button()
         Me.btnAutoCenteringOffset = New System.Windows.Forms.Button()
@@ -87,12 +88,11 @@ Partial Class frmMotionUI
         Me.tbSetLampLevel = New System.Windows.Forms.TextBox()
         Me.cbChangePosition = New System.Windows.Forms.CheckBox()
         Me.txtLoadPositionName = New System.Windows.Forms.TextBox()
-        Me.btnLoadPosition = New System.Windows.Forms.Button()
         Me.cbChannel = New System.Windows.Forms.ComboBox()
         Me.btnMove = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnPositionSave = New System.Windows.Forms.Button()
-        Me.ucMotionIndicator = New M7000.ucMotionIndicator()
+        Me.btnLoadPosition = New System.Windows.Forms.Button()
         Me.Label26 = New System.Windows.Forms.Label()
         Me.cbIndex = New System.Windows.Forms.ComboBox()
         Me.rbSpectrometer = New System.Windows.Forms.RadioButton()
@@ -145,8 +145,8 @@ Partial Class frmMotionUI
         Me.Label8 = New System.Windows.Forms.Label()
         Me.btnAlliedStart = New System.Windows.Forms.Button()
         Me.btnAlliedStop = New System.Windows.Forms.Button()
+        Me.ucMotionIndicator = New M7000.ucMotionIndicator()
         Me.UcAlarmTest1 = New M7000.ucAlarmTest()
-        Me.Button6 = New System.Windows.Forms.Button()
         Me.gbJOG.SuspendLayout()
         Me.tlpJOG.SuspendLayout()
         Me.gbManualCtrl.SuspendLayout()
@@ -322,14 +322,10 @@ Partial Class frmMotionUI
         Me.Panel2.Controls.Add(Me.chkTheta4)
         Me.Panel2.Controls.Add(Me.chkTheta3)
         Me.Panel2.Controls.Add(Me.chkTheta2)
-        Me.Panel2.Controls.Add(Me.Button5)
-        Me.Panel2.Controls.Add(Me.Button4)
-        Me.Panel2.Controls.Add(Me.Button3)
         Me.Panel2.Controls.Add(Me.btnJOGMode_OFF)
         Me.Panel2.Controls.Add(Me.btnJOGMode_ON)
         Me.Panel2.Controls.Add(Me.txtPosition)
         Me.Panel2.Controls.Add(Me.Label14)
-        Me.Panel2.Controls.Add(Me.btnThetaMove)
         Me.Panel2.Controls.Add(Me.Button1)
         Me.Panel2.Controls.Add(Me.btn_Homing)
         Me.Panel2.Controls.Add(Me.Label5)
@@ -339,6 +335,7 @@ Partial Class frmMotionUI
         Me.Panel2.Controls.Add(Me.btnYmove)
         Me.Panel2.Controls.Add(Me.rbMicroAdjust)
         Me.Panel2.Controls.Add(Me.rbAbs)
+        Me.Panel2.Controls.Add(Me.btnXmove)
         Me.Panel2.Location = New System.Drawing.Point(10, 17)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(280, 197)
@@ -355,6 +352,7 @@ Partial Class frmMotionUI
         Me.chkTheta4.TabIndex = 76
         Me.chkTheta4.Text = "Ɵ4 Axis"
         Me.chkTheta4.UseVisualStyleBackColor = True
+        Me.chkTheta4.Visible = False
         '
         'chkTheta3
         '
@@ -367,6 +365,7 @@ Partial Class frmMotionUI
         Me.chkTheta3.TabIndex = 75
         Me.chkTheta3.Text = "Ɵ3 Axis"
         Me.chkTheta3.UseVisualStyleBackColor = True
+        Me.chkTheta3.Visible = False
         '
         'chkTheta2
         '
@@ -379,6 +378,7 @@ Partial Class frmMotionUI
         Me.chkTheta2.TabIndex = 74
         Me.chkTheta2.Text = "Ɵ2 Axis"
         Me.chkTheta2.UseVisualStyleBackColor = True
+        Me.chkTheta2.Visible = False
         '
         'Button5
         '
@@ -386,12 +386,13 @@ Partial Class frmMotionUI
         Me.Button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button5.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button5.ForeColor = System.Drawing.Color.Black
-        Me.Button5.Location = New System.Drawing.Point(214, 134)
+        Me.Button5.Location = New System.Drawing.Point(727, 802)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(61, 25)
         Me.Button5.TabIndex = 73
         Me.Button5.Text = "Ɵ4 Axis Move"
         Me.Button5.UseVisualStyleBackColor = False
+        Me.Button5.Visible = False
         '
         'Button4
         '
@@ -399,12 +400,13 @@ Partial Class frmMotionUI
         Me.Button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button4.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button4.ForeColor = System.Drawing.Color.Black
-        Me.Button4.Location = New System.Drawing.Point(148, 134)
+        Me.Button4.Location = New System.Drawing.Point(661, 802)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(61, 25)
         Me.Button4.TabIndex = 72
         Me.Button4.Text = "Ɵ3 Axis Move"
         Me.Button4.UseVisualStyleBackColor = False
+        Me.Button4.Visible = False
         '
         'Button3
         '
@@ -412,12 +414,13 @@ Partial Class frmMotionUI
         Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button3.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button3.ForeColor = System.Drawing.Color.Black
-        Me.Button3.Location = New System.Drawing.Point(82, 134)
+        Me.Button3.Location = New System.Drawing.Point(595, 802)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(61, 25)
         Me.Button3.TabIndex = 71
         Me.Button3.Text = "Ɵ2 Axis Move"
         Me.Button3.UseVisualStyleBackColor = False
+        Me.Button3.Visible = False
         '
         'btnJOGMode_OFF
         '
@@ -474,12 +477,13 @@ Partial Class frmMotionUI
         Me.btnThetaMove.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnThetaMove.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnThetaMove.ForeColor = System.Drawing.Color.Black
-        Me.btnThetaMove.Location = New System.Drawing.Point(15, 134)
+        Me.btnThetaMove.Location = New System.Drawing.Point(528, 802)
         Me.btnThetaMove.Name = "btnThetaMove"
         Me.btnThetaMove.Size = New System.Drawing.Size(61, 25)
         Me.btnThetaMove.TabIndex = 9
         Me.btnThetaMove.Text = "Ɵ1 Axis Move"
         Me.btnThetaMove.UseVisualStyleBackColor = False
+        Me.btnThetaMove.Visible = False
         '
         'Button1
         '
@@ -500,9 +504,9 @@ Partial Class frmMotionUI
         Me.btn_Homing.BackColor = System.Drawing.Color.Silver
         Me.btn_Homing.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btn_Homing.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btn_Homing.Location = New System.Drawing.Point(186, 105)
+        Me.btn_Homing.Location = New System.Drawing.Point(15, 134)
         Me.btn_Homing.Name = "btn_Homing"
-        Me.btn_Homing.Size = New System.Drawing.Size(80, 25)
+        Me.btn_Homing.Size = New System.Drawing.Size(251, 25)
         Me.btn_Homing.TabIndex = 13
         Me.btn_Homing.Text = "Homing"
         Me.btn_Homing.UseVisualStyleBackColor = False
@@ -539,11 +543,11 @@ Partial Class frmMotionUI
         Me.btnZmove.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnZmove.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnZmove.ForeColor = System.Drawing.Color.Black
-        Me.btnZmove.Location = New System.Drawing.Point(101, 105)
+        Me.btnZmove.Location = New System.Drawing.Point(186, 105)
         Me.btnZmove.Name = "btnZmove"
         Me.btnZmove.Size = New System.Drawing.Size(81, 25)
         Me.btnZmove.TabIndex = 8
-        Me.btnZmove.Text = "Y Axis Move"
+        Me.btnZmove.Text = "Z Axis Move"
         Me.btnZmove.UseVisualStyleBackColor = False
         '
         'chkTheta1
@@ -557,6 +561,7 @@ Partial Class frmMotionUI
         Me.chkTheta1.TabIndex = 5
         Me.chkTheta1.Text = "Ɵ1 Axis"
         Me.chkTheta1.UseVisualStyleBackColor = True
+        Me.chkTheta1.Visible = False
         '
         'btnYmove
         '
@@ -564,11 +569,11 @@ Partial Class frmMotionUI
         Me.btnYmove.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnYmove.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnYmove.ForeColor = System.Drawing.Color.Black
-        Me.btnYmove.Location = New System.Drawing.Point(15, 105)
+        Me.btnYmove.Location = New System.Drawing.Point(100, 105)
         Me.btnYmove.Name = "btnYmove"
         Me.btnYmove.Size = New System.Drawing.Size(81, 25)
         Me.btnYmove.TabIndex = 7
-        Me.btnYmove.Text = "X Axis Move"
+        Me.btnYmove.Text = "Y Axis Move"
         Me.btnYmove.UseVisualStyleBackColor = False
         '
         'rbMicroAdjust
@@ -603,13 +608,12 @@ Partial Class frmMotionUI
         Me.btnXmove.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnXmove.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnXmove.ForeColor = System.Drawing.Color.Black
-        Me.btnXmove.Location = New System.Drawing.Point(341, 784)
+        Me.btnXmove.Location = New System.Drawing.Point(15, 105)
         Me.btnXmove.Name = "btnXmove"
         Me.btnXmove.Size = New System.Drawing.Size(81, 25)
         Me.btnXmove.TabIndex = 6
         Me.btnXmove.Text = "X Axis Move"
         Me.btnXmove.UseVisualStyleBackColor = False
-        Me.btnXmove.Visible = False
         '
         'gbMotion
         '
@@ -888,7 +892,6 @@ Partial Class frmMotionUI
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel3.BackColor = System.Drawing.Color.White
         Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel3.Controls.Add(Me.Button6)
         Me.Panel3.Controls.Add(Me.chkManualPos)
         Me.Panel3.Controls.Add(Me.btnLampOnOff)
         Me.Panel3.Controls.Add(Me.btnAutoCenteringOffset)
@@ -904,6 +907,19 @@ Partial Class frmMotionUI
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(280, 143)
         Me.Panel3.TabIndex = 67
+        '
+        'Button6
+        '
+        Me.Button6.BackColor = System.Drawing.Color.Silver
+        Me.Button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button6.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button6.Location = New System.Drawing.Point(534, 841)
+        Me.Button6.Name = "Button6"
+        Me.Button6.Size = New System.Drawing.Size(143, 30)
+        Me.Button6.TabIndex = 88
+        Me.Button6.Text = "Theta Homing"
+        Me.Button6.UseVisualStyleBackColor = False
+        Me.Button6.Visible = False
         '
         'chkManualPos
         '
@@ -993,19 +1009,6 @@ Partial Class frmMotionUI
         Me.txtLoadPositionName.TabIndex = 69
         Me.txtLoadPositionName.Visible = False
         '
-        'btnLoadPosition
-        '
-        Me.btnLoadPosition.BackColor = System.Drawing.Color.Silver
-        Me.btnLoadPosition.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnLoadPosition.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnLoadPosition.Location = New System.Drawing.Point(338, 815)
-        Me.btnLoadPosition.Name = "btnLoadPosition"
-        Me.btnLoadPosition.Size = New System.Drawing.Size(140, 30)
-        Me.btnLoadPosition.TabIndex = 68
-        Me.btnLoadPosition.Text = "Load Position File"
-        Me.btnLoadPosition.UseVisualStyleBackColor = False
-        Me.btnLoadPosition.Visible = False
-        '
         'cbChannel
         '
         Me.cbChannel.FormattingEnabled = True
@@ -1048,25 +1051,18 @@ Partial Class frmMotionUI
         Me.btnPositionSave.Text = "Save Position"
         Me.btnPositionSave.UseVisualStyleBackColor = False
         '
-        'ucMotionIndicator
+        'btnLoadPosition
         '
-        Me.ucMotionIndicator.BackColor = System.Drawing.Color.White
-        Me.ucMotionIndicator.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucMotionIndicator.Channel = Nothing
-        Me.ucMotionIndicator.Location = New System.Drawing.Point(12, 14)
-        Me.ucMotionIndicator.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.ucMotionIndicator.Name = "ucMotionIndicator"
-        Me.ucMotionIndicator.OpticalHeaderPos = Nothing
-        Me.ucMotionIndicator.Size = New System.Drawing.Size(298, 219)
-        Me.ucMotionIndicator.TabIndex = 3
-        Me.ucMotionIndicator.Theta1Pos = 0.0R
-        Me.ucMotionIndicator.Theta2Pos = 0.0R
-        Me.ucMotionIndicator.Theta3Pos = 0.0R
-        Me.ucMotionIndicator.Theta4Pos = 0.0R
-        Me.ucMotionIndicator.Title = Nothing
-        Me.ucMotionIndicator.XPos = 0.0R
-        Me.ucMotionIndicator.YPos = 0.0R
-        Me.ucMotionIndicator.ZPos = 0.0R
+        Me.btnLoadPosition.BackColor = System.Drawing.Color.Silver
+        Me.btnLoadPosition.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnLoadPosition.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnLoadPosition.Location = New System.Drawing.Point(338, 815)
+        Me.btnLoadPosition.Name = "btnLoadPosition"
+        Me.btnLoadPosition.Size = New System.Drawing.Size(140, 30)
+        Me.btnLoadPosition.TabIndex = 68
+        Me.btnLoadPosition.Text = "Load Position File"
+        Me.btnLoadPosition.UseVisualStyleBackColor = False
+        Me.btnLoadPosition.Visible = False
         '
         'Label26
         '
@@ -1306,6 +1302,7 @@ Partial Class frmMotionUI
         '
         Me.listACFInfo.BackColor = System.Drawing.Color.Gainsboro
         Me.listACFInfo.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.listACFInfo.HideSelection = False
         Me.listACFInfo.Location = New System.Drawing.Point(9, 65)
         Me.listACFInfo.Name = "listACFInfo"
         Me.listACFInfo.Size = New System.Drawing.Size(781, 100)
@@ -1707,6 +1704,26 @@ Partial Class frmMotionUI
         Me.btnAlliedStop.Text = "Stop"
         Me.btnAlliedStop.UseVisualStyleBackColor = False
         '
+        'ucMotionIndicator
+        '
+        Me.ucMotionIndicator.BackColor = System.Drawing.Color.White
+        Me.ucMotionIndicator.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ucMotionIndicator.Channel = Nothing
+        Me.ucMotionIndicator.Location = New System.Drawing.Point(12, 14)
+        Me.ucMotionIndicator.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.ucMotionIndicator.Name = "ucMotionIndicator"
+        Me.ucMotionIndicator.OpticalHeaderPos = Nothing
+        Me.ucMotionIndicator.Size = New System.Drawing.Size(298, 219)
+        Me.ucMotionIndicator.TabIndex = 3
+        Me.ucMotionIndicator.Theta1Pos = 0R
+        Me.ucMotionIndicator.Theta2Pos = 0R
+        Me.ucMotionIndicator.Theta3Pos = 0R
+        Me.ucMotionIndicator.Theta4Pos = 0R
+        Me.ucMotionIndicator.Title = Nothing
+        Me.ucMotionIndicator.XPos = 0R
+        Me.ucMotionIndicator.YPos = 0R
+        Me.ucMotionIndicator.ZPos = 0R
+        '
         'UcAlarmTest1
         '
         Me.UcAlarmTest1.Location = New System.Drawing.Point(808, 631)
@@ -1716,37 +1733,29 @@ Partial Class frmMotionUI
         Me.UcAlarmTest1.TabIndex = 1
         Me.UcAlarmTest1.Visible = False
         '
-        'Button6
-        '
-        Me.Button6.BackColor = System.Drawing.Color.Silver
-        Me.Button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button6.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button6.Location = New System.Drawing.Point(10, 73)
-        Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(143, 30)
-        Me.Button6.TabIndex = 88
-        Me.Button6.Text = "Theta Homing"
-        Me.Button6.UseVisualStyleBackColor = False
-        '
         'frmMotionUI
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.ClientSize = New System.Drawing.Size(1590, 1058)
         Me.ControlBox = False
+        Me.Controls.Add(Me.Button6)
         Me.Controls.Add(Me.gbACFMeas)
         Me.Controls.Add(Me.Label26)
         Me.Controls.Add(Me.gbACFCameraCtrl)
+        Me.Controls.Add(Me.Button5)
+        Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.cbIndex)
+        Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.Controls.Add(Me.gbMotion)
         Me.Controls.Add(Me.btn_ServoOff)
         Me.Controls.Add(Me.btnLoadPosition)
         Me.Controls.Add(Me.btn_ServoOn)
+        Me.Controls.Add(Me.btnThetaMove)
         Me.Controls.Add(Me.UcAlarmTest1)
         Me.Controls.Add(Me.rbSpectrometer)
         Me.Controls.Add(Me.rbCCD)
-        Me.Controls.Add(Me.btnXmove)
         Me.DoubleBuffered = True
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.MaximizeBox = False

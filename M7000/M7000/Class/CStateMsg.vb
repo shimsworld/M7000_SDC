@@ -170,14 +170,23 @@
         "리프트 센서 정상",
         "SMU Error",
         "Switch Error",
-        "EMS 및 Control box 알람",
-        "온도 이상 알람",
-        "온도 ECOR 알람",
-        "온도 SSR 알람",
-        "온도 과온 알람",
-        "도어 오픈 알람",
         "축 알람",
-                                                         "Manual Measuring", "Manual Measure end"}
+        "Manual Measuring",
+        "Manual Measure end",
+        "Light(1) Alarm", '정현기 알람추가 경알람
+        "Light(2) Alarm",
+        "EMS 알람",'중알람
+        "온도 과온 알람",
+        "온도 ECOR 알람",
+        "온도 SSR(1) 알람",
+        "온도 SSR(2) 알람",
+        "온도 센서(1) 알람",
+        "온도 센서(2) 알람",
+        "도어 오픈 알람",
+        "X축 알람",
+        "Y1축 알람",
+        "Y2축 알람",
+        "Z축 알람"}
 
 #Region "Enums"
 
@@ -317,7 +326,7 @@
         ePLC_POSITION_SLOT_CHECK
         eEOCR_ALARM
         eTEMPATURE_ALARM
-        ePLC_ALARM_EMS
+        ePLC_ALARM_EMS_X
         ePLC_ALARM_CONTROL_POWER
         ePLC_ALARM_SAFETY_RELAY1
         ePLC_ALARM_SAFETY_RELAY2
@@ -356,15 +365,26 @@
         ePLC_ALARM_LIFT_OK
         eSMU_ERROR
         eSWITCH_ERROR
-        ePLC_ALARM_EMS_AND_CONTROLBOX
-        ePLC_ALARM_TEMP_STRANGE
-        ePLC_ALARM_TEMP_EOCR
-        ePLC_ALARM_TEMP_SSR
-        ePLC_ALARM_TEMP_OVER
-        ePLC_ALARM_DOOR_OPEN
         ePLC_ALARM_AXIS
         eManulMeasuring
         eManulMeasureEnd
+        '정현기 알람 추가
+        '경알람
+        ePLC_ALARM_WEAK1
+        ePLC_ALARM_WEAK2
+        '중알람
+        ePLC_ALARM_EMS
+        ePLC_ALARM_TEMP_STRANGE
+        ePLC_ALARM_TEMP_EOCR
+        ePLC_ALARM_TEMP_SSR1
+        ePLC_ALARM_TEMP_SSR2
+        ePLC_ALARM_TEMP_SENSOR1
+        ePLC_ALARM_TEMP_SENSOR2
+        ePLC_ALARM_DOOR_OPEN
+        ePLC_ALARM_TEMP_XAXIS
+        ePLC_ALARM_TEMP_Y1AXIS
+        ePLC_ALARM_TEMP_Y2AXIS
+        ePLC_ALARM_TEMP_ZAXIS
     End Enum
 
 #End Region

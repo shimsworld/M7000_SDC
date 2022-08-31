@@ -26,6 +26,7 @@ Public Class ucDispRcpViewingAngle
         Dim measItem As ucDispRcpIVLSweep.eMeasureItems
         Dim dBiasValue As Double
         Dim sMeasureSweepParameter() As ucMeasureSweepRegion.sSetSweepRegion
+        Dim sMeasureRGBSweepParameter() As ucMeasureRGBSweepRegion.sSetSweepRegion '220826 Update by JKY
         Dim dSweepList() As Double
         Dim dLumiCorrection As Double
     End Structure
@@ -293,8 +294,10 @@ Public Class ucDispRcpViewingAngle
 
             If .sCommon.sweepType = ucDispRcpIVLSweep.eSweepType.eStandard Then
                 .sCommon.dSweepList = CSeqProcessor.MakeSweepList(.sCommon.sMeasureSweepParameter) 'ucMeasurementSweepSetting.SweepList
-            Else
+            ElseIf .sCommon.sweepType = ucDispRcpIVLSweep.eSweepType.eUserPattern Then
                 .sCommon.dSweepList = ucSweepSetting.ucUserPatternList.Setting
+            Else '220829 Update by JKY
+                .sCommon.dSweepList = CSeqProcessor.MakeRGBSweepList(.sCommon.sMeasureRGBSweepParameter)
             End If
 
             If .sCommon.dSweepList Is Nothing Then Return False
@@ -349,8 +352,10 @@ Public Class ucDispRcpViewingAngle
 
             If .sCommon.sweepType = ucDispRcpIVLSweep.eSweepType.eStandard Then
                 ucSweepSetting.ucSweepRegion.Setting = .sCommon.sMeasureSweepParameter
-            Else
+            ElseIf .sCommon.sweepType = ucDispRcpIVLSweep.eSweepType.eUserPattern Then
                 ucSweepSetting.ucUserPatternList.Setting = .sCommon.dSweepList
+            Else '220829 Update by JKY
+                ucSweepSetting.ucRGBSweepRegion.Setting = .sCommon.sMeasureRGBSweepParameter
             End If
 
 

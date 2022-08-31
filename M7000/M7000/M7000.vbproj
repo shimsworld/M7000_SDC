@@ -158,6 +158,7 @@
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="Class\Capture\cScreenCapture.vb" />
     <Compile Include="Class\CCalibration.vb" />
+    <Compile Include="Class\CSeqProcessor.vb" />
     <Compile Include="Class\CSequenceManager.vb" />
     <Compile Include="Class\CSheduler_PLC.vb" />
     <Compile Include="Class\CstateInfo.vb" />
@@ -173,6 +174,7 @@
     <Compile Include="Class\CStateMsg.vb" />
     <Compile Include="Class\Data Process\CDataQECal.vb" />
     <Compile Include="Class\IO\CRangeInfoINI.vb" />
+    <Compile Include="Class\IO\CRcpINI.vb" />
     <Compile Include="Class\IO\CSavePosition.vb" />
     <Compile Include="Class\Unit\CPGImiageINI.vb" />
     <Compile Include="Class\IO\CSeqBuilderSettingsINI.vb" />
@@ -195,9 +197,7 @@
     <Compile Include="Device\Control\ucG4SConfig.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Class\IO\CRcpINI.vb" />
     <Compile Include="Class\CScheduler.vb" />
-    <Compile Include="Class\CSeqProcessor.vb" />
     <Compile Include="Class\CSequenceListManager.vb" />
     <Compile Include="Class\Unit\CChannelStatusINI.vb" />
     <Compile Include="Class\Unit\CTime.vb" />
@@ -211,13 +211,25 @@
     <Compile Include="Class\Unit\Units\CUnitTemperature.vb" />
     <Compile Include="Class\Unit\Units\CUnitTime.vb" />
     <Compile Include="Class\Unit\Units\CunitVoltage.vb" />
-    <Compile Include="Device\Control\ucMcIVLPowerSupplyConfig.Designer.vb">
+    <Compile Include="Device\Control\ucMcIVLPowerSupplyConfig.designer.vb">
       <DependentUpon>ucMcIVLPowerSupplyConfig.vb</DependentUpon>
     </Compile>
     <Compile Include="Device\Control\ucMcIVLPowerSupplyConfig.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Device\DMM\CDevDMM6500.vb" />
+    <Compile Include="Device\Frame\frmEIPPGControl.designer.vb">
+      <DependentUpon>frmEIPPGControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Device\Frame\frmEIPPGControl.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Device\Frame\frmIVLPowerSupplyControl.designer.vb">
+      <DependentUpon>frmIVLPowerSupplyControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Device\Frame\frmIVLPowerSupplyControl.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Device\Frame\FrmPLCMotionControl.Designer.vb">
       <DependentUpon>FrmPLCMotionControl.vb</DependentUpon>
     </Compile>
@@ -230,6 +242,13 @@
     <Compile Include="Device\Frame\frmStrobeControl.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Device\Frame\frmSW7700Control.designer.vb">
+      <DependentUpon>frmSW7700Control.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Device\Frame\frmSW7700Control.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Device\IVL\CDevIVLPowersupply.vb" />
     <Compile Include="Device\IVL\CDevIVLPowerSupplyAPI.vb" />
     <Compile Include="Device\IVL\CDevIVLPowerSupplyCommonNode.vb" />
     <Compile Include="Device\Motion\Ajin\CDevMotion_AJIN.vb" />
@@ -261,11 +280,11 @@
     <Compile Include="Device\Motion\EZ\CDevMotionAPI.vb" />
     <Compile Include="Device\Motion\EZ\EziSERVOPlusRCommand.vb" />
     <Compile Include="Device\PatternGenerator\CComTCPServer.vb" />
+    <Compile Include="Device\PatternGenerator\CDevEIPPG.vb" />
     <Compile Include="Device\PatternGenerator\CDevG4S.vb" />
     <Compile Include="Device\PatternGenerator\CDevPGAPI.vb" />
     <Compile Include="Device\PatternGenerator\CDevPGCommonNode.vb" />
     <Compile Include="Device\SMU\CDevM6000CommonNode.vb" />
-    <Compile Include="Device\IVL\CDevIVLPowersupply.vb" />
     <Compile Include="Device\Strobe\CDevStrobe.vb" />
     <Compile Include="Device\PLC\CDevPLCCommonNode.vb" />
     <Compile Include="Device\PLC\CDevPLC_API.vb" />
@@ -576,12 +595,6 @@
     <Compile Include="SequenceBuilder\CommUserCtrl\ucDispGraph.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="SequenceBuilder\frmBuilderSettings.designer.vb">
-      <DependentUpon>frmBuilderSettings.vb</DependentUpon>
-    </Compile>
-    <Compile Include="SequenceBuilder\frmBuilderSettings.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="SequenceBuilder\CommUserCtrl\Module\frmSweepImgSelector.Designer.vb">
       <DependentUpon>frmSweepImgSelector.vb</DependentUpon>
     </Compile>
@@ -593,6 +606,12 @@
     </Compile>
     <Compile Include="SequenceBuilder\CommUserCtrl\Module\UcDispPGInitCode.vb">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\frmBuilderSettings.designer.vb">
+      <DependentUpon>frmBuilderSettings.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\frmBuilderSettings.vb">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="SequenceBuilder\Panel\ucDispSignalGenerator.designer.vb">
       <DependentUpon>ucDispSignalGenerator.vb</DependentUpon>
@@ -630,22 +649,22 @@
     <Compile Include="SequenceBuilder\Sequence\Common\ucMeasureColorList.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="SequenceBuilder\Sequence\Common\ucMeasureRGBSweepRegion.Designer.vb">
+    <Compile Include="SequenceBuilder\Sequence\Common\ucMeasureRGBSweepRegion.designer.vb">
       <DependentUpon>ucMeasureRGBSweepRegion.vb</DependentUpon>
     </Compile>
     <Compile Include="SequenceBuilder\Sequence\Common\ucMeasureRGBSweepRegion.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="SequenceBuilder\Sequence\Common\ucMeasureSweepRegion.Designer.vb">
-      <DependentUpon>ucMeasureSweepRegion.vb</DependentUpon>
-    </Compile>
-    <Compile Include="SequenceBuilder\Sequence\Common\ucMeasureSweepRegion.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="SequenceBuilder\Sequence\Common\ucMeasureSweepList.Designer.vb">
       <DependentUpon>ucMeasureSweepList.vb</DependentUpon>
     </Compile>
     <Compile Include="SequenceBuilder\Sequence\Common\ucMeasureSweepList.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\Common\ucMeasureSweepRegion.designer.vb">
+      <DependentUpon>ucMeasureSweepRegion.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\Common\ucMeasureSweepRegion.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="SequenceBuilder\Sequence\Common\ucSampleInfos.Designer.vb">
@@ -671,6 +690,12 @@
     </Compile>
     <Compile Include="SequenceBuilder\Sequence\frmSignalGenerator.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\ucDispPointSetting.designer.vb">
+      <DependentUpon>ucDispPointSetting.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\ucDispPointSetting.vb">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="SequenceBuilder\Sequence\ucDispRcpAging.Designer.vb">
       <DependentUpon>ucDispRcpAging.vb</DependentUpon>
@@ -702,7 +727,13 @@
     <Compile Include="SequenceBuilder\Sequence\ucDispRcpIVLSweep.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="SequenceBuilder\Sequence\ucDispRcpLifetimeAndIVLSweep.Designer.vb">
+    <Compile Include="SequenceBuilder\Sequence\ucDispRcpLifetime.designer.vb">
+      <DependentUpon>ucDispRcpLifetime.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\ucDispRcpLifetime.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SequenceBuilder\Sequence\ucDispRcpLifetimeAndIVLSweep.designer.vb">
       <DependentUpon>ucDispRcpLifetimeAndIVLSweep.vb</DependentUpon>
     </Compile>
     <Compile Include="SequenceBuilder\Sequence\ucDispRcpLifetimeAndIVLSweep.vb">
@@ -1082,22 +1113,10 @@
     <Compile Include="SequenceBuilder\Sequence\ucDispRcpCommon.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="SequenceBuilder\Sequence\ucDispRcpLifetime.Designer.vb">
-      <DependentUpon>ucDispRcpLifetime.vb</DependentUpon>
-    </Compile>
-    <Compile Include="SequenceBuilder\Sequence\ucDispRcpLifetime.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="SequenceBuilder\CommUserCtrl\Module\ucDispModule.Designer.vb">
       <DependentUpon>ucDispModule.vb</DependentUpon>
     </Compile>
     <Compile Include="SequenceBuilder\CommUserCtrl\Module\ucDispModule.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="SequenceBuilder\Sequence\ucDispPointSetting.Designer.vb">
-      <DependentUpon>ucDispPointSetting.vb</DependentUpon>
-    </Compile>
-    <Compile Include="SequenceBuilder\Sequence\ucDispPointSetting.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="SequenceBuilder\Sequence\ucDispRcpTemp.Designer.vb">
@@ -1266,6 +1285,12 @@
     <EmbeddedResource Include="Device\Control\ucSGOutputDefine.resx">
       <DependentUpon>ucSGOutputDefine.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Device\Frame\frmEIPPGControl.resx">
+      <DependentUpon>frmEIPPGControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Device\Frame\frmIVLPowerSupplyControl.resx">
+      <DependentUpon>frmIVLPowerSupplyControl.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Device\Frame\frmMcM600.resx">
       <DependentUpon>frmMcM600.vb</DependentUpon>
     </EmbeddedResource>
@@ -1292,6 +1317,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Device\Frame\frmSVSCamera.resx">
       <DependentUpon>frmSVSCamera.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Device\Frame\frmSW7700Control.resx">
+      <DependentUpon>frmSW7700Control.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Device\Frame\frmTCNx1.resx">
       <DependentUpon>frmTCNx1.vb</DependentUpon>
@@ -1390,9 +1418,6 @@
     <EmbeddedResource Include="SequenceBuilder\CommUserCtrl\ucDispGraph.resx">
       <DependentUpon>ucDispGraph.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SequenceBuilder\frmBuilderSettings.resx">
-      <DependentUpon>frmBuilderSettings.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="SequenceBuilder\CommUserCtrl\Module\frmSweepImgSelector.resx">
       <DependentUpon>frmSweepImgSelector.vb</DependentUpon>
     </EmbeddedResource>
@@ -1401,6 +1426,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SequenceBuilder\CommUserCtrl\Module\UcDispPGInitCode.resx">
       <DependentUpon>UcDispPGInitCode.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\frmBuilderSettings.resx">
+      <DependentUpon>frmBuilderSettings.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SequenceBuilder\Panel\ucDispSignalGenerator.resx">
       <DependentUpon>ucDispSignalGenerator.vb</DependentUpon>
@@ -1423,11 +1451,11 @@
     <EmbeddedResource Include="SequenceBuilder\Sequence\Common\ucMeasureRGBSweepRegion.resx">
       <DependentUpon>ucMeasureRGBSweepRegion.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SequenceBuilder\Sequence\Common\ucMeasureSweepRegion.resx">
-      <DependentUpon>ucMeasureSweepRegion.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="SequenceBuilder\Sequence\Common\ucMeasureSweepList.resx">
       <DependentUpon>ucMeasureSweepList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\Sequence\Common\ucMeasureSweepRegion.resx">
+      <DependentUpon>ucMeasureSweepRegion.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SequenceBuilder\Sequence\Common\ucSampleInfos.resx">
       <DependentUpon>ucSampleInfos.vb</DependentUpon>
@@ -1440,6 +1468,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SequenceBuilder\Sequence\frmSignalGenerator.resx">
       <DependentUpon>frmSignalGenerator.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\Sequence\ucDispPointSetting.resx">
+      <DependentUpon>ucDispPointSetting.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SequenceBuilder\Sequence\ucDispRcpAging.resx">
       <DependentUpon>ucDispRcpAging.vb</DependentUpon>
@@ -1459,6 +1490,9 @@
     <EmbeddedResource Include="SequenceBuilder\Sequence\ucDispRcpIVLSweep.resx">
       <DependentUpon>ucDispRcpIVLSweep.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="SequenceBuilder\Sequence\ucDispRcpLifetime.resx">
+      <DependentUpon>ucDispRcpLifetime.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SequenceBuilder\Sequence\ucDispRcpLifetimeAndIVLSweep.resx">
       <DependentUpon>ucDispRcpLifetimeAndIVLSweep.vb</DependentUpon>
     </EmbeddedResource>
@@ -1473,7 +1507,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SequenceBuilder\ucSequenceBuilder.resx">
       <DependentUpon>ucSequenceBuilder.vb</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="SubFrameControls\ChannelUI\CellUI\ucDispSampleCommonNode.resx">
       <DependentUpon>ucDispSampleCommonNode.vb</DependentUpon>
@@ -1641,12 +1674,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SequenceBuilder\Sequence\ucDispRcpCommon.resx">
       <DependentUpon>ucDispRcpCommon.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SequenceBuilder\Sequence\ucDispRcpLifetime.resx">
-      <DependentUpon>ucDispRcpLifetime.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SequenceBuilder\Sequence\ucDispPointSetting.resx">
-      <DependentUpon>ucDispPointSetting.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SubWindows\frmEditJIGLayout.resx">
       <DependentUpon>frmEditJIGLayout.vb</DependentUpon>

@@ -1004,6 +1004,26 @@ Public Class CSequenceManager
                             Next
                         End If
 
+                        '220829 Update by JKY : RGB SweepParameter
+                        If .sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter Is Nothing Then
+                            rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_Count_SweepSetting, CStr(0))
+                        Else
+                            rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_Count_SweepSetting, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter.Length))
+                            For n As Integer = 0 To .sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter.Length - 1
+                                rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Number, n, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).nSweepNumber))
+                                rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Start, n, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).dStart))
+                                rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Stop, n, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).dStop))
+                                rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Step, n, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).dStep))
+                                rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Point, n, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).nPoint))
+                                rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Type, n, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).SweepType))
+                                For m As Integer = 0 To 4
+                                    rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_Type, n, m, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).setPowerValue(m).PowerType))
+                                    rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopV, n, m, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).setPowerValue(m).dStopV))
+                                    rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopC, n, m, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).setPowerValue(m).dStopC))
+                                Next
+                            Next
+                        End If
+
                         '3. UserSweepList
                         If .sRecipes(i).sIVLSweepInfo.sCommon.dSweepList Is Nothing Then
                             rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_Count_SweepList, CStr(0))
@@ -1067,7 +1087,7 @@ Public Class CSequenceManager
                             rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLDevice_Keithley_LimitCurrent, CStr(.sRecipes(i).sIVLSweepInfo.sKeithleyInfos.LimitCurrent))
                             rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLDevice_Keithley_LimitVoltage, CStr(.sRecipes(i).sIVLSweepInfo.sKeithleyInfos.LimitVoltage))
                             rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLDevice_Keithley_CurrentRange, .sRecipes(i).sIVLSweepInfo.sKeithleyInfos.nCurrentRangeIndex)
-                           
+
                             rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLDevice_keithley_MeasureDelay, CStr(.sRecipes(i).sIVLSweepInfo.sKeithleyInfos.MeasureDelay_Sec))
                             rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLDevice_Keithley_MeasureDelayAuto, .sRecipes(i).sIVLSweepInfo.sKeithleyInfos.MeasureDelayAuto.ToString)
                             rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLDevice_Keithley_MeasureMode, CStr(.sRecipes(i).sIVLSweepInfo.sKeithleyInfos.MeasureMode.ToString))
@@ -1141,6 +1161,26 @@ Public Class CSequenceManager
                                 rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Point, n, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureSweepParameter(n).nPoint))
                                 '    rcpSaver.SaveIniValue(CRcp.eSecID.eRecipe, i, CRcp.eKeyID.eIVLCommon_SweepSetting_Level, n, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureSweepParameter(n).nLevel))
 
+                            Next
+                        End If
+
+                        '220829 Update by JKY : RGB SweepParameter
+                        If .sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter Is Nothing Then
+                            rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_Count_SweepSetting, CStr(0))
+                        Else
+                            rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_Count_SweepSetting, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter.Length))
+                            For n As Integer = 0 To .sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter.Length - 1
+                                rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Number, n, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).nSweepNumber))
+                                rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Start, n, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).dStart))
+                                rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Stop, n, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).dStop))
+                                rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Step, n, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).dStep))
+                                rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Point, n, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).nPoint))
+                                rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Type, n, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).SweepType))
+                                For m As Integer = 0 To 4
+                                    rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_Type, n, m, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).setPowerValue(m).PowerType))
+                                    rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopV, n, m, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).setPowerValue(m).dStopV))
+                                    rcpSaver.SaveIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopC, n, m, CStr(.sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter(n).setPowerValue(m).dStopC))
+                                Next
                             Next
                         End If
 
@@ -2107,6 +2147,8 @@ Public Class CSequenceManager
                                 .sRecipes(i).sIVLSweepInfo.sCommon.sweepType = ucDispRcpIVLSweep.eSweepType.eStandard
                             Case ucDispRcpIVLSweep.eSweepType.eUserPattern.ToString
                                 .sRecipes(i).sIVLSweepInfo.sCommon.sweepType = ucDispRcpIVLSweep.eSweepType.eUserPattern
+                            Case ucDispRcpIVLSweep.eSweepType.eRGBPattern.ToString '220826 Update by JKY
+                                .sRecipes(i).sIVLSweepInfo.sCommon.sweepType = ucDispRcpIVLSweep.eSweepType.eRGBPattern
                         End Select
 
                         Try
@@ -2118,29 +2160,52 @@ Public Class CSequenceManager
                         '2. Standard SweepParameter
                         nCnt = rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_Count_SweepSetting)
 
-                        Dim standardSweepSettings(nCnt - 1) As ucMeasureSweepRegion.sSetSweepRegion
+                        ' 220829 Update by JKY
+                        If .sRecipes(i).sIVLSweepInfo.sCommon.sweepType = ucDispRcpIVLSweep.eSweepType.eRGBPattern Then
+                            Dim standardSweepSettings(nCnt - 1) As ucMeasureRGBSweepRegion.sSetSweepRegion
 
-                        For n As Integer = 0 To nCnt - 1
-                            standardSweepSettings(n).nSweepNumber = CInt(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Number, n))
-                            standardSweepSettings(n).dStart = CDbl(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Start, n))
-                            standardSweepSettings(n).dStop = CDbl(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Stop, n))
-                            standardSweepSettings(n).dStep = CDbl(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Step, n))
-                            standardSweepSettings(n).nPoint = CInt(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Point, n))
-                            'Try
-                            '    standardSweepSettings(n).nLevel = CDbl(rcpLoader.LoadIniValue(CRcp.eSecID.eRecipe, i, CRcp.eKeyID.eIVLCommon_SweepSetting_Level, n))
+                            For n As Integer = 0 To nCnt - 1
+                                ReDim standardSweepSettings(nCnt - 1).setPowerValue(4)
+                                standardSweepSettings(n).nSweepNumber = CInt(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Number, n))
+                                standardSweepSettings(n).dStart = CDbl(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Start, n))
+                                standardSweepSettings(n).dStop = CDbl(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Stop, n))
+                                standardSweepSettings(n).dStep = CDbl(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Step, n))
+                                standardSweepSettings(n).nPoint = CInt(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Point, n))
+                                standardSweepSettings(n).SweepType = CInt(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Type, n))
+                                For m As Integer = 0 To 4
+                                    standardSweepSettings(n).setPowerValue(m).PowerType = CInt(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_Type, n, m))
+                                    standardSweepSettings(n).setPowerValue(m).dStopV = CDbl(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopV, n, m))
+                                    standardSweepSettings(n).setPowerValue(m).dStopC = CDbl(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopC, n, m))
+                                    standardSweepSettings(n).setPowerValue(m).bIsUse = If(standardSweepSettings(n).setPowerValue(m).dStopV = 0, False, True)
+                                Next
+                            Next
+                            .sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter = standardSweepSettings.Clone
+                        Else
+                            Dim standardSweepSettings(nCnt - 1) As ucMeasureSweepRegion.sSetSweepRegion
 
-                            'Catch ex As Exception
-                            '    standardSweepSettings(n).nLevel = 0
+                            For n As Integer = 0 To nCnt - 1
+                                standardSweepSettings(n).nSweepNumber = CInt(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Number, n))
+                                standardSweepSettings(n).dStart = CDbl(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Start, n))
+                                standardSweepSettings(n).dStop = CDbl(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Stop, n))
+                                standardSweepSettings(n).dStep = CDbl(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Step, n))
+                                standardSweepSettings(n).nPoint = CInt(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Point, n))
+                                'Try
+                                '    standardSweepSettings(n).nLevel = CDbl(rcpLoader.LoadIniValue(CRcp.eSecID.eRecipe, i, CRcp.eKeyID.eIVLCommon_SweepSetting_Level, n))
 
-                            'End Try
+                                'Catch ex As Exception
+                                '    standardSweepSettings(n).nLevel = 0
+
+                                'End Try
 
 
-                        Next
-                        .sRecipes(i).sIVLSweepInfo.sCommon.sMeasureSweepParameter = standardSweepSettings.Clone
+                            Next
+                            .sRecipes(i).sIVLSweepInfo.sCommon.sMeasureSweepParameter = standardSweepSettings.Clone
+
+                        End If
 
                         If .sRecipes(i).sIVLSweepInfo.sCommon.sweepType = ucDispRcpIVLSweep.eSweepType.eStandard Then
                             .sRecipes(i).sIVLSweepInfo.sCommon.dSweepList = CSeqProcessor.MakeSweepList(.sRecipes(i).sIVLSweepInfo.sCommon)
-                        Else
+                        ElseIf .sRecipes(i).sIVLSweepInfo.sCommon.sweepType = ucDispRcpIVLSweep.eSweepType.eUserPattern Then
 
                             '3. SweepList
                             nCnt = rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_Count_SweepList)
@@ -2151,6 +2216,8 @@ Public Class CSequenceManager
                                 dSweepList(n) = CDbl(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepList_Bias, n))
                             Next
                             .sRecipes(i).sIVLSweepInfo.sCommon.dSweepList = dSweepList.Clone
+                        Else '220829 Update by JKY
+                            .sRecipes(i).sIVLSweepInfo.sCommon.dSweepList = CSeqProcessor.MakeRGBSweepList(.sRecipes(i).sIVLSweepInfo.sCommon)
                         End If
 
 
@@ -2387,6 +2454,8 @@ Public Class CSequenceManager
                                 .sRecipes(i).sIVLSweepInfo.sCommon.sweepType = ucDispRcpIVLSweep.eSweepType.eStandard
                             Case ucDispRcpIVLSweep.eSweepType.eUserPattern.ToString
                                 .sRecipes(i).sIVLSweepInfo.sCommon.sweepType = ucDispRcpIVLSweep.eSweepType.eUserPattern
+                            Case ucDispRcpIVLSweep.eSweepType.eRGBPattern.ToString '220826 Update by JKY
+                                .sRecipes(i).sIVLSweepInfo.sCommon.sweepType = ucDispRcpIVLSweep.eSweepType.eRGBPattern
                         End Select
 
                         Try
@@ -2404,21 +2473,45 @@ Public Class CSequenceManager
 
                         '2. Standard SweepParameter
                         nCnt = rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_Count_SweepSetting)
+                        nCnt = rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_Count_SweepSetting)
 
-                        Dim standardSweepSettings(nCnt - 1) As ucMeasureSweepRegion.sSetSweepRegion
+                        '220829 Update by JKY
+                        If .sRecipes(i).sIVLSweepInfo.sCommon.sweepType = ucDispRcpIVLSweep.eSweepType.eRGBPattern Then
+                            Dim standardSweepSettings(nCnt - 1) As ucMeasureRGBSweepRegion.sSetSweepRegion
 
-                        For n As Integer = 0 To nCnt - 1
-                            standardSweepSettings(n).nSweepNumber = CInt(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Number, n))
-                            standardSweepSettings(n).dStart = CDbl(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Start, n))
-                            standardSweepSettings(n).dStop = CDbl(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Stop, n))
-                            standardSweepSettings(n).dStep = CDbl(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Step, n))
-                            standardSweepSettings(n).nPoint = CInt(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Point, n))
-                        Next
-                        .sRecipes(i).sIVLSweepInfo.sCommon.sMeasureSweepParameter = standardSweepSettings.Clone
+                            For n As Integer = 0 To nCnt - 1
+                                ReDim standardSweepSettings(nCnt - 1).setPowerValue(4)
+                                standardSweepSettings(n).nSweepNumber = CInt(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Number, n))
+                                standardSweepSettings(n).dStart = CDbl(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Start, n))
+                                standardSweepSettings(n).dStop = CDbl(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Stop, n))
+                                standardSweepSettings(n).dStep = CDbl(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Step, n))
+                                standardSweepSettings(n).nPoint = CInt(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Point, n))
+                                standardSweepSettings(n).SweepType = CInt(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Type, n))
+                                For m As Integer = 0 To 4
+                                    standardSweepSettings(n).setPowerValue(m).PowerType = CInt(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_Type, n, m))
+                                    standardSweepSettings(n).setPowerValue(m).dStopV = CDbl(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopV, n, m))
+                                    standardSweepSettings(n).setPowerValue(m).dStopC = CDbl(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_PowerSetting_StopC, n, m))
+                                    standardSweepSettings(n).setPowerValue(m).bIsUse = If(standardSweepSettings(n).setPowerValue(m).dStopV = 0, False, True)
+                                Next
+                            Next
+                            .sRecipes(i).sIVLSweepInfo.sCommon.sMeasureRGBSweepParameter = standardSweepSettings.Clone
+                        Else
+                            Dim standardSweepSettings(nCnt - 1) As ucMeasureSweepRegion.sSetSweepRegion
+
+                            For n As Integer = 0 To nCnt - 1
+                                standardSweepSettings(n).nSweepNumber = CInt(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Number, n))
+                                standardSweepSettings(n).dStart = CDbl(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Start, n))
+                                standardSweepSettings(n).dStop = CDbl(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Stop, n))
+                                standardSweepSettings(n).dStep = CDbl(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Step, n))
+                                standardSweepSettings(n).nPoint = CInt(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepSetting_Point, n))
+                            Next
+                            .sRecipes(i).sIVLSweepInfo.sCommon.sMeasureSweepParameter = standardSweepSettings.Clone
+
+                        End If
 
                         If .sRecipes(i).sIVLSweepInfo.sCommon.sweepType = ucDispRcpIVLSweep.eSweepType.eStandard Then
                             .sRecipes(i).sIVLSweepInfo.sCommon.dSweepList = CSeqProcessor.MakeSweepList(.sRecipes(i).sIVLSweepInfo.sCommon)
-                        Else
+                        ElseIf .sRecipes(i).sIVLSweepInfo.sCommon.sweepType = ucDispRcpIVLSweep.eSweepType.eUserPattern Then
 
                             '3. SweepList
                             nCnt = rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_Count_SweepList)
@@ -2429,6 +2522,8 @@ Public Class CSequenceManager
                                 dSweepList(n) = CDbl(rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eIVLCommon_SweepList_Bias, n))
                             Next
                             .sRecipes(i).sIVLSweepInfo.sCommon.dSweepList = dSweepList.Clone
+                        Else '220829 Update by JKY
+                            .sRecipes(i).sIVLSweepInfo.sCommon.dSweepList = CSeqProcessor.MakeRGBSweepList(.sRecipes(i).sIVLSweepInfo.sCommon)
                         End If
 
                         'ColorList
@@ -2657,6 +2752,19 @@ Public Class CSequenceManager
                                 Next
 
                                 .sRecipes(i).sLifetimeInfo.sViewingAngleInfos.sMeasureSweepParameter = sweepParamters.Clone
+                            ElseIf .sRecipes(i).sLifetimeInfo.sViewingAngleInfos.sweepType = ucDispRcpIVLSweep.eSweepType.eRGBPattern Then '220829 Update by JKY
+                                Dim numOfRegions As Integer = rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eViewingAngle_Count_SweepSetting)
+                                Dim sweepParamters(numOfRegions - 1) As ucMeasureRGBSweepRegion.sSetSweepRegion
+
+                                For n As Integer = 0 To sweepParamters.Length - 1
+                                    sweepParamters(n).nSweepNumber = rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eViewingAngle_SweepSetting_Number, n)
+                                    sweepParamters(n).dStart = rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eViewingAngle_SweepSetting_Start, n)
+                                    sweepParamters(n).dStop = rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eViewingAngle_SweepSetting_Stop, n)
+                                    sweepParamters(n).dStep = rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eViewingAngle_SweepSetting_Step, n)
+                                    sweepParamters(n).nPoint = rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eViewingAngle_SweepSetting_Point, n)
+                                Next
+
+                                .sRecipes(i).sLifetimeInfo.sViewingAngleInfos.sMeasureRGBSweepParameter = sweepParamters.Clone
                             End If
 
                             '3. UserSweepList
@@ -2766,15 +2874,15 @@ Public Class CSequenceManager
                         'Integral WaveLength
                         Try
 
-                        .sRecipes(i).sLifetimeInfo.sCommon.nIntegralWLCount = rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eCell_IntegralWLCount)
-                        .sRecipes(i).sLifetimeInfo.sCommon.nIntegralWL_Pick1_Start = rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eCell_WL1_START)
-                        .sRecipes(i).sLifetimeInfo.sCommon.nIntegralWL_Pick1_End = rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eCell_WL1_STOP)
-                        .sRecipes(i).sLifetimeInfo.sCommon.nIntegralWL_Pick2_Start = rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eCell_WL2_START)
-                        .sRecipes(i).sLifetimeInfo.sCommon.nIntegralWL_Pick2_End = rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eCell_WL2_STOP)
-                        .sRecipes(i).sLifetimeInfo.sCommon.nIntegralWL_Pick3_Start = rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eCell_WL3_START)
-                        .sRecipes(i).sLifetimeInfo.sCommon.nIntegralWL_Pick3_End = rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eCell_WL3_STOP)
-                        .sRecipes(i).sLifetimeInfo.sCommon.nIntegralWL_Pick4_Start = rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eCell_WL4_START)
-                        .sRecipes(i).sLifetimeInfo.sCommon.nIntegralWL_Pick4_End = rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eCell_WL4_STOP)
+                            .sRecipes(i).sLifetimeInfo.sCommon.nIntegralWLCount = rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eCell_IntegralWLCount)
+                            .sRecipes(i).sLifetimeInfo.sCommon.nIntegralWL_Pick1_Start = rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eCell_WL1_START)
+                            .sRecipes(i).sLifetimeInfo.sCommon.nIntegralWL_Pick1_End = rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eCell_WL1_STOP)
+                            .sRecipes(i).sLifetimeInfo.sCommon.nIntegralWL_Pick2_Start = rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eCell_WL2_START)
+                            .sRecipes(i).sLifetimeInfo.sCommon.nIntegralWL_Pick2_End = rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eCell_WL2_STOP)
+                            .sRecipes(i).sLifetimeInfo.sCommon.nIntegralWL_Pick3_Start = rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eCell_WL3_START)
+                            .sRecipes(i).sLifetimeInfo.sCommon.nIntegralWL_Pick3_End = rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eCell_WL3_STOP)
+                            .sRecipes(i).sLifetimeInfo.sCommon.nIntegralWL_Pick4_Start = rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eCell_WL4_START)
+                            .sRecipes(i).sLifetimeInfo.sCommon.nIntegralWL_Pick4_End = rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eCell_WL4_STOP)
                         Catch ex As Exception
                             .sRecipes(i).sLifetimeInfo.sCommon.nIntegralWLCount = 1
                             .sRecipes(i).sLifetimeInfo.sCommon.nIntegralWL_Pick1_Start = 380
@@ -2805,6 +2913,19 @@ Public Class CSequenceManager
                                 Next
 
                                 .sRecipes(i).sLifetimeInfo.sViewingAngleInfos.sMeasureSweepParameter = sweepParamters.Clone
+                            ElseIf .sRecipes(i).sLifetimeInfo.sViewingAngleInfos.sweepType = ucDispRcpIVLSweep.eSweepType.eRGBPattern Then '220829 Update by JKY
+                                Dim numOfRegions As Integer = rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eViewingAngle_Count_SweepSetting)
+                                Dim sweepParamters(numOfRegions - 1) As ucMeasureRGBSweepRegion.sSetSweepRegion
+
+                                For n As Integer = 0 To sweepParamters.Length - 1
+                                    sweepParamters(n).nSweepNumber = rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eViewingAngle_SweepSetting_Number, n)
+                                    sweepParamters(n).dStart = rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eViewingAngle_SweepSetting_Start, n)
+                                    sweepParamters(n).dStop = rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eViewingAngle_SweepSetting_Stop, n)
+                                    sweepParamters(n).dStep = rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eViewingAngle_SweepSetting_Step, n)
+                                    sweepParamters(n).nPoint = rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eViewingAngle_SweepSetting_Point, n)
+                                Next
+
+                                .sRecipes(i).sLifetimeInfo.sViewingAngleInfos.sMeasureRGBSweepParameter = sweepParamters.Clone
                             End If
 
                             '3. UserSweepList
@@ -3379,6 +3500,19 @@ Public Class CSequenceManager
                                 Next
 
                                 .sRecipes(i).sViewingAngleInfo.sCommon.sMeasureSweepParameter = sweepParamters.Clone
+                            ElseIf .sRecipes(i).sViewingAngleInfo.sCommon.sweepType = ucDispRcpIVLSweep.eSweepType.eRGBPattern Then '220829 Update by JKY
+                                Dim numOfRegions As Integer = rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eViewingAngle_Count_SweepSetting)
+                                Dim sweepParamters(numOfRegions - 1) As ucMeasureRGBSweepRegion.sSetSweepRegion
+
+                                For n As Integer = 0 To sweepParamters.Length - 1
+                                    sweepParamters(n).nSweepNumber = rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eViewingAngle_SweepSetting_Number, n)
+                                    sweepParamters(n).dStart = rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eViewingAngle_SweepSetting_Start, n)
+                                    sweepParamters(n).dStop = rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eViewingAngle_SweepSetting_Stop, n)
+                                    sweepParamters(n).dStep = rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eViewingAngle_SweepSetting_Step, n)
+                                    sweepParamters(n).nPoint = rcpLoader.LoadIniValue(CRcpINI.eSecID.eRecipe, i, CRcpINI.eKeyID.eViewingAngle_SweepSetting_Point, n)
+                                Next
+
+                                .sRecipes(i).sLifetimeInfo.sViewingAngleInfos.sMeasureRGBSweepParameter = sweepParamters.Clone
                             End If
 
                             '3. UserSweepList

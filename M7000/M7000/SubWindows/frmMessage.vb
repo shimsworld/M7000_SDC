@@ -16,7 +16,7 @@
         Else
 
             Try
-                lblMessage.Text = m_Message
+                'lblMessage.Text = m_Message
                 Me.Location = New Drawing.Point(600, 400)
                 Me.Show()
 
@@ -60,9 +60,9 @@
     End Sub
 
     Public Sub init()
-        lblMessage.Location = New System.Drawing.Point(0, 0)
-        lblMessage.Dock = DockStyle.Fill
-        lblMessage.Text = "No Error."
+        'lblMessage.Location = New System.Drawing.Point(0, 0)
+        'lblMessage.Dock = DockStyle.Fill
+        'lblMessage.Text = "No Error."
     End Sub
 #End Region
 

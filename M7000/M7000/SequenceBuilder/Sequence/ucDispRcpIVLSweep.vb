@@ -32,6 +32,7 @@ Public Class ucDispRcpIVLSweep
     Public Enum eSweepType
         eStandard
         eUserPattern
+        eRGBPattern '220826 Update by JKY
     End Enum
     Public Enum eSweepMethod
         eStair
@@ -83,6 +84,7 @@ Public Class ucDispRcpIVLSweep
         Dim sweepType As eSweepType
         Dim sweepLine As eSweepLine
         Dim sMeasureSweepParameter() As ucMeasureSweepRegion.sSetSweepRegion
+        Dim sMeasureRGBSweepParameter() As ucMeasureRGBSweepRegion.sSetSweepRegion '220826 Update by JKY
         ' Dim sMeasureUserSweepList() As Double
         Dim dSweepList() As Double
         Dim nColorList() As ucMeasureColorList.eColor
@@ -378,6 +380,7 @@ Public Class ucDispRcpIVLSweep
         Set(ByVal value As Boolean)
             ucSweepSetting.ucUserPatternList.Visible = value
             ucSweepSetting.ucSweepRegion.Visible = value
+            ucSweepSetting.ucRGBSweepRegion.Visible = value
         End Set
     End Property
 
@@ -405,12 +408,12 @@ Public Class ucDispRcpIVLSweep
         Select Case m_VisibleMode
 
             Case ucSequenceBuilder.eRcpMode.eCell_IVL
-                ucDispKeithley.Visible = True
+                ucDispKeithley.Visible = False '220829 Update by JKY
                 'ucDispSignalGenerator.Visible = False
 
                 IsVisibleOnlyCell = True
                 btnEdit.Enabled = False
-                btnMeasPoint.Enabled = False
+                btnMeasPoint.Enabled = True
             Case ucSequenceBuilder.eRcpMode.ePanel_IVL
                 btnMeasPoint.Enabled = True
                 For i As Integer = 0 To g_ConfigInfos.nDevice.Length - 1
@@ -487,6 +490,9 @@ Public Class ucDispRcpIVLSweep
                     m_IVLSweepInfos.sCommon.dSweepList = CSeqProcessor.MakeSweepList(m_IVLSweepInfos.sCommon.sMeasureSweepParameter)
                 Case ucDispRcpIVLSweep.eSweepType.eUserPattern
                     m_IVLSweepInfos.sCommon.dSweepList = ucSweepSetting.ucUserPatternList.Setting
+                Case ucDispRcpIVLSweep.eSweepType.eRGBPattern '220826 Update by JKY
+                    m_IVLSweepInfos.sCommon.sMeasureRGBSweepParameter = ucSweepSetting.ucRGBSweepRegion.Setting
+                    m_IVLSweepInfos.sCommon.dSweepList = CSeqProcessor.MakeRGBSweepList(m_IVLSweepInfos.sCommon.sMeasureRGBSweepParameter)
             End Select
 
 
@@ -576,8 +582,18 @@ Public Class ucDispRcpIVLSweep
                     ucSweepSetting.ucSweepRegion.Setting = m_IVLSweepInfos.sCommon.sMeasureSweepParameter
                 Case ucDispRcpIVLSweep.eSweepType.eUserPattern
                     ucSweepSetting.ucUserPatternList.Setting = m_IVLSweepInfos.sCommon.dSweepList
+                Case ucDispRcpIVLSweep.eSweepType.eRGBPattern '220826 Update by JKY
+                    ucSweepSetting.ucRGBSweepRegion.Setting = m_IVLSweepInfos.sCommon.sMeasureRGBSweepParameter
             End Select
 
+            '220829 Update by JKY
+            UcDispListView1.ClearAllData()
+            For i As Integer = 0 To m_IVLSweepInfos.sCommon.sMeasPoints.MeasPoint.Length - 1
+                Dim sData(1) As String
+                sData(0) = Format(m_IVLSweepInfos.sCommon.sMeasPoints.MeasPoint(i).X, "0.0")
+                sData(1) = Format(m_IVLSweepInfos.sCommon.sMeasPoints.MeasPoint(i).Y, "0.0")
+                UcDispListView1.AddRowData_AutoCountListNo(sData)
+            Next
 
             'Add 20150319
             ucColorSetting.Setting = .nColorList
@@ -646,6 +662,16 @@ Public Class ucDispRcpIVLSweep
 
         If dlg.ShowDialog = DialogResult.OK Then
             m_IVLSweepInfos.sCommon.sMeasPoints = dlg.Settings
+
+            '220829 Update by JKY
+            UcDispListView1.ClearAllData()
+            For i As Integer = 0 To m_IVLSweepInfos.sCommon.sMeasPoints.MeasPoint.Length - 1
+                Dim sData(1) As String
+                sData(0) = Format(m_IVLSweepInfos.sCommon.sMeasPoints.MeasPoint(i).X, "0.0")
+                sData(1) = Format(m_IVLSweepInfos.sCommon.sMeasPoints.MeasPoint(i).Y, "0.0")
+                UcDispListView1.AddRowData_AutoCountListNo(sData)
+            Next
+
         End If
     End Sub
 #End Region
@@ -653,11 +679,13 @@ Public Class ucDispRcpIVLSweep
 
 #Region "Change Event"
     Private Sub cbBiasMode_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbBiasMode.SelectedIndexChanged
+        '220830 Update by JKY
         If cbBiasMode.SelectedIndex = eBiasMode.eCV Then
             lblOffsetBiasValueUnit.Text = "V"
             lblLMeasValueUnit.Text = "V"
             ucSweepSetting.ucUserPatternList.UnitType = ucSweepSetting.eUnitType._Voltage
             ucSweepSetting.ucSweepRegion.UnitType = ucSweepSetting.eUnitType._Voltage
+            ucSweepSetting.ucRGBSweepRegion.UnitType = ucSweepSetting.eUnitType._Voltage
             ucDispKeithley.cboBiasMode.SelectedItem = "Voltage"
 
         ElseIf cbBiasMode.SelectedIndex = eBiasMode.eCC Then
@@ -665,6 +693,7 @@ Public Class ucDispRcpIVLSweep
             lblLMeasValueUnit.Text = "mA"
             ucSweepSetting.ucUserPatternList.UnitType = ucSweepSetting.eUnitType._milliAmpere
             ucSweepSetting.ucSweepRegion.UnitType = ucSweepSetting.eUnitType._milliAmpere
+            ucSweepSetting.ucRGBSweepRegion.UnitType = ucSweepSetting.eUnitType._milliAmpere
             ucDispKeithley.cboBiasMode.SelectedItem = "Current"
         End If
     End Sub
@@ -720,6 +749,9 @@ Public Class ucDispRcpIVLSweep
             Case M7000.ucSweepSetting.eSweepType._UserPattern
                 cbSweepMode.Enabled = False
                 tbCycleDelay.Enabled = False
+            Case M7000.ucSweepSetting.eSweepType._RGBPattern '220826 Update by JKY
+                cbSweepMode.Enabled = True
+                tbCycleDelay.Enabled = True
         End Select
 
     End Sub

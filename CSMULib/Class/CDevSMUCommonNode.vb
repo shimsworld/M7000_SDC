@@ -1,10 +1,11 @@
-﻿Public Class CDevSMUCommonNode
+﻿Imports CCommLib
+Public Class CDevSMUCommonNode
 
 #Region "Define"
 
     Protected m_MyModel As eModel
-    Protected m_ConfigInfo As CCommLib.CComCommonNode.sCommInfo
-    Protected m_CommStatus As CCommLib.CComCommonNode.eTransferState
+    Protected m_ConfigInfo As CComCommonNode.sCommInfo
+    Protected m_CommStatus As CComCommonNode.eTransferState
     Protected m_bIsConnected As Boolean = False
     Shared sSupportDeviceList() As String = New String() {"K236", "K237", "K238", "K2400", "K2410", "K2420", "K2425", "K2430", "K2440", "K2450", "K2601", "K2602", "K2635", "K2636", "M6100"}
 
@@ -46,11 +47,11 @@
         End Set
     End Property
 
-    Public Property Config As CCommLib.CComCommonNode.sCommInfo
+    Public Property Config As CComCommonNode.sCommInfo
         Get
             Return m_ConfigInfo
         End Get
-        Set(ByVal value As CCommLib.CComCommonNode.sCommInfo)
+        Set(ByVal value As CComCommonNode.sCommInfo)
             m_ConfigInfo = value
         End Set
     End Property
@@ -86,7 +87,7 @@
 
 #Region "Communication Functions"
 
-    Public Overridable Function Connection(ByVal config As CCommLib.CComCommonNode.sCommInfo) As Boolean
+    Public Overridable Function Connection(ByVal config As CComCommonNode.sCommInfo) As Boolean
         Return False
     End Function
 

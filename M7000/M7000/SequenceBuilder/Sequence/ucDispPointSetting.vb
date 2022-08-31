@@ -254,9 +254,9 @@ Public Class ucDispPointSetting
 
         Dim nrow As Integer
         UcDispListView1.GetNumOfRowData(nrow)
-        If nrow = 10 Then
+        If nrow = 30 Then '220829 Update by JKY : Change Point Limit
             UcDispTarget_PanelModuel1.PbDisplay_Del(pt)
-            MsgBox("더이상 포인트를 추가할 수 없습니다. 최대 10개까지 입력 가능합니다.")
+            MsgBox("더이상 포인트를 추가할 수 없습니다. 최대 30개까지 입력 가능합니다.")
             Exit Sub
         End If
 
@@ -539,8 +539,8 @@ Public Class ucDispPointSetting
 
         Dim nRow As Integer
         UcDispListView1.GetNumOfRowData(nRow)
-        If nRow = 10 Then
-            MsgBox("더이상 포인트를 추가할 수 없습니다. 최대 10개까지 입력 가능합니다.")
+        If nRow = 30 Then '220829 Update by JKY : Change Point Limit
+            MsgBox("더이상 포인트를 추가할 수 없습니다. 최대 30개까지 입력 가능합니다.")
             Exit Sub
         End If
 

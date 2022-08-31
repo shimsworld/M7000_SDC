@@ -56,6 +56,8 @@ Public Class frmMain
     Public cSwitch() As CDevSwitchAPI
     Public cDMM() As CDevDMM6500
     Public cBCR() As CDevVoyager1250
+    '정현기
+    Public cIVLPowerSupply() As CDevIVLPowersupply
 
     Public cStrobe() As CDevStrobe
 
@@ -1144,6 +1146,17 @@ Public Class frmMain
                             Next
                         Else
                             cDMM = Nothing
+                        End If
+                        '정현기
+                    Case frmConfigSystem.eDeviceItem.eIVLPowerSupply
+                        If g_ConfigInfos.IVLPowerSupplyConfig.settings Is Nothing = False Then
+                            ReDim cIVLPowerSupply(g_ConfigInfos.IVLPowerSupplyConfig.settings.Length - 1)
+
+                            For Idx As Integer = 0 To cIVLPowerSupply.Length - 1
+                                cIVLPowerSupply(Idx) = New CDevIVLPowersupply
+                            Next
+                        Else
+                            cIVLPowerSupply = Nothing
                         End If
                 End Select
             Next
@@ -2335,8 +2348,15 @@ Public Class frmMain
                         Else
                             tlHWStatus(n + ncount).BackColor = Color.LimeGreen
                         End If
+                        '정현기 EIP PG Connection
+                    ElseIf g_ConfigInfos.PGConfig.nDeviceType = CDevPGCommonNode.eDevModel._EIP Then
+                        If cPG.Connection(g_ConfigInfos.PGConfig.EIPPGConfig) Then
+                            tlHWStatus(n + ncount).BackColor = Color.Red
 
+                        Else
+                            tlHWStatus(n + ncount).BackColor = Color.LimeGreen
 
+                        End If
                     End If
                 Case frmConfigSystem.eDeviceItem.eMcSG
                     If g_ConfigInfos.SGConfig Is Nothing = False Then
@@ -2357,6 +2377,19 @@ Public Class frmMain
                     'If cPDMeasureUnit.Connection(g_ConfigInfos.PDMeasurementUnit) = False Then0
                     '    Return False
                     'End If
+                    '정현기 추가
+                Case frmConfigSystem.eDeviceItem.eIVLPowerSupply
+                    For i As Integer = 0 To g_ConfigInfos.IVLPowerSupplyConfig.settings.Length - 1
+
+                        Application.DoEvents()
+                        Thread.Sleep(10)
+
+                        If cIVLPowerSupply(i).Connection(g_ConfigInfos.IVLPowerSupplyConfig.settings(i)) = False Then
+                            tlHWStatus(n + ncount).BackColor = Color.Red
+                        Else
+                            tlHWStatus(n + ncount).BackColor = Color.LimeGreen
+                        End If
+                    Next
             End Select
         Next
 
@@ -2978,7 +3011,13 @@ Public Class frmMain
                             cBCR(j).Disconnection()
                         Next
                     End If
-
+                    '정현기
+                Case frmConfigSystem.eDeviceItem.eIVLPowerSupply
+                    If cIVLPowerSupply Is Nothing = False Then
+                        For j As Integer = 0 To cIVLPowerSupply.Length - 1
+                            cIVLPowerSupply(j).Disconnection()
+                        Next
+                    End If
             End Select
 
         Next
@@ -6253,9 +6292,25 @@ Public Class frmMain
     'Public Event evChangeMagazineAlarm(ByVal alarm() As CDevPLCCommonNode.eMagazineError)
     'Public Event evChangeMagazineContactInspection(ByVal state() As CDevPLCCommonNode.eMagazineContactIspection)
 
-    Dim m_bTC_Strange_Alarm As Boolean = False  '온도이상
-    Dim m_bTC_EOCR_Alarm As Boolean = False 'EOCR
-    Dim m_bTC_SSR_Alarm As Boolean = False ' SSR
+    '정현기 알람 추가
+    '경알람
+    Dim m_bWeak1_Alarm As Boolean = False
+    Dim m_bWeak2_Alarm As Boolean = False
+    '중알람
+    Dim m_bEMS_Alarm As Boolean = False
+    Dim m_bStrangeTemp_Alarm As Boolean = False  '온도이상
+    Dim m_bEOCR_Alarm As Boolean = False 'EOCR
+    Dim m_bSSR1_Alarm As Boolean = False ' SSR1
+    Dim m_bSSR2_Alarm As Boolean = False ' SSR2
+    Dim m_bTempSensor1_Alarm As Boolean = False ' TempSensor1
+    Dim m_bTempSensor2_Alarm As Boolean = False ' TempSensor2
+    Dim m_bDoor_Alarm As Boolean = False ' Door
+    Dim m_bAxis_X_Alarm As Boolean = False
+    Dim m_bAxis_Y1_Alarm As Boolean = False
+    Dim m_bAxis_Y2_Alarm As Boolean = False
+    Dim m_bAxis_Z_Alarm As Boolean = False
+
+
     Dim m_bTC_HighTemp_Alarm_Zone1 As Boolean = False '고온 ZONE 1
     Dim m_bTC_HighTemp_Alarm_Zone2 As Boolean = False '고온 ZONE 2
     Dim m_Servo_Alarm As Boolean = False    '각 축 Servo 알람
@@ -6263,11 +6318,9 @@ Public Class frmMain
     Dim m_bAlarmMessageShow As Boolean = False
     '  Dim m_bAxis_Alarm As Boolean = False
     ' Dim m_EQP_Alarm As Boolean = False
-    Dim m_bEMS_Alarm As Boolean = False
-    Dim m_bDoor_Alarm As Boolean = False
-    Dim m_bAxis_X_Alarm As Boolean = False
-    Dim m_bAxis_Y_Alarm As Boolean = False
-    Dim m_bAxis_Z_Alarm As Boolean = False
+
+
+
     Dim m_bAxis_Theta1_Alarm As Boolean = False
     Dim m_bAxis_Theta2_Alarm As Boolean = False
     Dim m_bAxis_Theta3_Alarm As Boolean = False
@@ -6995,71 +7048,11 @@ Public Class frmMain
 
     End Sub
 
-    Private Sub cPLC_evChangeEMSAlarm(ByVal alarm() As CDevPLCCommonNode.eEMSAlarm) Handles cPLC.evChangeEMSAlarm
-        If g_SystemInfo.isConnected = False Then Exit Sub '시스템이 연결되지 않은 상태의 이벤트는 무시한다.
-
-        Dim sTemp As String = ""
-        '   Dim bAlarm As Boolean = True
-        For i As Integer = 0 To alarm.Length - 1
-            If alarm(i) = CDevPLCCommonNode.eEMSAlarm.eNoError Then
-                m_bEMS_Alarm = False
-            Else
-                Select Case alarm(i)
-                    Case CDevPLCCommonNode.eEMSAlarm.eEMS1
-                        sTemp = sTemp & CDevPLCCommonNode.sEMSAlarm(0).ToString & ", "
-                        m_bEMS_Alarm = True
-                    Case CDevPLCCommonNode.eEMSAlarm.eEMS2
-                        sTemp = sTemp & CDevPLCCommonNode.sEMSAlarm(1).ToString & ", "
-                        m_bEMS_Alarm = True
-                    Case CDevPLCCommonNode.eEMSAlarm.eSafety_Control_Alarm1
-                        sTemp = sTemp & CDevPLCCommonNode.sEMSAlarm(4).ToString & ", "
-                        m_bEMS_Alarm = True
-                    Case CDevPLCCommonNode.eEMSAlarm.eSafety_Control_Alarm2
-                        sTemp = sTemp & CDevPLCCommonNode.sEMSAlarm(5).ToString & ", "
-                        m_bEMS_Alarm = True
-                    Case CDevPLCCommonNode.eEMSAlarm.eMC1_POWEROFF_Alarm
-                        sTemp = sTemp & CDevPLCCommonNode.sEMSAlarm(8).ToString & ", "
-                        m_bEMS_Alarm = True
-                    Case CDevPLCCommonNode.eEMSAlarm.eMC2_POWEROFF_Alarm
-                        sTemp = sTemp & CDevPLCCommonNode.sEMSAlarm(9).ToString & ", "
-                        m_bEMS_Alarm = True
-                    Case CDevPLCCommonNode.eEMSAlarm.eControlBoxTempLightAlarm
-                        sTemp = sTemp & CDevPLCCommonNode.sEMSAlarm(10).ToString & ", "
-                        m_bEMS_Alarm = True
-                    Case CDevPLCCommonNode.eEMSAlarm.eControlBoxTempHeavyAlarm
-                        sTemp = sTemp & CDevPLCCommonNode.sEMSAlarm(11).ToString & ", "
-                        m_bEMS_Alarm = True
-                    Case CDevPLCCommonNode.eEMSAlarm.eControlBoxSmokeAlarm
-                        sTemp = sTemp & CDevPLCCommonNode.sEMSAlarm(12).ToString & ", "
-                        m_bEMS_Alarm = True
-                End Select
-
-            End If
-        Next
-
-        If m_bEMS_Alarm = True Then
-            sPLCAlarmStr &= sTemp
-        End If
-
-        frmMessageUI.Message = sPLCAlarmStr & vbCrLf
-
-        If m_bAlarmMessageShow = False And m_bEMS_Alarm = False Then 'And m_bAxis_X_Alarm = False And m_bAxis_Y_Alarm = False And m_bAxis_Z_Alarm = False Then
-            frmMessageUI.HideFrame()
-            g_StateMsgHandler.messageToUserErrorCode(CStateMsg.eType.eMsg_State_Log_Alarm_Text, CStateMsg.eStateMsg.ePLC_ALARM_EMS_AND_CONTROLBOX, "OK...")
-            sPLCAlarmStr = ""
-        Else
-            frmMessageUI.ShowFrame()
-            g_StateMsgHandler.messageToUserErrorCode(CStateMsg.eType.eMsg_State_Log_Alarm_Text, CStateMsg.eStateMsg.ePLC_ALARM_EMS_AND_CONTROLBOX, sPLCAlarmStr)
-        End If
-
-        AlarmMsg(sPLCAlarmStr)
-    End Sub
-
-    'Private Sub cPLC_evChangeEOCRAlarm(ByVal alarm() As CDevPLCCommonNode.eTemperatureAlarm) Handles cPLC.evChangeEOCRAlarm
+    'Private Sub cPLC_evChangeTempAlarm(ByVal alarm() As CDevPLCCommonNode.eTemperatureAlarm) Handles cPLC.evChangeTemperatureAlarm
     '    If g_SystemInfo.isConnected = False Then Exit Sub '시스템이 연결되지 않은 상태의 이벤트는 무시한다.
 
-    '    ' Dim sTemp As String = ""
-    '    '   Dim bAlarm As Boolean = True
+    '    Dim sTemp As String = ""
+    '    Dim bAlarm As Boolean = True
     '    For i As Integer = 0 To alarm.Length - 1
     '        If alarm(i) = CDevPLCCommonNode.eTemperatureAlarm.eNoError Then
     '            m_bTC_EOCR_Alarm = False
@@ -7114,6 +7107,427 @@ Public Class frmMain
     '    AlarmMsg(sPLCAlarmStr)
     'End Sub
 
+    Private Sub cPLC_MessageReset()
+        frmMessageUI.dgWeakAlarm.Rows.Clear()
+        frmMessageUI.dgWeakAlarm.Rows.Clear()
+    End Sub
+
+    '정현기 알람추가
+    '경알람
+    Private Sub cPLC_evChangeWeak1Alarm(ByVal alarm() As CDevPLCCommonNode.eWeakAlarm) Handles cPLC.evChangeWeak1Alarm
+
+        If g_SystemInfo.isConnected = False Then Exit Sub '시스템이 연결되지 않은 상태의 이벤트는 무시한다.
+
+        ' Dim sTemp As String = ""
+        '   Dim bAlarm As Boolean = True
+        For i As Integer = 0 To alarm.Length - 1
+            If alarm(i) = CDevPLCCommonNode.eWeakAlarm.eNoError Then
+                m_bWeak1_Alarm = False
+            Else
+                sPLCAlarmStr = sPLCAlarmStr & CDevPLCCommonNode.sWeakAlarm1(alarm(i)).ToString & ", "
+                m_bWeak1_Alarm = True
+            End If
+        Next
+        If m_bWeak1_Alarm = True Then
+            sPLCAlarmStr = "경알람 = " & sPLCAlarmStr
+        End If
+
+
+        'AlarmMsg(sPLCAlarmStr)
+    End Sub
+    Private Sub cPLC_evChangeWeak2Alarm(ByVal alarm() As CDevPLCCommonNode.eWeakAlarm) Handles cPLC.evChangeWeak2Alarm
+        If g_SystemInfo.isConnected = False Then Exit Sub '시스템이 연결되지 않은 상태의 이벤트는 무시한다.
+
+        ' Dim sTemp As String = ""
+        '   Dim bAlarm As Boolean = True
+        For i As Integer = 0 To alarm.Length - 1
+            If alarm(i) = CDevPLCCommonNode.eWeakAlarm.eNoError Then
+                m_bWeak2_Alarm = False
+            Else
+                sPLCAlarmStr = sPLCAlarmStr & CDevPLCCommonNode.sWeakAlarm2(alarm(i)).ToString & ", "
+                m_bWeak2_Alarm = True
+            End If
+        Next
+        If m_bWeak2_Alarm = True Then
+            sPLCAlarmStr = "경알람 = " & sPLCAlarmStr
+        End If
+
+        '경알람 어떻게 구현..?
+        'frmMessageUI.Message = sPLCAlarmStr & vbCrLf
+
+        'If m_bEMS_Alarm = False And m_bStrangeTemp_Alarm = False And m_bEOCR_Alarm = False And m_bSSR1_Alarm = False And m_bSSR2_Alarm = False And m_bTempSensor1_Alarm = False And m_bTempSensor2_Alarm = False And m_bDoor_Alarm = False And m_bAxis_X_Alarm = False And m_bAxis_Y1_Alarm = False And m_bAxis_Y2_Alarm = False And m_bAxis_Z_Alarm = False And m_bAlarmMessageShow = False Then
+        '    frmMessageUI.HideFrame()
+        '    g_StateMsgHandler.messageToUserErrorCode(CStateMsg.eType.eMsg_State_Log_Alarm_Text, CStateMsg.eStateMsg.ePLC_ALARM_TEMP_EOCR, "OK...")
+        '    sPLCAlarmStr = ""
+        'Else
+        '    frmMessageUI.ShowFrame()
+        '    g_StateMsgHandler.messageToUserErrorCode(CStateMsg.eType.eMsg_State_Log_Alarm_Text, CStateMsg.eStateMsg.ePLC_ALARM_TEMP_EOCR, sPLCAlarmStr)
+        'End If
+
+        'AlarmMsg(sPLCAlarmStr)
+    End Sub
+    '중알람
+    Private Sub cPLC_evChangeEMSAlarm(ByVal alarm() As CDevPLCCommonNode.eEMSAlarm) Handles cPLC.evChangeEMSAlarm
+        If g_SystemInfo.isConnected = False Then Exit Sub '시스템이 연결되지 않은 상태의 이벤트는 무시한다.
+
+        ' Dim sTemp As String = ""
+        '   Dim bAlarm As Boolean = True
+        For i As Integer = 0 To alarm.Length - 1
+            If alarm(i) = CDevPLCCommonNode.eEMSAlarm.eNoError Then
+                m_bEMS_Alarm = False
+            Else
+                sPLCAlarmStr = sPLCAlarmStr & CDevPLCCommonNode.sEMSAlarm(alarm(i)).ToString & ", "
+                m_bEMS_Alarm = True
+            End If
+        Next
+        If m_bEMS_Alarm = True Then
+            sPLCAlarmStr = "EMS 상태 이상 = " & sPLCAlarmStr
+        End If
+
+        frmMessageUI.Message = sPLCAlarmStr & vbCrLf
+
+        If m_bEMS_Alarm = False And m_bStrangeTemp_Alarm = False And m_bEOCR_Alarm = False And m_bSSR1_Alarm = False And m_bSSR2_Alarm = False And m_bTempSensor1_Alarm = False And m_bTempSensor2_Alarm = False And m_bDoor_Alarm = False And m_bAxis_X_Alarm = False And m_bAxis_Y1_Alarm = False And m_bAxis_Y2_Alarm = False And m_bAxis_Z_Alarm = False And m_bAlarmMessageShow = False Then
+            frmMessageUI.HideFrame()
+            g_StateMsgHandler.messageToUserErrorCode(CStateMsg.eType.eMsg_State_Log_Alarm_Text, CStateMsg.eStateMsg.ePLC_ALARM_TEMP_EOCR, "OK...")
+            sPLCAlarmStr = ""
+        Else
+            frmMessageUI.ShowFrame()
+            g_StateMsgHandler.messageToUserErrorCode(CStateMsg.eType.eMsg_State_Log_Alarm_Text, CStateMsg.eStateMsg.ePLC_ALARM_TEMP_EOCR, sPLCAlarmStr)
+        End If
+
+        AlarmMsg(sPLCAlarmStr)
+    End Sub
+    Private Sub cPLC_evChangeStrangeTempAlarm(ByVal alarm() As CDevPLCCommonNode.eTemperatureAlarm) Handles cPLC.evChangeStrangeTempAlarm
+        If g_SystemInfo.isConnected = False Then Exit Sub '시스템이 연결되지 않은 상태의 이벤트는 무시한다.
+
+        ' Dim sTemp As String = ""
+        '   Dim bAlarm As Boolean = True
+        For i As Integer = 0 To alarm.Length - 1
+            If alarm(i) = CDevPLCCommonNode.eTemperatureAlarm.eNoError Then
+                m_bStrangeTemp_Alarm = False
+            Else
+                sPLCAlarmStr = sPLCAlarmStr & CDevPLCCommonNode.sStrangeTempAlarm(alarm(i)).ToString & ", "
+                m_bStrangeTemp_Alarm = True
+            End If
+        Next
+        If m_bStrangeTemp_Alarm = True Then
+            sPLCAlarmStr = "온도 상태 이상 = " & sPLCAlarmStr
+        End If
+
+        frmMessageUI.Message = sPLCAlarmStr & vbCrLf
+
+        If m_bEMS_Alarm = False And m_bStrangeTemp_Alarm = False And m_bEOCR_Alarm = False And m_bSSR1_Alarm = False And m_bSSR2_Alarm = False And m_bTempSensor1_Alarm = False And m_bTempSensor2_Alarm = False And m_bDoor_Alarm = False And m_bAxis_X_Alarm = False And m_bAxis_Y1_Alarm = False And m_bAxis_Y2_Alarm = False And m_bAxis_Z_Alarm = False And m_bAlarmMessageShow = False Then
+            frmMessageUI.HideFrame()
+            g_StateMsgHandler.messageToUserErrorCode(CStateMsg.eType.eMsg_State_Log_Alarm_Text, CStateMsg.eStateMsg.ePLC_ALARM_TEMP_EOCR, "OK...")
+            sPLCAlarmStr = ""
+        Else
+            frmMessageUI.ShowFrame()
+            g_StateMsgHandler.messageToUserErrorCode(CStateMsg.eType.eMsg_State_Log_Alarm_Text, CStateMsg.eStateMsg.ePLC_ALARM_TEMP_EOCR, sPLCAlarmStr)
+        End If
+
+        AlarmMsg(sPLCAlarmStr)
+    End Sub
+    Private Sub cPLC_evChangeEOCRAlarm(ByVal alarm() As CDevPLCCommonNode.eTemperatureAlarm) Handles cPLC.evChangeEOCRAlarm
+        If g_SystemInfo.isConnected = False Then Exit Sub '시스템이 연결되지 않은 상태의 이벤트는 무시한다.
+
+        ' Dim sTemp As String = ""
+        '   Dim bAlarm As Boolean = True
+        For i As Integer = 0 To alarm.Length - 1
+            If alarm(i) = CDevPLCCommonNode.eTemperatureAlarm.eNoError Then
+                m_bEOCR_Alarm = False
+            Else
+                sPLCAlarmStr = sPLCAlarmStr & CDevPLCCommonNode.sEOCRAlarm(alarm(i)).ToString & ", "
+                m_bEOCR_Alarm = True
+            End If
+        Next
+        If m_bEOCR_Alarm = True Then
+            sPLCAlarmStr = "EOCR 상태 이상 = " & sPLCAlarmStr
+        End If
+
+        frmMessageUI.Message = sPLCAlarmStr & vbCrLf
+
+        If m_bEMS_Alarm = False And m_bStrangeTemp_Alarm = False And m_bEOCR_Alarm = False And m_bSSR1_Alarm = False And m_bSSR2_Alarm = False And m_bTempSensor1_Alarm = False And m_bTempSensor2_Alarm = False And m_bDoor_Alarm = False And m_bAxis_X_Alarm = False And m_bAxis_Y1_Alarm = False And m_bAxis_Y2_Alarm = False And m_bAxis_Z_Alarm = False And m_bAlarmMessageShow = False Then
+            frmMessageUI.HideFrame()
+            g_StateMsgHandler.messageToUserErrorCode(CStateMsg.eType.eMsg_State_Log_Alarm_Text, CStateMsg.eStateMsg.ePLC_ALARM_TEMP_EOCR, "OK...")
+            sPLCAlarmStr = ""
+        Else
+            frmMessageUI.ShowFrame()
+            g_StateMsgHandler.messageToUserErrorCode(CStateMsg.eType.eMsg_State_Log_Alarm_Text, CStateMsg.eStateMsg.ePLC_ALARM_TEMP_EOCR, sPLCAlarmStr)
+        End If
+
+        AlarmMsg(sPLCAlarmStr)
+    End Sub
+    Private Sub cPLC_evChangeSSR1Alarm(ByVal alarm() As CDevPLCCommonNode.eTemperatureAlarm) Handles cPLC.evChangeSSR1Alarm
+        If g_SystemInfo.isConnected = False Then Exit Sub '시스템이 연결되지 않은 상태의 이벤트는 무시한다.
+
+        ' Dim sTemp As String = ""
+        '   Dim bAlarm As Boolean = True
+        For i As Integer = 0 To alarm.Length - 1
+            If alarm(i) = CDevPLCCommonNode.eTemperatureAlarm.eNoError Then
+                m_bSSR1_Alarm = False
+            Else
+                sPLCAlarmStr = sPLCAlarmStr & CDevPLCCommonNode.sSSR1Alarm(alarm(i)).ToString & ", "
+                m_bSSR1_Alarm = True
+            End If
+        Next
+        If m_bSSR1_Alarm = True Then
+            sPLCAlarmStr = "SSR1 상태 이상 = " & sPLCAlarmStr
+        End If
+
+        frmMessageUI.Message = sPLCAlarmStr & vbCrLf
+
+        If m_bEMS_Alarm = False And m_bStrangeTemp_Alarm = False And m_bEOCR_Alarm = False And m_bSSR1_Alarm = False And m_bSSR2_Alarm = False And m_bTempSensor1_Alarm = False And m_bTempSensor2_Alarm = False And m_bDoor_Alarm = False And m_bAxis_X_Alarm = False And m_bAxis_Y1_Alarm = False And m_bAxis_Y2_Alarm = False And m_bAxis_Z_Alarm = False And m_bAlarmMessageShow = False Then
+            frmMessageUI.HideFrame()
+            g_StateMsgHandler.messageToUserErrorCode(CStateMsg.eType.eMsg_State_Log_Alarm_Text, CStateMsg.eStateMsg.ePLC_ALARM_TEMP_EOCR, "OK...")
+            sPLCAlarmStr = ""
+        Else
+            frmMessageUI.ShowFrame()
+            g_StateMsgHandler.messageToUserErrorCode(CStateMsg.eType.eMsg_State_Log_Alarm_Text, CStateMsg.eStateMsg.ePLC_ALARM_TEMP_EOCR, sPLCAlarmStr)
+        End If
+
+        AlarmMsg(sPLCAlarmStr)
+    End Sub
+    Private Sub cPLC_evChangeSSR2Alarm(ByVal alarm() As CDevPLCCommonNode.eTemperatureAlarm) Handles cPLC.evChangeSSR2Alarm
+        If g_SystemInfo.isConnected = False Then Exit Sub '시스템이 연결되지 않은 상태의 이벤트는 무시한다.
+
+        ' Dim sTemp As String = ""
+        '   Dim bAlarm As Boolean = True
+        For i As Integer = 0 To alarm.Length - 1
+            If alarm(i) = CDevPLCCommonNode.eTemperatureAlarm.eNoError Then
+                m_bSSR2_Alarm = False
+            Else
+                sPLCAlarmStr = sPLCAlarmStr & CDevPLCCommonNode.sSSR2Alarm(alarm(i)).ToString & ", "
+                m_bSSR2_Alarm = True
+            End If
+        Next
+        If m_bSSR2_Alarm = True Then
+            sPLCAlarmStr = "SSR2 상태 이상 = " & sPLCAlarmStr
+        End If
+
+        frmMessageUI.Message = sPLCAlarmStr & vbCrLf
+
+        If m_bEMS_Alarm = False And m_bStrangeTemp_Alarm = False And m_bEOCR_Alarm = False And m_bSSR1_Alarm = False And m_bSSR2_Alarm = False And m_bTempSensor1_Alarm = False And m_bTempSensor2_Alarm = False And m_bDoor_Alarm = False And m_bAxis_X_Alarm = False And m_bAxis_Y1_Alarm = False And m_bAxis_Y2_Alarm = False And m_bAxis_Z_Alarm = False And m_bAlarmMessageShow = False Then
+            frmMessageUI.HideFrame()
+            g_StateMsgHandler.messageToUserErrorCode(CStateMsg.eType.eMsg_State_Log_Alarm_Text, CStateMsg.eStateMsg.ePLC_ALARM_TEMP_EOCR, "OK...")
+            sPLCAlarmStr = ""
+        Else
+            frmMessageUI.ShowFrame()
+            g_StateMsgHandler.messageToUserErrorCode(CStateMsg.eType.eMsg_State_Log_Alarm_Text, CStateMsg.eStateMsg.ePLC_ALARM_TEMP_EOCR, sPLCAlarmStr)
+        End If
+
+        AlarmMsg(sPLCAlarmStr)
+    End Sub
+    Private Sub cPLC_evChangeTempSensor1Alarm(ByVal alarm() As CDevPLCCommonNode.eTemperatureAlarm) Handles cPLC.evChangeTempSensor1Alarm
+        If g_SystemInfo.isConnected = False Then Exit Sub '시스템이 연결되지 않은 상태의 이벤트는 무시한다.
+
+        ' Dim sTemp As String = ""
+        '   Dim bAlarm As Boolean = True
+        For i As Integer = 0 To alarm.Length - 1
+            If alarm(i) = CDevPLCCommonNode.eTemperatureAlarm.eNoError Then
+                m_bTempSensor1_Alarm = False
+            Else
+                sPLCAlarmStr = sPLCAlarmStr & CDevPLCCommonNode.sTempSensor1Alarm(alarm(i)).ToString & ", "
+                m_bTempSensor1_Alarm = True
+            End If
+        Next
+        If m_bTempSensor1_Alarm = True Then
+            sPLCAlarmStr = "온도센서1 상태 이상 = " & sPLCAlarmStr
+        End If
+
+        frmMessageUI.Message = sPLCAlarmStr & vbCrLf
+
+        If m_bEMS_Alarm = False And m_bStrangeTemp_Alarm = False And m_bEOCR_Alarm = False And m_bSSR1_Alarm = False And m_bSSR2_Alarm = False And m_bTempSensor1_Alarm = False And m_bTempSensor2_Alarm = False And m_bDoor_Alarm = False And m_bAxis_X_Alarm = False And m_bAxis_Y1_Alarm = False And m_bAxis_Y2_Alarm = False And m_bAxis_Z_Alarm = False And m_bAlarmMessageShow = False Then
+            frmMessageUI.HideFrame()
+            g_StateMsgHandler.messageToUserErrorCode(CStateMsg.eType.eMsg_State_Log_Alarm_Text, CStateMsg.eStateMsg.ePLC_ALARM_TEMP_EOCR, "OK...")
+            sPLCAlarmStr = ""
+        Else
+            frmMessageUI.ShowFrame()
+            g_StateMsgHandler.messageToUserErrorCode(CStateMsg.eType.eMsg_State_Log_Alarm_Text, CStateMsg.eStateMsg.ePLC_ALARM_TEMP_EOCR, sPLCAlarmStr)
+        End If
+
+        AlarmMsg(sPLCAlarmStr)
+    End Sub
+    Private Sub cPLC_evChangeTempSensor2Alarm(ByVal alarm() As CDevPLCCommonNode.eTemperatureAlarm) Handles cPLC.evChangeTempSensor2Alarm
+        If g_SystemInfo.isConnected = False Then Exit Sub '시스템이 연결되지 않은 상태의 이벤트는 무시한다.
+
+        ' Dim sTemp As String = ""
+        '   Dim bAlarm As Boolean = True
+        For i As Integer = 0 To alarm.Length - 1
+            If alarm(i) = CDevPLCCommonNode.eTemperatureAlarm.eNoError Then
+                m_bTempSensor2_Alarm = False
+            Else
+                sPLCAlarmStr = sPLCAlarmStr & CDevPLCCommonNode.sTempSensor2Alarm(alarm(i)).ToString & ", "
+                m_bTempSensor2_Alarm = True
+            End If
+        Next
+        If m_bTempSensor2_Alarm = True Then
+            sPLCAlarmStr = "온도센서2 상태 이상 = " & sPLCAlarmStr
+        End If
+
+        frmMessageUI.Message = sPLCAlarmStr & vbCrLf
+
+        If m_bEMS_Alarm = False And m_bStrangeTemp_Alarm = False And m_bEOCR_Alarm = False And m_bSSR1_Alarm = False And m_bSSR2_Alarm = False And m_bTempSensor1_Alarm = False And m_bTempSensor2_Alarm = False And m_bDoor_Alarm = False And m_bAxis_X_Alarm = False And m_bAxis_Y1_Alarm = False And m_bAxis_Y2_Alarm = False And m_bAxis_Z_Alarm = False And m_bAlarmMessageShow = False Then
+            frmMessageUI.HideFrame()
+            g_StateMsgHandler.messageToUserErrorCode(CStateMsg.eType.eMsg_State_Log_Alarm_Text, CStateMsg.eStateMsg.ePLC_ALARM_TEMP_EOCR, "OK...")
+            sPLCAlarmStr = ""
+        Else
+            frmMessageUI.ShowFrame()
+            g_StateMsgHandler.messageToUserErrorCode(CStateMsg.eType.eMsg_State_Log_Alarm_Text, CStateMsg.eStateMsg.ePLC_ALARM_TEMP_EOCR, sPLCAlarmStr)
+        End If
+
+        AlarmMsg(sPLCAlarmStr)
+    End Sub
+
+    Private Sub cPLC_evChangeDoorAlarm(ByVal alarm() As CDevPLCCommonNode.eTemperatureAlarm) Handles cPLC.evChangeDoorAlarm
+        If g_SystemInfo.isConnected = False Then Exit Sub '시스템이 연결되지 않은 상태의 이벤트는 무시한다.
+
+        ' Dim sTemp As String = ""
+        '   Dim bAlarm As Boolean = True
+        For i As Integer = 0 To alarm.Length - 1
+            If alarm(i) = CDevPLCCommonNode.eTemperatureAlarm.eNoError Then
+                m_bDoor_Alarm = False
+            Else
+                sPLCAlarmStr = sPLCAlarmStr & CDevPLCCommonNode.sDoorOpenAlarm(alarm(i)).ToString & ", "
+                m_bDoor_Alarm = True
+            End If
+        Next
+        If m_bDoor_Alarm = True Then
+            sPLCAlarmStr = "Door 상태 이상 = " & sPLCAlarmStr
+        End If
+
+        frmMessageUI.Message = sPLCAlarmStr & vbCrLf
+
+        If m_bEMS_Alarm = False And m_bStrangeTemp_Alarm = False And m_bEOCR_Alarm = False And m_bSSR1_Alarm = False And m_bSSR2_Alarm = False And m_bTempSensor1_Alarm = False And m_bTempSensor2_Alarm = False And m_bDoor_Alarm = False And m_bAxis_X_Alarm = False And m_bAxis_Y1_Alarm = False And m_bAxis_Y2_Alarm = False And m_bAxis_Z_Alarm = False And m_bAlarmMessageShow = False Then
+            frmMessageUI.HideFrame()
+            g_StateMsgHandler.messageToUserErrorCode(CStateMsg.eType.eMsg_State_Log_Alarm_Text, CStateMsg.eStateMsg.ePLC_ALARM_TEMP_EOCR, "OK...")
+            sPLCAlarmStr = ""
+        Else
+            frmMessageUI.ShowFrame()
+            g_StateMsgHandler.messageToUserErrorCode(CStateMsg.eType.eMsg_State_Log_Alarm_Text, CStateMsg.eStateMsg.ePLC_ALARM_TEMP_EOCR, sPLCAlarmStr)
+        End If
+
+        AlarmMsg(sPLCAlarmStr)
+    End Sub
+    Private Sub cPLC_evChangeXAxisAlarm(ByVal alarm() As CDevPLCCommonNode.eAxisAlarm) Handles cPLC.evChangeXAxisAlarm
+        If g_SystemInfo.isConnected = False Then Exit Sub '시스템이 연결되지 않은 상태의 이벤트는 무시한다.
+
+        ' Dim sTemp As String = ""
+        '   Dim bAlarm As Boolean = True
+        For i As Integer = 0 To alarm.Length - 1
+            If alarm(i) = CDevPLCCommonNode.eTemperatureAlarm.eNoError Then
+                m_bAxis_X_Alarm = False
+            Else
+                sPLCAlarmStr = sPLCAlarmStr & CDevPLCCommonNode.sXAxisAlarm(alarm(i)).ToString & ", "
+                m_bAxis_X_Alarm = True
+            End If
+        Next
+        If m_bAxis_X_Alarm = True Then
+            sPLCAlarmStr = "X축 상태 이상 = " & sPLCAlarmStr
+        End If
+
+        frmMessageUI.Message = sPLCAlarmStr & vbCrLf
+
+        If m_bEMS_Alarm = False And m_bStrangeTemp_Alarm = False And m_bEOCR_Alarm = False And m_bSSR1_Alarm = False And m_bSSR2_Alarm = False And m_bTempSensor1_Alarm = False And m_bTempSensor2_Alarm = False And m_bDoor_Alarm = False And m_bAxis_X_Alarm = False And m_bAxis_Y1_Alarm = False And m_bAxis_Y2_Alarm = False And m_bAxis_Z_Alarm = False And m_bAlarmMessageShow = False Then
+            frmMessageUI.HideFrame()
+            g_StateMsgHandler.messageToUserErrorCode(CStateMsg.eType.eMsg_State_Log_Alarm_Text, CStateMsg.eStateMsg.ePLC_ALARM_TEMP_EOCR, "OK...")
+            sPLCAlarmStr = ""
+        Else
+            frmMessageUI.ShowFrame()
+            g_StateMsgHandler.messageToUserErrorCode(CStateMsg.eType.eMsg_State_Log_Alarm_Text, CStateMsg.eStateMsg.ePLC_ALARM_TEMP_EOCR, sPLCAlarmStr)
+        End If
+
+        AlarmMsg(sPLCAlarmStr)
+    End Sub
+    Private Sub cPLC_evChangeY1AxisAlarm(ByVal alarm() As CDevPLCCommonNode.eAxisAlarm) Handles cPLC.evChangeY1AxisAlarm
+        If g_SystemInfo.isConnected = False Then Exit Sub '시스템이 연결되지 않은 상태의 이벤트는 무시한다.
+
+        ' Dim sTemp As String = ""
+        '   Dim bAlarm As Boolean = True
+        For i As Integer = 0 To alarm.Length - 1
+            If alarm(i) = CDevPLCCommonNode.eTemperatureAlarm.eNoError Then
+                m_bAxis_Y1_Alarm = False
+            Else
+                sPLCAlarmStr = sPLCAlarmStr & CDevPLCCommonNode.sY1AxisAlarm(alarm(i)).ToString & ", "
+                m_bAxis_Y1_Alarm = True
+            End If
+        Next
+        If m_bAxis_Y1_Alarm = True Then
+            sPLCAlarmStr = "Y1축 상태 이상 = " & sPLCAlarmStr
+        End If
+
+        frmMessageUI.Message = sPLCAlarmStr & vbCrLf
+
+        If m_bEMS_Alarm = False And m_bStrangeTemp_Alarm = False And m_bEOCR_Alarm = False And m_bSSR1_Alarm = False And m_bSSR2_Alarm = False And m_bTempSensor1_Alarm = False And m_bTempSensor2_Alarm = False And m_bDoor_Alarm = False And m_bAxis_X_Alarm = False And m_bAxis_Y1_Alarm = False And m_bAxis_Y2_Alarm = False And m_bAxis_Z_Alarm = False And m_bAlarmMessageShow = False Then
+            frmMessageUI.HideFrame()
+            g_StateMsgHandler.messageToUserErrorCode(CStateMsg.eType.eMsg_State_Log_Alarm_Text, CStateMsg.eStateMsg.ePLC_ALARM_TEMP_EOCR, "OK...")
+            sPLCAlarmStr = ""
+        Else
+            frmMessageUI.ShowFrame()
+            g_StateMsgHandler.messageToUserErrorCode(CStateMsg.eType.eMsg_State_Log_Alarm_Text, CStateMsg.eStateMsg.ePLC_ALARM_TEMP_EOCR, sPLCAlarmStr)
+        End If
+
+        AlarmMsg(sPLCAlarmStr)
+    End Sub
+    Private Sub cPLC_evChangeY2AxisAlarm(ByVal alarm() As CDevPLCCommonNode.eAxisAlarm) Handles cPLC.evChangeY2AxisAlarm
+        If g_SystemInfo.isConnected = False Then Exit Sub '시스템이 연결되지 않은 상태의 이벤트는 무시한다.
+
+        ' Dim sTemp As String = ""
+        '   Dim bAlarm As Boolean = True
+        For i As Integer = 0 To alarm.Length - 1
+            If alarm(i) = CDevPLCCommonNode.eTemperatureAlarm.eNoError Then
+                m_bAxis_Y2_Alarm = False
+            Else
+                sPLCAlarmStr = sPLCAlarmStr & CDevPLCCommonNode.sY2AxisAlarm(alarm(i)).ToString & ", "
+                m_bAxis_Y2_Alarm = True
+            End If
+        Next
+        If m_bAxis_Y2_Alarm = True Then
+            sPLCAlarmStr = "Y2축 상태 이상 = " & sPLCAlarmStr
+        End If
+
+        frmMessageUI.Message = sPLCAlarmStr & vbCrLf
+
+        If m_bEMS_Alarm = False And m_bStrangeTemp_Alarm = False And m_bEOCR_Alarm = False And m_bSSR1_Alarm = False And m_bSSR2_Alarm = False And m_bTempSensor1_Alarm = False And m_bTempSensor2_Alarm = False And m_bDoor_Alarm = False And m_bAxis_X_Alarm = False And m_bAxis_Y1_Alarm = False And m_bAxis_Y2_Alarm = False And m_bAxis_Z_Alarm = False And m_bAlarmMessageShow = False Then
+            frmMessageUI.HideFrame()
+            g_StateMsgHandler.messageToUserErrorCode(CStateMsg.eType.eMsg_State_Log_Alarm_Text, CStateMsg.eStateMsg.ePLC_ALARM_TEMP_EOCR, "OK...")
+            sPLCAlarmStr = ""
+        Else
+            frmMessageUI.ShowFrame()
+            g_StateMsgHandler.messageToUserErrorCode(CStateMsg.eType.eMsg_State_Log_Alarm_Text, CStateMsg.eStateMsg.ePLC_ALARM_TEMP_EOCR, sPLCAlarmStr)
+        End If
+
+        AlarmMsg(sPLCAlarmStr)
+    End Sub
+    Private Sub cPLC_evChangeZAxisAlarm(ByVal alarm() As CDevPLCCommonNode.eAxisAlarm) Handles cPLC.evChangeZAxisAlarm
+        If g_SystemInfo.isConnected = False Then Exit Sub '시스템이 연결되지 않은 상태의 이벤트는 무시한다.
+
+        ' Dim sTemp As String = ""
+        '   Dim bAlarm As Boolean = True
+        For i As Integer = 0 To alarm.Length - 1
+            If alarm(i) = CDevPLCCommonNode.eTemperatureAlarm.eNoError Then
+                m_bAxis_Z_Alarm = False
+            Else
+                sPLCAlarmStr = sPLCAlarmStr & CDevPLCCommonNode.sZAxisAlarm(alarm(i)).ToString & ", "
+                m_bAxis_Z_Alarm = True
+            End If
+        Next
+        If m_bAxis_Z_Alarm = True Then
+            sPLCAlarmStr = "Y2축 상태 이상 = " & sPLCAlarmStr
+        End If
+
+        frmMessageUI.Message = sPLCAlarmStr & vbCrLf
+
+        If m_bEMS_Alarm = False And m_bStrangeTemp_Alarm = False And m_bEOCR_Alarm = False And m_bSSR1_Alarm = False And m_bSSR2_Alarm = False And m_bTempSensor1_Alarm = False And m_bTempSensor2_Alarm = False And m_bDoor_Alarm = False And m_bAxis_X_Alarm = False And m_bAxis_Y1_Alarm = False And m_bAxis_Y2_Alarm = False And m_bAxis_Z_Alarm = False And m_bAlarmMessageShow = False Then
+            frmMessageUI.HideFrame()
+            g_StateMsgHandler.messageToUserErrorCode(CStateMsg.eType.eMsg_State_Log_Alarm_Text, CStateMsg.eStateMsg.ePLC_ALARM_TEMP_EOCR, "OK...")
+            sPLCAlarmStr = ""
+        Else
+            frmMessageUI.ShowFrame()
+            g_StateMsgHandler.messageToUserErrorCode(CStateMsg.eType.eMsg_State_Log_Alarm_Text, CStateMsg.eStateMsg.ePLC_ALARM_TEMP_EOCR, sPLCAlarmStr)
+        End If
+
+        AlarmMsg(sPLCAlarmStr)
+    End Sub
     'Private Sub cPLC_evChangeOverTempZone1Alarm(ByVal alarm() As CDevPLCCommonNode.eTemperatureAlarm) Handles cPLC.evChangeOverTempZone1Alarm
     '    If g_SystemInfo.isConnected = False Then Exit Sub '시스템이 연결되지 않은 상태의 이벤트는 무시한다.
 
@@ -7405,351 +7819,179 @@ Public Class frmMain
     '    AlarmMsg(sPLCAlarmStr)
     'End Sub
 
-    Private Sub cPLC_evChangeYAxisAlarm(ByVal alarm() As CDevPLCCommonNode.eAxisAlarm) Handles cPLC.evChangeYAxisAlarm
-        If g_SystemInfo.isConnected = False Then Exit Sub '시스템이 연결되지 않은 상태의 이벤트는 무시한다.
-
-        Dim sTemp As String = ""
-        '   Dim bAlarm As Boolean = True
-        For i As Integer = 0 To alarm.Length - 1
-            If alarm(i) = CDevPLCCommonNode.eAxisAlarm.eNoError Then
-                m_bAxis_Y_Alarm = False
-            Else
-                Select Case alarm(i)
-                    Case CDevPLCCommonNode.eAxisAlarm.eAxis_Alarm
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(0) & ", "
-                        m_bAxis_Y_Alarm = True
-                    Case CDevPLCCommonNode.eAxisAlarm.eAxis_Servo_Alarm
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(1) & ", "
-                        m_bAxis_Y_Alarm = True
-                    Case CDevPLCCommonNode.eAxisAlarm.eAxis_RLS_Limit_Alarm
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(2) & ", "
-                        m_bAxis_Y_Alarm = True
-                    Case CDevPLCCommonNode.eAxisAlarm.eAxis_FLS_Limit_Alarm
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(3) & ", "
-                        m_bAxis_Y_Alarm = True
-                    Case CDevPLCCommonNode.eAxisAlarm.eAxis_Crush_Alarm
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(4) & ", "
-                        m_bAxis_Y_Alarm = True
-                    Case CDevPLCCommonNode.eAxisAlarm.eAxis_Homming_Timeout
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(5) & ", "
-                        m_bAxis_Y_Alarm = True
-                    Case CDevPLCCommonNode.eAxisAlarm.eAxis_Moving_Timeout
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(6) & ", "
-                        m_bAxis_Y_Alarm = True
-                    Case CDevPLCCommonNode.eAxisAlarm.eAMP_Over_Temp
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(7) & ", "
-                        m_bAxis_Y_Alarm = True
-                    Case CDevPLCCommonNode.eAxisAlarm.eOver_Current
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(8) & ", "
-                        m_bAxis_Y_Alarm = True
-                End Select
-            End If
-        Next
-        If m_bAxis_Y_Alarm = True Then
-            sPLCAlarmStr += "IVL-Y Axis Alarm = " & sTemp
-        End If
-
-        frmMessageUI.Message = sPLCAlarmStr & vbCrLf
-
-        If m_bAlarmMessageShow = False And m_bEMS_Alarm = False And m_bAxis_X_Alarm = False And m_bAxis_Y_Alarm = False And m_bAxis_Z_Alarm = False Then
-            frmMessageUI.HideFrame()
-            g_StateMsgHandler.messageToUserErrorCode(CStateMsg.eType.eMsg_State_Log_Alarm_Text, CStateMsg.eStateMsg.ePLC_ALARM_AXIS, "OK...")
-            sPLCAlarmStr = ""
-        Else
-            frmMessageUI.ShowFrame()
-            g_StateMsgHandler.messageToUserErrorCode(CStateMsg.eType.eMsg_State_Log_Alarm_Text, CStateMsg.eStateMsg.ePLC_ALARM_AXIS, sPLCAlarmStr)
-        End If
-        AlarmMsg(sPLCAlarmStr)
-    End Sub
-
-    Private Sub cPLC_evChangeZAxisAlarm(ByVal alarm() As CDevPLCCommonNode.eAxisAlarm) Handles cPLC.evChangeZAxisAlarm
-        If g_SystemInfo.isConnected = False Then Exit Sub '시스템이 연결되지 않은 상태의 이벤트는 무시한다.
-
-        Dim sTemp As String = ""
-        '   Dim bAlarm As Boolean = True
-        For i As Integer = 0 To alarm.Length - 1
-            If alarm(i) = CDevPLCCommonNode.eAxisAlarm.eNoError Then
-                m_bAxis_Z_Alarm = False
-            Else
-                Select Case alarm(i)
-                    Case CDevPLCCommonNode.eAxisAlarm.eAxis_Alarm
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(0) & ", "
-                        m_bAxis_Z_Alarm = True
-                    Case CDevPLCCommonNode.eAxisAlarm.eAxis_Servo_Alarm
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(1) & ", "
-                        m_bAxis_Z_Alarm = True
-                    Case CDevPLCCommonNode.eAxisAlarm.eAxis_RLS_Limit_Alarm
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(2) & ", "
-                        m_bAxis_Z_Alarm = True
-                    Case CDevPLCCommonNode.eAxisAlarm.eAxis_FLS_Limit_Alarm
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(3) & ", "
-                        m_bAxis_Z_Alarm = True
-                    Case CDevPLCCommonNode.eAxisAlarm.eAxis_Crush_Alarm
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(4) & ", "
-                        m_bAxis_Z_Alarm = True
-                    Case CDevPLCCommonNode.eAxisAlarm.eAxis_Homming_Timeout
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(5) & ", "
-                        m_bAxis_Z_Alarm = True
-                    Case CDevPLCCommonNode.eAxisAlarm.eAxis_Moving_Timeout
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(6) & ", "
-                        m_bAxis_Z_Alarm = True
-                    Case CDevPLCCommonNode.eAxisAlarm.eAMP_Over_Temp
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(7) & ", "
-                        m_bAxis_Z_Alarm = True
-                    Case CDevPLCCommonNode.eAxisAlarm.eOver_Current
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(8) & ", "
-                        m_bAxis_Z_Alarm = True
-                End Select
-
-            End If
-        Next
-        If m_bAxis_Z_Alarm = True Then
-            sPLCAlarmStr += "IVL-Z Axis Alarm = " & sTemp
-        End If
-
-        frmMessageUI.Message = sPLCAlarmStr & vbCrLf
-
-        If m_bAlarmMessageShow = False And m_bEMS_Alarm = False And m_bAxis_X_Alarm = False And m_bAxis_Y_Alarm = False And m_bAxis_Z_Alarm = False Then
-            frmMessageUI.HideFrame()
-            g_StateMsgHandler.messageToUserErrorCode(CStateMsg.eType.eMsg_State_Log_Alarm_Text, CStateMsg.eStateMsg.ePLC_ALARM_AXIS, "OK...")
-            sPLCAlarmStr = ""
-        Else
-            frmMessageUI.ShowFrame()
-            g_StateMsgHandler.messageToUserErrorCode(CStateMsg.eType.eMsg_State_Log_Alarm_Text, CStateMsg.eStateMsg.ePLC_ALARM_AXIS, sPLCAlarmStr)
-        End If
-        AlarmMsg(sPLCAlarmStr)
-    End Sub
-
-    Private Sub cPLC_evChangeTheta1AxisAlarm(alarm() As CDevPLCCommonNode.eAxisAlarm) Handles cPLC.evChangeTheta1AxisAlarm
-        If g_SystemInfo.isConnected = False Then Exit Sub '시스템이 연결되지 않은 상태의 이벤트는 무시한다.
-
-        Dim sTemp As String = ""
-        '   Dim bAlarm As Boolean = True
-        For i As Integer = 0 To alarm.Length - 1
-            If alarm(i) = CDevPLCCommonNode.eAxisAlarm.eNoError Then
-                m_bAxis_Theta1_Alarm = False
-            Else
-                Select Case alarm(i)
-                    Case CDevPLCCommonNode.eAxisAlarm.eAxis_Alarm
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(0) & ", "
-                        m_bAxis_Theta1_Alarm = True
-                    Case CDevPLCCommonNode.eAxisAlarm.eAxis_Servo_Alarm
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(1) & ", "
-                        m_bAxis_Theta1_Alarm = True
-                    Case CDevPLCCommonNode.eAxisAlarm.eAxis_RLS_Limit_Alarm
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(2) & ", "
-                        m_bAxis_Theta1_Alarm = True
-                    Case CDevPLCCommonNode.eAxisAlarm.eAxis_FLS_Limit_Alarm
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(3) & ", "
-                        m_bAxis_Theta1_Alarm = True
-                    Case CDevPLCCommonNode.eAxisAlarm.eAxis_Crush_Alarm
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(4) & ", "
-                        m_bAxis_Theta1_Alarm = True
-                    Case CDevPLCCommonNode.eAxisAlarm.eAxis_Homming_Timeout
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(5) & ", "
-                        m_bAxis_Theta1_Alarm = True
-                    Case CDevPLCCommonNode.eAxisAlarm.eAxis_Moving_Timeout
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(6) & ", "
-                        m_bAxis_Theta1_Alarm = True
-                    Case CDevPLCCommonNode.eAxisAlarm.eAMP_Over_Temp
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(7) & ", "
-                        m_bAxis_Theta1_Alarm = True
-                    Case CDevPLCCommonNode.eAxisAlarm.eOver_Current
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(8) & ", "
-                        m_bAxis_Theta1_Alarm = True
-                End Select
-
-            End If
-        Next
-        If m_bAxis_Theta1_Alarm = True Then
-            sPLCAlarmStr += "IVL-Theta1 Axis Alarm = " & sTemp
-        End If
-
-        frmMessageUI.Message = sPLCAlarmStr & vbCrLf
-
-        If m_bAlarmMessageShow = False And m_bEMS_Alarm = False And m_bAxis_Y_Alarm = False And m_bAxis_Z_Alarm = False And m_bAxis_Theta1_Alarm = False And m_bAxis_Theta2_Alarm = False And m_bAxis_Theta3_Alarm = False And m_bAxis_Theta4_Alarm = False Then
-            frmMessageUI.HideFrame()
-            g_StateMsgHandler.messageToUserErrorCode(CStateMsg.eType.eMsg_State_Log_Alarm_Text, CStateMsg.eStateMsg.ePLC_ALARM_AXIS, "OK...")
-            sPLCAlarmStr = ""
-        Else
-            frmMessageUI.ShowFrame()
-            g_StateMsgHandler.messageToUserErrorCode(CStateMsg.eType.eMsg_State_Log_Alarm_Text, CStateMsg.eStateMsg.ePLC_ALARM_AXIS, sPLCAlarmStr)
-        End If
-        AlarmMsg(sPLCAlarmStr)
-    End Sub
 
     Private Sub cPLC_evChangeTheta2AxisAlarm(alarm() As CDevPLCCommonNode.eAxisAlarm) Handles cPLC.evChangeTheta2AxisAlarm
-        If g_SystemInfo.isConnected = False Then Exit Sub '시스템이 연결되지 않은 상태의 이벤트는 무시한다.
+        'If g_SystemInfo.isConnected = False Then Exit Sub '시스템이 연결되지 않은 상태의 이벤트는 무시한다.
 
-        Dim sTemp As String = ""
-        '   Dim bAlarm As Boolean = True
-        For i As Integer = 0 To alarm.Length - 1
-            If alarm(i) = CDevPLCCommonNode.eAxisAlarm.eNoError Then
-                m_bAxis_Theta2_Alarm = False
-            Else
-                Select Case alarm(i)
-                    Case CDevPLCCommonNode.eAxisAlarm.eAxis_Alarm
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(0) & ", "
-                        m_bAxis_Theta2_Alarm = True
-                    Case CDevPLCCommonNode.eAxisAlarm.eAxis_Servo_Alarm
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(1) & ", "
-                        m_bAxis_Theta2_Alarm = True
-                    Case CDevPLCCommonNode.eAxisAlarm.eAxis_RLS_Limit_Alarm
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(2) & ", "
-                        m_bAxis_Theta2_Alarm = True
-                    Case CDevPLCCommonNode.eAxisAlarm.eAxis_FLS_Limit_Alarm
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(3) & ", "
-                        m_bAxis_Theta2_Alarm = True
-                    Case CDevPLCCommonNode.eAxisAlarm.eAxis_Crush_Alarm
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(4) & ", "
-                        m_bAxis_Theta2_Alarm = True
-                    Case CDevPLCCommonNode.eAxisAlarm.eAxis_Homming_Timeout
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(5) & ", "
-                        m_bAxis_Theta2_Alarm = True
-                    Case CDevPLCCommonNode.eAxisAlarm.eAxis_Moving_Timeout
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(6) & ", "
-                        m_bAxis_Theta2_Alarm = True
-                    Case CDevPLCCommonNode.eAxisAlarm.eAMP_Over_Temp
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(7) & ", "
-                        m_bAxis_Theta2_Alarm = True
-                    Case CDevPLCCommonNode.eAxisAlarm.eOver_Current
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(8) & ", "
-                        m_bAxis_Theta2_Alarm = True
-                End Select
+        'Dim sTemp As String = ""
+        ''   Dim bAlarm As Boolean = True
+        'For i As Integer = 0 To alarm.Length - 1
+        '    If alarm(i) = CDevPLCCommonNode.eAxisAlarm.eNoError Then
+        '        m_bAxis_Theta2_Alarm = False
+        '    Else
+        '        Select Case alarm(i)
+        '            Case CDevPLCCommonNode.eAxisAlarm.eAxis_Alarm
+        '                sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(0) & ", "
+        '                m_bAxis_Theta2_Alarm = True
+        '            Case CDevPLCCommonNode.eAxisAlarm.eAxis_Servo_Alarm
+        '                sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(1) & ", "
+        '                m_bAxis_Theta2_Alarm = True
+        '            Case CDevPLCCommonNode.eAxisAlarm.eAxis_RLS_Limit_Alarm
+        '                sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(2) & ", "
+        '                m_bAxis_Theta2_Alarm = True
+        '            Case CDevPLCCommonNode.eAxisAlarm.eAxis_FLS_Limit_Alarm
+        '                sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(3) & ", "
+        '                m_bAxis_Theta2_Alarm = True
+        '            Case CDevPLCCommonNode.eAxisAlarm.eAxis_Crush_Alarm
+        '                sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(4) & ", "
+        '                m_bAxis_Theta2_Alarm = True
+        '            Case CDevPLCCommonNode.eAxisAlarm.eAxis_Homming_Timeout
+        '                sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(5) & ", "
+        '                m_bAxis_Theta2_Alarm = True
+        '            Case CDevPLCCommonNode.eAxisAlarm.eAxis_Moving_Timeout
+        '                sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(6) & ", "
+        '                m_bAxis_Theta2_Alarm = True
+        '            Case CDevPLCCommonNode.eAxisAlarm.eAMP_Over_Temp
+        '                sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(7) & ", "
+        '                m_bAxis_Theta2_Alarm = True
+        '            Case CDevPLCCommonNode.eAxisAlarm.eOver_Current
+        '                sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(8) & ", "
+        '                m_bAxis_Theta2_Alarm = True
+        '        End Select
 
-            End If
-        Next
-        If m_bAxis_Theta2_Alarm = True Then
-            sPLCAlarmStr += "IVL-Theta2 Axis Alarm = " & sTemp
-        End If
+        '    End If
+        'Next
+        'If m_bAxis_Theta2_Alarm = True Then
+        '    sPLCAlarmStr += "IVL-Theta2 Axis Alarm = " & sTemp
+        'End If
 
-        frmMessageUI.Message = sPLCAlarmStr & vbCrLf
+        'frmMessageUI.Message = sPLCAlarmStr & vbCrLf
 
-        If m_bAlarmMessageShow = False And m_bEMS_Alarm = False And m_bAxis_X_Alarm = False And m_bAxis_Y_Alarm = False And m_bAxis_Z_Alarm = False And m_bAxis_Theta1_Alarm = False And m_bAxis_Theta2_Alarm = False And m_bAxis_Theta3_Alarm = False And m_bAxis_Theta4_Alarm = False Then
-            frmMessageUI.HideFrame()
-            g_StateMsgHandler.messageToUserErrorCode(CStateMsg.eType.eMsg_State_Log_Alarm_Text, CStateMsg.eStateMsg.ePLC_ALARM_AXIS, "OK...")
-            sPLCAlarmStr = ""
-        Else
-            frmMessageUI.ShowFrame()
-            g_StateMsgHandler.messageToUserErrorCode(CStateMsg.eType.eMsg_State_Log_Alarm_Text, CStateMsg.eStateMsg.ePLC_ALARM_AXIS, sPLCAlarmStr)
-        End If
-        AlarmMsg(sPLCAlarmStr)
+        'If m_bAlarmMessageShow = False And m_bEMS_Alarm = False And m_bAxis_X_Alarm = False And m_bAxis_Y_Alarm = False And m_bAxis_Z_Alarm = False And m_bAxis_Theta1_Alarm = False And m_bAxis_Theta2_Alarm = False And m_bAxis_Theta3_Alarm = False And m_bAxis_Theta4_Alarm = False Then
+        '    frmMessageUI.HideFrame()
+        '    g_StateMsgHandler.messageToUserErrorCode(CStateMsg.eType.eMsg_State_Log_Alarm_Text, CStateMsg.eStateMsg.ePLC_ALARM_AXIS, "OK...")
+        '    sPLCAlarmStr = ""
+        'Else
+        '    frmMessageUI.ShowFrame()
+        '    g_StateMsgHandler.messageToUserErrorCode(CStateMsg.eType.eMsg_State_Log_Alarm_Text, CStateMsg.eStateMsg.ePLC_ALARM_AXIS, sPLCAlarmStr)
+        'End If
+        'AlarmMsg(sPLCAlarmStr)
     End Sub
 
     Private Sub cPLC_evChangeTheta3AxisAlarm(alarm() As CDevPLCCommonNode.eAxisAlarm) Handles cPLC.evChangeTheta3AxisAlarm
-        If g_SystemInfo.isConnected = False Then Exit Sub '시스템이 연결되지 않은 상태의 이벤트는 무시한다.
+        'If g_SystemInfo.isConnected = False Then Exit Sub '시스템이 연결되지 않은 상태의 이벤트는 무시한다.
 
-        Dim sTemp As String = ""
-        '   Dim bAlarm As Boolean = True
-        For i As Integer = 0 To alarm.Length - 1
-            If alarm(i) = CDevPLCCommonNode.eAxisAlarm.eNoError Then
-                m_bAxis_Theta3_Alarm = False
-            Else
-                Select Case alarm(i)
-                    Case CDevPLCCommonNode.eAxisAlarm.eAxis_Alarm
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(0) & ", "
-                        m_bAxis_Theta3_Alarm = True
-                    Case CDevPLCCommonNode.eAxisAlarm.eAxis_Servo_Alarm
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(1) & ", "
-                        m_bAxis_Theta3_Alarm = True
-                    Case CDevPLCCommonNode.eAxisAlarm.eAxis_RLS_Limit_Alarm
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(2) & ", "
-                        m_bAxis_Theta3_Alarm = True
-                    Case CDevPLCCommonNode.eAxisAlarm.eAxis_FLS_Limit_Alarm
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(3) & ", "
-                        m_bAxis_Theta3_Alarm = True
-                    Case CDevPLCCommonNode.eAxisAlarm.eAxis_Crush_Alarm
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(4) & ", "
-                        m_bAxis_Theta3_Alarm = True
-                    Case CDevPLCCommonNode.eAxisAlarm.eAxis_Homming_Timeout
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(5) & ", "
-                        m_bAxis_Theta3_Alarm = True
-                    Case CDevPLCCommonNode.eAxisAlarm.eAxis_Moving_Timeout
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(6) & ", "
-                        m_bAxis_Theta3_Alarm = True
-                    Case CDevPLCCommonNode.eAxisAlarm.eAMP_Over_Temp
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(7) & ", "
-                        m_bAxis_Theta3_Alarm = True
-                    Case CDevPLCCommonNode.eAxisAlarm.eOver_Current
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(8) & ", "
-                        m_bAxis_Theta3_Alarm = True
-                End Select
+        'Dim sTemp As String = ""
+        ''   Dim bAlarm As Boolean = True
+        'For i As Integer = 0 To alarm.Length - 1
+        '    If alarm(i) = CDevPLCCommonNode.eAxisAlarm.eNoError Then
+        '        m_bAxis_Theta3_Alarm = False
+        '    Else
+        '        Select Case alarm(i)
+        '            Case CDevPLCCommonNode.eAxisAlarm.eAxis_Alarm
+        '                sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(0) & ", "
+        '                m_bAxis_Theta3_Alarm = True
+        '            Case CDevPLCCommonNode.eAxisAlarm.eAxis_Servo_Alarm
+        '                sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(1) & ", "
+        '                m_bAxis_Theta3_Alarm = True
+        '            Case CDevPLCCommonNode.eAxisAlarm.eAxis_RLS_Limit_Alarm
+        '                sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(2) & ", "
+        '                m_bAxis_Theta3_Alarm = True
+        '            Case CDevPLCCommonNode.eAxisAlarm.eAxis_FLS_Limit_Alarm
+        '                sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(3) & ", "
+        '                m_bAxis_Theta3_Alarm = True
+        '            Case CDevPLCCommonNode.eAxisAlarm.eAxis_Crush_Alarm
+        '                sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(4) & ", "
+        '                m_bAxis_Theta3_Alarm = True
+        '            Case CDevPLCCommonNode.eAxisAlarm.eAxis_Homming_Timeout
+        '                sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(5) & ", "
+        '                m_bAxis_Theta3_Alarm = True
+        '            Case CDevPLCCommonNode.eAxisAlarm.eAxis_Moving_Timeout
+        '                sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(6) & ", "
+        '                m_bAxis_Theta3_Alarm = True
+        '            Case CDevPLCCommonNode.eAxisAlarm.eAMP_Over_Temp
+        '                sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(7) & ", "
+        '                m_bAxis_Theta3_Alarm = True
+        '            Case CDevPLCCommonNode.eAxisAlarm.eOver_Current
+        '                sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(8) & ", "
+        '                m_bAxis_Theta3_Alarm = True
+        '        End Select
 
-            End If
-        Next
-        If m_bAxis_Theta3_Alarm = True Then
-            sPLCAlarmStr += "IVL-Theta3 Axis Alarm = " & sTemp
-        End If
+        '    End If
+        'Next
+        'If m_bAxis_Theta3_Alarm = True Then
+        '    sPLCAlarmStr += "IVL-Theta3 Axis Alarm = " & sTemp
+        'End If
 
-        frmMessageUI.Message = sPLCAlarmStr & vbCrLf
+        'frmMessageUI.Message = sPLCAlarmStr & vbCrLf
 
-        If m_bAlarmMessageShow = False And m_bEMS_Alarm = False And m_bAxis_X_Alarm = False And m_bAxis_Y_Alarm = False And m_bAxis_Z_Alarm = False And m_bAxis_Theta1_Alarm = False And m_bAxis_Theta2_Alarm = False And m_bAxis_Theta3_Alarm = False And m_bAxis_Theta4_Alarm = False Then
-            frmMessageUI.HideFrame()
-            g_StateMsgHandler.messageToUserErrorCode(CStateMsg.eType.eMsg_State_Log_Alarm_Text, CStateMsg.eStateMsg.ePLC_ALARM_AXIS, "OK...")
-            sPLCAlarmStr = ""
-        Else
-            frmMessageUI.ShowFrame()
-            g_StateMsgHandler.messageToUserErrorCode(CStateMsg.eType.eMsg_State_Log_Alarm_Text, CStateMsg.eStateMsg.ePLC_ALARM_AXIS, sPLCAlarmStr)
-        End If
-        AlarmMsg(sPLCAlarmStr)
+        'If m_bAlarmMessageShow = False And m_bEMS_Alarm = False And m_bAxis_X_Alarm = False And m_bAxis_Y_Alarm = False And m_bAxis_Z_Alarm = False And m_bAxis_Theta1_Alarm = False And m_bAxis_Theta2_Alarm = False And m_bAxis_Theta3_Alarm = False And m_bAxis_Theta4_Alarm = False Then
+        '    frmMessageUI.HideFrame()
+        '    g_StateMsgHandler.messageToUserErrorCode(CStateMsg.eType.eMsg_State_Log_Alarm_Text, CStateMsg.eStateMsg.ePLC_ALARM_AXIS, "OK...")
+        '    sPLCAlarmStr = ""
+        'Else
+        '    frmMessageUI.ShowFrame()
+        '    g_StateMsgHandler.messageToUserErrorCode(CStateMsg.eType.eMsg_State_Log_Alarm_Text, CStateMsg.eStateMsg.ePLC_ALARM_AXIS, sPLCAlarmStr)
+        'End If
+        'AlarmMsg(sPLCAlarmStr)
     End Sub
 
     Private Sub cPLC_evChangeTheta4AxisAlarm(alarm() As CDevPLCCommonNode.eAxisAlarm) Handles cPLC.evChangeTheta4AxisAlarm
-        If g_SystemInfo.isConnected = False Then Exit Sub '시스템이 연결되지 않은 상태의 이벤트는 무시한다.
+        'If g_SystemInfo.isConnected = False Then Exit Sub '시스템이 연결되지 않은 상태의 이벤트는 무시한다.
 
-        Dim sTemp As String = ""
-        '   Dim bAlarm As Boolean = True
-        For i As Integer = 0 To alarm.Length - 1
-            If alarm(i) = CDevPLCCommonNode.eAxisAlarm.eNoError Then
-                m_bAxis_Theta4_Alarm = False
-            Else
-                Select Case alarm(i)
-                    Case CDevPLCCommonNode.eAxisAlarm.eAxis_Alarm
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(0) & ", "
-                        m_bAxis_Theta4_Alarm = True
-                    Case CDevPLCCommonNode.eAxisAlarm.eAxis_Servo_Alarm
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(1) & ", "
-                        m_bAxis_Theta4_Alarm = True
-                    Case CDevPLCCommonNode.eAxisAlarm.eAxis_RLS_Limit_Alarm
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(2) & ", "
-                        m_bAxis_Theta4_Alarm = True
-                    Case CDevPLCCommonNode.eAxisAlarm.eAxis_FLS_Limit_Alarm
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(3) & ", "
-                        m_bAxis_Theta4_Alarm = True
-                    Case CDevPLCCommonNode.eAxisAlarm.eAxis_Crush_Alarm
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(4) & ", "
-                        m_bAxis_Theta4_Alarm = True
-                    Case CDevPLCCommonNode.eAxisAlarm.eAxis_Homming_Timeout
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(5) & ", "
-                        m_bAxis_Theta4_Alarm = True
-                    Case CDevPLCCommonNode.eAxisAlarm.eAxis_Moving_Timeout
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(6) & ", "
-                        m_bAxis_Theta4_Alarm = True
-                    Case CDevPLCCommonNode.eAxisAlarm.eAMP_Over_Temp
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(7) & ", "
-                        m_bAxis_Theta4_Alarm = True
-                    Case CDevPLCCommonNode.eAxisAlarm.eOver_Current
-                        sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(8) & ", "
-                        m_bAxis_Theta4_Alarm = True
-                End Select
+        'Dim sTemp As String = ""
+        ''   Dim bAlarm As Boolean = True
+        'For i As Integer = 0 To alarm.Length - 1
+        '    If alarm(i) = CDevPLCCommonNode.eAxisAlarm.eNoError Then
+        '        m_bAxis_Theta4_Alarm = False
+        '    Else
+        '        Select Case alarm(i)
+        '            Case CDevPLCCommonNode.eAxisAlarm.eAxis_Alarm
+        '                sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(0) & ", "
+        '                m_bAxis_Theta4_Alarm = True
+        '            Case CDevPLCCommonNode.eAxisAlarm.eAxis_Servo_Alarm
+        '                sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(1) & ", "
+        '                m_bAxis_Theta4_Alarm = True
+        '            Case CDevPLCCommonNode.eAxisAlarm.eAxis_RLS_Limit_Alarm
+        '                sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(2) & ", "
+        '                m_bAxis_Theta4_Alarm = True
+        '            Case CDevPLCCommonNode.eAxisAlarm.eAxis_FLS_Limit_Alarm
+        '                sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(3) & ", "
+        '                m_bAxis_Theta4_Alarm = True
+        '            Case CDevPLCCommonNode.eAxisAlarm.eAxis_Crush_Alarm
+        '                sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(4) & ", "
+        '                m_bAxis_Theta4_Alarm = True
+        '            Case CDevPLCCommonNode.eAxisAlarm.eAxis_Homming_Timeout
+        '                sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(5) & ", "
+        '                m_bAxis_Theta4_Alarm = True
+        '            Case CDevPLCCommonNode.eAxisAlarm.eAxis_Moving_Timeout
+        '                sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(6) & ", "
+        '                m_bAxis_Theta4_Alarm = True
+        '            Case CDevPLCCommonNode.eAxisAlarm.eAMP_Over_Temp
+        '                sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(7) & ", "
+        '                m_bAxis_Theta4_Alarm = True
+        '            Case CDevPLCCommonNode.eAxisAlarm.eOver_Current
+        '                sTemp = sTemp & CDevPLCCommonNode.AxisAlarm(8) & ", "
+        '                m_bAxis_Theta4_Alarm = True
+        '        End Select
 
-            End If
-        Next
-        If m_bAxis_Theta4_Alarm = True Then
-            sPLCAlarmStr += "IVL-Theta4 Axis Alarm = " & sTemp
-        End If
+        '    End If
+        'Next
+        'If m_bAxis_Theta4_Alarm = True Then
+        '    sPLCAlarmStr += "IVL-Theta4 Axis Alarm = " & sTemp
+        'End If
 
-        frmMessageUI.Message = sPLCAlarmStr & vbCrLf
+        'frmMessageUI.Message = sPLCAlarmStr & vbCrLf
 
-        If m_bAlarmMessageShow = False And m_bEMS_Alarm = False And m_bAxis_X_Alarm = False And m_bAxis_Y_Alarm = False And m_bAxis_Z_Alarm = False And m_bAxis_Theta1_Alarm = False And m_bAxis_Theta2_Alarm = False And m_bAxis_Theta3_Alarm = False And m_bAxis_Theta4_Alarm = False Then
-            frmMessageUI.HideFrame()
-            g_StateMsgHandler.messageToUserErrorCode(CStateMsg.eType.eMsg_State_Log_Alarm_Text, CStateMsg.eStateMsg.ePLC_ALARM_AXIS, "OK...")
-            sPLCAlarmStr = ""
-        Else
-            frmMessageUI.ShowFrame()
-            g_StateMsgHandler.messageToUserErrorCode(CStateMsg.eType.eMsg_State_Log_Alarm_Text, CStateMsg.eStateMsg.ePLC_ALARM_AXIS, sPLCAlarmStr)
-        End If
-        AlarmMsg(sPLCAlarmStr)
+        'If m_bAlarmMessageShow = False And m_bEMS_Alarm = False And m_bAxis_X_Alarm = False And m_bAxis_Y_Alarm = False And m_bAxis_Z_Alarm = False And m_bAxis_Theta1_Alarm = False And m_bAxis_Theta2_Alarm = False And m_bAxis_Theta3_Alarm = False And m_bAxis_Theta4_Alarm = False Then
+        '    frmMessageUI.HideFrame()
+        '    g_StateMsgHandler.messageToUserErrorCode(CStateMsg.eType.eMsg_State_Log_Alarm_Text, CStateMsg.eStateMsg.ePLC_ALARM_AXIS, "OK...")
+        '    sPLCAlarmStr = ""
+        'Else
+        '    frmMessageUI.ShowFrame()
+        '    g_StateMsgHandler.messageToUserErrorCode(CStateMsg.eType.eMsg_State_Log_Alarm_Text, CStateMsg.eStateMsg.ePLC_ALARM_AXIS, sPLCAlarmStr)
+        'End If
+        'AlarmMsg(sPLCAlarmStr)
     End Sub
     Dim sDataTypeFolder() As String = New String() {"IVL Sweep\", "Lifetime\", "Viewing Angle\", "Lifetime_IVL\"}
     Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles tsBtnTestRed.Click
@@ -7952,65 +8194,6 @@ Public Class frmMain
             End If
         End If
     End Sub
-
-    Private Sub cPLC_evChangeDoorAlarm(ByVal alarm() As CDevPLCCommonNode.eDoorAlarm) Handles cPLC.evChangeDoorAlarm
-        If g_SystemInfo.isConnected = False Then Exit Sub '시스템이 연결되지 않은 상태의 이벤트는 무시한다.
-
-        Dim sTemp As String = ""
-        '   Dim bAlarm As Boolean = True
-        For i As Integer = 0 To alarm.Length - 1
-            If alarm(i) = CDevPLCCommonNode.eAxisAlarm.eNoError Then
-                m_bDoor_Alarm = False
-            Else
-                Select Case alarm(i)
-                    Case CDevPLCCommonNode.eDoorAlarm.eSafety_Door_Loop
-                        sTemp = sTemp & CDevPLCCommonNode.sDoorOpenAlarm(0) & ", "
-                        m_bDoor_Alarm = True
-                    Case CDevPLCCommonNode.eDoorAlarm.eSafety_Door_1
-                        sTemp = sTemp & CDevPLCCommonNode.sDoorOpenAlarm(1) & ", "
-                        m_bDoor_Alarm = True
-                    Case CDevPLCCommonNode.eDoorAlarm.eSafety_Door_2
-                        sTemp = sTemp & CDevPLCCommonNode.sDoorOpenAlarm(2) & ", "
-                        m_bDoor_Alarm = True
-                    Case CDevPLCCommonNode.eDoorAlarm.eSafety_Door_3
-                        sTemp = sTemp & CDevPLCCommonNode.sDoorOpenAlarm(3) & ", "
-                        m_bDoor_Alarm = True
-                    Case CDevPLCCommonNode.eDoorAlarm.eSafety_Door_4
-                        sTemp = sTemp & CDevPLCCommonNode.sDoorOpenAlarm(4) & ", "
-                        m_bDoor_Alarm = True
-                    Case CDevPLCCommonNode.eDoorAlarm.eSafety_Door_5
-                        sTemp = sTemp & CDevPLCCommonNode.sDoorOpenAlarm(5) & ", "
-                        m_bDoor_Alarm = True
-                    Case CDevPLCCommonNode.eDoorAlarm.eSafety_Door_6
-                        sTemp = sTemp & CDevPLCCommonNode.sDoorOpenAlarm(6) & ", "
-                        m_bDoor_Alarm = True
-                    Case CDevPLCCommonNode.eDoorAlarm.eSafety_Door_7
-                        sTemp = sTemp & CDevPLCCommonNode.sDoorOpenAlarm(7) & ", "
-                        m_bDoor_Alarm = True
-                    Case CDevPLCCommonNode.eDoorAlarm.eSafety_Door_8
-                        sTemp = sTemp & CDevPLCCommonNode.sDoorOpenAlarm(8) & ", "
-                        m_bDoor_Alarm = True
-                End Select
-            End If
-        Next
-        If m_bDoor_Alarm = True Then
-            sPLCAlarmStr &= "Door Alarm = " & sTemp
-        End If
-
-        frmMessageUI.Message = sPLCAlarmStr & vbCrLf
-
-        If m_bAlarmMessageShow = False And m_bEMS_Alarm = False And m_bAxis_X_Alarm = False And m_bAxis_Y_Alarm = False And m_bAxis_Z_Alarm = False And m_bDoor_Alarm = False Then
-            frmMessageUI.HideFrame()
-            g_StateMsgHandler.messageToUserErrorCode(CStateMsg.eType.eMsg_State_Log_Alarm_Text, CStateMsg.eStateMsg.ePLC_ALARM_DOOR_SAFETY1, "OK...")
-            sPLCAlarmStr = ""
-        Else
-            frmMessageUI.ShowFrame()
-            g_StateMsgHandler.messageToUserErrorCode(CStateMsg.eType.eMsg_State_Log_Alarm_Text, CStateMsg.eStateMsg.ePLC_ALARM_DOOR_SAFETY1, sPLCAlarmStr)
-        End If
-        AlarmMsg(sPLCAlarmStr)
-    End Sub
-
-   
     Private Sub ToolStripButton1_Click_1(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
         If g_SystemInfo.isConnected = True Then
 
@@ -8038,5 +8221,25 @@ Public Class frmMain
             End If
 
         End If
+    End Sub
+    Private Sub EIPPGToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EIPPGToolStripMenuItem.Click
+        Dim dlg As New frmEIPPGControl(Me, g_ConfigInfos)
+        If dlg.ShowDialog = DialogResult.OK Then
+        End If
+    End Sub
+    Private Sub SW7700ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SW7700ToolStripMenuItem.Click
+        Dim dlg As New frmSW7700Control(Me, g_ConfigInfos)
+        If dlg.ShowDialog = DialogResult.OK Then
+        End If
+    End Sub
+
+    Private Sub IVLPowerSupplyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles IVLPowerSupplyToolStripMenuItem.Click
+        Dim dlg As New frmIVLPowerSupplyControl(Me, g_ConfigInfos)
+        If dlg.ShowDialog = DialogResult.OK Then
+        End If
+    End Sub
+
+    Private Sub cPLC_evChangeEQPAlarm(alarm() As CDevPLCCommonNode.eEQPLightAlaram) Handles cPLC.evChangeEQPAlarm
+
     End Sub
 End Class

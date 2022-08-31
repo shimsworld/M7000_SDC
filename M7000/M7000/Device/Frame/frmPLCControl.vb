@@ -4,7 +4,23 @@ Public Class frmPLCControl
 
     Dim m_Main As frmMain
 
-
+    '정현기 알람 추가
+    '경알람
+    Dim ledWeak1Alarm() As LBSoft.IndustrialCtrls.Leds.LBLed
+    Dim ledWeak2Alarm() As LBSoft.IndustrialCtrls.Leds.LBLed
+    '중알람
+    Dim ledEMSAlarm() As LBSoft.IndustrialCtrls.Leds.LBLed
+    Dim ledTempAlarm() As LBSoft.IndustrialCtrls.Leds.LBLed
+    Dim ledEOCRAlarm() As LBSoft.IndustrialCtrls.Leds.LBLed
+    Dim ledSSR1Alarm() As LBSoft.IndustrialCtrls.Leds.LBLed
+    Dim ledSSR2Alarm() As LBSoft.IndustrialCtrls.Leds.LBLed
+    Dim ledTempSensor1Alarm() As LBSoft.IndustrialCtrls.Leds.LBLed
+    Dim ledTempSensor2Alarm() As LBSoft.IndustrialCtrls.Leds.LBLed
+    Dim ledDoorAlarm() As LBSoft.IndustrialCtrls.Leds.LBLed
+    Dim ledXAxisAlarm() As LBSoft.IndustrialCtrls.Leds.LBLed
+    Dim ledY1AxisAlarm() As LBSoft.IndustrialCtrls.Leds.LBLed
+    Dim ledY2AxisAlarm() As LBSoft.IndustrialCtrls.Leds.LBLed
+    Dim ledZAxisAlarm() As LBSoft.IndustrialCtrls.Leds.LBLed
 #Region "Create, Dispose and Init"
 
     Public Sub New(ByVal main As frmMain, ByVal config As frmConfigDevice.sConfig)
@@ -60,6 +76,25 @@ Public Class frmPLCControl
             .SelectedIndex = 0
         End With
 
+
+        '정현기 알람 추가-----------------------------------------------------
+        '경알람
+        ledWeak1Alarm = New LBSoft.IndustrialCtrls.Leds.LBLed() {ledWeak1Alarm_0, ledWeak1Alarm_1, ledWeak1Alarm_2, ledWeak1Alarm_3, ledWeak1Alarm_4, ledWeak1Alarm_5, ledWeak1Alarm_6, ledWeak1Alarm_7, ledWeak1Alarm_8, ledWeak1Alarm_9, ledWeak1Alarm_10, ledWeak1Alarm_11, ledWeak1Alarm_12, ledWeak1Alarm_13, ledWeak1Alarm_14}
+        ledWeak2Alarm = New LBSoft.IndustrialCtrls.Leds.LBLed() {ledWeak2Alarm_0, ledWeak2Alarm_1, ledWeak2Alarm_2, ledWeak2Alarm_3, ledWeak2Alarm_4, ledWeak2Alarm_5, ledWeak2Alarm_6}
+        '중알람
+        ledEMSAlarm = New LBSoft.IndustrialCtrls.Leds.LBLed() {ledEMSAlarm_0, ledEMSAlarm_1, ledEMSAlarm_2, ledEMSAlarm_3, ledEMSAlarm_4, ledEMSAlarm_5, ledEMSAlarm_6, ledEMSAlarm_7}
+        ledTempAlarm = New LBSoft.IndustrialCtrls.Leds.LBLed() {ledTempAlarm_0, ledTempAlarm_1, ledTempAlarm_2, ledTempAlarm_3, ledTempAlarm_4}
+        ledEOCRAlarm = New LBSoft.IndustrialCtrls.Leds.LBLed() {ledEOCRAlarm_0, ledEOCRAlarm_1, ledEOCRAlarm_2, ledEOCRAlarm_3, ledEOCRAlarm_4}
+        ledSSR1Alarm = New LBSoft.IndustrialCtrls.Leds.LBLed() {ledSSR1Alarm_0, ledSSR1Alarm_1, ledSSR1Alarm_2, ledSSR1Alarm_3, ledSSR1Alarm_4}
+        ledSSR2Alarm = New LBSoft.IndustrialCtrls.Leds.LBLed() {ledSSR2Alarm_0, ledSSR2Alarm_1, ledSSR2Alarm_2, ledSSR2Alarm_3, ledSSR2Alarm_4}
+        ledTempSensor1Alarm = New LBSoft.IndustrialCtrls.Leds.LBLed() {ledTS1Alarm_0, ledTS1Alarm_1, ledTS1Alarm_2, ledTS1Alarm_3, ledTS1Alarm_4}
+        ledTempSensor2Alarm = New LBSoft.IndustrialCtrls.Leds.LBLed() {ledTS2Alarm_0, ledTS2Alarm_1, ledTS2Alarm_2, ledTS2Alarm_3, ledTS2Alarm_4}
+        ledDoorAlarm = New LBSoft.IndustrialCtrls.Leds.LBLed() {ledDoorAlarm_0, ledDoorAlarm_1, ledDoorAlarm_2, ledDoorAlarm_3}
+        ledXAxisAlarm = New LBSoft.IndustrialCtrls.Leds.LBLed() {ledXAlarm_0, ledXAlarm_1, ledXAlarm_2, ledXAlarm_3, ledXAlarm_4, ledXAlarm_5, ledXAlarm_6, ledXAlarm_7, ledXAlarm_8, ledXAlarm_9}
+        ledY1AxisAlarm = New LBSoft.IndustrialCtrls.Leds.LBLed() {ledY1Alarm_0, ledY1Alarm_1, ledY1Alarm_2, ledY1Alarm_3, ledY1Alarm_4, ledY1Alarm_5, ledY1Alarm_6, ledY1Alarm_7, ledY1Alarm_8, ledY1Alarm_9, ledY1Alarm_10}
+        ledY2AxisAlarm = New LBSoft.IndustrialCtrls.Leds.LBLed() {ledY2Alarm_0, ledY2Alarm_1, ledY2Alarm_2, ledY2Alarm_3, ledY2Alarm_4, ledY2Alarm_5, ledY2Alarm_6, ledY2Alarm_7, ledY2Alarm_8, ledY2Alarm_9}
+        ledZAxisAlarm = New LBSoft.IndustrialCtrls.Leds.LBLed() {ledZAlarm_0, ledZAlarm_1, ledZAlarm_2, ledZAlarm_3, ledZAlarm_4, ledZAlarm_5, ledZAlarm_6, ledZAlarm_7, ledZAlarm_8, ledZAlarm_9}
+        '----------------------------------------------------------------------------
         ' cbBaudRate.SelectedIndex = 2
     End Sub
 #End Region
@@ -262,41 +297,36 @@ Public Class frmPLCControl
         ledSysStatus_Processing.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
         ledSysStatus_SystemLoading.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
 
-        ledAlarm_Hitter_No_Error.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_Hitter_CH3.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_Hitter_CH1.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_Hitter_CH2.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_Hitter_CH4.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_Hitter_CH5.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_Hitter_CH6.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_Hitter_CH7.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_Hitter_CH8.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_Hitter_CH9.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-
         ledConnectionStateCheck.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
+
+
+        '정현기 알람 추가--------------------------
+        '경알람
+        AlarmWeak1LEDInit()
+        AlarmWeak2LEDInit()
+        '중알람
+        AlarmEMSLEDInit()
+        AlarmTempLEDInit()
+        AlarmEOCRLEDInit()
+        AlarmSSR1LEDInit()
+        AlarmSSR2LEDInit()
+        AlarmTempSensor1LEDInit()
+        AlarmTempSensor2LEDInit()
+        AlarmDoorLEDInit()
+        AlarmXAxisLEDInit()
+        AlarmY1AxisLEDInit()
+        AlarmY2AxisLEDInit()
+        AlarmZAxisLEDInit()
+        '------------------------------------------
 
         MagazineSlotLEDInit(eMagazineShape.eSupply)
 
-        EQPAlarmLEDInit()
-        AxisAlarmLEDInit()
         ServoAlarmLEDInit()
         EQPStatusLEDInit()
 
         MagazineSlotLEDInit(eMagazineShape.eExhaus)
 
         AlarmDoorLEDInit()
-        EmsAlarmLEDInit()
-        HitterAlarmLEDInit()
-        HitterEOCRAlarmLEDInit()
-        HitterSSRAlarmLEDInit()
-        HitterOverZone1AlarmLEDInit()
-        HitterOverZone2AlarmLEDInit()
-        LoaderAxisAlarmLEDInit()
-        UnLoaderAxisAlarmLEDInit()
-        HitterAxisAlarmLEDInit()
-        XAxisAlarmLEDInit()
-        YAxisAlarmLEDInit()
-        ZAxisAlarmLEDInit()
 
     End Sub
 
@@ -306,40 +336,80 @@ Public Class frmPLCControl
     End Enum
 
 #Region "LEDInit"
-
+    '정현기 알람 추가-----------------------------------------------------------------------
+    '경알람
+    Private Sub AlarmWeak1LEDInit()
+        For i = 0 To ledWeak1Alarm.Length - 1
+            ledWeak1Alarm(i).State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
+        Next
+    End Sub
+    Private Sub AlarmWeak2LEDInit()
+        For i = 0 To ledWeak2Alarm.Length - 1
+            ledWeak2Alarm(i).State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
+        Next
+    End Sub
+    '중알람
+    Private Sub AlarmEMSLEDInit()
+        For i = 0 To ledEMSAlarm.Length - 1
+            ledEMSAlarm(i).State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
+        Next
+    End Sub
+    Private Sub AlarmTempLEDInit()
+        For i = 0 To ledTempAlarm.Length - 1
+            ledTempAlarm(i).State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
+        Next
+    End Sub
+    Private Sub AlarmEOCRLEDInit()
+        For i = 0 To ledEOCRAlarm.Length - 1
+            ledEOCRAlarm(i).State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
+        Next
+    End Sub
+    Private Sub AlarmSSR1LEDInit()
+        For i = 0 To ledSSR1Alarm.Length - 1
+            ledSSR1Alarm(i).State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
+        Next
+    End Sub
+    Private Sub AlarmSSR2LEDInit()
+        For i = 0 To ledSSR2Alarm.Length - 1
+            ledSSR2Alarm(i).State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
+        Next
+    End Sub
+    Private Sub AlarmTempSensor1LEDInit()
+        For i = 0 To ledTempSensor1Alarm.Length - 1
+            ledTempSensor1Alarm(i).State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
+        Next
+    End Sub
+    Private Sub AlarmTempSensor2LEDInit()
+        For i = 0 To ledTempSensor2Alarm.Length - 1
+            ledTempSensor2Alarm(i).State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
+        Next
+    End Sub
     Private Sub AlarmDoorLEDInit()
-        ledDoorAlarm_NoError.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledDoorAlarm_Safety_Door.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledDoorAlarm_Door1.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledDoorAlarm_Door2.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledDoorAlarm_Door3.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledDoorAlarm_Door4.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledDoorAlarm_Door5.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledDoorAlarm_Door6.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledDoorAlarm_Door7.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledDoorAlarm_Door8.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
+        For i = 0 To ledDoorAlarm.Length - 1
+            ledDoorAlarm(i).State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
+        Next
     End Sub
-
-    Private Sub AlarmTemperatureLEDInit()
-        ledAxisAlarm_XAxis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-        ledAxisAlarm_YAxis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAxisAlarm_ZAxis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAxisAlarm_Y2Axis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAxisAlarm_THETA1Axis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAxisAlarm_THETA2Axis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAxisAlarm_THETA3Axis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAxisAlarm_THETA4Axis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAxisAlarm_NONE2.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAxisAlarm_NONE3.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
+    Private Sub AlarmXAxisLEDInit()
+        For i = 0 To ledXAxisAlarm.Length - 1
+            ledXAxisAlarm(i).State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
+        Next
     End Sub
-
-    Private Sub AlarmTemperatureControlLEDInit()
-        ledEQPAlarm_None.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-        ledEQPAlarm_None2.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledEQPAlarm_Light.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledEQPAlarm_Heavy.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
+    Private Sub AlarmY1AxisLEDInit()
+        For i = 0 To ledY1AxisAlarm.Length - 1
+            ledY1AxisAlarm(i).State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
+        Next
     End Sub
-
+    Private Sub AlarmY2AxisLEDInit()
+        For i = 0 To ledY2AxisAlarm.Length - 1
+            ledY2AxisAlarm(i).State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
+        Next
+    End Sub
+    Private Sub AlarmZAxisLEDInit()
+        For i = 0 To ledZAxisAlarm.Length - 1
+            ledZAxisAlarm(i).State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
+        Next
+    End Sub
+    '---------------------------------------------------------------------------------------
 
     Private Sub MagazineErrorLEDInit()
         ledMagazineErrorStatus_Down.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
@@ -447,35 +517,7 @@ Public Class frmPLCControl
                 ledExhausSLOT10.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
         End Select
     End Sub
-    Private Sub EQPAlarmLEDInit()
-        ledEQPAlarm_None.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledEQPAlarm_None2.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledEQPAlarm_Light.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledEQPAlarm_Heavy.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-    End Sub
 
-    Private Sub AxisAlarmLEDInit()
-        ledAxisAlarm_NoError.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-
-        ledAxisAlarm_XAxis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAxisAlarm_YAxis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAxisAlarm_ZAxis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-
-
-        ledAxisAlarm_Y2Axis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAxisAlarm_THETA1Axis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAxisAlarm_THETA2Axis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-
-        ledAxisAlarm_THETA3Axis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAxisAlarm_THETA4Axis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAxisAlarm_NONE2.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAxisAlarm_NONE3.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-
-        ledAxisAlarm_STOPERAxis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAxisAlarm_ALIGNAxis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAxisAlarm_ContactAxis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-
-    End Sub
 
     Private Sub ServoAlarmLEDInit()
         ledServoAlarm_XAxis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
@@ -496,128 +538,6 @@ Public Class frmPLCControl
         ledServoAlarm_Contact.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
     End Sub
 
-    Private Sub EmsAlarmLEDInit()
-        ledEMSAlarm_NO_Error.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledEMSAlarm_EMS.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledEMSAlarm_EMS2.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledEMSAlarm_TempLight.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledEMSAlarm_TempHeavy.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledEMSAlarm_SMOKE.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledEMSAlarm_MC1.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledEMSAlarm_MC2.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledEMSAlarm_Safety1.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledEMSAlarm_Safety2.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-    End Sub
-    Private Sub HitterAlarmLEDInit()
-        ledAlarm_Hitter_No_Error.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_Hitter_CH1.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_Hitter_CH2.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_Hitter_CH3.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_Hitter_CH4.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_Hitter_CH5.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_Hitter_CH6.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_Hitter_CH7.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_Hitter_CH8.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_Hitter_CH9.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-    End Sub
-    Private Sub HitterEOCRAlarmLEDInit()
-        ledAlarm_HitterEOCR_No_Error.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_HitterEOCR_CH1.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_HitterEOCR_CH2.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_HitterEOCR_CH3.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_HitterEOCR_CH4.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_HitterEOCR_CH5.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_HitterEOCR_CH6.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_HitterEOCR_CH7.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_HitterEOCR_CH8.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_HitterEOCR_CH9.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-    End Sub
-    Private Sub HitterSSRAlarmLEDInit()
-        ledAlarm_HitterSSR_No_Error.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_HitterSSR_CH1.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_HitterSSR_CH2.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_HitterSSR_CH3.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_HitterSSR_CH4.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_HitterSSR_CH5.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_HitterSSR_CH6.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_HitterSSR_CH7.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_HitterSSR_CH8.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_HitterSSR_CH9.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-    End Sub
-    Private Sub HitterOverZone1AlarmLEDInit()
-        ledAlarm_HitterOverZone1_No_Error.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_HitterOverZone1_CH1.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_HitterOverZone1_CH2.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_HitterOverZone1_CH3.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_HitterOverZone1_CH4.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_HitterOverZone1_CH5.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_HitterOverZone1_CH6.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_HitterOverZone1_CH7.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_HitterOverZone1_CH8.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_HitterOverZone1_CH9.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-    End Sub
-    Private Sub HitterOverZone2AlarmLEDInit()
-        ledAlarm_HitterOverZone2_No_Error.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_HitterOverZone2_CH1.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_HitterOverZone2_CH2.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_HitterOverZone2_CH3.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_HitterOverZone2_CH4.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_HitterOverZone2_CH5.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_HitterOverZone2_CH6.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_HitterOverZone2_CH7.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_HitterOverZone2_CH8.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_HitterOverZone2_CH9.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-    End Sub
-    Private Sub LoaderAxisAlarmLEDInit()
-        ledAlarm_LoaderAxis_NoError.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_LoaderAxis_AMP_OVER.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_LoaderAxis_OVER_CURRENT.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-    End Sub
-    Private Sub UnLoaderAxisAlarmLEDInit()
-        ledAlarm_UnLoaderAxis_NoError.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_UnLoaderAxis_AMP_OVER.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_UnLoaderAxis_OVER_CURRENT.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-    End Sub
-    Private Sub HitterAxisAlarmLEDInit()
-        ledAlarm_HitterAxis_NoError.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_HitterAxis_AMP_OVER.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_HitterAxis_OVER_CURRENT.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-    End Sub
-    Private Sub XAxisAlarmLEDInit()
-        ledAlarm_XAxis_Axis_NoError.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_XAxis_AMP_OVER.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_XAxis_OVER_CURRENT.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-    End Sub
-    Private Sub YAxisAlarmLEDInit()
-        ledAlarm_YAxis_Axis_NoError.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_YAxis_AMP_OVER.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_YAxis_OVER_CURRENT.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-    End Sub
-    Private Sub ZAxisAlarmLEDInit()
-        ledAlarm_ZAxis_Axis_NoError.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_ZAxis_AMP_OVER.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_ZAxis_OVER_CURRENT.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-    End Sub
-    Private Sub Theta1AxisAlarmLEDInit()
-        ledAlarm_Theta1Axis_Axis_NoError.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_Theta1Axis_AMP_OVER.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_Theta1Axis_OVER_CURRENT.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-    End Sub
-    Private Sub Theta2AxisAlarmLEDInit()
-        ledAlarm_Theta2Axis_Axis_NoError.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_Theta2Axis_AMP_OVER.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_Theta2Axis_OVER_CURRENT.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-    End Sub
-    Private Sub Theta3AxisAlarmLEDInit()
-        ledAlarm_Theta3Axis_Axis_NoError.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_Theta3Axis_AMP_OVER.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_Theta3Axis_OVER_CURRENT.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-    End Sub
-    Private Sub Theta4AxisAlarmLEDInit()
-        ledAlarm_Theta4Axis_Axis_NoError.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_Theta4Axis_AMP_OVER.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_Theta4Axis_OVER_CURRENT.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-    End Sub
 #End Region
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
@@ -708,519 +628,470 @@ Public Class frmPLCControl
             End Select
         Next
 
-        ledAlarm_Hitter_No_Error.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_Hitter_CH3.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_Hitter_CH1.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_Hitter_CH2.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_Hitter_CH4.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_Hitter_CH5.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_Hitter_CH6.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_Hitter_CH7.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_Hitter_CH8.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-        ledAlarm_Hitter_CH9.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-
-        For i As Integer = 0 To m_Main.cPLC.Datas.nDISignal.Length - 1
-            Select Case m_Main.cPLC.Datas.nDISignal(i)
-
-                Case CDevPLCCommonNode.eDISignal.eNoError
-                    ledAlarm_Hitter_No_Error.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-                    ledAlarm_Hitter_CH3.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-                    ledAlarm_Hitter_CH1.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-                    ledAlarm_Hitter_CH2.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-                    ledAlarm_Hitter_CH4.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-                    ledAlarm_Hitter_CH5.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-                    ledAlarm_Hitter_CH6.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-                    ledAlarm_Hitter_CH7.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-                    ledAlarm_Hitter_CH8.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-                    ledAlarm_Hitter_CH9.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-                Case CDevPLCCommonNode.eDISignal.eEmergency
-                    ledAlarm_Hitter_No_Error.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eDISignal.eFire
-                    ledAlarm_Hitter_CH1.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eDISignal.eHeater
-                    ledAlarm_Hitter_CH2.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eDISignal.eCurrentLimit
-                    ledAlarm_Hitter_CH3.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eDISignal.eInterlock
-                    ledAlarm_Hitter_CH4.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eDISignal.eCylinder
-                    ledAlarm_Hitter_CH5.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eDISignal.eDoorOpen
-                    ledAlarm_Hitter_CH6.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eDISignal.eSupply
-                    ledAlarm_Hitter_CH7.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eDISignal.eInspectionStage
-                    ledAlarm_Hitter_CH8.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eDISignal.eExhaus
-                    ledAlarm_Hitter_CH9.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-            End Select
-        Next
-
-        'MagazineSlotLEDControl(eMagazineShape.eSupply)
-        'MagazineSlotLEDControl(eMagazineShape.eExhaus)
-
-        EQPAlramLEDControl()
-        AxisAlarmLEDControl()
         ServoAlramLEDControl()
         EQPStateLEDControl()
-
+        '정현기 알람추가-----------------------------------------------------------------------------------
+        '경알람
+        Weak1AlarmLEDControl()
+        Weak2AlarmLEDControl()
+        '중알람
+        EMSLEDControl()
+        TempAlarmLEDControl()
+        EOCRAlarmLEDControl()
+        SSR1AlarmLEDControl()
+        SSR2AlarmLEDControl()
+        TempSensor1AlarmLEDControl()
+        TempSensor2AlarmLEDControl()
         DoorAlarmLEDControl()
-        EMSAlarmLEDControl()
-        'HitterAlarmLEDControl()
-        'HitterEOCRAlarmLEDControl()
-        'HitterSSRAlarmLEDControl()
-        'HitterOVERZONE1AlarmLEDControl()
-        'HitterOVERZONE2AlarmLEDControl()
-        'LoaderAxisAlarmLEDControl()
-        'UnLoaderAxisAlarmLEDControl()
-        ' HitterAxisAlarmLEDControl()
-        xAxisAlarmLEDControl()
-        YAxisAlarmLEDControl()
-        zAxisAlarmLEDControl()
-        Theta1AxisAlarmLEDControl()
-        Theta2AxisAlarmLEDControl()
-        Theta3AxisAlarmLEDControl()
-        Theta4AxisAlarmLEDControl()
-
-        'MagazinePositionLEDControl(eMagazineShape.eSupply)
-        'MagazineStatusLEDControl(eMagazineShape.eSupply)
-
-        'MagazineSlotLEDControl(eMagazineShape.eExhaus)
-        'MagazinePositionLEDControl(eMagazineShape.eExhaus)
-        'MagazineStatusLEDControl(eMagazineShape.eExhaus)
-
-        'MagazineErrorLEDControl()
-        ''   MagazineInspectionStatusLEDControl()
-
-        'AlarmDoorLEDControl()
-        'AlarmTemperatureLEDControl()
-        'AlarmTemperatureControlLEDControl()
-        '  AlarmPCBInfoLEDControl()
-        '  AlarmConbareLEDControl()
-        '  AlarmLiftSensorLEDControl()
-
+        XAxisAlarmLEDControl()
+        Y1AxisAlarmLEDControl()
+        Y2AxisAlarmLEDControl()
+        ZAxisAlarmLEDControl()
+        '--------------------------------------------------------------------------------------------------
         Timer1.Enabled = True
     End Sub
 
 #Region "LEDControl"
+    '정현기 알람추가-----------------------------------------------------------------------------------
+    '경알람
+    Private Sub Weak1AlarmLEDControl()
+        AlarmWeak1LEDInit()
+        For i As Integer = 0 To m_Main.cPLC.Datas.nWeakAlarm1.Length - 1
+            Select Case m_Main.cPLC.Datas.nWeakAlarm1(i)
+                Case CDevPLCCommonNode.eWeakAlarm.eNoError
+                    ledWeak1Alarm_0.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eWeakAlarm.eError1
+                    ledWeak1Alarm_1.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eWeakAlarm.eError2
+                    ledWeak1Alarm_2.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eWeakAlarm.eError3
+                    ledWeak1Alarm_3.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eWeakAlarm.eError4
+                    ledWeak1Alarm_4.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eWeakAlarm.eError5
+                    ledWeak1Alarm_5.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eWeakAlarm.eError6
+                    ledWeak1Alarm_6.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eWeakAlarm.eError7
+                    ledWeak1Alarm_7.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eWeakAlarm.eError8
+                    ledWeak1Alarm_8.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eWeakAlarm.eError9
+                    ledWeak1Alarm_9.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eWeakAlarm.eError10
+                    ledWeak1Alarm_10.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eWeakAlarm.eError11
+                    ledWeak1Alarm_11.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eWeakAlarm.eError12
+                    ledWeak1Alarm_12.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eWeakAlarm.eError13
+                    ledWeak1Alarm_13.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eWeakAlarm.eError14
+                    '없음
+                Case CDevPLCCommonNode.eWeakAlarm.eError15
+                    '없음
+                Case CDevPLCCommonNode.eWeakAlarm.eError16
+                    ledWeak1Alarm_14.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
 
-    Private Sub EQPAlramLEDControl()
+            End Select
+        Next
+    End Sub
+    Private Sub Weak2AlarmLEDControl()
+        AlarmWeak2LEDInit()
+        For i As Integer = 0 To m_Main.cPLC.Datas.nWeakAlarm2.Length - 1
+            Select Case m_Main.cPLC.Datas.nWeakAlarm2(i)
+                Case CDevPLCCommonNode.eWeakAlarm.eNoError
+                    ledWeak2Alarm_0.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eWeakAlarm.eError1
+                    ledWeak2Alarm_1.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eWeakAlarm.eError2
+                    ledWeak2Alarm_2.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eWeakAlarm.eError3
+                    ledWeak2Alarm_3.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eWeakAlarm.eError4
+                    ledWeak2Alarm_4.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eWeakAlarm.eError5
+                    ledWeak2Alarm_5.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eWeakAlarm.eError6
+                    ledWeak2Alarm_6.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eWeakAlarm.eError7
 
-        EQPAlarmLEDInit()
+                Case CDevPLCCommonNode.eWeakAlarm.eError8
 
-        For i As Integer = 0 To m_Main.cPLC.Datas.nEQPAlaram.Length - 1
-            Select Case m_Main.cPLC.Datas.nEQPAlaram(i)
-                Case CDevPLCCommonNode.eEQPLightAlaram.eNoError
-                    ledEQPAlarm_None.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                    ' ledEQPAlarm_None2.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eEQPLightAlaram.eLightAlaram
-                    ledEQPAlarm_Light.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eEQPLightAlaram.eHeavyAlaram
-                    ledEQPAlarm_Heavy.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eWeakAlarm.eError9
+
+                Case CDevPLCCommonNode.eWeakAlarm.eError10
+
+                Case CDevPLCCommonNode.eWeakAlarm.eError11
+
+                Case CDevPLCCommonNode.eWeakAlarm.eError12
+
+                Case CDevPLCCommonNode.eWeakAlarm.eError13
+
+                Case CDevPLCCommonNode.eWeakAlarm.eError14
+
+                Case CDevPLCCommonNode.eWeakAlarm.eError15
+
+                Case CDevPLCCommonNode.eWeakAlarm.eError16
+
+            End Select
+        Next
+    End Sub
+    '중알람
+    Private Sub EMSLEDControl()
+        AlarmEMSLEDInit()
+        For i As Integer = 0 To m_Main.cPLC.Datas.nEmsAlarm.Length - 1
+            Select Case m_Main.cPLC.Datas.nEmsAlarm(i)
+                Case CDevPLCCommonNode.eEMSAlarm.eNoError
+                    ledEMSAlarm_0.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eEMSAlarm.eEMS1
+                    ledEMSAlarm_1.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eEMSAlarm.eSafety_Control_Alarm1
+                    ledEMSAlarm_2.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eEMSAlarm.eSafety_Control_Alarm2
+                    ledEMSAlarm_3.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eEMSAlarm.eMC1_POWEROFF_Alarm
+                    ledEMSAlarm_4.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eEMSAlarm.eMC2_POWEROFF_Alarm
+                    ledEMSAlarm_5.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eEMSAlarm.eControlBoxTempLightAlarm
+                    ledEMSAlarm_6.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eEMSAlarm.eControlBoxSmokeAlarm
+                    ledEMSAlarm_7.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+            End Select
+        Next
+    End Sub
+    Private Sub TempAlarmLEDControl()
+        AlarmTempLEDInit()
+        For i As Integer = 0 To m_Main.cPLC.Datas.nStrangeTempAlarm.Length - 1
+            Select Case m_Main.cPLC.Datas.nStrangeTempAlarm(i)
+                Case CDevPLCCommonNode.eTemperatureAlarm.eNoError
+                    ledTempAlarm_0.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT1
+
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT2
+                    ledTempAlarm_1.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT3
+                    ledTempAlarm_2.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT4
+                    ledTempAlarm_3.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT5
+                    ledTempAlarm_4.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT6
+
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT7
+
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT8
+
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT9
+
+            End Select
+        Next
+    End Sub
+    Private Sub EOCRAlarmLEDControl()
+        AlarmEOCRLEDInit()
+        For i As Integer = 0 To m_Main.cPLC.Datas.nEOCRTempAlarm.Length - 1
+            Select Case m_Main.cPLC.Datas.nEOCRTempAlarm(i)
+                Case CDevPLCCommonNode.eTemperatureAlarm.eNoError
+                    ledEOCRAlarm_0.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT1
+
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT2
+                    ledEOCRAlarm_1.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT3
+                    ledEOCRAlarm_2.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT4
+                    ledEOCRAlarm_3.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT5
+                    ledEOCRAlarm_4.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT6
+
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT7
+
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT8
+
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT9
+
+            End Select
+        Next
+    End Sub
+    Private Sub SSR1AlarmLEDControl()
+        AlarmSSR1LEDInit()
+        For i As Integer = 0 To m_Main.cPLC.Datas.nSSRTemp1Alarm.Length - 1
+            Select Case m_Main.cPLC.Datas.nSSRTemp1Alarm(i)
+                Case CDevPLCCommonNode.eTemperatureAlarm.eNoError
+                    ledSSR1Alarm_0.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT1
+
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT2
+                    ledSSR1Alarm_1.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT3
+                    ledSSR1Alarm_2.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT4
+                    ledSSR1Alarm_3.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT5
+                    ledSSR1Alarm_4.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT6
+
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT7
+
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT8
+
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT9
+
+            End Select
+        Next
+    End Sub
+    Private Sub SSR2AlarmLEDControl()
+        AlarmSSR2LEDInit()
+        For i As Integer = 0 To m_Main.cPLC.Datas.nSSRTemp2Alarm.Length - 1
+            Select Case m_Main.cPLC.Datas.nSSRTemp2Alarm(i)
+                Case CDevPLCCommonNode.eTemperatureAlarm.eNoError
+                    ledSSR2Alarm_0.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT1
+
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT2
+                    ledSSR2Alarm_1.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT3
+                    ledSSR2Alarm_2.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT4
+                    ledSSR2Alarm_3.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT5
+                    ledSSR2Alarm_4.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT6
+
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT7
+
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT8
+
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT9
+
+            End Select
+        Next
+    End Sub
+    Private Sub TempSensor1AlarmLEDControl()
+        AlarmTempSensor1LEDInit()
+        For i As Integer = 0 To m_Main.cPLC.Datas.nTempSensor1Alarm.Length - 1
+            Select Case m_Main.cPLC.Datas.nTempSensor1Alarm(i)
+                Case CDevPLCCommonNode.eTemperatureAlarm.eNoError
+                    ledTS1Alarm_0.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT1
+
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT2
+                    ledTS1Alarm_1.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT3
+                    ledTS1Alarm_2.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT4
+                    ledTS1Alarm_3.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT5
+                    ledTS1Alarm_4.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT6
+
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT7
+
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT8
+
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT9
+
+            End Select
+        Next
+    End Sub
+    Private Sub TempSensor2AlarmLEDControl()
+        AlarmTempSensor2LEDInit()
+        For i As Integer = 0 To m_Main.cPLC.Datas.nTempSensor2Alarm.Length - 1
+            Select Case m_Main.cPLC.Datas.nTempSensor2Alarm(i)
+                Case CDevPLCCommonNode.eTemperatureAlarm.eNoError
+                    ledTS2Alarm_0.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT1
+
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT2
+                    ledTS2Alarm_1.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT3
+                    ledTS2Alarm_2.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT4
+                    ledTS2Alarm_3.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT5
+                    ledTS2Alarm_4.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT6
+
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT7
+
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT8
+
+                Case CDevPLCCommonNode.eTemperatureAlarm.eT9
+
             End Select
         Next
     End Sub
     Private Sub DoorAlarmLEDControl()
         AlarmDoorLEDInit()
-
         For i As Integer = 0 To m_Main.cPLC.Datas.nDoorAlarm.Length - 1
             Select Case m_Main.cPLC.Datas.nDoorAlarm(i)
-                Case CDevPLCCommonNode.eDoorAlarm.eNoError
-                    ledDoorAlarm_NoError.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eDoorAlarm.eSafety_Door_Loop
-                    ledDoorAlarm_Safety_Door.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eDoorAlarm.eSafety_Door_1
-                    ledDoorAlarm_Door1.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eDoorAlarm.eSafety_Door_2
-                    ledDoorAlarm_Door2.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eDoorAlarm.eSafety_Door_3
-                    ledDoorAlarm_Door3.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eDoorAlarm.eSafety_Door_4
-                    ledDoorAlarm_Door4.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eDoorAlarm.eSafety_Door_5
-                    ledDoorAlarm_Door5.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eDoorAlarm.eSafety_Door_6
-                    ledDoorAlarm_Door6.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eDoorAlarm.eSafety_Door_7
-                    ledDoorAlarm_Door7.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eDoorAlarm.eSafety_Door_8
-                    ledDoorAlarm_Door8.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-            End Select
-        Next
-    End Sub
-
-    Private Sub EMSAlarmLEDControl()
-        EmsAlarmLEDInit()
-
-        For i As Integer = 0 To m_Main.cPLC.Datas.nEmsAlarm.Length - 1
-            Select Case m_Main.cPLC.Datas.nEmsAlarm(i)
-                Case CDevPLCCommonNode.eEMSAlarm.eNoError
-                    ledEMSAlarm_NO_Error.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eEMSAlarm.eEMS1
-                    ledEMSAlarm_EMS.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eEMSAlarm.eEMS2
-                    ledEMSAlarm_EMS2.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eEMSAlarm.eControlBoxTempLightAlarm
-                    ledEMSAlarm_TempLight.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eEMSAlarm.eControlBoxTempHeavyAlarm
-                    ledEMSAlarm_TempHeavy.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eEMSAlarm.eControlBoxSmokeAlarm
-                    ledEMSAlarm_SMOKE.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eEMSAlarm.eSafety_Control_Alarm1
-                    ledEMSAlarm_Safety1.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eEMSAlarm.eSafety_Control_Alarm2
-                    ledEMSAlarm_Safety2.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eEMSAlarm.eMC1_POWEROFF_Alarm
-                    ledEMSAlarm_MC1.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eEMSAlarm.eMC2_POWEROFF_Alarm
-                    ledEMSAlarm_MC2.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-            End Select
-        Next
-
-    End Sub
-    Private Sub HitterAlarmLEDControl()
-        HitterAlarmLEDInit()
-
-        For i As Integer = 0 To m_Main.cPLC.Datas.nStrangeTempAlarm.Length - 1
-            Select Case m_Main.cPLC.Datas.nStrangeTempAlarm(i)
                 Case CDevPLCCommonNode.eTemperatureAlarm.eNoError
-                    ledAlarm_Hitter_No_Error.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                    ledDoorAlarm_0.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
                 Case CDevPLCCommonNode.eTemperatureAlarm.eT1
-                    ledAlarm_Hitter_CH1.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                    ledDoorAlarm_1.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
                 Case CDevPLCCommonNode.eTemperatureAlarm.eT2
-                    ledAlarm_Hitter_CH2.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                    ledDoorAlarm_2.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
                 Case CDevPLCCommonNode.eTemperatureAlarm.eT3
-                    ledAlarm_Hitter_CH3.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                    ledDoorAlarm_3.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
                 Case CDevPLCCommonNode.eTemperatureAlarm.eT4
-                    ledAlarm_Hitter_CH4.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+
                 Case CDevPLCCommonNode.eTemperatureAlarm.eT5
-                    ledAlarm_Hitter_CH5.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+
                 Case CDevPLCCommonNode.eTemperatureAlarm.eT6
-                    ledAlarm_Hitter_CH6.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+
                 Case CDevPLCCommonNode.eTemperatureAlarm.eT7
-                    ledAlarm_Hitter_CH7.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+
                 Case CDevPLCCommonNode.eTemperatureAlarm.eT8
-                    ledAlarm_Hitter_CH8.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+
                 Case CDevPLCCommonNode.eTemperatureAlarm.eT9
-                    ledAlarm_Hitter_CH9.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-            End Select
-        Next
 
-    End Sub
-    Private Sub HitterEOCRAlarmLEDControl()
-        HitterEOCRAlarmLEDInit()
-
-        For i As Integer = 0 To m_Main.cPLC.Datas.nEOCRTempAlarm.Length - 1
-            Select Case m_Main.cPLC.Datas.nEOCRTempAlarm(i)
-                Case CDevPLCCommonNode.eTemperatureAlarm.eNoError
-                    ledAlarm_HitterEOCR_No_Error.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eTemperatureAlarm.eT1
-                    ledAlarm_HitterEOCR_CH1.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eTemperatureAlarm.eT2
-                    ledAlarm_HitterEOCR_CH2.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eTemperatureAlarm.eT3
-                    ledAlarm_HitterEOCR_CH3.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eTemperatureAlarm.eT4
-                    ledAlarm_HitterEOCR_CH4.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eTemperatureAlarm.eT5
-                    ledAlarm_HitterEOCR_CH5.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eTemperatureAlarm.eT6
-                    ledAlarm_HitterEOCR_CH6.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eTemperatureAlarm.eT7
-                    ledAlarm_HitterEOCR_CH7.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eTemperatureAlarm.eT8
-                    ledAlarm_HitterEOCR_CH8.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eTemperatureAlarm.eT9
-                    ledAlarm_HitterEOCR_CH9.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-            End Select
-        Next
-
-    End Sub
-    Private Sub HitterSSRAlarmLEDControl()
-        HitterSSRAlarmLEDInit()
-
-        For i As Integer = 0 To m_Main.cPLC.Datas.nSSRTempAlarm.Length - 1
-            Select Case m_Main.cPLC.Datas.nSSRTempAlarm(i)
-                Case CDevPLCCommonNode.eTemperatureAlarm.eNoError
-                    ledAlarm_HitterSSR_No_Error.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eTemperatureAlarm.eT1
-                    ledAlarm_HitterSSR_CH1.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eTemperatureAlarm.eT2
-                    ledAlarm_HitterSSR_CH2.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eTemperatureAlarm.eT3
-                    ledAlarm_HitterSSR_CH3.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eTemperatureAlarm.eT4
-                    ledAlarm_HitterSSR_CH4.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eTemperatureAlarm.eT5
-                    ledAlarm_HitterSSR_CH5.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eTemperatureAlarm.eT6
-                    ledAlarm_HitterSSR_CH6.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eTemperatureAlarm.eT7
-                    ledAlarm_HitterSSR_CH7.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eTemperatureAlarm.eT8
-                    ledAlarm_HitterSSR_CH8.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eTemperatureAlarm.eT9
-                    ledAlarm_HitterSSR_CH9.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-            End Select
-        Next
-
-    End Sub
-    Private Sub HitterOVERZONE1AlarmLEDControl()
-        HitterOverZone1AlarmLEDInit()
-
-        For i As Integer = 0 To m_Main.cPLC.Datas.nOverTempAlarm_Zone1.Length - 1
-            Select Case m_Main.cPLC.Datas.nOverTempAlarm_Zone1(i)
-                Case CDevPLCCommonNode.eTemperatureAlarm.eNoError
-                    ledAlarm_HitterOverZone1_No_Error.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eTemperatureAlarm.eT1
-                    ledAlarm_HitterOverZone1_CH1.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eTemperatureAlarm.eT2
-                    ledAlarm_HitterOverZone1_CH2.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eTemperatureAlarm.eT3
-                    ledAlarm_HitterOverZone1_CH3.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eTemperatureAlarm.eT4
-                    ledAlarm_HitterOverZone1_CH4.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eTemperatureAlarm.eT5
-                    ledAlarm_HitterOverZone1_CH5.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eTemperatureAlarm.eT6
-                    ledAlarm_HitterOverZone1_CH6.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eTemperatureAlarm.eT7
-                    ledAlarm_HitterOverZone1_CH7.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eTemperatureAlarm.eT8
-                    ledAlarm_HitterOverZone1_CH8.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eTemperatureAlarm.eT9
-                    ledAlarm_HitterOverZone1_CH9.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
             End Select
         Next
     End Sub
-    Private Sub HitterOVERZONE2AlarmLEDControl()
-        HitterOverZone2AlarmLEDInit()
-
-        For i As Integer = 0 To m_Main.cPLC.Datas.nOverTempAlarm_Zone2.Length - 1
-            Select Case m_Main.cPLC.Datas.nOverTempAlarm_Zone2(i)
-                Case CDevPLCCommonNode.eTemperatureAlarm.eNoError
-                    ledAlarm_HitterOverZone2_No_Error.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eTemperatureAlarm.eT1
-                    ledAlarm_HitterOverZone2_CH1.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eTemperatureAlarm.eT2
-                    ledAlarm_HitterOverZone2_CH2.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eTemperatureAlarm.eT3
-                    ledAlarm_HitterOverZone2_CH3.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eTemperatureAlarm.eT4
-                    ledAlarm_HitterOverZone2_CH4.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eTemperatureAlarm.eT5
-                    ledAlarm_HitterOverZone2_CH5.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eTemperatureAlarm.eT6
-                    ledAlarm_HitterOverZone2_CH6.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eTemperatureAlarm.eT7
-                    ledAlarm_HitterOverZone2_CH7.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eTemperatureAlarm.eT8
-                    ledAlarm_HitterOverZone2_CH8.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eTemperatureAlarm.eT9
-                    ledAlarm_HitterOverZone2_CH9.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-            End Select
-        Next
-    End Sub
-    Private Sub LoaderAxisAlarmLEDControl()
-        LoaderAxisAlarmLEDInit()
-
-        For i As Integer = 0 To m_Main.cPLC.Datas.nLoaderAxisAlarm.Length - 1
-            Select Case m_Main.cPLC.Datas.nLoaderAxisAlarm(i)
-                Case CDevPLCCommonNode.eAxisAlarm.eNoError
-                    ledAlarm_LoaderAxis_NoError.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eAxisAlarm.eAMP_Over_Temp
-                    ledAlarm_LoaderAxis_AMP_OVER.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eAxisAlarm.eOver_Current
-                    ledAlarm_LoaderAxis_OVER_CURRENT.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-            End Select
-        Next
-
-    End Sub
-    Private Sub UnLoaderAxisAlarmLEDControl()
-        UnLoaderAxisAlarmLEDInit()
-
-        For i As Integer = 0 To m_Main.cPLC.Datas.nUnLoaderAxisAlarm.Length - 1
-            Select Case m_Main.cPLC.Datas.nUnLoaderAxisAlarm(i)
-                Case CDevPLCCommonNode.eAxisAlarm.eNoError
-                    ledAlarm_UnLoaderAxis_NoError.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eAxisAlarm.eAMP_Over_Temp
-                    ledAlarm_UnLoaderAxis_AMP_OVER.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eAxisAlarm.eOver_Current
-                    ledAlarm_UnLoaderAxis_OVER_CURRENT.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-            End Select
-        Next
-
-    End Sub
-    Private Sub HitterAxisAlarmLEDControl()
-        HitterAxisAlarmLEDInit()
-
-        For i As Integer = 0 To m_Main.cPLC.Datas.nHitterAxisAlarm.Length - 1
-            Select Case m_Main.cPLC.Datas.nHitterAxisAlarm(i)
-                Case CDevPLCCommonNode.eAxisAlarm.eNoError
-                    ledAlarm_HitterAxis_NoError.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eAxisAlarm.eAMP_Over_Temp
-                    ledAlarm_HitterAxis_AMP_OVER.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eAxisAlarm.eOver_Current
-                    ledAlarm_HitterAxis_OVER_CURRENT.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-            End Select
-        Next
-
-    End Sub
-    Private Sub xAxisAlarmLEDControl()
-        XAxisAlarmLEDInit()
-
+    Private Sub XAxisAlarmLEDControl()
+        AlarmXAxisLEDInit()
         For i As Integer = 0 To m_Main.cPLC.Datas.nXAxisAlarm.Length - 1
             Select Case m_Main.cPLC.Datas.nXAxisAlarm(i)
                 Case CDevPLCCommonNode.eAxisAlarm.eNoError
-                    ledAlarm_XAxis_Axis_NoError.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                    ledXAlarm_0.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eAxisAlarm.eAxis_Alarm
+                    ledXAlarm_1.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eAxisAlarm.eAxis_Servo_Alarm
+                    ledXAlarm_2.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eAxisAlarm.eAxis_RLS_Limit_Alarm
+                    ledXAlarm_3.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eAxisAlarm.eAxis_FLS_Limit_Alarm
+                    ledXAlarm_4.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eAxisAlarm.eAxis_Crush_Alarm
+                    ledXAlarm_5.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eAxisAlarm.eAxis_Homming_Timeout
+                    ledXAlarm_6.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eAxisAlarm.eAxis_Moving_Timeout
+                    ledXAlarm_7.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
                 Case CDevPLCCommonNode.eAxisAlarm.eAMP_Over_Temp
-                    ledAlarm_XAxis_AMP_OVER.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                    ledXAlarm_8.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
                 Case CDevPLCCommonNode.eAxisAlarm.eOver_Current
-                    ledAlarm_XAxis_OVER_CURRENT.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                    ledXAlarm_9.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eAxisAlarm.eSynchronous_axispositional_alarm
+
             End Select
         Next
-
     End Sub
-    Private Sub YAxisAlarmLEDControl()
-        YAxisAlarmLEDInit()
-
-        For i As Integer = 0 To m_Main.cPLC.Datas.nYAxisAlarm.Length - 1
-            Select Case m_Main.cPLC.Datas.nYAxisAlarm(i)
+    Private Sub Y1AxisAlarmLEDControl()
+        AlarmY1AxisLEDInit()
+        For i As Integer = 0 To m_Main.cPLC.Datas.nY1AxisAlarm.Length - 1
+            Select Case m_Main.cPLC.Datas.nY1AxisAlarm(i)
                 Case CDevPLCCommonNode.eAxisAlarm.eNoError
-                    ledAlarm_YAxis_Axis_NoError.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                    ledY1Alarm_0.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eAxisAlarm.eAxis_Alarm
+                    ledY1Alarm_1.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eAxisAlarm.eAxis_Servo_Alarm
+                    ledY1Alarm_2.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eAxisAlarm.eAxis_RLS_Limit_Alarm
+                    ledY1Alarm_3.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eAxisAlarm.eAxis_FLS_Limit_Alarm
+                    ledY1Alarm_4.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eAxisAlarm.eAxis_Crush_Alarm
+                    ledY1Alarm_5.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eAxisAlarm.eAxis_Homming_Timeout
+                    ledY1Alarm_6.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eAxisAlarm.eAxis_Moving_Timeout
+                    ledY1Alarm_7.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
                 Case CDevPLCCommonNode.eAxisAlarm.eAMP_Over_Temp
-                    ledAlarm_YAxis_AMP_OVER.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                    ledY1Alarm_8.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
                 Case CDevPLCCommonNode.eAxisAlarm.eOver_Current
-                    ledAlarm_YAxis_OVER_CURRENT.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                    ledY1Alarm_9.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eAxisAlarm.eSynchronous_axispositional_alarm
+                    ledY1Alarm_10.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
             End Select
         Next
-
     End Sub
-    Private Sub zAxisAlarmLEDControl()
-        ZAxisAlarmLEDInit()
+    Private Sub Y2AxisAlarmLEDControl()
+        AlarmY2AxisLEDInit()
+        For i As Integer = 0 To m_Main.cPLC.Datas.nY2AxisAlarm.Length - 1
+            Select Case m_Main.cPLC.Datas.nY2AxisAlarm(i)
+                Case CDevPLCCommonNode.eAxisAlarm.eNoError
+                    ledY2Alarm_0.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eAxisAlarm.eAxis_Alarm
+                    ledY2Alarm_1.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eAxisAlarm.eAxis_Servo_Alarm
+                    ledY2Alarm_2.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eAxisAlarm.eAxis_RLS_Limit_Alarm
+                    ledY2Alarm_3.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eAxisAlarm.eAxis_FLS_Limit_Alarm
+                    ledY2Alarm_4.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eAxisAlarm.eAxis_Crush_Alarm
+                    ledY2Alarm_5.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eAxisAlarm.eAxis_Homming_Timeout
+                    ledY2Alarm_6.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eAxisAlarm.eAxis_Moving_Timeout
+                    ledY2Alarm_7.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eAxisAlarm.eAMP_Over_Temp
+                    ledY2Alarm_8.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eAxisAlarm.eOver_Current
+                    ledY2Alarm_9.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eAxisAlarm.eSynchronous_axispositional_alarm
 
+            End Select
+        Next
+    End Sub
+    Private Sub ZAxisAlarmLEDControl()
+        AlarmZAxisLEDInit()
         For i As Integer = 0 To m_Main.cPLC.Datas.nZAxisAlarm.Length - 1
             Select Case m_Main.cPLC.Datas.nZAxisAlarm(i)
                 Case CDevPLCCommonNode.eAxisAlarm.eNoError
-                    ledAlarm_ZAxis_Axis_NoError.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                    ledZAlarm_0.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eAxisAlarm.eAxis_Alarm
+                    ledZAlarm_1.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eAxisAlarm.eAxis_Servo_Alarm
+                    ledZAlarm_2.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eAxisAlarm.eAxis_RLS_Limit_Alarm
+                    ledZAlarm_3.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eAxisAlarm.eAxis_FLS_Limit_Alarm
+                    ledZAlarm_4.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eAxisAlarm.eAxis_Crush_Alarm
+                    ledZAlarm_5.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eAxisAlarm.eAxis_Homming_Timeout
+                    ledZAlarm_6.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eAxisAlarm.eAxis_Moving_Timeout
+                    ledZAlarm_7.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
                 Case CDevPLCCommonNode.eAxisAlarm.eAMP_Over_Temp
-                    ledAlarm_ZAxis_AMP_OVER.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                    ledZAlarm_8.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
                 Case CDevPLCCommonNode.eAxisAlarm.eOver_Current
-                    ledAlarm_ZAxis_OVER_CURRENT.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-            End Select
-        Next
-
-    End Sub
-
-    Private Sub Theta1AxisAlarmLEDControl()
-        Theta1AxisAlarmLEDInit()
-        For i As Integer = 0 To m_Main.cPLC.Datas.nTheta1AxisAlarm.Length - 1
-            Select Case m_Main.cPLC.Datas.nTheta1AxisAlarm(i)
-                Case CDevPLCCommonNode.eAxisAlarm.eNoError
-                    ledAlarm_Theta1Axis_Axis_NoError.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eAxisAlarm.eAMP_Over_Temp
-                    ledAlarm_Theta1Axis_AMP_OVER.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eAxisAlarm.eOver_Current
-                    ledAlarm_Theta1Axis_OVER_CURRENT.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-            End Select
-        Next
-    End Sub
-    Private Sub Theta2AxisAlarmLEDControl()
-        Theta2AxisAlarmLEDInit()
-        For i As Integer = 0 To m_Main.cPLC.Datas.nTheta2AxisAlarm.Length - 1
-            Select Case m_Main.cPLC.Datas.nTheta2AxisAlarm(i)
-                Case CDevPLCCommonNode.eAxisAlarm.eNoError
-                    ledAlarm_Theta2Axis_Axis_NoError.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eAxisAlarm.eAMP_Over_Temp
-                    ledAlarm_Theta2Axis_AMP_OVER.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eAxisAlarm.eOver_Current
-                    ledAlarm_Theta2Axis_OVER_CURRENT.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                    ledZAlarm_9.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eAxisAlarm.eSynchronous_axispositional_alarm
 
             End Select
         Next
     End Sub
-    Private Sub Theta3AxisAlarmLEDControl()
-        Theta3AxisAlarmLEDInit()
-        For i As Integer = 0 To m_Main.cPLC.Datas.nTheta3AxisAlarm.Length - 1
-            Select Case m_Main.cPLC.Datas.nTheta3AxisAlarm(i)
-                Case CDevPLCCommonNode.eAxisAlarm.eNoError
-                    ledAlarm_Theta3Axis_Axis_NoError.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eAxisAlarm.eAMP_Over_Temp
-                    ledAlarm_Theta3Axis_AMP_OVER.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eAxisAlarm.eOver_Current
-                    ledAlarm_Theta3Axis_OVER_CURRENT.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-
-            End Select
-        Next
-    End Sub
-    Private Sub Theta4AxisAlarmLEDControl()
-        Theta4AxisAlarmLEDInit()
-        For i As Integer = 0 To m_Main.cPLC.Datas.nTheta4AxisAlarm.Length - 1
-            Select Case m_Main.cPLC.Datas.nTheta4AxisAlarm(i)
-                Case CDevPLCCommonNode.eAxisAlarm.eNoError
-                    ledAlarm_Theta4Axis_Axis_NoError.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eAxisAlarm.eAMP_Over_Temp
-                    ledAlarm_Theta4Axis_AMP_OVER.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eAxisAlarm.eOver_Current
-                    ledAlarm_Theta4Axis_OVER_CURRENT.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-            End Select
-        Next
-    End Sub
+    '--------------------------------------------------------------------------------------------------
     Private Sub ServoAlramLEDControl()
 
         ServoAlarmLEDInit()
 
         For i As Integer = 0 To m_Main.cPLC.Datas.nServoAlarm.Length - 1
             Select Case m_Main.cPLC.Datas.nServoAlarm(i)
-                ' Case CDevPLCCommonNode.eServoAlarm.eX_Axis_Servo_ON
-                ' ledServoAlarm_XAxis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                Case CDevPLCCommonNode.eServoAlarm.eX_Axis_Servo_ON
+                    ledServoAlarm_XAxis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
                 Case CDevPLCCommonNode.eServoAlarm.eY1_Axis_Servo_ON
                     ledServoAlarm_Y1Axis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
                 Case CDevPLCCommonNode.eServoAlarm.eZ_Axis_Servo_ON
                     ledServoAlarm_ZAxis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eServoAlarm.eTheta1_Axis_Servo_ON
-                    ledServoAlarm_Theta1Axis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eServoAlarm.eTheta2_Axis_Servo_ON
-                    ledServoAlarm_Theta2Axis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eServoAlarm.eTheta3_Axis_Servo_ON
-                    ledServoAlarm_Theta3Axis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eServoAlarm.eTheta4_Axis_Servo_ON
-                    ledServoAlarm_Theta4Axis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                    'Case CDevPLCCommonNode.eServoAlarm.eTheta1_Axis_Servo_ON
+                    '    ledServoAlarm_Theta1Axis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                    'Case CDevPLCCommonNode.eServoAlarm.eTheta2_Axis_Servo_ON
+                    '    ledServoAlarm_Theta2Axis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                    'Case CDevPLCCommonNode.eServoAlarm.eTheta3_Axis_Servo_ON
+                    '    ledServoAlarm_Theta3Axis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
+                    'Case CDevPLCCommonNode.eServoAlarm.eTheta4_Axis_Servo_ON
+                    '    ledServoAlarm_Theta4Axis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
                     ' Case CDevPLCCommonNode.eServoAlarm.eY2_Axis_Servo_ON
                     '   ledServoAlarm_Y2Axis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
 
             End Select
         Next
-    End Sub
-
-    Private Sub AxisAlarmLEDControl()
-
-        AxisAlarmLEDInit()
-
-        For i As Integer = 0 To m_Main.cPLC.Datas.nAxisAlarm.Length - 1
-            Select Case m_Main.cPLC.Datas.nAxisAlarm(i)
-                Case CDevPLCCommonNode.eAllAxisAlarm.eNoError
-                    ledAxisAlarm_NoError.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                    'Case CDevPLCCommonNode.eAllAxisAlarm.eX_Axis_Alarm
-                    '    ledAxisAlarm_XAxis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eAllAxisAlarm.eY1_Axis_Alarm
-                    ledAxisAlarm_YAxis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eAllAxisAlarm.eZ_Axis_Alarm
-                    ledAxisAlarm_ZAxis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eAllAxisAlarm.eTheta1_Axis_Alarm
-                    ledAxisAlarm_THETA1Axis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eAllAxisAlarm.eTheta2_Axis_Alarm
-                    ledAxisAlarm_THETA2Axis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eAllAxisAlarm.eTheta3_Axis_Alarm
-                    ledAxisAlarm_THETA3Axis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eAllAxisAlarm.eTheta4_Axis_Alarm
-                    ledAxisAlarm_THETA4Axis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                    'Case CDevPLCCommonNode.eAllAxisAlarm.eY2_Axis_Alarm
-                    '    ledAxisAlarm_Y2Axis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-
-            End Select
-        Next
-
     End Sub
     Private Sub EQPStateLEDControl()
 
@@ -1479,63 +1350,7 @@ Public Class frmPLCControl
         AlarmDoorLEDInit()
     End Sub
 
-    Private Sub AlarmTemperatureLEDControl()
-        AlarmTemperatureLEDInit()
 
-        For i As Integer = 0 To m_Main.cPLC.Datas.nTemperatureAlarm.Length - 1
-            Select Case m_Main.cPLC.Datas.nTemperatureAlarm(i)
-                Case CDevPLCCommonNode.eTemperatureAlarm.eNoError
-                    ledAxisAlarm_XAxis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eTemperatureAlarm.eT1
-                    ledAxisAlarm_YAxis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                    ledAxisAlarm_XAxis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-                Case CDevPLCCommonNode.eTemperatureAlarm.eT2
-                    ledAxisAlarm_ZAxis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                    ledAxisAlarm_XAxis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-                Case CDevPLCCommonNode.eTemperatureAlarm.eT3
-                    ledAxisAlarm_Y2Axis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                    ledAxisAlarm_XAxis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-                Case CDevPLCCommonNode.eTemperatureAlarm.eT4
-                    ledAxisAlarm_THETA1Axis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                    ledAxisAlarm_XAxis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-                Case CDevPLCCommonNode.eTemperatureAlarm.eT5
-                    ledAxisAlarm_THETA2Axis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                    ledAxisAlarm_XAxis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-                Case CDevPLCCommonNode.eTemperatureAlarm.eT6
-                    ledAxisAlarm_THETA3Axis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                    ledAxisAlarm_XAxis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-                Case CDevPLCCommonNode.eTemperatureAlarm.eT7
-                    ledAxisAlarm_THETA4Axis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                    ledAxisAlarm_XAxis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-                Case CDevPLCCommonNode.eTemperatureAlarm.eT8
-                    ledAxisAlarm_NONE2.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                    ledAxisAlarm_XAxis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-                Case CDevPLCCommonNode.eTemperatureAlarm.eT9
-                    ledAxisAlarm_NONE3.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                    ledAxisAlarm_XAxis.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-            End Select
-        Next
-    End Sub
-
-    Private Sub AlarmTemperatureControlLEDControl()
-        AlarmTemperatureControlLEDInit()
-
-        For i As Integer = 0 To m_Main.cPLC.Datas.nTemperatureControlAlarm.Length - 1
-            Select Case m_Main.cPLC.Datas.nTemperatureControlAlarm(i)
-                Case CDevPLCCommonNode.eTemperatureAlarm.eNoError
-                    ledEQPAlarm_None.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                Case CDevPLCCommonNode.eTemperatureAlarm.eT1
-                    ledEQPAlarm_None2.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                    ledEQPAlarm_None.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-                Case CDevPLCCommonNode.eTemperatureAlarm.eT2
-                    ledEQPAlarm_Light.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                    ledEQPAlarm_None.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-                Case CDevPLCCommonNode.eTemperatureAlarm.eT3
-                    ledEQPAlarm_Heavy.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.On
-                    ledEQPAlarm_None.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off
-            End Select
-        Next
-    End Sub
 #End Region
 
 
@@ -1548,5 +1363,13 @@ Public Class frmPLCControl
         reqInfo.nEQPStatus = state ' CDevPLC.eSystemStatus.ePauseAndProcess 'state
 
         m_Main.cPLC.Request(reqInfo)
+    End Sub
+
+    Private Sub ledTempAlarm_2_Load(sender As Object, e As EventArgs) Handles ledTempAlarm_2.Load
+
+    End Sub
+
+    Private Sub ledTempAlarm_3_Load(sender As Object, e As EventArgs) Handles ledTempAlarm_3.Load
+
     End Sub
 End Class

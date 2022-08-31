@@ -9,52 +9,53 @@
 
 
     Private strKey() As String = New String() {
-"Recipe List", _
-"SeqCommon_PathAndFName", "SeqCommon_OnlyFName", "SeqCommon_FNameAndExt", "SeqCommon_OnlyExt", "SeqCommon_FPath", "SeqCommon_Date", _
-"SeqCommon_Counter_TestEndSetting", "SeqCommon_TestEndParam_TypeOfParam", "SeqCommon_TestEndParam_Value", _
-"SeqCommon_DefaultTemp", "SeqCommon_ACFMode", _
-"SeqCommon_Counter_LimitedSetting", "SeqCommon_Limited_TypeOfParam", "SeqCommon_Limited_MaxValue", "SeqCommon_Limited_MinValue", _
-"SeqCommon_SampleInfo_Type", "SeqCommon_SampleInfo_ColorType", "SeqCommon_SampleInfo_Color", "SeqCommon_Title", "SeqCommon_SampleInfo_Size", _
-"SeqCommon_SampleInfo_FF", "SeqCommon_SampleInfo_Comment", _
-"SeqCommon_AccumulateTempChangeTime", "SeqCommon_ContinuousDataSave", _
-"SeqCommon_CounterTestRecipe", "SeqCommon_CounterLifeTimeMode", "SeqCommon_CounterChangeTemp", "SeqCommon_CounterIVLSweep", _
-"SeqCommon_CounterImageSweep", "SeqCommon_CounterGrayScaleSweep", "SeqCommon_CounterPatternMeas", "SeqCommon_CounterViewingAngle", "SeqCommon_CounterLifetimeAndIVL", _
-"Mode", _
-"LTCommon_Mode", "LTCommon_RefPDSet_EnableRenewal", "LTCommon_RefPDSet_RenewalTime", _
-"LTCommon_Counter_TestEndSetting", "LTCommon_TestEndParam_TypeOfParam", "LTCommon_TestEndParam_Value", _
-"LTCommon_Counter_MeasSetting", "LTCommon_MeasSetting_Interval", "LTCommon_MeasSetting_ChangeTime", _
-"LTCommon_EndBiasStatus", "LTCommon_Counter_TestIVLSweepMeasSetting", "LTCommon_TestIVLSweepMeasParam_TypeOfParam", "LTCommon_TestIVLSweepMeasParam_Value", _
-"ChangeTemp_TargetTemp", "ChangeTemp_StableTime", _
-"CellLT_Counter_M6000SrcSetting", "CellLT_Enable_M6000SrcSetting", "CellLT_Src_Mode", "CellLT_Src_EnableRevMode", "CellLT_Src_Bias", "CellLT_Src_Amplitude", _
-"CellLT_Src_Pulse_Frequency", "CellLT_Src_Pulse_Duty", "CellLT_Src_Pulse_EnableDutyDivision", _
-"CellLT_IntegralWLCount", "CellLT_WL1_START", "CellLT_WL1_STOP", "CellLT_WL2_START", "CellLT_WL2_STOP", "CellLT_WL3_START", "CellLT_WL3_STOP", "CellLT_WL4_START", "CellLT_WL4_STOP", _
-"PanelLT_Counter_SignalLine", "PanelLT_Signal_Name", "PanelLT_Signal_SrcMode", "PanelLT_Signal_VLow", "PanelLT_Signal_VHigh", _
-"PanelLT_Signal_Pulse_Delay", "PanelLT_Signal_Pulse_Width", "PanelLT_Signal_Pulse_Period", _
-"Panel_Signal_Limit_Current", "Panel_Signal_Limit_Temp", "Panel_Signal_Limit_Average", _
-"Module Counter PwrLine", "Module Pwr Ch", "Module Pwr Volt", "Module Pwr CurrentLimit", "Module Pwr ONDelay", "Module Pwr OFFDelay", _
-"Module Counter Image", "Module MeasImage IsSelected", "Module MeasImage ImageName", "Module MeasImage FilePath", "Module MeasImage DelayTime", _
-"Module SlideImage IsSelected", "Module SlideImage ImageName", "Module SlideImage FilePath", "Module SlideImage DelayTime", _
-"Module GrayScale White", "Module GrayScale Red", "Module GrayScale Green", "Module GrayScale Blue", "Module Def. Pattern", "Module Counter Reg", _
-"Module Reg Name", "Module Reg CMD", "Module Reg LenOfValue", "Module Reg Value", "Module_GnT_ModelName", "Module_GnT_Enable_ModelDownload", "Module_GnT_ACFImageIdx", _
-"ImageSweep_Counter_Image", "ImageSweep_IsSelected", "ImageSweep_ImageName", "ImageSweep_FilePath", "ImageSweep_DelayTime", _
-"MeasPos_Counter", "MeasPos_Margin_X", "MeasPos_Margin_Y", "MeasPos_X", "MeasPos_Y", "MeasPoint_color", _
-"GrayScaleSweep_Mode", "GrayScaleSweep_LenSweepValue", "GrayScaleSweep_SweepValue_White", "GrayScaleSweep_SweepValue_Red", "GrayScaleSweep_SweepValue_Green", "GrayScaleSweep_SweepValue_Blue", _
-"IVLCommon_Average", "IVLCommon_BiasMode", "IVLCommon_CycleDelay", "IVLCommon_DelayState", "IVLCommon_LMeasLevel", "IVLCommon_MeasItem", "IVLCommon_MeasureDelay", "IVLCommon_OffsetBias", _
-"IVLCommon_SweepMode", "IVLCommon_SweepMethod", "IVLCommon_SweepType", "IVLCommon_SweepDelay", "IVLCommon_SweepLine", _
-"IVLCommon_Count_SweepSetting", "IVLCommon_SweepSetting_Number", "IVLCommon_SweepSetting_Start", "IVLCommon_SweepSetting_Stop", "IVLCommon_SweepSetting_Step", "IVLCommon_SweepSetting_Point", "IVLCommon_SweepSetting_Level", _
-"IVLCommon_Count_SweepList", "IVLCommon_UserSweepSetting_Bias", "IVLCommon_Count_ColorList", "IVLCommon_SweepColor_Number", "IVLCommon_ViewingAngle", "IVLCommon_FirstSweep", _
-"IVLCommon_LMeasLimit", "IVLCommon_CurrentLimit", "IVLCommon_LumiCorrection", "IVLCommon_BiasInvert", "IVLCommon_ValueForFast", "IVLCommon_FastNormalMode", "IVLCommon_FastBiasMode", "IVLCommon_LimitIsAnd", _
-"IVLDevice_Keithley_IntegTime", "IVLDevice_Keithley_IntegTimeIndex", "IVLDevice_Keithley_LimitVoltage", "IVLDevice_Keithley_LimitCurrent", "IVLDevice_Keithley_MeasureMode", "IVLDevice_keithley_MeasureDelay", "IVLDevice_Keithley_MeasureDelayAuto", _
-"IVLDevice_Keithley_MeasureAuroRange", "IVLDevice_Keithley_NumofMeasData", "IVLDevice_Keithley_SourceMode", "IVLDevice_Keithley_SourceDelay", _
-"IVLDevice_Keithley_SourceAutoRange", "IVLDevice_Keithley_TerminalMode", "IVLDevice_Keithley_WireMode", _
-"IVLRGBSignal_Red", "IVLRGBSignal_Green", "IVLRGBSignal_Blue", _
+"Recipe List",
+"SeqCommon_PathAndFName", "SeqCommon_OnlyFName", "SeqCommon_FNameAndExt", "SeqCommon_OnlyExt", "SeqCommon_FPath", "SeqCommon_Date",
+"SeqCommon_Counter_TestEndSetting", "SeqCommon_TestEndParam_TypeOfParam", "SeqCommon_TestEndParam_Value",
+"SeqCommon_DefaultTemp", "SeqCommon_ACFMode",
+"SeqCommon_Counter_LimitedSetting", "SeqCommon_Limited_TypeOfParam", "SeqCommon_Limited_MaxValue", "SeqCommon_Limited_MinValue",
+"SeqCommon_SampleInfo_Type", "SeqCommon_SampleInfo_ColorType", "SeqCommon_SampleInfo_Color", "SeqCommon_Title", "SeqCommon_SampleInfo_Size",
+"SeqCommon_SampleInfo_FF", "SeqCommon_SampleInfo_Comment",
+"SeqCommon_AccumulateTempChangeTime", "SeqCommon_ContinuousDataSave",
+"SeqCommon_CounterTestRecipe", "SeqCommon_CounterLifeTimeMode", "SeqCommon_CounterChangeTemp", "SeqCommon_CounterIVLSweep",
+"SeqCommon_CounterImageSweep", "SeqCommon_CounterGrayScaleSweep", "SeqCommon_CounterPatternMeas", "SeqCommon_CounterViewingAngle", "SeqCommon_CounterLifetimeAndIVL",
+"Mode",
+"LTCommon_Mode", "LTCommon_RefPDSet_EnableRenewal", "LTCommon_RefPDSet_RenewalTime",
+"LTCommon_Counter_TestEndSetting", "LTCommon_TestEndParam_TypeOfParam", "LTCommon_TestEndParam_Value",
+"LTCommon_Counter_MeasSetting", "LTCommon_MeasSetting_Interval", "LTCommon_MeasSetting_ChangeTime",
+"LTCommon_EndBiasStatus", "LTCommon_Counter_TestIVLSweepMeasSetting", "LTCommon_TestIVLSweepMeasParam_TypeOfParam", "LTCommon_TestIVLSweepMeasParam_Value",
+"ChangeTemp_TargetTemp", "ChangeTemp_StableTime",
+"CellLT_Counter_M6000SrcSetting", "CellLT_Enable_M6000SrcSetting", "CellLT_Src_Mode", "CellLT_Src_EnableRevMode", "CellLT_Src_Bias", "CellLT_Src_Amplitude",
+"CellLT_Src_Pulse_Frequency", "CellLT_Src_Pulse_Duty", "CellLT_Src_Pulse_EnableDutyDivision",
+"CellLT_IntegralWLCount", "CellLT_WL1_START", "CellLT_WL1_STOP", "CellLT_WL2_START", "CellLT_WL2_STOP", "CellLT_WL3_START", "CellLT_WL3_STOP", "CellLT_WL4_START", "CellLT_WL4_STOP",
+"PanelLT_Counter_SignalLine", "PanelLT_Signal_Name", "PanelLT_Signal_SrcMode", "PanelLT_Signal_VLow", "PanelLT_Signal_VHigh",
+"PanelLT_Signal_Pulse_Delay", "PanelLT_Signal_Pulse_Width", "PanelLT_Signal_Pulse_Period",
+"Panel_Signal_Limit_Current", "Panel_Signal_Limit_Temp", "Panel_Signal_Limit_Average",
+"Module Counter PwrLine", "Module Pwr Ch", "Module Pwr Volt", "Module Pwr CurrentLimit", "Module Pwr ONDelay", "Module Pwr OFFDelay",
+"Module Counter Image", "Module MeasImage IsSelected", "Module MeasImage ImageName", "Module MeasImage FilePath", "Module MeasImage DelayTime",
+"Module SlideImage IsSelected", "Module SlideImage ImageName", "Module SlideImage FilePath", "Module SlideImage DelayTime",
+"Module GrayScale White", "Module GrayScale Red", "Module GrayScale Green", "Module GrayScale Blue", "Module Def. Pattern", "Module Counter Reg",
+"Module Reg Name", "Module Reg CMD", "Module Reg LenOfValue", "Module Reg Value", "Module_GnT_ModelName", "Module_GnT_Enable_ModelDownload", "Module_GnT_ACFImageIdx",
+"ImageSweep_Counter_Image", "ImageSweep_IsSelected", "ImageSweep_ImageName", "ImageSweep_FilePath", "ImageSweep_DelayTime",
+"MeasPos_Counter", "MeasPos_Margin_X", "MeasPos_Margin_Y", "MeasPos_X", "MeasPos_Y", "MeasPoint_color",
+"GrayScaleSweep_Mode", "GrayScaleSweep_LenSweepValue", "GrayScaleSweep_SweepValue_White", "GrayScaleSweep_SweepValue_Red", "GrayScaleSweep_SweepValue_Green", "GrayScaleSweep_SweepValue_Blue",
+"IVLCommon_Average", "IVLCommon_BiasMode", "IVLCommon_CycleDelay", "IVLCommon_DelayState", "IVLCommon_LMeasLevel", "IVLCommon_MeasItem", "IVLCommon_MeasureDelay", "IVLCommon_OffsetBias",
+"IVLCommon_SweepMode", "IVLCommon_SweepMethod", "IVLCommon_SweepType", "IVLCommon_SweepDelay", "IVLCommon_SweepLine",
+"IVLCommon_Count_SweepSetting", "IVLCommon_SweepSetting_Number", "IVLCommon_SweepSetting_Start", "IVLCommon_SweepSetting_Stop", "IVLCommon_SweepSetting_Step", "IVLCommon_SweepSetting_Point", "IVLCommon_SweepSetting_Level",
+"IVLCommon_SweepSetting_Type", "IVLCommon_PowerSetting_Type", "IVLCommon_PowerSetting_StopV", "IVLCommon_PowerSetting_StopC",
+"IVLCommon_Count_SweepList", "IVLCommon_UserSweepSetting_Bias", "IVLCommon_Count_ColorList", "IVLCommon_SweepColor_Number", "IVLCommon_ViewingAngle", "IVLCommon_FirstSweep",
+"IVLCommon_LMeasLimit", "IVLCommon_CurrentLimit", "IVLCommon_LumiCorrection", "IVLCommon_BiasInvert", "IVLCommon_ValueForFast", "IVLCommon_FastNormalMode", "IVLCommon_FastBiasMode", "IVLCommon_LimitIsAnd",
+"IVLDevice_Keithley_IntegTime", "IVLDevice_Keithley_IntegTimeIndex", "IVLDevice_Keithley_LimitVoltage", "IVLDevice_Keithley_LimitCurrent", "IVLDevice_Keithley_MeasureMode", "IVLDevice_keithley_MeasureDelay", "IVLDevice_Keithley_MeasureDelayAuto",
+"IVLDevice_Keithley_MeasureAuroRange", "IVLDevice_Keithley_NumofMeasData", "IVLDevice_Keithley_SourceMode", "IVLDevice_Keithley_SourceDelay",
+"IVLDevice_Keithley_SourceAutoRange", "IVLDevice_Keithley_TerminalMode", "IVLDevice_Keithley_WireMode",
+"IVLRGBSignal_Red", "IVLRGBSignal_Green", "IVLRGBSignal_Blue",
      "ViewingAngle_Common_SweepType",
- "ViewingAngle_Common_SrcDevice", "ViewingAngle_Common_BiasMode", "ViewingAngle_Common_BiasValue", "ViewingAngle_Common_LumiCorrection", "ViewingAngle_Count_SweepSetting", _
- "ViewingAngle_SweepSetting_Number", "ViewingAngle_SweepSetting_Start", "ViewingAngle_SweepSetting_Stop", "ViewingAngle_SweepSetting_Step", _
- "ViewingAngle_SweepSetting_Point", "ViewingAngle_SweepSetting_Level", "ViewingAngle_Count_SweepList", "ViewingAngle_SweepList_Bias", _
- "ViewingAngleDevice_Keithley_IntegTime", "ViewingAngleDevice_Keithley_IntegTimeIndex", "ViewingAngleDevice_Keithley_LimitVoltage", "ViewingAngleDevice_Keithley_LimitCurrent", "ViewingAngleDevice_Keithley_MeasureMode", "ViewingAngleDevice_keithley_MeasureDelay", "ViewingAngleDevice_Keithley_MeasureDelayAuto", _
-"ViewingAngleDevice_Keithley_MeasureAuroRange", "ViewingAngleDevicee_Keithley_NumofMeasData", "ViewingAngleDevice_Keithley_SourceMode", "ViewingAngleDevice_Keithley_SourceDelay", _
-"ViewingAngleDevice_Keithley_SourceAutoRange", "ViewingAngleDevice_Keithley_TerminalMode", "ViewingAngleDevice_Keithley_WireMode", _
+ "ViewingAngle_Common_SrcDevice", "ViewingAngle_Common_BiasMode", "ViewingAngle_Common_BiasValue", "ViewingAngle_Common_LumiCorrection", "ViewingAngle_Count_SweepSetting",
+ "ViewingAngle_SweepSetting_Number", "ViewingAngle_SweepSetting_Start", "ViewingAngle_SweepSetting_Stop", "ViewingAngle_SweepSetting_Step",
+ "ViewingAngle_SweepSetting_Point", "ViewingAngle_SweepSetting_Level", "ViewingAngle_Count_SweepList", "ViewingAngle_SweepList_Bias",
+ "ViewingAngleDevice_Keithley_IntegTime", "ViewingAngleDevice_Keithley_IntegTimeIndex", "ViewingAngleDevice_Keithley_LimitVoltage", "ViewingAngleDevice_Keithley_LimitCurrent", "ViewingAngleDevice_Keithley_MeasureMode", "ViewingAngleDevice_keithley_MeasureDelay", "ViewingAngleDevice_Keithley_MeasureDelayAuto",
+"ViewingAngleDevice_Keithley_MeasureAuroRange", "ViewingAngleDevicee_Keithley_NumofMeasData", "ViewingAngleDevice_Keithley_SourceMode", "ViewingAngleDevice_Keithley_SourceDelay",
+"ViewingAngleDevice_Keithley_SourceAutoRange", "ViewingAngleDevice_Keithley_TerminalMode", "ViewingAngleDevice_Keithley_WireMode",
 "Aging_Mode", "Aging_EndBiasStatus", "Aging_Counter_TestEndStting", "Aging_TestEndParam_Typeofparm", "Aging_TestEndParam_Value"}
 
 
@@ -209,6 +210,10 @@
         eIVLCommon_SweepSetting_Step
         eIVLCommon_SweepSetting_Point
         eIVLCommon_SweepSetting_Level
+        eIVLCommon_SweepSetting_Type '220829 Update by JKY
+        eIVLCommon_PowerSetting_Type
+        eIVLCommon_PowerSetting_StopV
+        eIVLCommon_PowerSetting_StopC ' ===
         eIVLCommon_Count_SweepList
         eIVLCommon_SweepList_Bias
         eIVLCommon_Count_ColorList
@@ -298,6 +303,18 @@
         IniWriteValue(sSection, sKey, value)
     End Sub
 
+    Public Sub SaveIniValue(ByVal nSection As eSecID, ByVal rcpSectionIndex As Integer, ByVal nKey As eKeyID, ByVal keyIndex1 As Integer, ByVal keyIndex2 As Integer, ByVal value As String)
+        Dim sSection As String
+        Dim sKey As String
+        If nSection = eSecID.eRecipe Then
+            sSection = strSection(nSection) & Format(rcpSectionIndex + 1, "00")
+        Else
+            sSection = strSection(nSection)
+        End If
+        sKey = strKey(nKey) & Format(keyIndex1 + 1, "00") & "_" & Format(keyIndex2 + 1, "00")
+        IniWriteValue(sSection, sKey, value)
+    End Sub
+
     Public Function LoadIniValue(ByVal nSection As eSecID, ByVal rcpSectionIndex As Integer, ByVal nkey As eKeyID) As String
         Dim sSection As String
         If nSection = eSecID.eRecipe Then
@@ -317,6 +334,18 @@
             sSection = strSection(nSection)
         End If
         sKey = strKey(nkey) & Format(keyIndex + 1, "00")
+        Return IniReadValue(sSection, sKey)
+    End Function
+
+    Public Function LoadIniValue(ByVal nSection As eSecID, ByVal rcpSectionIndex As Integer, ByVal nkey As eKeyID, ByVal keyIndex1 As Integer, ByVal keyIndex2 As Integer) As String
+        Dim sSection As String
+        Dim sKey As String
+        If nSection = eSecID.eRecipe Then
+            sSection = strSection(nSection) & Format(rcpSectionIndex + 1, "00")
+        Else
+            sSection = strSection(nSection)
+        End If
+        sKey = strKey(nkey) & Format(keyIndex1 + 1, "00") & "_" & Format(keyIndex2 + 1, "00")
         Return IniReadValue(sSection, sKey)
     End Function
 
