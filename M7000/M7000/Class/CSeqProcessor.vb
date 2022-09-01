@@ -2511,6 +2511,16 @@ Public Class CSeqProcessor
                 'End If
             End Try
 
+            'JKY test
+            Try
+                For i = 0 To 4
+                    fMain.cIVLPowerSupply(i).Volt = 10
+                    fMain.cIVLPowerSupply(i).Current = 10
+                Next
+            Catch ex As Exception
+
+            End Try
+
 
             If fMain.cIVLSMU(nDevKeithley).mySMU.Measure(IVL_V, IVL_I) = False Then
                 bCheckedIVLLoopState = False

@@ -391,9 +391,20 @@
                 'IVL 등록쪽 업데이트 YJS 20200727 연동을 LT, IVL use로 구분하는게 좋은데 일단 보류
                 Dim nDevM6000 As Integer = frmSettingWind.GetAllocationValue(ch, frmSettingWind.eChAllocationItem.eDevNoOfM6000)
                 Dim bLTUse As Integer = frmSettingWind.GetAllocationValue(ch, frmSettingWind.eChAllocationItem.eLifetimeUse)
+                Dim bIVLUse As Integer = frmSettingWind.GetAllocationValue(ch, frmSettingWind.eChAllocationItem.eIVLUse) '220831 Update by JKY
+                Dim nChOfSwitch As Integer = frmSettingWind.GetAllocationValue(ch, frmSettingWind.eChAllocationItem.eChOfSwitch)
                 Dim sJIGName As String = Nothing
                 Dim nJIGNumber As Integer = Nothing
                 For i As Integer = 0 To m_sequenceMgr(ch).SequenceInfo.sRecipes.Length - 1
+
+                    '220831 Update by JKY : IVL Sequence Check
+                    If m_sequenceMgr(ch).SequenceInfo.sRecipes(i).nMode = ucSequenceBuilder.eRcpMode.eCell_IVL Then
+                        If bIVLUse = -1 Then
+                            sJIGName = (CInt(frmSettingWind.GetAllocationValue(ch, frmSettingWind.eChAllocationItem.ePallet_No)) + 1) & "_" & (nChOfSwitch + 1)
+                            MsgBox("해당 채널은 IVL 실험을 할 수 없습니다. [대상 채널 :" & "JIG" & sJIGName & "]")
+                            Exit Sub
+                        End If
+                    End If
 
                     'If m_sequenceMgr(ch).SequenceInfo.sRecipes(i).nMode = ucSequenceBuilder.eRcpMode.eCell_IVL Then
                     '    nJIGNumber = ucDispJIG.convertIncNumberToMatrixValue(ch)
@@ -406,6 +417,7 @@
 
                     'End If
 
+                    'Lifetime Sequence Check
                     If (m_sequenceMgr(ch).SequenceInfo.sRecipes(i).nMode = ucSequenceBuilder.eRcpMode.eCell_Lifetime Or m_sequenceMgr(ch).SequenceInfo.sRecipes(i).nMode = ucSequenceBuilder.eRcpMode.eCell_LifetimeAndIVL) And nDevM6000 < 0 Then
                         If g_SystemOptions.sOptionData.DispGroup.ChDispType = CChDisp.eChannelDispType.eChannel Then
                             sJIGName = Format(ch + 1, "00")
@@ -467,6 +479,8 @@
         Dim sDefPath As String = Application.StartupPath & "\Sequence"
         Dim bRst As Boolean = True
         Dim sMsg As String = ""
+        Dim bIVL As Boolean = False
+        Dim bLT As Boolean = False
         Dim combindChNum() As Integer
         combindChNum = frmSettingWind.CheckCombinedChannelAsJIG(nJIGNo)
 
@@ -488,9 +502,22 @@
 
                     Else
                         Dim nDevM6000 As Integer = frmSettingWind.GetAllocationValue(combindChNum(i), frmSettingWind.eChAllocationItem.eDevNoOfM6000)
+                        Dim bIVLUse As Integer = frmSettingWind.GetAllocationValue(combindChNum(i), frmSettingWind.eChAllocationItem.eIVLUse) '220831 Update by JKY
+                        Dim nChOfSwitch As Integer = frmSettingWind.GetAllocationValue(combindChNum(i), frmSettingWind.eChAllocationItem.eChOfSwitch)
                         Dim sJIGName As String = Nothing
 
                         For j As Integer = 0 To m_sequenceMgr(combindChNum(i)).SequenceInfo.sRecipes.Length - 1
+
+                            '220831 Update by JKY : IVL Sequence Check
+                            If m_sequenceMgr(combindChNum(i)).SequenceInfo.sRecipes(i).nMode = ucSequenceBuilder.eRcpMode.eCell_IVL Then
+                                If bIVLUse = -1 Then
+                                    sJIGName = (CInt(frmSettingWind.GetAllocationValue(combindChNum(i), frmSettingWind.eChAllocationItem.ePallet_No)) + 1) & "_" & (combindChNum(i) + 1)
+                                    bRst = False
+                                    sMsg = sMsg & "," & "JIG" & sJIGName 'combindChNum(i) + 1
+                                    bIVL = True
+                                End If
+                            End If
+
                             If (m_sequenceMgr(combindChNum(i)).SequenceInfo.sRecipes(j).nMode = ucSequenceBuilder.eRcpMode.eCell_Lifetime Or m_sequenceMgr(combindChNum(i)).SequenceInfo.sRecipes(j).nMode = ucSequenceBuilder.eRcpMode.eCell_LifetimeAndIVL) And nDevM6000 < 0 Then
                                 If g_SystemOptions.sOptionData.DispGroup.ChDispType = CChDisp.eChannelDispType.eChannel Then
                                     sJIGName = Format(combindChNum(i) + 1, "00")
@@ -500,6 +527,7 @@
 
                                 bRst = False
                                 sMsg = sMsg & "," & "TEG" & sJIGName 'combindChNum(i) + 1
+                                bLT = True
                                 Exit For
                             End If
                         Next
@@ -518,7 +546,11 @@
 
             If sMsg <> "" Then
                 sMsg.TrimStart(",")
-                MsgBox("Lifetime 실험을 할 수 없습니다. 실험 정보 설정후 재시도 하십시오.[대상채널 : " & sMsg & "]")
+                If bLT = True Then
+                    MsgBox("해당 채널은 Lifetime 실험을 할 수 없습니다.[대상채널 : " & sMsg & "]")
+                ElseIf bIVL = True Then
+                    MsgBox("해당 채널은 IVL 실험을 할 수 없습니다.[대상채널 : " & sMsg & "]")
+                End If
                 Exit Sub
             End If
         End If

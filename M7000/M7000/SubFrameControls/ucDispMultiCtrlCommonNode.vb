@@ -458,10 +458,25 @@
 
                         Else
                             Dim nDevM6000 As Integer = frmSettingWind.GetAllocationValue(i, frmSettingWind.eChAllocationItem.eDevNoOfM6000)
+                            Dim bIVLUse As Integer = frmSettingWind.GetAllocationValue(i, frmSettingWind.eChAllocationItem.eIVLUse) '220831 Update by JKY
+                            Dim nChOfSwitch As Integer = frmSettingWind.GetAllocationValue(i, frmSettingWind.eChAllocationItem.eChOfSwitch)
                             Dim sJIGName As String = Nothing
 
                             'IVL 등록쪽 업데이트 YJS 20200727
                             For j As Integer = 0 To m_sequenceMgr(i).SequenceInfo.sRecipes.Length - 1
+
+                                '220831 Update by JKY : IVL Sequence Check
+                                '여러개 선택했을때 IVL 따로, LT 따로 가능한지? 아예 예외를 따로 분리 해야할지?
+                                'LT 체크된 개수 지그당 최대 8개인지 한번더 체크? -> 아니면 전체선택 버튼 없애기?
+                                If m_sequenceMgr(i).SequenceInfo.sRecipes(j).nMode = ucSequenceBuilder.eRcpMode.eCell_IVL Then
+                                    If bIVLUse = -1 Then
+                                        sJIGName = (CInt(frmSettingWind.GetAllocationValue(i, frmSettingWind.eChAllocationItem.ePallet_No)) + 1) & "_" & (nChOfSwitch + 1)
+                                        bRst = False
+                                        sMsg = sMsg & "," & "JIG" & sJIGName 'combindChNum(i) + 1
+                                        bIVL = True
+                                    End If
+                                End If
+
                                 'If m_sequenceMgr(i).SequenceInfo.sRecipes(j).nMode = ucSequenceBuilder.eRcpMode.eCell_IVL Then
                                 '    nJIGNumber = ucDispJIG.convertIncNumberToMatrixValue(i)
                                 '    If nJIGNumber <> 8 Then
